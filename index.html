@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cory Ziller - Interactive Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            overflow-x: hidden;
+            background: var(--dark);
+        }
+
+        /* Chevron Container */
+        .chevron-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .chevron-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Individual Chevron Panes */
+        .chevron-pane {
+            position: relative;
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            clip-path: polygon(0 0, calc(100% - 5vw) 0, 100% 50%, calc(100% - 5vw) 100%, 0 100%, 5vw 50%);
+        }
+
+        .chevron-pane:first-child {
+            clip-path: polygon(0 0, calc(100% - 5vw) 0, 100% 50%, calc(100% - 5vw) 100%, 0 100%);
+        }
+
+        .chevron-pane:last-child {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 5vw 50%);
+        }
+
+        /* Pane Colors */
+        .pane-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .pane-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .pane-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .pane-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .pane-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        /* Content Container */
+        .pane-content {
+            max-width: 1200px;
+            width: 100%;
+            color: white;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Profile Section */
+        .profile-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 4rem;
+            font-weight: 700;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 0.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Workflow Visual */
+        .workflow-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .workflow-step {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .workflow-step:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+
+        /* Form Styles */
+        .demo-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: white;
+            background: white;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .benefits-list {
+            text-align: left;
+            margin: 2rem auto;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .benefits-list h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .benefits-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .benefits-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+
+        .nav-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-arrow.disabled:hover {
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-arrow.left {
+            left: 2rem;
+        }
+
+        .nav-arrow.right {
+            right: 2rem;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1001;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            transition: width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Pane Number Indicator */
+        .pane-number {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-size: 6rem;
+            font-weight: 900;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .chevron-pane {
+                padding: 2rem;
+                clip-path: none;
+            }
+
+            .workflow-visual {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .nav-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .nav-arrow.left {
+                left: 1rem;
+            }
+
+            .nav-arrow.right {
+                right: 1rem;
+            }
+
+            .nav-dots {
+                right: 1rem;
+            }
+
+            .profile-circle {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+
+        /* Form Result */
+        .form-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: none;
+        }
+
+        .form-result.show {
+            display: block;
+        }
+
+        /* List Styling */
+        .key-points {
+            text-align: left;
+            max-width: 700px;
+            margin: 2rem auto;
+        }
+
+        .key-points li {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .key-points li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* News Article Cards */
+        .news-article {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .news-article:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-article h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            line-height: 1.4;
+        }
+
+        .news-source {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .news-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-top: 0.75rem;
+        }
+
+        .news-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots" id="navDots"></div>
+
+    <!-- Navigation Arrows -->
+    <div class="nav-arrow left" id="prevBtn">‹</div>
+    <div class="nav-arrow right" id="nextBtn">›</div>
+
+    <!-- Chevron Container -->
+    <div class="chevron-container">
+        <div class="chevron-track" id="chevronTrack">
+
+            <!-- Pane 1: Introduction -->
+            <div class="chevron-pane pane-1">
+                <div class="pane-number">01</div>
+                <div class="pane-content">
+                    <!-- Replace 'profile.jpg' with your actual photo filename -->
+                    <img src="profile.jpg" alt="Cory Ziller" class="profile-circle" style="object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="profile-circle" style="display: none;">CZ</div>
+
+                    <h1>Cory Ziller</h1>
+                    <div class="subtitle">STEM MBA Candidate @ Fisher College of Business '27</div>
+                    <div class="subtitle" style="font-size: 1.2rem; opacity: 0.9; margin-top: -1rem;">Senior Client & Data Analyst</div>
+
+                    <div class="description" style="max-width: 900px; margin: 2rem auto;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; text-align: left; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; border: 2px solid rgba(255,255,255,0.2);">
+                            <div>
+                                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">📊 Data Analytics</div>
+                                <div style="font-size: 0.95rem; opacity: 0.9;">4+ years transforming media KPIs into business results for Fortune 500 clients</div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">🎯 Leadership</div>
+                                <div style="font-size: 0.95rem; opacity: 0.9;">Led analytics training for 40+ analysts while advancing to Senior Analyst</div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">🤖 Innovation</div>
+                                <div style="font-size: 0.95rem; opacity: 0.9;">Building AI-driven automation workflows to streamline complex processes</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://linkedin.com/in/coryziller" target="_blank" class="btn">View LinkedIn</a>
+                    <a href="#" class="btn btn-outline" onclick="nextPane(); return false;">See My Work →</a>
+                </div>
+            </div>
+
+            <!-- Pane 2: The Challenge -->
+            <div class="chevron-pane pane-2">
+                <div class="pane-number">02</div>
+                <div class="pane-content">
+                    <h2>The Challenge</h2>
+                    <p class="description">
+                        Email overload is crushing productivity. Teams spend hours sorting through messages,
+                        missing critical information, and manually processing data that could be automated.
+                    </p>
+                    <div class="key-points">
+                        <ul>
+                            <li><strong>200+ emails per day</strong> - too many to process manually</li>
+                            <li><strong>Critical insights buried</strong> - important data lost in the noise</li>
+                            <li><strong>Manual data extraction</strong> - hours wasted on repetitive tasks</li>
+                            <li><strong>Delayed responses</strong> - slow turnaround affects business outcomes</li>
+                        </ul>
+                    </div>
+                    <p class="description" style="margin-top: 2rem;">
+                        <strong>There had to be a better way...</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pane 3: The Solution -->
+            <div class="chevron-pane pane-3">
+                <div class="pane-number">03</div>
+                <div class="pane-content">
+                    <h2>🚀 The Solution</h2>
+                    <h1 style="font-size: 3rem; margin-bottom: 2rem;">Intelligent Email Automation</h1>
+                    <p class="description">
+                        A sophisticated workflow that monitors, analyzes, and processes emails automatically—
+                        turning hours of manual work into seconds of intelligent automation.
+                    </p>
+                    <div class="key-points" style="margin-top: 3rem;">
+                        <ul>
+                            <li><strong>24/7 Monitoring</strong> - Continuously scans for important messages</li>
+                            <li><strong>AI-Powered Analysis</strong> - Understands context and extracts insights</li>
+                            <li><strong>Smart Categorization</strong> - Automatically sorts and prioritizes</li>
+                            <li><strong>Instant Reports</strong> - Delivers formatted summaries on demand</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pane 4: How It Works -->
+            <div class="chevron-pane pane-4">
+                <div class="pane-number">04</div>
+                <div class="pane-content">
+                    <h2>📊 How It Works</h2>
+                    <div class="workflow-visual">
+                        <div class="workflow-step">
+                            <div class="step-icon">📧</div>
+                            <div class="step-title">Receive</div>
+                            <div class="step-text">Email arrives in inbox</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">🔍</div>
+                            <div class="step-title">Extract</div>
+                            <div class="step-text">Parse key information</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">🧠</div>
+                            <div class="step-title">Analyze</div>
+                            <div class="step-text">AI processes content</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">✉️</div>
+                            <div class="step-title">Deliver</div>
+                            <div class="step-text">Send formatted report</div>
+                        </div>
+                    </div>
+                    <div class="description" style="margin-top: 3rem;">
+                        <strong>The result?</strong> Hours of manual work reduced to seconds.
+                        Critical insights delivered instantly. Zero emails missed.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pane 5: Company News Search -->
+            <div class="chevron-pane pane-5">
+                <div class="pane-number">05</div>
+                <div class="pane-content">
+                    <h2>📰 Company News Search</h2>
+                    <p class="description">
+                        See real-time news monitoring in action! Enter any company name to fetch the latest news articles
+                        from major news sources around the world.
+                    </p>
+
+                    <div class="demo-form">
+                        <form id="newsSearchForm">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input
+                                    type="text"
+                                    id="companyInput"
+                                    placeholder="e.g., Apple, Tesla, Microsoft"
+                                    required
+                                >
+                            </div>
+                            <button type="submit" class="btn" style="width: 100%;">
+                                🔍 Search News
+                            </button>
+                        </form>
+
+                        <div class="form-result" id="newsResult" style="margin-top: 2rem;"></div>
+
+                        <!-- News Results Container -->
+                        <div id="newsContainer" style="display: none; margin-top: 2rem;">
+                            <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Latest News</h3>
+                            <div id="newsArticles"></div>
+                        </div>
+                    </div>
+
+                    <div class="benefits-list">
+                        <h3>💡 What This Demonstrates:</h3>
+                        <ul>
+                            <li>Real-time data fetching from news APIs</li>
+                            <li>Content parsing and structuring</li>
+                            <li>Automated monitoring capabilities</li>
+                            <li>Multi-source data aggregation</li>
+                            <li>Instant information delivery</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let currentPane = 0;
+        const totalPanes = 5;
+        const chevronTrack = document.getElementById('chevronTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const navDotsContainer = document.getElementById('navDots');
+
+        // Create navigation dots
+        for (let i = 0; i < totalPanes; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToPane(i));
+            navDotsContainer.appendChild(dot);
+        }
+
+        function updatePane() {
+            // Update track position
+            chevronTrack.style.transform = `translateX(-${currentPane * 100}vw)`;
+
+            // Update progress bar
+            progressFill.style.width = `${((currentPane + 1) / totalPanes) * 100}%`;
+
+            // Update navigation buttons
+            prevBtn.classList.toggle('disabled', currentPane === 0);
+            nextBtn.classList.toggle('disabled', currentPane === totalPanes - 1);
+
+            // Update dots
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentPane);
+            });
+        }
+
+        function nextPane() {
+            if (currentPane < totalPanes - 1) {
+                currentPane++;
+                updatePane();
+            }
+        }
+
+        function prevPane() {
+            if (currentPane > 0) {
+                currentPane--;
+                updatePane();
+            }
+        }
+
+        function goToPane(index) {
+            currentPane = index;
+            updatePane();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevPane);
+        nextBtn.addEventListener('click', nextPane);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevPane();
+            if (e.key === 'ArrowRight') nextPane();
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextPane();
+            if (touchEndX > touchStartX + 50) prevPane();
+        }
+
+        // Mouse wheel navigation
+        let scrollTimeout;
+        document.addEventListener('wheel', (e) => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (e.deltaY > 0) nextPane();
+                else prevPane();
+            }, 50);
+        }, { passive: true });
+
+        // Company News Search
+        document.getElementById('newsSearchForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const company = document.getElementById('companyInput').value.trim();
+            const resultDiv = document.getElementById('newsResult');
+            const newsContainer = document.getElementById('newsContainer');
+            const articlesDiv = document.getElementById('newsArticles');
+
+            if (!company) return;
+
+            // Show loading state
+            resultDiv.innerHTML = '⏳ Searching for news...';
+            resultDiv.classList.add('show');
+            newsContainer.style.display = 'none';
+
+            try {
+                // Use RSS2JSON API to fetch Google News RSS feed
+                const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(company)}&hl=en&gl=US&ceid=US:en`;
+                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`;
+
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.status !== 'ok') {
+                    throw new Error('Failed to fetch news');
+                }
+
+                // Clear previous results
+                articlesDiv.innerHTML = '';
+                resultDiv.innerHTML = '';
+                resultDiv.classList.remove('show');
+
+                if (data.items && data.items.length > 0) {
+                    // Display articles
+                    data.items.forEach(article => {
+                        const articleCard = document.createElement('div');
+                        articleCard.className = 'news-article';
+
+                        // Parse date
+                        const pubDate = new Date(article.pubDate);
+                        const timeAgo = getTimeAgo(pubDate);
+
+                        // Clean description (remove HTML tags)
+                        const description = article.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...';
+
+                        articleCard.innerHTML = `
+                            <h4>${article.title}</h4>
+                            <div class="news-source">
+                                <span>📰 ${article.author || 'Unknown Source'}</span>
+                                <span class="news-date">• ${timeAgo}</span>
+                            </div>
+                            <div class="news-description">${description}</div>
+                        `;
+
+                        // Make card clickable to open article
+                        articleCard.addEventListener('click', () => {
+                            window.open(article.link, '_blank');
+                        });
+
+                        articlesDiv.appendChild(articleCard);
+                    });
+
+                    newsContainer.style.display = 'block';
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="no-results">
+                            No news found for "${company}". Try a different company name.
+                        </div>
+                    `;
+                    resultDiv.classList.add('show');
+                }
+
+            } catch (error) {
+                console.error('News fetch error:', error);
+                resultDiv.innerHTML = `
+                    <strong>❌ Error</strong><br><br>
+                    Failed to fetch news. Please try again.<br><br>
+                    <small>Make sure you have an internet connection.</small>
+                `;
+                resultDiv.classList.add('show');
+            }
+        });
+
+        // Helper function to calculate "time ago"
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+
+            let interval = seconds / 31536000;
+            if (interval > 1) return Math.floor(interval) + ' years ago';
+
+            interval = seconds / 2592000;
+            if (interval > 1) return Math.floor(interval) + ' months ago';
+
+            interval = seconds / 86400;
+            if (interval > 1) return Math.floor(interval) + ' days ago';
+
+            interval = seconds / 3600;
+            if (interval > 1) return Math.floor(interval) + ' hours ago';
+
+            interval = seconds / 60;
+            if (interval > 1) return Math.floor(interval) + ' minutes ago';
+
+            return Math.floor(seconds) + ' seconds ago';
+        }
+
+        // Initialize
+        updatePane();
+    </script>
+</body>
+</html>
