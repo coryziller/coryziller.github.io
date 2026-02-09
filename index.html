@@ -683,49 +683,64 @@
                 </div>
             </div>
 
-            <!-- Pane 5: Company News Search -->
+            <!-- Pane 5: Social Listening Demo -->
             <div class="chevron-pane pane-5">
                 <div class="pane-number">05</div>
                 <div class="pane-content">
-                    <h2>📰 Company News Search</h2>
+                    <h2>🎧 Social Listening Demo</h2>
+                    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">NVIDIA GPU Monitoring</h1>
                     <p class="description">
-                        See real-time news monitoring in action! Enter any company name to fetch the latest news articles
-                        from major news sources around the world.
+                        Experience my automated social listening tool! Get a real data report sent to your inbox—
+                        including sentiment analysis, top issues, and a 30-second audio briefing.
                     </p>
 
                     <div class="demo-form">
-                        <form id="newsSearchForm">
+                        <form id="socialListeningForm">
                             <div class="form-group">
-                                <label>Company Name</label>
+                                <label>Your First Name</label>
                                 <input
                                     type="text"
-                                    id="companyInput"
-                                    placeholder="e.g., Apple, Tesla, Microsoft"
+                                    id="nameInput"
+                                    placeholder="e.g., John"
+                                    required
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Your Email Address</label>
+                                <input
+                                    type="email"
+                                    id="emailInput"
+                                    placeholder="e.g., john@example.com"
                                     required
                                 >
                             </div>
                             <button type="submit" class="btn" style="width: 100%;">
-                                🔍 Search News
+                                📧 Send Me the Report
                             </button>
                         </form>
 
-                        <div class="form-result" id="newsResult" style="margin-top: 2rem;"></div>
-
-                        <!-- News Results Container -->
-                        <div id="newsContainer" style="display: none; margin-top: 2rem;">
-                            <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Latest News</h3>
-                            <div id="newsArticles"></div>
-                        </div>
+                        <div class="form-result" id="demoResult"></div>
                     </div>
 
                     <div class="benefits-list">
-                        <h3>💡 What This Demonstrates:</h3>
+                        <h3>📊 What You'll Receive:</h3>
                         <ul>
-                            <li>Real-time data fetching from news APIs</li>
-                            <li>Content parsing and structuring</li>
-                            <li>Automated monitoring capabilities</li>
-                            <li>Multi-source data aggregation</li>
-                            <li>Instant information delivery</li>
+                            <li>Real data from Reddit & Hacker News</li>
+                            <li>Sentiment analysis & severity breakdown</li>
+                            <li>Top 3 prioritized issues</li>
+                            <li>Category distribution insights</li>
+                            <li>30-second audio briefing (MP3)</li>
+                        </ul>
+                    </div>
+
+                    <div class="benefits-list" style="margin-top: 1.5rem;">
+                        <h3>🔧 Tech Stack:</h3>
+                        <ul>
+                            <li>Python for data collection & analysis</li>
+                            <li>Reddit & Hacker News APIs</li>
+                            <li>ElevenLabs AI for text-to-speech</li>
+                            <li>Vercel serverless functions</li>
+                            <li>Automated email delivery via SMTP</li>
                         </ul>
                     </div>
                 </div>
@@ -826,110 +841,53 @@
             }, 50);
         }, { passive: true });
 
-        // Company News Search
-        document.getElementById('newsSearchForm').addEventListener('submit', async (e) => {
+        // Social Listening Demo Form
+        document.getElementById('socialListeningForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const company = document.getElementById('companyInput').value.trim();
-            const resultDiv = document.getElementById('newsResult');
-            const newsContainer = document.getElementById('newsContainer');
-            const articlesDiv = document.getElementById('newsArticles');
+            const name = document.getElementById('nameInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const resultDiv = document.getElementById('demoResult');
 
-            if (!company) return;
+            if (!name || !email) return;
 
             // Show loading state
-            resultDiv.innerHTML = '⏳ Searching for news...';
+            resultDiv.innerHTML = '⏳ Sending your report...';
             resultDiv.classList.add('show');
-            newsContainer.style.display = 'none';
 
             try {
-                // Use RSS2JSON API to fetch Google News RSS feed
-                const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(company)}&hl=en&gl=US&ceid=US:en`;
-                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`;
+                // Call Vercel serverless function
+                const response = await fetch('https://social-listening-ten.vercel.app/api/send-demo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email
+                    })
+                });
 
-                const response = await fetch(apiUrl);
                 const data = await response.json();
 
-                if (data.status !== 'ok') {
-                    throw new Error('Failed to fetch news');
-                }
-
-                // Clear previous results
-                articlesDiv.innerHTML = '';
-                resultDiv.innerHTML = '';
-                resultDiv.classList.remove('show');
-
-                if (data.items && data.items.length > 0) {
-                    // Display articles
-                    data.items.forEach(article => {
-                        const articleCard = document.createElement('div');
-                        articleCard.className = 'news-article';
-
-                        // Parse date
-                        const pubDate = new Date(article.pubDate);
-                        const timeAgo = getTimeAgo(pubDate);
-
-                        // Clean description (remove HTML tags)
-                        const description = article.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...';
-
-                        articleCard.innerHTML = `
-                            <h4>${article.title}</h4>
-                            <div class="news-source">
-                                <span>📰 ${article.author || 'Unknown Source'}</span>
-                                <span class="news-date">• ${timeAgo}</span>
-                            </div>
-                            <div class="news-description">${description}</div>
-                        `;
-
-                        // Make card clickable to open article
-                        articleCard.addEventListener('click', () => {
-                            window.open(article.link, '_blank');
-                        });
-
-                        articlesDiv.appendChild(articleCard);
-                    });
-
-                    newsContainer.style.display = 'block';
-                } else {
+                if (response.ok && data.success) {
                     resultDiv.innerHTML = `
-                        <div class="no-results">
-                            No news found for "${company}". Try a different company name.
-                        </div>
+                        <strong>✅ Success!</strong><br><br>
+                        Check your email (${email}) for the NVIDIA Social Listening Report!<br><br>
+                        <small>The report includes real data from Reddit & Hacker News, plus a 30-second audio briefing.</small>
                     `;
-                    resultDiv.classList.add('show');
+                } else {
+                    throw new Error(data.error || 'Failed to send report');
                 }
 
             } catch (error) {
-                console.error('News fetch error:', error);
+                console.error('Demo send error:', error);
                 resultDiv.innerHTML = `
                     <strong>❌ Error</strong><br><br>
-                    Failed to fetch news. Please try again.<br><br>
-                    <small>Make sure you have an internet connection.</small>
+                    ${error.message || 'Failed to send report. Please try again.'}<br><br>
+                    <small>If the problem persists, reach out via LinkedIn.</small>
                 `;
-                resultDiv.classList.add('show');
             }
         });
-
-        // Helper function to calculate "time ago"
-        function getTimeAgo(date) {
-            const seconds = Math.floor((new Date() - date) / 1000);
-
-            let interval = seconds / 31536000;
-            if (interval > 1) return Math.floor(interval) + ' years ago';
-
-            interval = seconds / 2592000;
-            if (interval > 1) return Math.floor(interval) + ' months ago';
-
-            interval = seconds / 86400;
-            if (interval > 1) return Math.floor(interval) + ' days ago';
-
-            interval = seconds / 3600;
-            if (interval > 1) return Math.floor(interval) + ' hours ago';
-
-            interval = seconds / 60;
-            if (interval > 1) return Math.floor(interval) + ' minutes ago';
-
-            return Math.floor(seconds) + ' seconds ago';
-        }
 
         // Initialize
         updatePane();
