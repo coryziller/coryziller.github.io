@@ -104,16 +104,17 @@
             height: 280px;
             border-radius: 16px;
             background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto var(--space-6);
             overflow: hidden;
-            /* Subtle purposeful glow - only on photo */
+            /* Enhanced glow around photo */
             box-shadow:
-                0 8px 32px rgba(255, 255, 255, 0.08),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
+                0 8px 32px rgba(255, 255, 255, 0.15),
+                0 0 40px rgba(255, 255, 255, 0.2),
+                0 0 80px rgba(255, 255, 255, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -126,8 +127,9 @@
         .profile-photo:hover {
             transform: translateY(-4px);
             box-shadow:
-                0 12px 48px rgba(255, 255, 255, 0.12),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+                0 12px 48px rgba(255, 255, 255, 0.2),
+                0 0 60px rgba(255, 255, 255, 0.3),
+                0 0 100px rgba(255, 255, 255, 0.15);
         }
 
         .hero-greeting {
@@ -190,11 +192,11 @@
         }
 
         .credential-text {
-            font-size: 1.375rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-primary);
             line-height: 1.5;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
         }
 
         /* ============================================
@@ -211,6 +213,7 @@
         .tagline-text {
             font-size: var(--text-2xl);
             font-weight: 500;
+            font-style: italic;
             color: var(--text-secondary);
             line-height: 1.4;
             letter-spacing: -0.01em;
@@ -592,7 +595,7 @@
                         <div class="credential-bullet"></div>
                         <div class="credential-label">Previously</div>
                         <p class="credential-text">
-                            Data Analyst at a Chicago-based advertising agency.
+                            Sr. Data Analyst at a Chicago-based advertising agency.
                         </p>
                     </div>
 
