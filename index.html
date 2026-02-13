@@ -357,6 +357,19 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Bouncing Arrow Animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -390,9 +403,15 @@
 
             <!-- Centered Bottom Section -->
             <div style="text-align: center; margin-bottom: 3rem;">
-                <p style="font-size: 1.5rem; line-height: 1.6; opacity: 0.7; margin-bottom: 3rem; font-style: italic; font-family: Georgia, serif;">
-                    I love building automation workflows to explore and creatively solve problems.
+                <p style="font-size: 1.5rem; line-height: 1.6; opacity: 0.7; margin-bottom: 1.5rem; font-style: italic; font-family: Georgia, serif;">
+                    I love turning ideas into automation -- Check out my work below.
                 </p>
+
+                <!-- Funky Arrow -->
+                <div style="font-size: 3rem; margin-bottom: 2rem; animation: bounce 2s infinite;">
+                    ↓
+                </div>
+
                 <div style="display: flex; gap: 1rem; justify-content: center;">
                     <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn" style="margin: 0;">View LinkedIn</a>
                     <a href="#works" class="btn btn-outline" style="margin: 0;">Side Projects</a>
