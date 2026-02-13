@@ -215,7 +215,7 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             cursor: pointer;
             border: 2px solid rgba(255, 255, 255, 0.1);
         }
@@ -224,6 +224,46 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 60px rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .work-card.expanded {
+            grid-column: 1 / -1;
+            transform: translateY(0);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .work-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            padding: 0 2rem;
+        }
+
+        .work-card.expanded .work-details {
+            max-height: 3000px;
+            padding: 2rem;
+        }
+
+        .close-btn {
+            display: none;
+            margin: 1rem auto;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .work-card.expanded .close-btn {
+            display: block;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .work-image {
@@ -299,6 +339,11 @@
             .works-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* Make expanded card details responsive */
+            .work-details > div > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
         }
 
         /* Smooth Scroll */
@@ -314,14 +359,10 @@
             <div>
                 <p style="font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.8;">Hey there,</p>
                 <h1 style="font-size: 5rem; line-height: 1.1; margin-bottom: 2rem;">I'm Cory Ziller</h1>
-                <a href="#works" style="display: inline-flex; align-items: center; gap: 0.5rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; transition: gap 0.3s;">
-                    Let's Collaborate
-                    <span style="transition: transform 0.3s;">→</span>
-                </a>
             </div>
             <div>
                 <p style="font-size: 1.3rem; line-height: 1.8; opacity: 0.9; margin-bottom: 2rem;">
-                    Currently a MBA candidate at Ohio State University, transforming data into actionable insights through advanced analytics, automation, and AI-driven solutions.
+                    Currently a STEM MBA candidate at Ohio State University. I have worked for an AI startup that fought sex trafficking. I have worked in sales. I have spent 4 years as a Data Analyst for a Chicago based Advertising agency.
                 </p>
                 <div style="display: flex; gap: 1rem; margin-top: 2rem;">
                     <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn" style="margin: 0;">View LinkedIn</a>
@@ -377,7 +418,7 @@
 
             <div class="works-grid">
                 <!-- Social Listening Project -->
-                <div class="work-card" onclick="window.location.href='#social-listening'">
+                <div class="work-card" id="social-card" onclick="toggleCard('social-card')">
                     <div class="work-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                         AI
                     </div>
@@ -390,10 +431,98 @@
                             <span class="tag">Automation</span>
                         </div>
                     </div>
+
+                    <!-- Expanded Details -->
+                    <div class="work-details">
+                        <div style="border-top: 2px solid rgba(255, 255, 255, 0.1); margin-top: 2rem; padding-top: 2rem;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Try the Demo</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 2rem; line-height: 1.6;">
+                                Experience my automated social listening tool! Get a real data report sent to your inbox—
+                                including sentiment analysis, top issues, and a 30-second audio briefing.
+                            </p>
+
+                            <!-- Demo Form -->
+                            <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1); margin-bottom: 2rem;">
+                                <form id="socialListeningForm" onclick="event.stopPropagation()">
+                                    <div style="margin-bottom: 1.5rem; text-align: left;">
+                                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your First Name</label>
+                                        <input type="text" id="nameInput" placeholder="e.g., John" required
+                                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit; color: #000;">
+                                    </div>
+                                    <div style="margin-bottom: 1.5rem; text-align: left;">
+                                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your Email Address</label>
+                                        <input type="email" id="emailInput" placeholder="e.g., john@example.com" required
+                                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit; color: #000;">
+                                    </div>
+                                    <button type="submit" class="btn" style="width: 100%; margin: 0;">Send Me the Report</button>
+                                </form>
+                                <div id="demoResult" style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none;"></div>
+                            </div>
+
+                            <!-- Two Column Layout for What You'll Receive and Tech Stack -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                                <!-- What You'll Receive -->
+                                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
+                                    <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">What You'll Receive:</h3>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Real data from Reddit & Hacker News
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Sentiment analysis & severity breakdown
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Top 3 prioritized issues
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Category distribution insights
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            30-second audio briefing (MP3)
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tech Stack -->
+                                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
+                                    <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">Tech Stack:</h3>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Python for data collection & analysis
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Reddit & Hacker News APIs
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            ElevenLabs AI for text-to-speech
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Vercel serverless functions
+                                        </li>
+                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                            <span style="position: absolute; left: 0;">✓</span>
+                                            Automated email delivery via SMTP
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <button class="close-btn" onclick="toggleCard('social-card'); event.stopPropagation();">Close</button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Placeholder for future projects -->
-                <div class="work-card" style="opacity: 0.5; cursor: default;">
+                <div class="work-card" style="opacity: 0.5; cursor: default; pointer-events: none;">
                     <div class="work-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
                         +
                     </div>
@@ -409,97 +538,21 @@
         </div>
     </section>
 
-    <!-- Social Listening Detail Section -->
-    <section class="works-section" id="social-listening" style="background: #1a1a1a; padding: 4rem 2rem;">
-        <div class="works-container" style="max-width: 900px;">
-            <div style="text-align: center;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Social Listening Demo</h2>
-                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; opacity: 0.9;">NVIDIA GPU Monitoring</h3>
-                <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem; line-height: 1.6;">
-                    Experience my automated social listening tool! Get a real data report sent to your inbox—
-                    including sentiment analysis, top issues, and a 30-second audio briefing.
-                </p>
-            </div>
-
-            <!-- Demo Form -->
-            <div style="max-width: 600px; margin: 2rem auto; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(255, 255, 255, 0.1);">
-                <form id="socialListeningForm">
-                    <div style="margin-bottom: 1.5rem; text-align: left;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your First Name</label>
-                        <input type="text" id="nameInput" placeholder="e.g., John" required
-                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit;">
-                    </div>
-                    <div style="margin-bottom: 1.5rem; text-align: left;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: white;">Your Email Address</label>
-                        <input type="email" id="emailInput" placeholder="e.g., john@example.com" required
-                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit;">
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%;">Send Me the Report</button>
-                </form>
-                <div id="demoResult" style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none;"></div>
-            </div>
-
-            <!-- What You'll Receive -->
-            <div style="max-width: 600px; margin: 2rem auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
-                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">What You'll Receive:</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Real data from Reddit & Hacker News
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Sentiment analysis & severity breakdown
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Top 3 prioritized issues
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Category distribution insights
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        30-second audio briefing (MP3)
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Tech Stack -->
-            <div style="max-width: 600px; margin: 2rem auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
-                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Tech Stack:</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Python for data collection & analysis
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Reddit & Hacker News APIs
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        ElevenLabs AI for text-to-speech
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Vercel serverless functions
-                    </li>
-                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
-                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
-                        Automated email delivery via SMTP
-                    </li>
-                </ul>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="#works" class="btn btn-outline">Back to My Works</a>
-            </div>
-        </div>
-    </section>
 
     <script>
+        // Toggle card expansion
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('expanded');
+
+            if (card.classList.contains('expanded')) {
+                // Scroll to the card smoothly
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
         // Social Listening Demo Form
         document.getElementById('socialListeningForm').addEventListener('submit', async (e) => {
             e.preventDefault();
