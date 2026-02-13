@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cory Ziller - Interactive Portfolio</title>
+    <title>Cory Ziller - Portfolio</title>
 
     <style>
         * {
@@ -12,88 +12,33 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #2563eb;
-            --secondary: #1e40af;
-            --accent: #3b82f6;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #64748b;
-        }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: white;
             overflow-x: hidden;
-            background: var(--dark);
         }
 
-        /* Chevron Container */
-        .chevron-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .chevron-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-
-        /* Individual Chevron Panes */
-        .chevron-pane {
-            position: relative;
-            min-width: 100vw;
-            height: 100vh;
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem;
-            clip-path: polygon(0 0, calc(100% - 5vw) 0, 100% 50%, calc(100% - 5vw) 100%, 0 100%, 5vw 50%);
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
         }
 
-        .chevron-pane:first-child {
-            clip-path: polygon(0 0, calc(100% - 5vw) 0, 100% 50%, calc(100% - 5vw) 100%, 0 100%);
-        }
-
-        .chevron-pane:last-child {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 5vw 50%);
-        }
-
-        /* Pane Colors - Sleek Black & White */
-        .pane-1 { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); }
-        .pane-2 { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
-
-        /* Content Container */
-        .pane-content {
+        .hero-content {
             max-width: 1200px;
-            width: 100%;
-            color: white;
             text-align: center;
-            position: relative;
-            z-index: 2;
-            animation: fadeIn 0.8s ease-out;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Profile Section */
         .profile-circle {
             width: 300px;
             height: 300px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
             border: 6px solid white;
             display: flex;
             align-items: center;
@@ -103,6 +48,13 @@
             font-weight: 700;
             box-shadow: 0 30px 80px rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-circle:hover {
@@ -114,31 +66,41 @@
             font-size: 4rem;
             margin-bottom: 1rem;
             font-weight: 800;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
         }
 
         .subtitle {
             font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
             font-weight: 500;
         }
 
-        .description {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto 2rem;
+        .hero-skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 2rem auto;
+            text-align: left;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
-        /* Buttons */
+        .skill-item h3 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -149,7 +111,7 @@
             font-weight: 700;
             font-size: 1.1rem;
             transition: all 0.3s;
-            margin: 0.5rem;
+            margin: 1rem 0.5rem 0;
             border: none;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
@@ -171,288 +133,156 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Workflow Visual */
-        .workflow-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
+        /* Capabilities Section */
+        .capabilities-section {
+            padding: 6rem 2rem;
+            background: #1a1a1a;
         }
 
-        .workflow-step {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            width: 200px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .workflow-step:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .step-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .step-title {
-            font-size: 1.2rem;
+        .capabilities-header {
+            text-transform: uppercase;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 3rem;
         }
 
-        .step-text {
-            font-size: 0.9rem;
-            opacity: 0.9;
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .arrow {
-            font-size: 2rem;
-            opacity: 0.7;
-        }
-
-        /* Form Styles */
-        .demo-form {
-            max-width: 600px;
-            margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: white;
-            background: white;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .benefits-list {
-            text-align: left;
-            margin: 2rem auto;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .benefits-list h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .benefits-list ul {
+        .capabilities-column ul {
             list-style: none;
             padding: 0;
         }
 
-        .benefits-list li {
-            padding: 0.5rem 0;
-            padding-left: 2rem;
-            position: relative;
-            font-size: 1.1rem;
-        }
-
-        .benefits-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            font-weight: 700;
+        .capabilities-column li {
             font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            opacity: 0.9;
         }
 
-        /* Navigation Dots */
-        .nav-dots {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        @media (max-width: 1024px) {
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
 
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
+        /* My Works Section */
+        .works-section {
+            padding: 6rem 2rem;
+            background: #0a0a0a;
+        }
+
+        .works-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .works-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .works-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .works-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .work-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
-        .nav-dot.active {
-            background: white;
-            transform: scale(1.3);
+        .work-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .nav-dot:hover {
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Navigation Arrows */
-        .nav-arrow {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        .work-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s;
-            user-select: none;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
         }
 
-        .nav-arrow:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-50%) scale(1.1);
+        .work-content {
+            padding: 2rem;
         }
 
-        .nav-arrow.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
+        .work-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        .nav-arrow.disabled:hover {
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
+        .work-description {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            line-height: 1.6;
         }
 
-        .nav-arrow.left {
-            left: 2rem;
+        .work-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .nav-arrow.right {
-            right: 2rem;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            z-index: 1001;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: white;
-            transition: width 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-
-        /* Pane Number Indicator */
-        .pane-number {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            font-size: 6rem;
-            font-weight: 900;
-            opacity: 0.1;
-            z-index: 1;
+        .tag {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .hero-content {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+                text-align: center !important;
             }
 
-            h2 {
-                font-size: 1.8rem;
+            h1 {
+                font-size: 3rem !important;
             }
 
             .subtitle {
                 font-size: 1.2rem;
-            }
-
-            .description {
-                font-size: 1rem;
-            }
-
-            .chevron-pane {
-                padding: 2rem;
-                clip-path: none;
-            }
-
-            .workflow-visual {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .arrow {
-                transform: rotate(90deg);
-            }
-
-            .nav-arrow {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-
-            .nav-arrow.left {
-                left: 1rem;
-            }
-
-            .nav-arrow.right {
-                right: 1rem;
-            }
-
-            .nav-dots {
-                right: 1rem;
             }
 
             .profile-circle {
@@ -461,314 +291,215 @@
                 font-size: 4rem;
                 border: 5px solid white;
             }
+
+            .works-header h2 {
+                font-size: 2rem;
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* Form Result */
-        .form-result {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            display: none;
-        }
-
-        .form-result.show {
-            display: block;
-        }
-
-        /* List Styling */
-        .key-points {
-            text-align: left;
-            max-width: 700px;
-            margin: 2rem auto;
-        }
-
-        .key-points li {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .key-points li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            font-weight: 700;
-        }
-
-        /* News Article Cards */
-        .news-article {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: left;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .news-article:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .news-article h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: white;
-            line-height: 1.4;
-        }
-
-        .news-source {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .news-date {
-            font-size: 0.85rem;
-            opacity: 0.7;
-        }
-
-        .news-description {
-            font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.6;
-            margin-top: 0.75rem;
-        }
-
-        .news-link {
-            display: inline-block;
-            margin-top: 0.75rem;
-            color: white;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 2rem;
-            font-size: 1.1rem;
-            opacity: 0.8;
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
-    <!-- Progress Bar -->
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content" style="text-align: left; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+            <div>
+                <p style="font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.8;">Hey there,</p>
+                <h1 style="font-size: 5rem; line-height: 1.1; margin-bottom: 2rem;">I'm Cory Ziller</h1>
+                <a href="#works" style="display: inline-flex; align-items: center; gap: 0.5rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; transition: gap 0.3s;">
+                    Let's Collaborate
+                    <span style="transition: transform 0.3s;">→</span>
+                </a>
+            </div>
+            <div>
+                <p style="font-size: 1.3rem; line-height: 1.8; opacity: 0.9; margin-bottom: 2rem;">
+                    Currently a MBA candidate at Ohio State University, transforming data into actionable insights through advanced analytics, automation, and AI-driven solutions.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn" style="margin: 0;">View LinkedIn</a>
+                    <a href="#works" class="btn btn-outline" style="margin: 0;">My Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Navigation Dots -->
-    <div class="nav-dots" id="navDots"></div>
+    <!-- Capabilities Section -->
+    <section class="capabilities-section">
+        <div class="works-container">
+            <h2 class="capabilities-header">Capabilities</h2>
+            <div class="capabilities-grid">
+                <div class="capabilities-column">
+                    <ul>
+                        <li>Product Management</li>
+                        <li>Roadmap Development</li>
+                        <li>Stakeholder Management</li>
+                        <li>Cross-Functional Leadership</li>
+                        <li>Resource Management</li>
+                    </ul>
+                </div>
+                <div class="capabilities-column">
+                    <ul>
+                        <li>Growth Strategy</li>
+                        <li>Data-Driven Decision Making</li>
+                        <li>Problem Solving & Innovation</li>
+                        <li>Product Delivery</li>
+                        <li>UX/UI Strategy</li>
+                    </ul>
+                </div>
+                <div class="capabilities-column">
+                    <ul>
+                        <li>Commercial Awareness</li>
+                        <li>Project Management</li>
+                        <li>Customer-Centric Design</li>
+                        <li>Agile Methodologies</li>
+                        <li>Market Analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Navigation Arrows -->
-    <div class="nav-arrow left" id="prevBtn">‹</div>
-    <div class="nav-arrow right" id="nextBtn">›</div>
+    <!-- My Works Section -->
+    <section class="works-section" id="works">
+        <div class="works-container">
+            <div class="works-header">
+                <h2>My Works</h2>
+                <p class="works-subtitle">A selection of recent projects highlighting automation, data analytics, and AI-driven solutions</p>
+            </div>
 
-    <!-- Chevron Container -->
-    <div class="chevron-container">
-        <div class="chevron-track" id="chevronTrack">
-
-            <!-- Pane 1: Introduction -->
-            <div class="chevron-pane pane-1">
-                <div class="pane-number">01</div>
-                <div class="pane-content">
-                    <!-- Replace 'profile.jpg' with your actual photo filename -->
-                    <img src="profile.jpg" alt="Cory Ziller" class="profile-circle" style="object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="profile-circle" style="display: none;">CZ</div>
-
-                    <h1>Cory Ziller</h1>
-                    <div class="subtitle">STEM MBA Candidate @ Fisher College of Business '27</div>
-                    <div class="subtitle" style="font-size: 1.2rem; opacity: 0.9; margin-top: -1rem;">Senior Client & Data Analyst</div>
-
-                    <div class="description" style="max-width: 900px; margin: 2rem auto;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; text-align: left; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; border: 2px solid rgba(255,255,255,0.2);">
-                            <div>
-                                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Data Analytics</div>
-                                <div style="font-size: 0.95rem; opacity: 0.9;">4+ years transforming media KPIs into business results for Fortune 500 clients</div>
-                            </div>
-                            <div>
-                                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Leadership</div>
-                                <div style="font-size: 0.95rem; opacity: 0.9;">Led analytics training for 40+ analysts while advancing to Senior Analyst</div>
-                            </div>
-                            <div>
-                                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Innovation</div>
-                                <div style="font-size: 0.95rem; opacity: 0.9;">Building AI-driven automation workflows to streamline complex processes</div>
-                            </div>
+            <div class="works-grid">
+                <!-- Social Listening Project -->
+                <div class="work-card" onclick="window.location.href='#social-listening'">
+                    <div class="work-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        AI
+                    </div>
+                    <div class="work-content">
+                        <h3 class="work-title">Social Listening & NVIDIA GPU Monitoring</h3>
+                        <p class="work-description">Automated social listening tool that monitors Reddit & Hacker News for NVIDIA GPU discussions, delivers sentiment analysis and audio briefings via email.</p>
+                        <div class="work-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">AI Analysis</span>
+                            <span class="tag">Automation</span>
                         </div>
                     </div>
-                    <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn">View LinkedIn</a>
-                    <a href="#" class="btn btn-outline" onclick="nextPane(); return false;">See My Work →</a>
                 </div>
-            </div>
 
-            <!-- Pane 2: Social Listening Demo -->
-            <div class="chevron-pane pane-2">
-                <div class="pane-number">02</div>
-                <div class="pane-content">
-                    <h2>Social Listening Demo</h2>
-                    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">NVIDIA GPU Monitoring</h1>
-                    <p class="description">
-                        Experience my automated social listening tool! Get a real data report sent to your inbox—
-                        including sentiment analysis, top issues, and a 30-second audio briefing.
-                    </p>
-
-                    <div class="demo-form">
-                        <form id="socialListeningForm">
-                            <div class="form-group">
-                                <label>Your First Name</label>
-                                <input
-                                    type="text"
-                                    id="nameInput"
-                                    placeholder="e.g., John"
-                                    required
-                                >
-                            </div>
-                            <div class="form-group">
-                                <label>Your Email Address</label>
-                                <input
-                                    type="email"
-                                    id="emailInput"
-                                    placeholder="e.g., john@example.com"
-                                    required
-                                >
-                            </div>
-                            <button type="submit" class="btn" style="width: 100%;">
-                                Send Me the Report
-                            </button>
-                        </form>
-
-                        <div class="form-result" id="demoResult"></div>
+                <!-- Placeholder for future projects -->
+                <div class="work-card" style="opacity: 0.5; cursor: default;">
+                    <div class="work-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        +
                     </div>
-
-                    <div class="benefits-list">
-                        <h3>What You'll Receive:</h3>
-                        <ul>
-                            <li>Real data from Reddit & Hacker News</li>
-                            <li>Sentiment analysis & severity breakdown</li>
-                            <li>Top 3 prioritized issues</li>
-                            <li>Category distribution insights</li>
-                            <li>30-second audio briefing (MP3)</li>
-                        </ul>
-                    </div>
-
-                    <div class="benefits-list" style="margin-top: 1.5rem;">
-                        <h3>Tech Stack:</h3>
-                        <ul>
-                            <li>Python for data collection & analysis</li>
-                            <li>Reddit & Hacker News APIs</li>
-                            <li>ElevenLabs AI for text-to-speech</li>
-                            <li>Vercel serverless functions</li>
-                            <li>Automated email delivery via SMTP</li>
-                        </ul>
+                    <div class="work-content">
+                        <h3 class="work-title">Coming Soon</h3>
+                        <p class="work-description">More projects on the way</p>
+                        <div class="work-tags">
+                            <span class="tag">TBD</span>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
+    </section>
+
+    <!-- Social Listening Detail Section -->
+    <section class="works-section" id="social-listening" style="background: #1a1a1a; padding: 4rem 2rem;">
+        <div class="works-container" style="max-width: 900px;">
+            <div style="text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Social Listening Demo</h2>
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; opacity: 0.9;">NVIDIA GPU Monitoring</h3>
+                <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem; line-height: 1.6;">
+                    Experience my automated social listening tool! Get a real data report sent to your inbox—
+                    including sentiment analysis, top issues, and a 30-second audio briefing.
+                </p>
+            </div>
+
+            <!-- Demo Form -->
+            <div style="max-width: 600px; margin: 2rem auto; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(255, 255, 255, 0.1);">
+                <form id="socialListeningForm">
+                    <div style="margin-bottom: 1.5rem; text-align: left;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your First Name</label>
+                        <input type="text" id="nameInput" placeholder="e.g., John" required
+                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit;">
+                    </div>
+                    <div style="margin-bottom: 1.5rem; text-align: left;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: white;">Your Email Address</label>
+                        <input type="email" id="emailInput" placeholder="e.g., john@example.com" required
+                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit;">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Me the Report</button>
+                </form>
+                <div id="demoResult" style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none;"></div>
+            </div>
+
+            <!-- What You'll Receive -->
+            <div style="max-width: 600px; margin: 2rem auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">What You'll Receive:</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Real data from Reddit & Hacker News
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Sentiment analysis & severity breakdown
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Top 3 prioritized issues
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Category distribution insights
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        30-second audio briefing (MP3)
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tech Stack -->
+            <div style="max-width: 600px; margin: 2rem auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Tech Stack:</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Python for data collection & analysis
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Reddit & Hacker News APIs
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        ElevenLabs AI for text-to-speech
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Vercel serverless functions
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; font-weight: 700; font-size: 1.3rem;">✓</span>
+                        Automated email delivery via SMTP
+                    </li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#works" class="btn btn-outline">Back to My Works</a>
+            </div>
+        </div>
+    </section>
 
     <script>
-        let currentPane = 0;
-        const totalPanes = 2;
-        const chevronTrack = document.getElementById('chevronTrack');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const progressFill = document.getElementById('progressFill');
-        const navDotsContainer = document.getElementById('navDots');
-
-        // Create navigation dots
-        for (let i = 0; i < totalPanes; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'nav-dot';
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToPane(i));
-            navDotsContainer.appendChild(dot);
-        }
-
-        function updatePane() {
-            // Update track position
-            chevronTrack.style.transform = `translateX(-${currentPane * 100}vw)`;
-
-            // Update progress bar
-            progressFill.style.width = `${((currentPane + 1) / totalPanes) * 100}%`;
-
-            // Update navigation buttons
-            prevBtn.classList.toggle('disabled', currentPane === 0);
-            nextBtn.classList.toggle('disabled', currentPane === totalPanes - 1);
-
-            // Update dots
-            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentPane);
-            });
-        }
-
-        function nextPane() {
-            if (currentPane < totalPanes - 1) {
-                currentPane++;
-                updatePane();
-            }
-        }
-
-        function prevPane() {
-            if (currentPane > 0) {
-                currentPane--;
-                updatePane();
-            }
-        }
-
-        function goToPane(index) {
-            currentPane = index;
-            updatePane();
-        }
-
-        // Event listeners
-        prevBtn.addEventListener('click', prevPane);
-        nextBtn.addEventListener('click', nextPane);
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevPane();
-            if (e.key === 'ArrowRight') nextPane();
-        });
-
-        // Touch/swipe support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) nextPane();
-            if (touchEndX > touchStartX + 50) prevPane();
-        }
-
-        // Mouse wheel navigation
-        let scrollTimeout;
-        document.addEventListener('wheel', (e) => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                if (e.deltaY > 0) nextPane();
-                else prevPane();
-            }, 50);
-        }, { passive: true });
-
         // Social Listening Demo Form
         document.getElementById('socialListeningForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -780,10 +511,9 @@
 
             // Show loading state
             resultDiv.innerHTML = '⏳ Sending your report...';
-            resultDiv.classList.add('show');
+            resultDiv.style.display = 'block';
 
             try {
-                // Call Vercel serverless function
                 const response = await fetch('https://social-listening-ten.vercel.app/api/send-demo', {
                     method: 'POST',
                     headers: {
@@ -806,7 +536,6 @@
                 } else {
                     throw new Error(data.error || 'Failed to send report');
                 }
-
             } catch (error) {
                 console.error('Demo send error:', error);
                 resultDiv.innerHTML = `
@@ -816,9 +545,6 @@
                 `;
             }
         });
-
-        // Initialize
-        updatePane();
     </script>
 </body>
 </html>
