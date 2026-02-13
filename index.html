@@ -75,7 +75,7 @@
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding: var(--space-6) var(--space-4) var(--space-8);
+            padding: var(--space-4) var(--space-4) var(--space-6);
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
         }
 
@@ -88,10 +88,10 @@
         /* Hero Grid */
         .hero-grid {
             display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: var(--space-12);
+            grid-template-columns: 350px 1fr;
+            gap: var(--space-8);
             align-items: start;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-4);
         }
 
         /* Left Column - Photo & Name */
@@ -100,15 +100,15 @@
         }
 
         .profile-photo {
-            width: 280px;
-            height: 280px;
+            width: 240px;
+            height: 240px;
             border-radius: 16px;
             background: rgba(255, 255, 255, 0.03);
             border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto var(--space-6);
+            margin: 0 auto var(--space-4);
             overflow: hidden;
             /* Enhanced glow around photo */
             box-shadow:
@@ -133,15 +133,15 @@
         }
 
         .hero-greeting {
-            font-size: var(--text-xl);
+            font-size: 1.125rem;
             font-weight: 500;
             color: var(--text-secondary);
-            margin-bottom: var(--space-2);
+            margin-bottom: var(--space-1);
             letter-spacing: -0.01em;
         }
 
         .hero-name {
-            font-size: var(--text-hero);
+            font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.05;
             letter-spacing: -0.03em;
@@ -153,14 +153,14 @@
 
         /* Right Column - Credentials */
         .hero-right {
-            padding-left: var(--space-10);
-            padding-top: var(--space-6);
+            padding-left: var(--space-8);
+            padding-top: var(--space-4);
             animation: slideUp 0.7s ease-out 0.1s both;
         }
 
         .credential-item {
             position: relative;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-4);
             padding-left: var(--space-3);
         }
 
@@ -193,7 +193,7 @@
         }
 
         .credential-text {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.5;
@@ -205,14 +205,14 @@
            ============================================ */
         .tagline-bridge {
             text-align: center;
-            margin: var(--space-6) auto var(--space-3);
+            margin: var(--space-4) auto var(--space-2);
             padding: 0 var(--space-4);
             max-width: 800px;
             animation: fadeIn 0.8s ease-out 0.3s both;
         }
 
         .tagline-text {
-            font-size: var(--text-2xl);
+            font-size: 1.25rem;
             font-weight: 500;
             font-style: italic;
             color: var(--text-secondary);
