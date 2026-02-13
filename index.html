@@ -5,7 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cory Ziller - Portfolio</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        /* ============================================
+           DESIGN SYSTEM - 8px Spacing Scale
+           ============================================ */
+        :root {
+            /* Spacing (8px base) */
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-5: 40px;
+            --space-6: 48px;
+            --space-8: 64px;
+            --space-10: 80px;
+            --space-12: 96px;
+            --space-16: 128px;
+
+            /* Typography Scale */
+            --text-xs: 0.75rem;     /* 12px - microcopy */
+            --text-sm: 0.875rem;    /* 14px - captions */
+            --text-base: 1rem;      /* 16px - body */
+            --text-lg: 1.125rem;    /* 18px - body large */
+            --text-xl: 1.25rem;     /* 20px - emphasis */
+            --text-2xl: 1.5rem;     /* 24px - small headers */
+            --text-3xl: 1.875rem;   /* 30px */
+            --text-4xl: 2.25rem;    /* 36px */
+            --text-5xl: 3rem;       /* 48px */
+            --text-hero: 4.5rem;    /* 72px - hero name */
+
+            /* Colors */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --glow-primary: rgba(255, 255, 255, 0.25);
+            --glow-subtle: rgba(255, 255, 255, 0.12);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,146 +57,266 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #0a0a0a;
-            color: white;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: var(--text-base);
+            line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Hero Section */
+        /* ============================================
+           HERO SECTION
+           ============================================ */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: var(--space-8) var(--space-4);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
         }
 
         .hero-content {
-            max-width: 1200px;
-            text-align: center;
+            max-width: 1280px;
+            width: 100%;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .profile-circle {
+        /* Hero Grid */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: var(--space-12);
+            align-items: start;
+            margin-bottom: var(--space-10);
+        }
+
+        /* Left Column - Photo & Name */
+        .hero-left {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .profile-photo {
             width: 280px;
             height: 280px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 5rem;
-            font-weight: 700;
-            box-shadow: 0 0 60px rgba(255, 255, 255, 0.4), 0 0 100px rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            margin: 0 auto var(--space-6);
             overflow: hidden;
+            /* Subtle purposeful glow - only on photo */
+            box-shadow:
+                0 8px 32px rgba(255, 255, 255, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .profile-circle img {
+        .profile-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .profile-circle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 80px rgba(255, 255, 255, 0.6), 0 0 120px rgba(255, 255, 255, 0.3);
+        .profile-photo:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 12px 48px rgba(255, 255, 255, 0.12),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
+        .hero-greeting {
+            font-size: var(--text-xl);
             font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.01em;
         }
 
-        .hero-skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 900px;
-            margin: 2rem auto;
-            text-align: left;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid rgba(255,255,255,0.1);
+        .hero-name {
+            font-size: var(--text-hero);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin: 0;
+            /* Keep name bold and prominent */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
-        .skill-item h3 {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+        /* Right Column - Credentials */
+        .hero-right {
+            padding-left: var(--space-6);
+            padding-top: var(--space-3);
+            animation: slideUp 0.7s ease-out 0.1s both;
         }
 
-        .skill-item p {
-            font-size: 0.95rem;
-            opacity: 0.9;
+        .credential-item {
+            position: relative;
+            margin-bottom: var(--space-6);
+            padding-left: var(--space-3);
+        }
+
+        .credential-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Subtle glowing bullet */
+        .credential-bullet {
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-primary);
+            /* More subtle glow */
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.4),
+                0 0 16px rgba(255, 255, 255, 0.15);
+        }
+
+        .credential-label {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-1);
+        }
+
+        .credential-text {
+            font-size: var(--text-lg);
+            font-weight: 500;
+            color: var(--text-primary);
             line-height: 1.5;
+            letter-spacing: -0.01em;
         }
 
+        /* ============================================
+           TAGLINE BRIDGE SECTION
+           ============================================ */
+        .tagline-bridge {
+            text-align: center;
+            margin: var(--space-12) auto var(--space-8);
+            padding: var(--space-6) var(--space-4);
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        .tagline-text {
+            font-size: var(--text-2xl);
+            font-weight: 500;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-8);
+            /* Better visual anchor */
+            position: relative;
+            padding-bottom: var(--space-4);
+        }
+
+        .tagline-text::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.2) 50%,
+                transparent 100%);
+        }
+
+        /* CTA Buttons Container */
+        .cta-container {
+            display: flex;
+            gap: var(--space-2);
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* Arrow Wrapper */
+        .arrow-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bouncing-arrow {
+            font-size: var(--text-5xl);
+            margin-bottom: var(--space-2);
+            animation: bounce 2s ease-in-out infinite;
+            color: var(--text-secondary);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-16px); }
+            60% { transform: translateY(-8px); }
+        }
+
+        /* Buttons */
         .btn {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: white;
-            color: #000;
+            padding: 14px 32px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            margin: 1rem 0.5rem 0;
-            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: var(--text-base);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            letter-spacing: -0.01em;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
-            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
         }
 
         .btn-outline {
             background: transparent;
-            color: white;
-            border: 2px solid white;
+            color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Capabilities Section */
+        /* ============================================
+           CAPABILITIES SECTION
+           ============================================ */
         .capabilities-section {
-            padding: 6rem 2rem;
-            background: #1a1a1a;
+            padding: var(--space-16) var(--space-4);
+            background: var(--bg-secondary);
         }
 
         .capabilities-header {
             text-transform: uppercase;
-            font-size: 1rem;
+            font-size: var(--text-sm);
             font-weight: 700;
-            letter-spacing: 0.15em;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 3rem;
+            letter-spacing: 0.12em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-8);
+            text-align: center;
         }
 
         .capabilities-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 4rem;
-            max-width: 1400px;
+            gap: var(--space-10);
+            max-width: 1280px;
             margin: 0 auto;
         }
 
@@ -162,68 +326,66 @@
         }
 
         .capabilities-column li {
-            font-size: 1.3rem;
+            font-size: var(--text-lg);
             line-height: 1.8;
-            margin-bottom: 0.8rem;
-            opacity: 0.9;
+            margin-bottom: var(--space-2);
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
-        @media (max-width: 1024px) {
-            .capabilities-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        /* Side Projects Section */
+        /* ============================================
+           WORKS SECTION
+           ============================================ */
         .works-section {
-            padding: 6rem 2rem;
-            background: #0a0a0a;
+            padding: var(--space-16) var(--space-4);
+            background: var(--bg-primary);
         }
 
         .works-container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
         .works-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: var(--space-8);
         }
 
         .works-header h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: var(--text-5xl);
+            margin-bottom: var(--space-3);
             font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .works-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            max-width: 700px;
+            font-size: var(--text-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
         .works-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: var(--space-4);
+            margin-top: var(--space-8);
         }
 
         .work-card {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
         }
 
         .work-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .work-card.expanded {
@@ -237,25 +399,26 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            padding: 0 2rem;
+            padding: 0 var(--space-4);
         }
 
         .work-card.expanded .work-details {
             max-height: 3000px;
-            padding: 2rem;
+            padding: var(--space-4);
         }
 
         .close-btn {
             display: none;
-            margin: 1rem auto;
-            padding: 0.8rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin: var(--space-3) auto;
+            padding: 12px 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             color: white;
-            border-radius: 50px;
+            border-radius: 100px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
+            font-size: var(--text-sm);
         }
 
         .work-card.expanded .close-btn {
@@ -263,7 +426,8 @@
         }
 
         .close-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .work-image {
@@ -273,81 +437,117 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: var(--text-5xl);
             font-weight: 700;
             color: white;
         }
 
         .work-content {
-            padding: 2rem;
+            padding: var(--space-4);
         }
 
         .work-title {
-            font-size: 1.5rem;
+            font-size: var(--text-2xl);
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.01em;
         }
 
         .work-description {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 1rem;
+            font-size: var(--text-base);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-3);
             line-height: 1.6;
         }
 
         .work-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: var(--space-1);
         }
 
         .tag {
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            font-size: var(--text-sm);
             font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Responsive */
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-8);
+                text-align: center;
+            }
+
+            .hero-right {
+                padding-left: 0;
+            }
+
+            .credential-item {
+                text-align: left;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-6);
+            }
+
+            .hero-name {
+                font-size: var(--text-4xl);
+            }
+
+            .profile-photo {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero-content > div:first-child {
-                grid-template-columns: 1fr !important;
-                gap: 2rem !important;
-            }
-
-            .hero-content > div > div {
-                text-align: center !important;
-            }
-
-            h1 {
-                font-size: 3.5rem !important;
-            }
-
-            .hero-content p {
-                font-size: 1.4rem !important;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .profile-circle {
-                width: 200px;
-                height: 200px;
-                font-size: 4rem;
-                border: 3px solid rgba(255, 255, 255, 0.3);
-            }
-
-            .works-header h2 {
-                font-size: 2rem;
-            }
-
             .works-grid {
                 grid-template-columns: 1fr;
             }
 
-            /* Make expanded card details responsive */
+            .cta-container {
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+
+            .arrow-wrapper {
+                order: -1;
+            }
+
             .work-details > div > div[style*="grid-template-columns"] {
                 grid-template-columns: 1fr !important;
             }
@@ -357,85 +557,72 @@
         html {
             scroll-behavior: smooth;
         }
-
-        /* Bouncing Arrow Animation */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content" style="padding: 2rem;">
-            <!-- Two Column Layout -->
-            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 8rem; align-items: center; margin-bottom: 4rem;">
-                <!-- Left Column: Photo and Name -->
-                <div style="margin-left: -4rem;">
-                    <div class="profile-circle" style="margin: 0 auto 3rem auto;">
+        <div class="hero-content">
+            <!-- Hero Grid -->
+            <div class="hero-grid">
+                <!-- Left Column: Photo & Name -->
+                <div class="hero-left">
+                    <div class="profile-photo">
                         <img src="profile.jpg" alt="Cory Ziller" onerror="this.parentElement.innerHTML='CZ';">
                     </div>
                     <div style="text-align: left;">
-                        <p style="font-size: 2rem; margin-bottom: 1.5rem; opacity: 0.8;">Hey there,</p>
-                        <h1 style="font-size: 5rem; line-height: 1.1; margin-bottom: 0; white-space: nowrap;">I'm Cory Ziller</h1>
+                        <p class="hero-greeting">Hey there,</p>
+                        <h1 class="hero-name">I'm Cory Ziller</h1>
                     </div>
                 </div>
 
                 <!-- Right Column: Credentials -->
-                <div style="text-align: left;">
+                <div class="hero-right">
                     <!-- Credential 1 -->
-                    <div style="margin-bottom: 2.5rem;">
-                        <p style="font-size: 1.6rem; line-height: 1.4; opacity: 0.95; margin: 0; white-space: nowrap;">
-                            • Current STEM MBA candidate at Ohio State.
+                    <div class="credential-item">
+                        <div class="credential-bullet"></div>
+                        <div class="credential-label">Current</div>
+                        <p class="credential-text">
+                            Building AI-native workflows and automation systems at Ohio State's STEM MBA program
                         </p>
                     </div>
 
                     <!-- Credential 2 -->
-                    <div style="margin-bottom: 2.5rem;">
-                        <p style="font-size: 1.6rem; line-height: 1.4; opacity: 0.95; margin: 0; white-space: nowrap;">
-                            • Previous Data Analyst at a Chicago-based advertising agency.
+                    <div class="credential-item">
+                        <div class="credential-bullet"></div>
+                        <div class="credential-label">Previously</div>
+                        <p class="credential-text">
+                            Data analyst at a Chicago adtech agency — turned messy marketing data into strategic insights
                         </p>
                     </div>
 
                     <!-- Credential 3 -->
-                    <div style="margin-bottom: 2.5rem;">
-                        <p style="font-size: 1.6rem; line-height: 1.4; opacity: 0.95; margin: 0; white-space: nowrap;">
-                            • Early AI startup experience supporting law enforcement.
+                    <div class="credential-item">
+                        <div class="credential-bullet"></div>
+                        <div class="credential-label">Early Experience</div>
+                        <p class="credential-text">
+                            Supported law enforcement with AI tooling at an early-stage startup
                         </p>
-                    </div>
-
-                    <!-- Work History Button -->
-                    <div style="margin-top: 4rem;">
-                        <a href="#" class="btn btn-outline" style="margin: 0;">Work History</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Centered Bottom Section -->
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <p style="font-size: 1.5rem; line-height: 1.6; opacity: 0.7; margin-bottom: 2.5rem; font-style: italic; font-family: Georgia, serif;">
-                    I love turning ideas into automation -- Check out my work below.
+            <!-- Tagline Bridge Section -->
+            <div class="tagline-bridge">
+                <p class="tagline-text">
+                    I turn ideas into automation that actually works
                 </p>
 
-                <div style="display: flex; gap: 1rem; justify-content: center; align-items: flex-end;">
-                    <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn" style="margin: 0;">View LinkedIn</a>
+                <div class="cta-container">
+                    <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn">View LinkedIn</a>
 
-                    <!-- Side Projects button with arrow above it -->
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <!-- Funky Arrow positioned over Side Projects -->
-                        <div style="font-size: 3rem; margin-bottom: 1rem; animation: bounce 2s infinite;">
-                            ↓
-                        </div>
-                        <a href="#works" class="btn btn-outline" style="margin: 0;">Side Projects</a>
+                    <!-- Side Projects with Arrow -->
+                    <div class="arrow-wrapper">
+                        <div class="bouncing-arrow">↓</div>
+                        <a href="#works" class="btn btn-outline">Side Projects</a>
                     </div>
+
+                    <a href="#" class="btn btn-outline">Work History</a>
                 </div>
             </div>
         </div>
@@ -482,7 +669,7 @@
         <div class="works-container">
             <div class="works-header">
                 <h2>Side Projects</h2>
-                <p class="works-subtitle">A selection of recent projects highlighting automation, data analytics, and AI-driven solutions</p>
+                <p class="works-subtitle">Automation, data analytics, and AI-driven solutions built from scratch</p>
             </div>
 
             <div class="works-grid">
@@ -503,54 +690,54 @@
 
                     <!-- Expanded Details -->
                     <div class="work-details">
-                        <div style="border-top: 2px solid rgba(255, 255, 255, 0.1); margin-top: 2rem; padding-top: 2rem;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Try the Demo</h3>
-                            <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 2rem; line-height: 1.6;">
+                        <div style="border-top: 1px solid var(--border-subtle); margin-top: var(--space-4); padding-top: var(--space-4);">
+                            <h3 style="font-size: var(--text-3xl); margin-bottom: var(--space-2); font-weight: 700;">Try the Demo</h3>
+                            <p style="font-size: var(--text-lg); color: var(--text-secondary); margin-bottom: var(--space-6); line-height: 1.6;">
                                 Experience my automated social listening tool! Get a real data report sent to your inbox—
                                 including sentiment analysis, top issues, and a 30-second audio briefing.
                             </p>
 
                             <!-- Demo Form -->
-                            <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1); margin-bottom: 2rem;">
+                            <div style="background: rgba(255, 255, 255, 0.03); padding: var(--space-4); border-radius: 12px; border: 1px solid var(--border-subtle); margin-bottom: var(--space-6);">
                                 <form id="socialListeningForm" onclick="event.stopPropagation()">
-                                    <div style="margin-bottom: 1.5rem; text-align: left;">
-                                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your First Name</label>
+                                    <div style="margin-bottom: var(--space-3); text-align: left;">
+                                        <label style="display: block; margin-bottom: var(--space-1); font-weight: 600; font-size: var(--text-sm);">Your First Name</label>
                                         <input type="text" id="nameInput" placeholder="e.g., John" required
-                                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit; color: #000;">
+                                            style="width: 100%; padding: 14px; border: 1px solid var(--border-subtle); border-radius: 8px; background: rgba(255, 255, 255, 0.9); font-size: var(--text-base); font-family: inherit; color: #000;">
                                     </div>
-                                    <div style="margin-bottom: 1.5rem; text-align: left;">
-                                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your Email Address</label>
+                                    <div style="margin-bottom: var(--space-3); text-align: left;">
+                                        <label style="display: block; margin-bottom: var(--space-1); font-weight: 600; font-size: var(--text-sm);">Your Email Address</label>
                                         <input type="email" id="emailInput" placeholder="e.g., john@example.com" required
-                                            style="width: 100%; padding: 1rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.9); font-size: 1rem; font-family: inherit; color: #000;">
+                                            style="width: 100%; padding: 14px; border: 1px solid var(--border-subtle); border-radius: 8px; background: rgba(255, 255, 255, 0.9); font-size: var(--text-base); font-family: inherit; color: #000;">
                                     </div>
                                     <button type="submit" class="btn" style="width: 100%; margin: 0;">Send Me the Report</button>
                                 </form>
-                                <div id="demoResult" style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none;"></div>
+                                <div id="demoResult" style="margin-top: var(--space-3); padding: var(--space-2); background: rgba(255, 255, 255, 0.05); border-radius: 8px; display: none;"></div>
                             </div>
 
-                            <!-- Two Column Layout for What You'll Receive and Tech Stack -->
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                            <!-- Two Column Layout -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-6);">
                                 <!-- What You'll Receive -->
-                                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
-                                    <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">What You'll Receive:</h3>
+                                <div style="background: rgba(255, 255, 255, 0.03); padding: var(--space-4); border-radius: 12px; border: 1px solid var(--border-subtle);">
+                                    <h3 style="margin-bottom: var(--space-3); font-size: var(--text-xl); font-weight: 600;">What You'll Receive:</h3>
                                     <ul style="list-style: none; padding: 0;">
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Real data from Reddit & Hacker News
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Sentiment analysis & severity breakdown
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Top 3 prioritized issues
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Category distribution insights
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             30-second audio briefing (MP3)
                                         </li>
@@ -558,26 +745,26 @@
                                 </div>
 
                                 <!-- Tech Stack -->
-                                <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1);">
-                                    <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">Tech Stack:</h3>
+                                <div style="background: rgba(255, 255, 255, 0.03); padding: var(--space-4); border-radius: 12px; border: 1px solid var(--border-subtle);">
+                                    <h3 style="margin-bottom: var(--space-3); font-size: var(--text-xl); font-weight: 600;">Tech Stack:</h3>
                                     <ul style="list-style: none; padding: 0;">
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Python for data collection & analysis
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Reddit & Hacker News APIs
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             ElevenLabs AI for text-to-speech
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Vercel serverless functions
                                         </li>
-                                        <li style="padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.95rem;">
+                                        <li style="padding: 6px 0; padding-left: var(--space-3); position: relative; font-size: var(--text-sm); color: var(--text-secondary);">
                                             <span style="position: absolute; left: 0;">✓</span>
                                             Automated email delivery via SMTP
                                         </li>
@@ -615,7 +802,6 @@
             card.classList.toggle('expanded');
 
             if (card.classList.contains('expanded')) {
-                // Scroll to the card smoothly
                 setTimeout(() => {
                     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
@@ -631,7 +817,6 @@
 
             if (!name || !email) return;
 
-            // Show loading state
             resultDiv.innerHTML = '⏳ Sending your report...';
             resultDiv.style.display = 'block';
 
