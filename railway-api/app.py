@@ -43,8 +43,14 @@ def send_demo():
             return jsonify({'error': 'Name and email are required'}), 400
 
         # Load cached report data
-        with open('latest_report.json', 'r') as f:
-            report_data = json.load(f)
+        try:
+            with open('latest_report.json', 'r') as f:
+                report_data = json.load(f)
+        except FileNotFoundError:
+            return jsonify({'error': 'Report data not available. Please try again later.'}), 500
+        except Exception as e:
+            print(f"Error loading report: {e}")
+            return jsonify({'error': f'Failed to load report data: {str(e)}'}), 500
 
         # Build personalized script
         now = datetime.now().strftime('%B %d, %Y')
