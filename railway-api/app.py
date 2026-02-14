@@ -3,16 +3,28 @@ from flask_cors import CORS
 import os
 import json
 from datetime import datetime
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 from gtts import gTTS
 import io
+import base64
+import resend
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+# Enable CORS with explicit configuration
+CORS(app, resources={
+    r"/*": {
+        "origins": "*",
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
+
+# Add CORS headers to all responses (belt and suspenders approach)
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    return response
 
 @app.route('/send-demo', methods=['POST', 'OPTIONS'])
 def send_demo():
@@ -57,15 +69,21 @@ TOP ISSUES DETECTED:
             email_body += f"{i}. [{issue['severity'].upper()}] {issue['category']}: {issue['title']}\n"
 
         email_body += f"""
-I've attached a personalized 30-second audio briefing just for you.
+I've attached a personalized 30-second audio briefing with key insights from the analysis.
 
-This demo showcases how I built an automated social listening system that:
-- Scrapes Reddit & Hacker News for NVIDIA GPU discussions
-- Analyzes sentiment and prioritizes issues
-- Generates personalized audio briefings using AI text-to-speech
-- Delivers insights via automated email
+ABOUT THIS PROJECT:
+I built this end-to-end automated social listening pipeline to monitor brand sentiment and surface critical issues in real-time. The system continuously scrapes Reddit and Hacker News discussions, performs AI-powered sentiment analysis, and delivers personalized audio briefings via automated email—all running on a serverless architecture.
 
-Thanks for checking out my work!
+Key capabilities:
+• Multi-source data aggregation (Reddit API, Hacker News API)
+• Real-time sentiment analysis with severity classification
+• AI-generated audio summaries using Google Text-to-Speech
+• Automated email delivery with dynamic attachments
+• Scalable deployment on Railway with scheduled cron jobs
+
+This demonstrates my ability to build production-ready automation systems that combine web scraping, NLP, and AI to deliver actionable insights.
+
+I'd love to discuss how I can bring similar solutions to your team!
 
 Best regards,
 Cory Ziller
@@ -77,7 +95,7 @@ https://coryziller.github.io
         if top_issues:
             top_issue_text = f"Top issue: {top_issues[0]['category']}. {top_issues[0]['title'][:60]}."
 
-        audio_script = f"Hi {name}, this is your 30 second round up for {now}. Found {total} posts discussing NVIDIA GPU issues. Sentiment: {sentiment}. {top_issue_text} Check your email for full details."
+        audio_script = f"Hi {name}, this is Cory Ziller with your personalized social listening briefing. I've analyzed {total} posts discussing NVIDIA GPU issues across Reddit and Hacker News. Overall sentiment is {sentiment}. {top_issue_text} This automated system scrapes forums, analyzes sentiment using AI, and generates these personalized briefings. Check your email for the complete report with detailed insights. Thanks for checking out my work!"
 
         # Generate audio with gTTS (Google Text-to-Speech)
         print(f"Generating audio with gTTS for: {name}")
@@ -95,35 +113,35 @@ https://coryziller.github.io
 
         print(f"Audio generated successfully - {len(audio_data)} bytes")
 
-        # Send email with attachment
-        sender_email = os.environ.get('SENDER_EMAIL')
-        gmail_password = os.environ.get('GMAIL_APP_PASSWORD')
+        # Send email with Resend
+        resend_api_key = os.environ.get('RESEND_API_KEY')
+        sender_email = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
 
-        if not sender_email or not gmail_password:
-            return jsonify({'error': 'Email credentials not configured'}), 500
+        if not resend_api_key:
+            return jsonify({'error': 'Resend API key not configured'}), 500
 
-        # Create email
-        msg = MIMEMultipart()
-        msg['From'] = sender_email
-        msg['To'] = email
-        msg['Subject'] = f'Your Personalized NVIDIA GPU Report - {now}'
+        # Set Resend API key
+        resend.api_key = resend_api_key
 
-        # Add body
-        msg.attach(MIMEText(email_body, 'plain'))
-
-        # Add audio attachment
-        audio_attachment = MIMEBase('audio', 'mpeg')
-        audio_attachment.set_payload(audio_data)
-        encoders.encode_base64(audio_attachment)
+        # Encode audio as base64 for attachment
+        audio_base64 = base64.b64encode(audio_data).decode('utf-8')
         filename = f"nvidia_report_{name.replace(' ', '_')}.mp3"
-        audio_attachment.add_header('Content-Disposition', f'attachment; filename={filename}')
-        msg.attach(audio_attachment)
 
-        # Send email
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
-            server.starttls()
-            server.login(sender_email, gmail_password)
-            server.send_message(msg)
+        # Send email using Resend
+        print(f"Sending email to {email} via Resend...")
+
+        response = resend.Emails.send({
+            "from": sender_email,
+            "to": email,
+            "subject": f"Your Personalized NVIDIA GPU Report - {now}",
+            "text": email_body,
+            "attachments": [{
+                "filename": filename,
+                "content": audio_base64
+            }]
+        })
+
+        print(f"Resend response: {response}")
 
         return jsonify({
             'success': True,
