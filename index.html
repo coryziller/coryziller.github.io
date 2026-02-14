@@ -664,73 +664,87 @@
                                     </p>
                                 </div>
 
-                                <!-- Demo Form (Moved Up) -->
-                                <div class="scroll-section" style="margin-bottom: var(--space-6); text-align: center; background: rgba(255,255,255,0.15); padding: var(--space-6); border-radius: 16px; border: 2px solid rgba(255,255,255,0.3);">
-                                    <div style="margin-bottom: var(--space-4);">
-                                        <span style="font-size: var(--text-sm); font-weight: 600; color: white;">SEE IT IN ACTION</span>
-                                        <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2); margin-bottom: var(--space-3); color: white;">Try the workflow</h3>
-                                        <p style="font-size: 1.125rem; color: rgba(255,255,255,0.95); max-width: 600px; margin: 0 auto; line-height: 1.7;">
-                                            Get a sample email with real sentiment data and an audio briefing.
-                                        </p>
-                                    </div>
-                                    <form id="socialListeningForm" onclick="event.stopPropagation()" style="max-width: 500px; margin: 0 auto;">
-                                        <div style="margin-bottom: var(--space-3); text-align: left;">
-                                            <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Name</label>
-                                            <input type="text" id="nameInput" placeholder="John Doe" required
-                                                style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
-                                        </div>
-                                        <div style="margin-bottom: var(--space-4); text-align: left;">
-                                            <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Email</label>
-                                            <input type="email" id="emailInput" placeholder="john@example.com" required
-                                                style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
-                                        </div>
-                                        <button type="submit" style="width: 100%; padding: 16px 32px; background: white; color: #667eea; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
-                                            Send Me the Demo Report
-                                        </button>
-                                        <div id="demoResult" style="margin-top: var(--space-4); padding: var(--space-3); background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none; text-align: center; font-size: var(--text-base); color: white;"></div>
-                                    </form>
-                                </div>
+                                <!-- Two Column Layout -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8); align-items: start;">
 
-                                <!-- The Idea -->
-                                <div style="margin-bottom: var(--space-6); text-align: center;">
-                                    <h4 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: var(--space-2);">The Idea</h4>
-                                    <p style="font-size: 1rem; color: rgba(255,255,255,0.9); max-width: 550px; margin: 0 auto; line-height: 1.6;">
-                                        NVIDIA product managers need to know what users think about their GPUs, but checking Reddit and Hacker News daily takes hours. Automate the entire process.
-                                    </p>
-                                </div>
+                                    <!-- Left Column: Content -->
+                                    <div style="padding-right: 20px;">
+                                        <!-- The Idea -->
+                                        <div style="margin-bottom: 48px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Idea</h4>
+                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                                NVIDIA product managers need to track user sentiment to prioritize product features and understand pain points, but checking Reddit and Hacker News daily takes hours. Automate the entire process.
+                                            </p>
+                                        </div>
 
-                                <!-- What I Built -->
-                                <div style="margin-bottom: var(--space-6); text-align: center;">
-                                    <h4 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: var(--space-4);">What I Built</h4>
-                                    <div style="display: flex; align-items: center; justify-content: center; gap: 16px; max-width: 700px; margin: 0 auto; flex-wrap: wrap;">
-                                        <div style="text-align: center;">
-                                            <div style="font-weight: 700; color: white; margin-bottom: 4px;">Scrape</div>
-                                            <div style="font-size: 0.875rem; color: rgba(255,255,255,0.8);">Reddit/HN daily</div>
+                                        <!-- What I Built -->
+                                        <div style="margin-bottom: 48px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 20px; letter-spacing: -0.02em;">What I Built</h4>
+                                            <div style="display: flex; flex-direction: column; gap: 16px;">
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Scrape</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Reddit & Hacker News daily</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Python + PRAW + API</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Analyze</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Sentiment & categorization</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">OpenAI API</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Generate</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">30-second audio summary</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Google Text-to-Speech</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Email</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Automated delivery</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Brevo API</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div style="color: rgba(255,255,255,0.6); font-size: 1.5rem;">→</div>
-                                        <div style="text-align: center;">
-                                            <div style="font-weight: 700; color: white; margin-bottom: 4px;">Analyze</div>
-                                            <div style="font-size: 0.875rem; color: rgba(255,255,255,0.8);">Sentiment</div>
-                                        </div>
-                                        <div style="color: rgba(255,255,255,0.6); font-size: 1.5rem;">→</div>
-                                        <div style="text-align: center;">
-                                            <div style="font-weight: 700; color: white; margin-bottom: 4px;">Generate</div>
-                                            <div style="font-size: 0.875rem; color: rgba(255,255,255,0.8);">Audio summary</div>
-                                        </div>
-                                        <div style="color: rgba(255,255,255,0.6); font-size: 1.5rem;">→</div>
-                                        <div style="text-align: center;">
-                                            <div style="font-weight: 700; color: white; margin-bottom: 4px;">Email</div>
-                                            <div style="font-size: 0.875rem; color: rgba(255,255,255,0.8);">Automated delivery</div>
+
+                                        <!-- The Impact -->
+                                        <div>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Impact</h4>
+                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                                Saves product teams hours every week and delivers insights before standup.
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- The Impact -->
-                                <div style="margin-bottom: var(--space-6); text-align: center;">
-                                    <h4 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: var(--space-2);">The Impact</h4>
-                                    <p style="font-size: 1rem; color: rgba(255,255,255,0.9); max-width: 500px; margin: 0 auto;">
-                                        Saves product teams hours every week and delivers insights before standup.
-                                    </p>
+                                    <!-- Right Column: Demo Form -->
+                                    <div>
+                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); height: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.2);">
+                                            <div style="margin-bottom: 32px;">
+                                                <span style="font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em;">See It In Action</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px; color: white; letter-spacing: -0.02em;">Try the workflow</h3>
+                                                <p style="font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.6;">
+                                                    Get a sample email with real sentiment data and an audio briefing.
+                                                </p>
+                                            </div>
+                                            <form id="socialListeningForm" onclick="event.stopPropagation()" style="max-width: 100%;">
+                                                <div style="margin-bottom: var(--space-3); text-align: left;">
+                                                    <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Name</label>
+                                                    <input type="text" id="nameInput" placeholder="John Doe" required
+                                                        style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
+                                                </div>
+                                                <div style="margin-bottom: var(--space-4); text-align: left;">
+                                                    <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Email</label>
+                                                    <input type="email" id="emailInput" placeholder="john@example.com" required
+                                                        style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
+                                                </div>
+                                                <button type="submit" style="width: 100%; padding: 16px 32px; background: white; color: #667eea; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+                                                    Send Me the Demo Report
+                                                </button>
+                                                <div id="demoResult" style="margin-top: var(--space-4); padding: var(--space-3); background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none; text-align: center; font-size: var(--text-base); color: white;"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <!-- GitHub Link -->
