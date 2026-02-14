@@ -299,45 +299,6 @@
         }
 
         /* ============================================
-           CAPABILITIES SECTION
-           ============================================ */
-        .capabilities-section {
-            padding: var(--space-16) var(--space-4);
-            background: var(--bg-secondary);
-        }
-
-        .capabilities-header {
-            text-transform: uppercase;
-            font-size: var(--text-sm);
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            color: var(--text-tertiary);
-            margin-bottom: var(--space-8);
-            text-align: center;
-        }
-
-        .capabilities-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-10);
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .capabilities-column ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .capabilities-column li {
-            font-size: var(--text-lg);
-            line-height: 1.8;
-            margin-bottom: var(--space-2);
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* ============================================
            WORKS SECTION
            ============================================ */
         .works-section {
@@ -556,11 +517,6 @@
                 margin-right: auto;
             }
 
-            .capabilities-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-6);
-            }
-
             .hero-name {
                 font-size: var(--text-4xl);
             }
@@ -665,198 +621,12 @@
         </div>
     </section>
 
-    <!-- Capabilities Section -->
-    <section class="capabilities-section">
-        <div class="works-container">
-            <h2 class="capabilities-header">Capabilities</h2>
-            <div class="capabilities-grid">
-                <div class="capabilities-column">
-                    <ul>
-                        <li>Product Management</li>
-                        <li>Roadmap Development</li>
-                        <li>Stakeholder Management</li>
-                        <li>Cross-Functional Leadership</li>
-                        <li>Resource Management</li>
-                    </ul>
-                </div>
-                <div class="capabilities-column">
-                    <ul>
-                        <li>Growth Strategy</li>
-                        <li>Data-Driven Decision Making</li>
-                        <li>Problem Solving & Innovation</li>
-                        <li>Product Delivery</li>
-                        <li>UX/UI Strategy</li>
-                    </ul>
-                </div>
-                <div class="capabilities-column">
-                    <ul>
-                        <li>Commercial Awareness</li>
-                        <li>Project Management</li>
-                        <li>Customer-Centric Design</li>
-                        <li>Agile Methodologies</li>
-                        <li>Market Analysis</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Side Projects Section -->
     <section class="works-section" id="works">
         <div class="works-container">
             <div class="works-header">
                 <h2>Side Projects</h2>
                 <p class="works-subtitle">Automation, data analytics, and AI-driven solutions built from scratch</p>
-            </div>
-
-            <div class="works-grid">
-                <!-- Social Listening Project -->
-                <div class="work-card" id="social-card" onclick="toggleCard('social-card')">
-                    <div class="work-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    </div>
-                    <div class="work-content">
-                        <h3 class="work-title">Track User Product Sentiment Across Reddit & Hacker News</h3>
-                        <p class="work-description">Nobody has time to manually check forums. This tool handles it automatically. Scrapes discussions, analyzes sentiment, and sends you a quick audio briefing via email before standup.</p>
-                        <div class="work-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">API Integration</span>
-                            <span class="tag">Automation</span>
-                        </div>
-                    </div>
-
-                    <!-- Expanded Details -->
-                    <div class="work-details">
-                        <div style="border-top: 1px solid var(--border-subtle); margin-top: var(--space-4); padding-top: var(--space-8);">
-
-                            <!-- Hero: The Challenge -->
-                            <div class="scroll-section" style="margin-bottom: var(--space-8); text-align: center; padding: var(--space-6) 0;">
-                                <div style="display: inline-block; background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15)); padding: 8px 20px; border-radius: 20px; margin-bottom: var(--space-4);">
-                                    <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">THE CHALLENGE</span>
-                                </div>
-                                <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: var(--space-4); line-height: 1.2; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                                    THE CHALLENGE
-                                </h2>
-                                <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; line-height: 1.7;">
-                                    Product managers at NVIDIA need to know what people are saying about their GPUs. But who has time to scroll through Reddit all day?
-                                </p>
-                            </div>
-
-                            <!-- The Solution -->
-                            <div class="scroll-section" style="margin-bottom: var(--space-8); background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08)); padding: var(--space-6); border-radius: 16px; border: 1px solid rgba(102, 126, 234, 0.2);">
-                                <div style="text-align: center; margin-bottom: var(--space-4);">
-                                    <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">THE SOLUTION</span>
-                                </div>
-                                <p style="font-size: 1.125rem; color: var(--text-secondary); text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.7;">
-                                    I built a tool that does it for them. Scrapes discussions, figures out what people actually think, identifies pain points with current products, highlights what should be prioritized, and emails a 30-second audio summary.
-                                </p>
-                            </div>
-
-                            <!-- How It Works -->
-                            <div class="scroll-section" style="margin-bottom: var(--space-8);">
-                                <div style="text-align: center; margin-bottom: var(--space-6);">
-                                    <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">THE PIPELINE</span>
-                                    <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2);">How It Works</h3>
-                                </div>
-
-                                <!-- Workflow Timeline -->
-                                <div style="position: relative; padding: var(--space-4) 0;">
-                                    <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #667eea, #764ba2); transform: translateX(-50%);"></div>
-
-                                    <!-- Step 1 -->
-                                    <div style="position: relative; margin-bottom: var(--space-6); display: flex; align-items: center; gap: var(--space-4);">
-                                        <div style="flex: 1; text-align: right; padding-right: var(--space-4);">
-                                            <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1);">Scrape</h4>
-                                            <p style="font-size: var(--text-base); color: var(--text-secondary); line-height: 1.6;">
-                                                Python scripts pull conversations from Reddit and Hacker News
-                                            </p>
-                                        </div>
-                                        <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);">1</div>
-                                        <div style="flex: 1;"></div>
-                                    </div>
-
-                                    <!-- Step 2 -->
-                                    <div style="position: relative; margin-bottom: var(--space-6); display: flex; align-items: center; gap: var(--space-4);">
-                                        <div style="flex: 1;"></div>
-                                        <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);">2</div>
-                                        <div style="flex: 1; padding-left: var(--space-4);">
-                                            <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1);">Analyze</h4>
-                                            <p style="font-size: var(--text-base); color: var(--text-secondary); line-height: 1.6;">
-                                                Figures out sentiment and categorizes feedback (performance, pricing, bugs)
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Step 3 -->
-                                    <div style="position: relative; margin-bottom: var(--space-6); display: flex; align-items: center; gap: var(--space-4);">
-                                        <div style="flex: 1; text-align: right; padding-right: var(--space-4);">
-                                            <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1);">Generate</h4>
-                                            <p style="font-size: var(--text-base); color: var(--text-secondary); line-height: 1.6;">
-                                                Creates a 30-second audio summary you can listen to on the go
-                                            </p>
-                                        </div>
-                                        <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);">3</div>
-                                        <div style="flex: 1;"></div>
-                                    </div>
-
-                                    <!-- Step 4 -->
-                                    <div style="position: relative; display: flex; align-items: center; gap: var(--space-4);">
-                                        <div style="flex: 1;"></div>
-                                        <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);">4</div>
-                                        <div style="flex: 1; padding-left: var(--space-4);">
-                                            <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1);">Send</h4>
-                                            <p style="font-size: var(--text-base); color: var(--text-secondary); line-height: 1.6;">
-                                                Emails it to you with the audio file attached
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Live Demo CTA -->
-                            <div class="scroll-section" style="margin-bottom: var(--space-6); text-align: center; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); padding: var(--space-6); border-radius: 16px; border: 2px solid rgba(102, 126, 234, 0.3);">
-                                <div style="margin-bottom: var(--space-4);">
-                                    <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">TRY IT YOURSELF</span>
-                                    <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2); margin-bottom: var(--space-3);">See It In Action</h3>
-                                    <p style="font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.7;">
-                                        Want to see it work? Drop your email below and I'll send you a live demo with real GPU sentiment data and a personalized audio briefing.
-                                    </p>
-                                </div>
-                                <form id="socialListeningForm" onclick="event.stopPropagation()" style="max-width: 500px; margin: 0 auto;">
-                                    <div style="margin-bottom: var(--space-3); text-align: left;">
-                                        <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: var(--text-primary);">Your Name</label>
-                                        <input type="text" id="nameInput" placeholder="John Doe" required
-                                            style="width: 100%; padding: 16px; border: 2px solid rgba(102, 126, 234, 0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
-                                    </div>
-                                    <div style="margin-bottom: var(--space-4); text-align: left;">
-                                        <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: var(--text-primary);">Your Email</label>
-                                        <input type="email" id="emailInput" placeholder="john@example.com" required
-                                            style="width: 100%; padding: 16px; border: 2px solid rgba(102, 126, 234, 0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
-                                    </div>
-                                    <button type="submit" style="width: 100%; padding: 16px 32px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);">
-                                        Send Me the Demo Report
-                                    </button>
-                                    <div id="demoResult" style="margin-top: var(--space-4); padding: var(--space-3); background: rgba(255, 255, 255, 0.05); border-radius: 12px; display: none; text-align: center; font-size: var(--text-base);"></div>
-                                </form>
-                            </div>
-
-                            <button class="close-btn" onclick="toggleCard('social-card'); event.stopPropagation();">Close</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Placeholder for future projects -->
-                <div class="work-card" style="opacity: 0.5; cursor: default; pointer-events: none;">
-                    <div class="work-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        +
-                    </div>
-                    <div class="work-content">
-                        <h3 class="work-title">Coming Soon</h3>
-                        <p class="work-description">More projects on the way</p>
-                        <div class="work-tags">
-                            <span class="tag">TBD</span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Four Quadrant Cards -->
