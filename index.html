@@ -462,6 +462,11 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
+        .quad-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
         .work-image {
             width: 100%;
             height: 250px;
@@ -858,51 +863,72 @@
             <div style="margin-top: 80px;">
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;">
 
-                    <!-- Card 1: Blue -->
-                    <div style="background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px;">
-                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px;">
+                    <!-- Card 1: Social Listening -->
+                    <div class="quad-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12h3"></path>
+                                <path d="M6 8v8"></path>
+                                <path d="M9 5v14"></path>
+                                <path d="M12 3v18"></path>
+                                <path d="M15 5v14"></path>
+                                <path d="M18 8v8"></path>
+                                <path d="M21 12h-3"></path>
+                            </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            AI ENTERPRISE PROGRAMS
+                            TRACK USER PRODUCT SENTIMENT ACROSS REDDIT & HACKER NEWS
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            Led cross-functional AI adoption initiatives across enterprise organizations, driving strategic implementation and measurable business outcomes.
+                            Nobody has time to manually check forums. This tool handles it automatically. Scrapes discussions, analyzes sentiment, and sends you a quick audio briefing via email before standup.
                         </p>
                     </div>
 
-                    <!-- Card 2: Purple -->
-                    <div style="background: linear-gradient(135deg, #9B7EBD 0%, #7A5C99 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px;">
-                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px;">
+                    <!-- Card 2: Coming Soon -->
+                    <div class="quad-card" style="background: linear-gradient(135deg, #9B7EBD 0%, #7A5C99 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B7EBD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            CROSS-FUNCTIONAL LEADERSHIP
+                            MORE TO COME...
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            Orchestrated collaboration between data, product, and engineering teams to deliver high-impact solutions on tight timelines.
+                            New projects in the works.
                         </p>
                     </div>
 
-                    <!-- Card 3: Pink -->
-                    <div style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px;">
-                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px;">
+                    <!-- Card 3: Coming Soon -->
+                    <div class="quad-card" style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E89BA7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            THOUGHT LEADERSHIP & IMPACT
+                            MORE TO COME...
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            Published research and insights on AI implementation, product strategy, and data-driven decision making for industry audiences.
+                            New projects in the works.
                         </p>
                     </div>
 
-                    <!-- Card 4: Beige -->
-                    <div style="background: linear-gradient(135deg, #D4B896 0%, #B89968 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px;">
-                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px;">
+                    <!-- Card 4: Coming Soon -->
+                    <div class="quad-card" style="background: linear-gradient(135deg, #D4B896 0%, #B89968 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4B896" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            MENTORSHIP & COMMUNITY
+                            MORE TO COME...
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            Coached junior analysts and product managers, building data literacy and analytical capabilities across organizations.
+                            New projects in the works.
                         </p>
                     </div>
 
