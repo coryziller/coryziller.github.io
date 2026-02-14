@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-02-09T02:26:39.554552",
+  "total_posts": 83,
+  "by_severity": {
+    "critical": 42,
+    "high": 13,
+    "low": 1,
+    "medium": 27
+  },
+  "by_category": {
+    "Driver Issues": 18,
+    "Software Compatibility": 27,
+    "Hardware Defects": 17,
+    "Performance / Stability": 8,
+    "Thermal / Power": 5,
+    "Pricing / Availability": 6,
+    "General / Uncategorized": 2
+  },
+  "sentiment_stats": {
+    "average_score": 7.2,
+    "overall_label": "Mixed",
+    "min_score": -100,
+    "max_score": 80.0,
+    "pct_negative": 7.2,
+    "pct_positive": 22.9
+  },
+  "by_source": {
+    "reddit": 80,
+    "hackernews": 3
+  },
+  "top_issues": [
+    {
+      "title": "PSA: The Steam Systray menu bypasses \"Launch Options\" and can cause GPU instability (NVIDIA P3/Idle Lock)",
+      "category": "Driver Issues",
+      "severity": "critical",
+      "sentiment_score": -20.0,
+      "priority_score": 74.5,
+      "subreddit": "linux_gaming",
+      "score": 149,
+      "num_comments": 17
+    },
+    {
+      "title": "Why is performance terrible on my Acer Nitro V15?",
+      "category": "Software Compatibility",
+      "severity": "critical",
+      "sentiment_score": -60.0,
+      "priority_score": 71.6,
+      "subreddit": "linux_gaming",
+      "score": 5,
+      "num_comments": 14
+    },
+    {
+      "title": "It fits!",
+      "category": "Hardware Defects",
+      "severity": "critical",
+      "sentiment_score": 0.0,
+      "priority_score": 67.8,
+      "subreddit": "nvidia",
+      "score": 32,
+      "num_comments": 11
+    },
+    {
+      "title": "A list of all the GPUs that held the crown of best gaming performance starting from the DX11 era",
+      "category": "Software Compatibility",
+      "severity": "critical",
+      "sentiment_score": 60.0,
+      "priority_score": 67.3,
+      "subreddit": "hardware",
+      "score": 103,
+      "num_comments": 66
+    },
+    {
+      "title": "DLAA and DLSS Quality gives same fps?",
+      "category": "Hardware Defects",
+      "severity": "critical",
+      "sentiment_score": 0.0,
+      "priority_score": 66.7,
+      "subreddit": "nvidia",
+      "score": 0,
+      "num_comments": 18
+    }
+  ]
+}
