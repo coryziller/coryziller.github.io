@@ -6,7 +6,8 @@ from datetime import datetime
 from gtts import gTTS
 import io
 import base64
-import resend
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 
 app = Flask(__name__)
 # Enable CORS with explicit configuration
@@ -113,35 +114,43 @@ https://coryziller.github.io
 
         print(f"Audio generated successfully - {len(audio_data)} bytes")
 
-        # Send email with Resend
-        resend_api_key = os.environ.get('RESEND_API_KEY')
-        sender_email = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
+        # Send email with Brevo (Sendinblue)
+        brevo_api_key = os.environ.get('BREVO_API_KEY')
+        sender_email = os.environ.get('SENDER_EMAIL', 'demo@coryziller.com')
 
-        if not resend_api_key:
-            return jsonify({'error': 'Resend API key not configured'}), 500
+        if not brevo_api_key:
+            return jsonify({'error': 'Brevo API key not configured'}), 500
 
-        # Set Resend API key
-        resend.api_key = resend_api_key
+        # Configure Brevo API
+        configuration = sib_api_v3_sdk.Configuration()
+        configuration.api_key['api-key'] = brevo_api_key
+        api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
 
         # Encode audio as base64 for attachment
         audio_base64 = base64.b64encode(audio_data).decode('utf-8')
         filename = f"nvidia_report_{name.replace(' ', '_')}.mp3"
 
-        # Send email using Resend
-        print(f"Sending email to {email} via Resend...")
-
-        response = resend.Emails.send({
-            "from": sender_email,
-            "to": email,
-            "subject": f"Your Personalized NVIDIA GPU Report - {now}",
-            "text": email_body,
-            "attachments": [{
-                "filename": filename,
-                "content": audio_base64
+        # Create email
+        send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+            to=[{"email": email, "name": name}],
+            sender={"email": sender_email, "name": "Cory Ziller"},
+            subject=f"Your Personalized NVIDIA GPU Report - {now}",
+            text_content=email_body,
+            attachment=[{
+                "content": audio_base64,
+                "name": filename
             }]
-        })
+        )
 
-        print(f"Resend response: {response}")
+        # Send email using Brevo
+        print(f"Sending email to {email} via Brevo...")
+
+        try:
+            api_response = api_instance.send_transac_email(send_smtp_email)
+            print(f"Brevo: Email sent successfully! Message ID: {api_response.message_id}")
+        except ApiException as e:
+            print(f"Brevo API Error: {e}")
+            return jsonify({'error': f'Failed to send email: {str(e)}'}), 500
 
         return jsonify({
             'success': True,
