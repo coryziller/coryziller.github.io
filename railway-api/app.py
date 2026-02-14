@@ -184,6 +184,20 @@ https://coryziller.github.io
 def health():
     return jsonify({'status': 'healthy'}), 200
 
+@app.route('/debug', methods=['GET'])
+def debug():
+    """Debug endpoint to check file system"""
+    import os
+    cwd = os.getcwd()
+    files = os.listdir('.')
+    file_exists = os.path.exists('latest_report.json')
+
+    return jsonify({
+        'current_directory': cwd,
+        'files_in_directory': files,
+        'latest_report_exists': file_exists
+    }), 200
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
     app.run(host='0.0.0.0', port=port)
