@@ -407,8 +407,36 @@
         }
 
         .work-card.expanded .work-details {
-            max-height: 3000px;
+            max-height: 75vh;
             padding: var(--space-4);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Scroll-triggered fade animations */
+        .scroll-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scroll-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .work-details::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .work-details::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .work-details::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
         }
 
         .close-btn {
@@ -697,7 +725,7 @@
                         <div style="border-top: 1px solid var(--border-subtle); margin-top: var(--space-4); padding-top: var(--space-8);">
 
                             <!-- Hero: The Challenge -->
-                            <div style="margin-bottom: var(--space-8); text-align: center; padding: var(--space-6) 0;">
+                            <div class="scroll-section" style="margin-bottom: var(--space-8); text-align: center; padding: var(--space-6) 0;">
                                 <div style="display: inline-block; background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15)); padding: 8px 20px; border-radius: 20px; margin-bottom: var(--space-4);">
                                     <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">THE CHALLENGE</span>
                                 </div>
@@ -710,7 +738,7 @@
                             </div>
 
                             <!-- The Solution -->
-                            <div style="margin-bottom: var(--space-8); background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08)); padding: var(--space-6); border-radius: 16px; border: 1px solid rgba(102, 126, 234, 0.2);">
+                            <div class="scroll-section" style="margin-bottom: var(--space-8); background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08)); padding: var(--space-6); border-radius: 16px; border: 1px solid rgba(102, 126, 234, 0.2);">
                                 <div style="text-align: center; margin-bottom: var(--space-4);">
                                     <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">THE SOLUTION</span>
                                     <h3 style="font-size: 2.5rem; font-weight: 700; margin-top: var(--space-2);">An AI-Powered Social Listening Engine</h3>
@@ -721,7 +749,7 @@
                             </div>
 
                             <!-- Key Capabilities -->
-                            <div style="margin-bottom: var(--space-8);">
+                            <div class="scroll-section" style="margin-bottom: var(--space-8);">
                                 <div style="text-align: center; margin-bottom: var(--space-6);">
                                     <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">KEY CAPABILITIES</span>
                                     <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2);">What This System Can Do</h3>
@@ -759,7 +787,7 @@
                             </div>
 
                             <!-- How It Works -->
-                            <div style="margin-bottom: var(--space-8);">
+                            <div class="scroll-section" style="margin-bottom: var(--space-8);">
                                 <div style="text-align: center; margin-bottom: var(--space-6);">
                                     <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">THE PIPELINE</span>
                                     <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2);">How It Works</h3>
@@ -820,7 +848,7 @@
                             </div>
 
                             <!-- Live Demo CTA -->
-                            <div style="margin-bottom: var(--space-6); text-align: center; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); padding: var(--space-6); border-radius: 16px; border: 2px solid rgba(102, 126, 234, 0.3);">
+                            <div class="scroll-section" style="margin-bottom: var(--space-6); text-align: center; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); padding: var(--space-6); border-radius: 16px; border: 2px solid rgba(102, 126, 234, 0.3);">
                                 <div style="margin-bottom: var(--space-4);">
                                     <span style="font-size: var(--text-sm); font-weight: 600; color: #667eea;">TRY IT YOURSELF</span>
                                     <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2); margin-bottom: var(--space-3);">See It In Action</h3>
@@ -878,8 +906,40 @@
             if (card.classList.contains('expanded')) {
                 setTimeout(() => {
                     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Initialize scroll animations for this card
+                    initScrollAnimations(card);
                 }, 100);
             }
+        }
+
+        // Scroll-triggered fade animations
+        function initScrollAnimations(card) {
+            const scrollContainer = card.querySelector('.work-details');
+            const sections = card.querySelectorAll('.scroll-section');
+
+            if (!scrollContainer || !sections.length) return;
+
+            // Show first section immediately
+            if (sections[0]) sections[0].classList.add('visible');
+
+            // Detect when sections come into view
+            scrollContainer.addEventListener('scroll', () => {
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const containerRect = scrollContainer.getBoundingClientRect();
+
+                    // Check if section is in view within the scrollContainer
+                    const isVisible = rect.top < containerRect.bottom - 100 &&
+                                     rect.bottom > containerRect.top + 100;
+
+                    if (isVisible) {
+                        section.classList.add('visible');
+                    }
+                });
+            });
+
+            // Trigger initial check
+            scrollContainer.dispatchEvent(new Event('scroll'));
         }
 
         // Social Listening Demo Form
