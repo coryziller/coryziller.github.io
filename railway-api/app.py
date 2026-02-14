@@ -43,13 +43,19 @@ def send_demo():
             return jsonify({'error': 'Name and email are required'}), 400
 
         # Load cached report data
+        print(f"[DEBUG] Attempting to load latest_report.json")
+        print(f"[DEBUG] Current working directory: {os.getcwd()}")
+        print(f"[DEBUG] Files in current directory: {os.listdir('.')}")
+
         try:
             with open('latest_report.json', 'r') as f:
                 report_data = json.load(f)
+            print(f"[DEBUG] Successfully loaded report data!")
         except FileNotFoundError:
+            print(f"[ERROR] File not found: latest_report.json")
             return jsonify({'error': 'Report data not available. Please try again later.'}), 500
         except Exception as e:
-            print(f"Error loading report: {e}")
+            print(f"[ERROR] Error loading report: {e}")
             return jsonify({'error': f'Failed to load report data: {str(e)}'}), 500
 
         # Build personalized script
