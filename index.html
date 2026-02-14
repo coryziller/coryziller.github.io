@@ -634,7 +634,7 @@
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;">
 
                     <!-- Card 1: Social Listening -->
-                    <div class="quad-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; grid-column: 1 / -1;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M3 12h3"></path>
@@ -652,6 +652,125 @@
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
                             Nobody has time to manually check forums. This tool handles it automatically. Scrapes discussions, analyzes sentiment, and sends you a quick audio briefing via email before standup.
                         </p>
+
+                        <!-- Expanded Details -->
+                        <div class="work-details">
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-8);">
+
+                                <!-- Hero: The Challenge -->
+                                <div class="scroll-section" style="margin-bottom: var(--space-8); text-align: center; padding: var(--space-6) 0;">
+                                    <div style="display: inline-block; background: rgba(255,255,255,0.15); padding: 8px 20px; border-radius: 20px; margin-bottom: var(--space-4);">
+                                        <span style="font-size: var(--text-sm); font-weight: 600; color: white;">THE CHALLENGE</span>
+                                    </div>
+                                    <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: var(--space-4); line-height: 1.2; color: white;">
+                                        THE CHALLENGE
+                                    </h2>
+                                    <p style="font-size: 1.25rem; color: rgba(255,255,255,0.95); max-width: 700px; margin: 0 auto; line-height: 1.7;">
+                                        Product managers at NVIDIA need to know what people are saying about their GPUs. But who has time to scroll through Reddit all day?
+                                    </p>
+                                </div>
+
+                                <!-- The Solution -->
+                                <div class="scroll-section" style="margin-bottom: var(--space-8); background: rgba(255,255,255,0.1); padding: var(--space-6); border-radius: 16px; border: 1px solid rgba(255,255,255,0.2);">
+                                    <div style="text-align: center; margin-bottom: var(--space-4);">
+                                        <span style="font-size: var(--text-sm); font-weight: 600; color: white;">THE SOLUTION</span>
+                                    </div>
+                                    <p style="font-size: 1.125rem; color: rgba(255,255,255,0.95); text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.7;">
+                                        I built a tool that does it for them. Scrapes discussions, figures out what people actually think, identifies pain points with current products, highlights what should be prioritized, and emails a 30-second audio summary.
+                                    </p>
+                                </div>
+
+                                <!-- How It Works -->
+                                <div class="scroll-section" style="margin-bottom: var(--space-8);">
+                                    <div style="text-align: center; margin-bottom: var(--space-6);">
+                                        <span style="font-size: var(--text-sm); font-weight: 600; color: white;">THE PIPELINE</span>
+                                        <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2); color: white;">How It Works</h3>
+                                    </div>
+
+                                    <!-- Workflow Timeline -->
+                                    <div style="position: relative; padding: var(--space-4) 0;">
+                                        <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.3); transform: translateX(-50%);"></div>
+
+                                        <!-- Step 1 -->
+                                        <div style="position: relative; margin-bottom: var(--space-6); display: flex; align-items: center; gap: var(--space-4);">
+                                            <div style="flex: 1; text-align: right; padding-right: var(--space-4);">
+                                                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1); color: white;">Scrape</h4>
+                                                <p style="font-size: var(--text-base); color: rgba(255,255,255,0.9); line-height: 1.6;">
+                                                    Python scripts pull conversations from Reddit and Hacker News
+                                                </p>
+                                            </div>
+                                            <div style="width: 64px; height: 64px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); color: #667eea;">1</div>
+                                            <div style="flex: 1;"></div>
+                                        </div>
+
+                                        <!-- Step 2 -->
+                                        <div style="position: relative; margin-bottom: var(--space-6); display: flex; align-items: center; gap: var(--space-4);">
+                                            <div style="flex: 1;"></div>
+                                            <div style="width: 64px; height: 64px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); color: #667eea;">2</div>
+                                            <div style="flex: 1; padding-left: var(--space-4);">
+                                                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1); color: white;">Analyze</h4>
+                                                <p style="font-size: var(--text-base); color: rgba(255,255,255,0.9); line-height: 1.6;">
+                                                    Figures out sentiment and categorizes feedback (performance, pricing, bugs)
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Step 3 -->
+                                        <div style="position: relative; margin-bottom: var(--space-6); display: flex; align-items: center; gap: var(--space-4);">
+                                            <div style="flex: 1; text-align: right; padding-right: var(--space-4);">
+                                                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1); color: white;">Generate</h4>
+                                                <p style="font-size: var(--text-base); color: rgba(255,255,255,0.9); line-height: 1.6;">
+                                                    Creates a 30-second audio summary you can listen to on the go
+                                                </p>
+                                            </div>
+                                            <div style="width: 64px; height: 64px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); color: #667eea;">3</div>
+                                            <div style="flex: 1;"></div>
+                                        </div>
+
+                                        <!-- Step 4 -->
+                                        <div style="position: relative; display: flex; align-items: center; gap: var(--space-4);">
+                                            <div style="flex: 1;"></div>
+                                            <div style="width: 64px; height: 64px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; z-index: 1; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); color: #667eea;">4</div>
+                                            <div style="flex: 1; padding-left: var(--space-4);">
+                                                <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1); color: white;">Send</h4>
+                                                <p style="font-size: var(--text-base); color: rgba(255,255,255,0.9); line-height: 1.6;">
+                                                    Emails it to you with the audio file attached
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Live Demo CTA -->
+                                <div class="scroll-section" style="margin-bottom: var(--space-6); text-align: center; background: rgba(255,255,255,0.15); padding: var(--space-6); border-radius: 16px; border: 2px solid rgba(255,255,255,0.3);">
+                                    <div style="margin-bottom: var(--space-4);">
+                                        <span style="font-size: var(--text-sm); font-weight: 600; color: white;">TRY IT YOURSELF</span>
+                                        <h3 style="font-size: 2rem; font-weight: 700; margin-top: var(--space-2); margin-bottom: var(--space-3); color: white;">See It In Action</h3>
+                                        <p style="font-size: 1.125rem; color: rgba(255,255,255,0.95); max-width: 600px; margin: 0 auto; line-height: 1.7;">
+                                            Want to see it work? Drop your email below and I'll send you a live demo with real GPU sentiment data and a personalized audio briefing.
+                                        </p>
+                                    </div>
+                                    <form id="socialListeningForm" onclick="event.stopPropagation()" style="max-width: 500px; margin: 0 auto;">
+                                        <div style="margin-bottom: var(--space-3); text-align: left;">
+                                            <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Name</label>
+                                            <input type="text" id="nameInput" placeholder="John Doe" required
+                                                style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
+                                        </div>
+                                        <div style="margin-bottom: var(--space-4); text-align: left;">
+                                            <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Email</label>
+                                            <input type="email" id="emailInput" placeholder="john@example.com" required
+                                                style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
+                                        </div>
+                                        <button type="submit" style="width: 100%; padding: 16px 32px; background: white; color: #667eea; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+                                            Send Me the Demo Report
+                                        </button>
+                                        <div id="demoResult" style="margin-top: var(--space-4); padding: var(--space-3); background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none; text-align: center; font-size: var(--text-base); color: white;"></div>
+                                    </form>
+                                </div>
+
+                                <button class="close-btn" onclick="toggleCard('social-card'); event.stopPropagation();" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Close</button>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Card 2: Coming Soon -->
