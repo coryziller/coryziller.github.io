@@ -931,7 +931,11 @@
             scrollContainer.dispatchEvent(new Event('scroll'));
         }
 
-        // Social Listening Demo Form
+        // ============================================
+        // SOCIAL LISTENING DEMO FORM - UPDATED WITH GOOGLE SHEETS
+        // ============================================
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-1Ug6SYktFirnQKSSkLr6pxTExJpTXdPfEnp6RWKmnIt56fkXk4siFgIp1KjBvBeY/exec';
+
         document.getElementById('socialListeningForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('nameInput').value.trim();
@@ -944,6 +948,22 @@
             resultDiv.style.display = 'block';
 
             try {
+                // STEP 1: Log to Google Sheets (NEW - runs in background)
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email
+                    })
+                }).catch(err => {
+                    console.log('Google Sheets logging (background):', err);
+                });
+
+                // STEP 2: Send Demo Email (EXISTING)
                 const response = await fetch('https://coryzillergithubio-production.up.railway.app/send-demo', {
                     method: 'POST',
                     headers: {
