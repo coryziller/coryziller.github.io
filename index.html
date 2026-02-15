@@ -745,10 +745,10 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Music Memory Timeline (NEW!) -->
-                    <a href="spotify-music-memory/index.html" class="quad-card" style="text-decoration: none; background: linear-gradient(135deg, #9B7EBD 0%, #7A5C99 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; display: block;">
+                    <!-- Card 2: Music Memory Timeline -->
+                    <div class="work-card quad-card" id="spotify-card" onclick="toggleCard('spotify-card')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B7EBD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 18V5l12-2v13"></path>
                                 <circle cx="6" cy="18" r="3"></circle>
                                 <circle cx="18" cy="16" r="3"></circle>
@@ -760,7 +760,88 @@
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
                             Links your Spotify listening history to photos taken at the same time. Creates a searchable music memory timeline that connects songs to life moments.
                         </p>
-                    </a>
+
+                        <!-- Expanded Details -->
+                        <div class="work-details">
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
+
+                                <!-- Two Column Layout -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8); align-items: start;">
+
+                                    <!-- Left Column: Content -->
+                                    <div style="padding-right: 20px;">
+                                        <!-- The Idea -->
+                                        <div style="margin-bottom: 48px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Idea</h4>
+                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                                Music is tied to memory. Every photo you take has a timestamp. What if you could see what song was playing when you took that beach sunset photo? Or find all the photos from that road trip playlist?
+                                            </p>
+                                        </div>
+
+                                        <!-- How It Works -->
+                                        <div style="margin-bottom: 48px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 20px; letter-spacing: -0.02em;">How It Works</h4>
+                                            <div style="display: flex; flex-direction: column; gap: 16px;">
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Connect Spotify</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">OAuth authorization to access listening history</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Spotify Web API</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Extract EXIF Data</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Pull timestamps and GPS from your photos</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Python + PIL</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Match Timestamps</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Link songs to photos by time</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Custom algorithm</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Build Timeline</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Searchable music memory map</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">JavaScript + HTML</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The Result -->
+                                        <div>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Result</h4>
+                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                                A searchable timeline connecting your Spotify history to life moments. Search by song to find photos, or browse photos to discover what you were listening to.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column: CTA -->
+                                    <div>
+                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); height: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.2);">
+                                            <div style="margin-bottom: 32px;">
+                                                <span style="font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em;">Coming Soon</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px; color: white; letter-spacing: -0.02em;">Connect Your Spotify</h3>
+                                                <p style="font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 24px;">
+                                                    This workflow is currently in development. Check back soon to try it out!
+                                                </p>
+                                                <div style="padding: 24px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                                                    <div style="font-size: 3rem; margin-bottom: 16px;">🎵</div>
+                                                    <p style="font-size: 0.875rem; color: rgba(255,255,255,0.7); line-height: 1.5;">
+                                                        Imagine seeing what song was playing during your favorite vacation photos, or finding all photos from that epic road trip playlist.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button class="close-btn" onclick="toggleCard('spotify-card'); event.stopPropagation();" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Close</button>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Card 3: Coming Soon -->
                     <div class="quad-card" style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
