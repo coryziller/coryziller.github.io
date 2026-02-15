@@ -745,8 +745,8 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Music Memory Timeline (NEW!) -->
-                    <a href="spotify-music-memory/index.html" class="quad-card" style="text-decoration: none; background: linear-gradient(135deg, #9B7EBD 0%, #7A5C99 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; display: block;">
+                    <!-- Card 2: Music Memory Timeline (EXPANDABLE!) -->
+                    <div class="work-card quad-card" id="spotify-card" onclick="toggleCard('spotify-card')" style="background: linear-gradient(135deg, #9B7EBD 0%, #7A5C99 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B7EBD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 18V5l12-2v13"></path>
@@ -760,7 +760,84 @@
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
                             Links your Spotify listening history to photos taken at the same time. Creates a searchable music memory timeline that connects songs to life moments.
                         </p>
-                    </a>
+
+                        <!-- Expanded Details -->
+                        <div class="work-details">
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
+
+                                <!-- Two Column Layout -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8); align-items: start;">
+
+                                    <!-- Left Column: Content -->
+                                    <div style="padding-right: 20px;">
+                                        <!-- The Idea -->
+                                        <div style="margin-bottom: 48px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Idea</h4>
+                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                                Photos capture moments, but what about the soundtrack? Connect your Spotify listening history to photos taken at the same time, creating a rich multimedia timeline of your life's memories.
+                                            </p>
+                                        </div>
+
+                                        <!-- How It Works -->
+                                        <div style="margin-bottom: 48px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 20px; letter-spacing: -0.02em;">How It Works</h4>
+                                            <div style="display: flex; flex-direction: column; gap: 16px;">
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Connect Spotify</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Fetch listening history via API</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Last 50 tracks with timestamps</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Analyze Photos</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Extract metadata from images</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Timestamps, locations, EXIF data</div>
+                                                </div>
+                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
+                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Match Timestamps</div>
+                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Connect songs to photos</div>
+                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Build searchable timeline</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The Result -->
+                                        <div>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Result</h4>
+                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                                A multimedia memory timeline. Search "beach photos" and see you were listening to "Ocean Eyes" by Billie Eilish. Your life, with a soundtrack.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column: Try It -->
+                                    <div>
+                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.2);">
+                                            <div style="margin-bottom: 32px;">
+                                                <span style="font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em;">Try It Yourself</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px; color: white; letter-spacing: -0.02em;">Connect Your Spotify</h3>
+                                                <p style="font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 24px;">
+                                                    Authorize access to see your recent listening history and start building your music memory timeline.
+                                                </p>
+                                            </div>
+                                            <div onclick="event.stopPropagation()">
+                                                <button id="spotifyAuthBtn" onclick="authorizeSpotify()" style="width: 100%; padding: 16px 32px; background: white; color: #9B7EBD; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); margin-bottom: 16px;">
+                                                    🎵 Connect Spotify
+                                                </button>
+                                                <div id="spotifyStatus" style="margin-top: 16px; padding: 16px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none; text-align: left; font-size: 0.875rem; color: white; max-height: 400px; overflow-y: auto;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button class="close-btn" onclick="toggleCard('spotify-card'); event.stopPropagation();" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Close</button>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <!-- Card 3: Coming Soon -->
                     <div class="quad-card" style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
@@ -889,6 +966,28 @@
                 `;
             }
         });
+
+        // Spotify Authorization
+        const SPOTIFY_CLIENT_ID = '8ae04e8bb7de49a08178624f8ac3bec1';
+        const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:8888/callback';
+
+        function authorizeSpotify() {
+            const scopes = 'user-read-recently-played user-read-playback-state user-read-currently-playing';
+            const authUrl = `https://accounts.spotify.com/authorize?client_id=${SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(SPOTIFY_REDIRECT_URI)}&scope=${encodeURIComponent(scopes)}`;
+
+            const statusDiv = document.getElementById('spotifyStatus');
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = `
+                <strong>📍 Next Steps:</strong><br><br>
+                1. Click button below to authorize Spotify<br>
+                2. You'll see an error page (that's normal!)<br>
+                3. Copy the entire URL from your browser<br>
+                4. Email it to cory for the full demo!<br><br>
+                <a href="${authUrl}" target="_blank" style="display: inline-block; padding: 12px 24px; background: white; color: #9B7EBD; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 8px;">
+                    Authorize Spotify →
+                </a>
+            `;
+        }
     </script>
 </body>
 </html>
