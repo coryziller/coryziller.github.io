@@ -745,22 +745,21 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Music Memory Timeline (NEW!) -->
-                    <a href="spotify-music-memory/index.html" class="quad-card" style="text-decoration: none; background: linear-gradient(135deg, #9B7EBD 0%, #7A5C99 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; display: block;">
+                    <!-- Card 2: Coming Soon -->
+                    <div class="quad-card" style="background: linear-gradient(135deg, #9B7EBD 0%, #7A5C99 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B7EBD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M9 18V5l12-2v13"></path>
-                                <circle cx="6" cy="18" r="3"></circle>
-                                <circle cx="18" cy="16" r="3"></circle>
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
                             </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            MUSIC MEMORY TIMELINE
+                            MORE TO COME...
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            Links your Spotify listening history to photos taken at the same time. Creates a searchable music memory timeline that connects songs to life moments.
+                            New projects in the works.
                         </p>
-                    </a>
+                    </div>
 
                     <!-- Card 3: Coming Soon -->
                     <div class="quad-card" style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">

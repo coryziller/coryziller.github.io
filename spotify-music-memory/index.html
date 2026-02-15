@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Recently Played Fetcher</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1DB954 0%, #191414 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #1DB954;
+            margin-top: 0;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        .status.loading {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+        }
+        button {
+            background: #1DB954;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 185, 84, 0.4);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .track {
+            border-left: 4px solid #1DB954;
+            padding: 12px;
+            margin: 12px 0;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .track-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #191414;
+        }
+        .track-artist {
+            color: #666;
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .track-time {
+            color: #999;
+            font-size: 13px;
+        }
+        .tracks-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .count {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1DB954;
+            margin: 20px 0;
+        }
+        #authCodeInput {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Spotify Music Memory Fetcher</h1>
+
+        <div id="step1">
+            <p>This page will fetch your last 50 Spotify tracks and save them so we can match them with your photos!</p>
+            <button onclick="fetchTracks()">Fetch My Spotify History</button>
+        </div>
+
+        <div id="status"></div>
+
+        <div id="results" class="hidden">
+            <div class="count" id="trackCount"></div>
+            <button onclick="downloadJSON()">💾 Download as JSON</button>
+            <button onclick="downloadCSV()">📊 Download as CSV</button>
+            <div class="tracks-container" id="tracksContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        const CLIENT_ID = '8ae04e8bb7de49a08178624f8ac3bec1';
+        const CLIENT_SECRET = 'ca2a0c40ac3542cf86b266c10aeb6910';
+        const REDIRECT_URI = 'http://127.0.0.1:8888/callback';
+
+        // Get auth code from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const authCode = urlParams.get('code') || 'AQC5PgSO0zV0I3FmuNG89Jk6BHTf0MwHzTuR6ohRQJQ9pjic2PNbSw0YDdCbb5AhBypSIfFhqIwe-MNlmU3HIj66L7-6YIig-BCqTLDZwdeFvUO1UR_pUndM9Jh3DpW1WQs5Va9QUIaxPixT4xrkNcTlKND10_JZlkcTqc5bEP8ICDu9rmOZl3HCY_0BmOOJka3fhLyzvlSKLs7gNxN_GphC2b72seWohxk9Xcf4cZD3Og4e2AsyKpL9QnIVIG1SnDLhq_EDusaKvo5dMbGYO1HBPVU';
+
+        let tracksData = [];
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.textContent = message;
+        }
+
+        async function exchangeCodeForToken(code) {
+            const authHeader = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
+
+            const response = await fetch('https://accounts.spotify.com/api/token', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Basic ${authHeader}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    grant_type: 'authorization_code',
+                    code: code,
+                    redirect_uri: REDIRECT_URI,
+                }),
+            });
+
+            return await response.json();
+        }
+
+        async function getRecentlyPlayed(accessToken) {
+            const response = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=50', {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+
+            return await response.json();
+        }
+
+        async function fetchTracks() {
+            try {
+                showStatus('🔄 Exchanging authorization code for access token...', 'loading');
+
+                const tokenData = await exchangeCodeForToken(authCode);
+
+                if (!tokenData.access_token) {
+                    throw new Error('Failed to get access token: ' + JSON.stringify(tokenData));
+                }
+
+                showStatus('✅ Got access token! Fetching your recently played tracks...', 'loading');
+
+                const recentlyPlayed = await getRecentlyPlayed(tokenData.access_token);
+
+                if (!recentlyPlayed.items) {
+                    throw new Error('Failed to fetch tracks: ' + JSON.stringify(recentlyPlayed));
+                }
+
+                tracksData = recentlyPlayed.items.map((item, index) => {
+                    const track = item.track;
+                    const playedAt = new Date(item.played_at);
+
+                    return {
+                        number: index + 1,
+                        song: track.name,
+                        artist: track.artists.map(a => a.name).join(', '),
+                        album: track.album.name,
+                        played_at: playedAt.toLocaleString(),
+                        played_at_iso: item.played_at,
+                        spotify_uri: track.uri,
+                        duration_ms: track.duration_ms,
+                    };
+                });
+
+                displayTracks();
+                showStatus(`✅ Successfully fetched ${tracksData.length} tracks!`, 'success');
+
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('results').classList.remove('hidden');
+
+            } catch (error) {
+                showStatus(`❌ Error: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        function displayTracks() {
+            const container = document.getElementById('tracksContainer');
+            const countDiv = document.getElementById('trackCount');
+
+            countDiv.textContent = `📊 Found ${tracksData.length} recently played tracks`;
+
+            container.innerHTML = tracksData.map(track => `
+                <div class="track">
+                    <div class="track-title">${track.number}. ${track.song}</div>
+                    <div class="track-artist">👤 ${track.artist}</div>
+                    <div class="track-time">📅 ${track.played_at}</div>
+                </div>
+            `).join('');
+        }
+
+        function downloadJSON() {
+            const dataStr = JSON.stringify(tracksData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'spotify_recent_tracks.json';
+            link.click();
+        }
+
+        function downloadCSV() {
+            const headers = ['Number', 'Song', 'Artist', 'Album', 'Played At', 'ISO Timestamp', 'Duration (ms)'];
+            const rows = tracksData.map(t => [
+                t.number,
+                `"${t.song}"`,
+                `"${t.artist}"`,
+                `"${t.album}"`,
+                `"${t.played_at}"`,
+                t.played_at_iso,
+                t.duration_ms
+            ]);
+
+            const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+            const blob = new Blob([csv], {type: 'text/csv'});
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'spotify_recent_tracks.csv';
+            link.click();
+        }
+    </script>
+</body>
+</html>
