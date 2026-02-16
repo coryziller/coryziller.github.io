@@ -171,7 +171,6 @@
         .data-table {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 12px; overflow: hidden; margin-bottom: var(--space-4);
-            min-height: 600px; display: flex; flex-direction: column;
         }
 
         .table-header { background: rgba(29, 185, 84, 0.15); padding: var(--space-3); border-bottom: 1px solid rgba(29, 185, 84, 0.3); }
@@ -181,7 +180,6 @@
             display: grid; grid-template-columns: 50px 1fr 120px; gap: var(--space-3);
             padding: var(--space-3) var(--space-3); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             align-items: center; transition: all 0.2s;
-            min-height: 100px;
         }
 
         .table-row:hover { background: rgba(29, 185, 84, 0.08); }
@@ -496,6 +494,43 @@
         let currentTab = 'overview';
         let selectedYear = 'all';
 
+        // Artist Genre Mapping
+        const ARTIST_GENRES = {
+            'Pentatonix': ['A Cappella', 'Pop'], 'Pitch Slapped': ['A Cappella'], "Bee's Knees": ['A Cappella'],
+            'SoCal VoCals': ['A Cappella'], 'Juxtaposition': ['A Cappella'], 'Faux Paz': ['A Cappella'],
+            'The Coda Conduct': ['A Cappella'], 'Twisted Measure': ['A Cappella'], 'Straight No Chaser': ['A Cappella'],
+            'The Alley Cats': ['A Cappella'], 'Citizen Queen': ['A Cappella', 'Pop'],
+            'Ariana Grande': ['Pop', 'R&B'], 'Meghan Trainor': ['Pop'], 'Shawn Mendes': ['Pop'], 'Justin Bieber': ['Pop'],
+            'Tori Kelly': ['Pop', 'R&B'], 'Sabrina Carpenter': ['Pop'], 'Demi Lovato': ['Pop'],
+            'Billie Eilish': ['Pop', 'Alternative'], 'Andy Grammer': ['Pop'], 'Anna Kendrick': ['Pop'],
+            'Beyoncé': ['R&B', 'Pop'], 'Ella Mai': ['R&B'], 'Daniel Caesar': ['R&B', 'Soul'],
+            'PJ Morton': ['R&B', 'Soul'], 'Amber Mark': ['R&B', 'Soul'], 'FLO': ['R&B', 'Pop'],
+            'Koryn Hawthorne': ['R&B', 'Gospel'], 'Jonathan McReynolds': ['R&B', 'Gospel'],
+            'Kelly Rowland': ['R&B', 'Pop'], 'The Walls Group': ['R&B', 'Gospel'],
+            'Street Corner Renaissance': ['R&B', 'A Cappella'],
+            'Ben Platt': ['Musical Theater', 'Pop'], 'Lin-Manuel Miranda': ['Musical Theater'],
+            'Leslie Odom Jr.': ['Musical Theater', 'R&B'], 'Jeremy Jordan': ['Musical Theater'],
+            'Hunter Parrish': ['Musical Theater'], 'Megan McGinnis': ['Musical Theater'],
+            'Natalie Weiss': ['Musical Theater'], 'Original Cast Recording': ['Musical Theater'],
+            'Glee Cast': ['Musical Theater', 'Pop'], 'Company': ['Musical Theater'],
+            'In The Heights (Original Cast Recording)': ['Musical Theater'], 'Wallace Smith': ['Musical Theater'],
+            'Nick Blaemire': ['Musical Theater'], 'Nathan Lane': ['Musical Theater'],
+            'Zak Resnick': ['Musical Theater'], 'John Jorge': ['Musical Theater'],
+            'Jonathan Reid Gealt': ['Musical Theater'], 'Julia Harriman': ['Musical Theater', 'Pop'],
+            'Alex Newell': ['Musical Theater', 'R&B'], 'Mortician': ['Musical Theater'],
+            'Stephen Day': ['Indie', 'Pop'], 'Sammy Rae & The Friends': ['Indie', 'Soul'],
+            'Lake Street Dive': ['Indie', 'Soul'], 'Lawrence': ['Indie', 'Soul'], 'Couch': ['Indie'],
+            'Brasstracks': ['Indie', 'Electronic'], 'Michael Bublé': ['Jazz', 'Pop'],
+            'Megan Thee Stallion': ['Hip Hop'], 'Juice': ['Hip Hop', 'R&B'],
+            'Maroon 5': ['Pop', 'Rock'], 'Fall Out Boy': ['Rock', 'Pop'],
+            'The All-American Rejects': ['Rock', 'Pop'], 'Robbie Williams': ['Pop', 'Rock'],
+            'Brayton Bowman': ['Pop', 'Indie'], 'Renée Rapp': ['Pop'], 'Grace Kinstler': ['Pop'],
+            'Stacey Ryan': ['Pop', 'R&B'], 'Gloria Tells': ['Pop', 'R&B'], 'REBBY': ['Pop', 'R&B'],
+            'Patrick Hizon': ['Pop', 'A Cappella'], 'Aqyila': ['R&B', 'Pop'], 'RAYE': ['Pop', 'R&B'],
+            'Claire Ernst': ['Pop', 'Indie'], 'Candee Sweet': ['Pop'], 'Qveen Herby': ['Pop', 'Hip Hop'],
+            "Cosmo's Midnight": ['Electronic'], 'Oliver Nelson': ['Electronic'], 'KATSEYE': ['Pop', 'K-Pop']
+        };
+
         async function loadSpotifyData() {
             try {
                 const [stats, artistEvolution, monthlyTrends, topSongs] = await Promise.all([
@@ -605,11 +640,7 @@
                     break;
                 case 'insights':
                     content.innerHTML = renderInsightsTab();
-                    setTimeout(() => {
-                        const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-                        const latestYear = years[years.length - 1];
-                        generateWordCloud(latestYear);
-                    }, 100);
+                    setTimeout(() => generateWordCloud(), 100);
                     break;
             }
         }
@@ -638,7 +669,7 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-6); align-items: stretch; grid-auto-rows: 1fr;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-6);">
                     <div class="data-table">
                         <div class="table-header">
                             <div class="table-title">Top Artists (All Time)</div>
@@ -673,12 +704,12 @@
             `;
         }
 
+        let currentCenterIndex = 0;
+
         function renderEvolutionTab() {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const yearCount = years.length;
-
-            // Start with the most recent year as center
-            const centerIndex = yearCount - 1;
+            currentCenterIndex = yearCount - 1; // Start at most recent year
 
             return `
                 <div style="text-align: center; margin-bottom: var(--space-4);">
@@ -703,47 +734,11 @@
                 </div>
 
                 <div id="artistEvolutionContainer">
-                    ${renderThreeYearCards(centerIndex)}
+                    ${renderThreeYearCards(currentCenterIndex)}
                 </div>
             `;
         }
 
-        function updateYearFromSlider(value) {
-            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-            const index = parseInt(value);
-
-            selectedYear = years[index];
-
-            document.getElementById('yearDisplay').textContent = years[index];
-
-            // Update year marks to show adjacent years
-            const yearMarks = document.getElementById('yearMarks');
-            if (index === 0) {
-                // First year: only show 2012 and 2013
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[0]}</div>
-                    <div class="year-mark">${years[1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else if (index === years.length - 1) {
-                // Last year: only show 2025 and 2026
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[years.length - 2]}</div>
-                    <div class="year-mark">${years[years.length - 1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else {
-                // Middle years: show previous, current, next
-                yearMarks.innerHTML = `
-                    <div class="year-mark">Previous Year</div>
-                    <div class="year-mark">Current Year</div>
-                    <div class="year-mark">Next Year</div>
-                `;
-                yearMarks.style.justifyContent = 'space-between';
-            }
-
-            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(years[index], index);
-        }
 
         function renderArtistEvolution(year, yearIndex) {
             const evolution = SPOTIFY_DATA.artistEvolution || {};
@@ -802,12 +797,9 @@
             `;
         }
 
-        let currentCenterIndex = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort().length - 1;
-
         function renderThreeYearCards(centerIndex) {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const yearCount = years.length;
-
             currentCenterIndex = centerIndex;
 
             const prevIndex = centerIndex - 1;
@@ -835,26 +827,19 @@
             // Normal case: Show 3 cards
             else {
                 gridStyle = 'display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); max-width: 1400px; margin: 0 auto;';
-
-                // Left card (Previous Year)
                 if (prevIndex >= 0) {
                     html += renderYearCard(years[prevIndex], prevIndex, 'prev');
                 } else {
-                    html += '<div></div>'; // Empty space
+                    html += '<div></div>';
                 }
-
-                // Center card (Current Year) - with ranking changes
                 html += renderYearCard(years[centerIndex], centerIndex, 'current');
-
-                // Right card (Next Year)
                 if (nextIndex < yearCount) {
                     html += renderYearCard(years[nextIndex], nextIndex, 'next');
                 } else {
-                    html += '<div></div>'; // Empty space
+                    html += '<div></div>';
                 }
             }
 
-            // Wrap in a div with the appropriate grid style
             return `<div style="${gridStyle}">${html}</div>`;
         }
 
@@ -957,7 +942,7 @@
                 </div>
 
                 <div class="chart-container" style="height: 500px;">
-                    <div class="chart-title">Genre Distribution Over Time (Simulated)</div>
+                    <div class="chart-title">Genre Distribution Over Time</div>
                     <canvas id="genreChart"></canvas>
                 </div>
             `;
@@ -965,58 +950,86 @@
 
         function renderGenreChart() {
             const ctx = document.getElementById('genreChart');
-            if (!ctx) return;
+            if (!ctx || !SPOTIFY_DATA.artistEvolution) return;
 
-            // Simulated genre data based on artist names
-            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-            
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution).sort();
+
+            // Calculate genre distributions for each year
+            const genreData = {};
+            years.forEach(year => {
+                const yearArtists = SPOTIFY_DATA.artistEvolution[year];
+                const genreCounts = {};
+                let totalPlays = 0;
+
+                // Count plays by genre
+                yearArtists.forEach(artistData => {
+                    const artist = artistData.artist;
+                    const plays = artistData.play_count;
+                    const genres = ARTIST_GENRES[artist] || ['Other'];
+
+                    // Split plays across genres if artist belongs to multiple
+                    const sharePerGenre = plays / genres.length;
+                    genres.forEach(genre => {
+                        genreCounts[genre] = (genreCounts[genre] || 0) + sharePerGenre;
+                    });
+                    totalPlays += plays;
+                });
+
+                // Convert to percentages
+                genreData[year] = {};
+                Object.keys(genreCounts).forEach(genre => {
+                    genreData[year][genre] = (genreCounts[genre] / totalPlays) * 100;
+                });
+            });
+
+            // Determine top genres to display (top 5 by average percentage)
+            const genreAverages = {};
+            const allGenres = new Set();
+            Object.values(genreData).forEach(yearData => {
+                Object.keys(yearData).forEach(genre => allGenres.add(genre));
+            });
+
+            allGenres.forEach(genre => {
+                const percentages = years.map(year => genreData[year][genre] || 0);
+                genreAverages[genre] = percentages.reduce((a, b) => a + b, 0) / percentages.length;
+            });
+
+            const topGenres = Object.entries(genreAverages)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 6)
+                .map(([genre]) => genre);
+
+            // Color mapping for genres
+            const genreColors = {
+                'Pop': { border: '#1DB954', bg: 'rgba(29, 185, 84, 0.1)' },
+                'R&B': { border: '#ec4899', bg: 'rgba(236, 72, 153, 0.1)' },
+                'A Cappella': { border: '#8b5cf6', bg: 'rgba(139, 92, 246, 0.1)' },
+                'Musical Theater': { border: '#f59e0b', bg: 'rgba(245, 158, 11, 0.1)' },
+                'Indie': { border: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)' },
+                'Soul': { border: '#10b981', bg: 'rgba(16, 185, 129, 0.1)' },
+                'Hip Hop': { border: '#ef4444', bg: 'rgba(239, 68, 68, 0.1)' },
+                'Jazz': { border: '#06b6d4', bg: 'rgba(6, 182, 212, 0.1)' },
+                'Rock': { border: '#f97316', bg: 'rgba(249, 115, 22, 0.1)' },
+                'Electronic': { border: '#a855f7', bg: 'rgba(168, 85, 247, 0.1)' }
+            };
+
+            const datasets = topGenres.map(genre => ({
+                label: genre,
+                data: years.map(year => genreData[year][genre] || 0),
+                borderColor: genreColors[genre]?.border || '#64748b',
+                backgroundColor: genreColors[genre]?.bg || 'rgba(100, 116, 139, 0.1)',
+                borderWidth: 3,
+                tension: 0.4
+            }));
+
             new Chart(ctx, {
                 type: 'line',
-                data: {
-                    labels: years,
-                    datasets: [
-                        {
-                            label: 'Pop',
-                            data: years.map(() => Math.random() * 40 + 20),
-                            borderColor: '#1DB954',
-                            backgroundColor: 'rgba(29, 185, 84, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Electronic',
-                            data: years.map(() => Math.random() * 30 + 15),
-                            borderColor: '#8b5cf6',
-                            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Hip Hop',
-                            data: years.map(() => Math.random() * 25 + 10),
-                            borderColor: '#ec4899',
-                            backgroundColor: 'rgba(236, 72, 153, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Rock',
-                            data: years.map(() => Math.random() * 20 + 5),
-                            borderColor: '#f59e0b',
-                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        }
-                    ]
-                },
+                data: { labels: years, datasets },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: true,
-                            labels: { color: 'rgba(255, 255, 255, 0.8)' }
-                        },
+                        legend: { display: true, labels: { color: 'rgba(255, 255, 255, 0.8)' } },
                         tooltip: {
                             backgroundColor: 'rgba(0, 0, 0, 0.9)',
                             titleColor: '#1DB954',
@@ -1024,27 +1037,23 @@
                             borderColor: '#1DB954',
                             borderWidth: 1,
                             padding: 16,
-                            displayColors: false,
-                            titleFont: { size: 14, weight: 'bold' },
-                            bodyFont: { size: 12 },
                             callbacks: {
                                 title: function(context) {
-                                    return context[0].label + ' Top Artists';
+                                    return context[0].label + ' - Genre Distribution';
                                 },
                                 label: function(context) {
-                                    return null; // Hide the default label
+                                    return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
                                 },
                                 afterBody: function(context) {
                                     const year = context[0].label;
                                     const evolution = SPOTIFY_DATA.artistEvolution;
-
                                     if (evolution && evolution[year]) {
                                         const topArtists = evolution[year].slice(0, 5);
-                                        return topArtists.map((artist, i) =>
-                                            `${i + 1}. ${artist.artist}`
+                                        return ['', 'Top Artists:'].concat(
+                                            topArtists.map((artist, i) => `${i + 1}. ${artist.artist}`)
                                         );
                                     }
-                                    return ['No data available'];
+                                    return [];
                                 }
                             }
                         }
@@ -1056,10 +1065,7 @@
                             ticks: { color: 'rgba(255, 255, 255, 0.7)' },
                             title: { display: true, text: 'Percentage of Listening', color: 'rgba(255, 255, 255, 0.7)' }
                         },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: 'rgba(255, 255, 255, 0.7)' }
-                        }
+                        x: { grid: { display: false }, ticks: { color: 'rgba(255, 255, 255, 0.7)' } }
                     }
                 }
             });
@@ -1111,14 +1117,14 @@
                 <div class="year-filter-container">
                     <div class="year-filter-header">
                         <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="wordCloudYearDisplay">${years[yearCount - 1]}</div>
+                        <div class="year-display" id="wordCloudYearDisplay">All Years</div>
                     </div>
                     <div class="year-slider-wrapper">
                         <input type="range" class="year-slider" id="wordCloudYearSlider"
-                               min="0" max="${yearCount - 1}" value="${yearCount - 1}"
+                               min="0" max="${yearCount}" value="${yearCount}"
                                oninput="updateWordCloudYear(this.value)">
                         <div class="year-marks" id="wordCloudYearMarks" style="justify-content: center;">
-                            <div class="year-mark">${years[yearCount - 1]}</div>
+                            <div class="year-mark">All Years</div>
                         </div>
                     </div>
                 </div>
@@ -1127,39 +1133,28 @@
             `;
         }
 
-        function generateWordCloud(year) {
-            if (!SPOTIFY_DATA.stats && !SPOTIFY_DATA.topSongs) return;
+        function generateWordCloud(year = 'all') {
+            if (!SPOTIFY_DATA.stats) return;
 
             const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft'];
             const wordFreq = {};
 
-            // Get data source for the specific year
+            // Get data source based on year selection
             let dataSource = [];
-            if (SPOTIFY_DATA.topSongs && SPOTIFY_DATA.topSongs[year]) {
+            if (year === 'all') {
+                dataSource = SPOTIFY_DATA.stats.top_tracks_all_time;
+            } else if (SPOTIFY_DATA.topSongs && SPOTIFY_DATA.topSongs[year]) {
                 dataSource = SPOTIFY_DATA.topSongs[year];
-            } else if (SPOTIFY_DATA.artistEvolution && SPOTIFY_DATA.artistEvolution[year]) {
-                // Fallback: use artist names from artist evolution data
-                SPOTIFY_DATA.artistEvolution[year].forEach(item => {
-                    const words = item.artist.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
-                    words.forEach(word => {
-                        if (word.length > 2 && !stopWords.includes(word)) {
-                            wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
-                        }
-                    });
-                });
             }
 
-            // Process track data if available
-            if (dataSource.length > 0) {
-                dataSource.forEach(item => {
-                    const words = `${item.track || ''} ${item.artist || ''}`.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
-                    words.forEach(word => {
-                        if (word.length > 2 && !stopWords.includes(word)) {
-                            wordFreq[word] = (wordFreq[word] || 0) + (item.play_count || 0);
-                        }
-                    });
+            dataSource.forEach(item => {
+                const words = `${item.track} ${item.artist}`.toLowerCase().split(/\W+/);
+                words.forEach(word => {
+                    if (word.length > 2 && !stopWords.includes(word)) {
+                        wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
+                    }
                 });
-            }
+            });
 
             const sortedWords = Object.entries(wordFreq)
                 .sort((a, b) => b[1] - a[1])
@@ -1192,35 +1187,19 @@
         function updateWordCloudYear(value) {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const index = parseInt(value);
-            const year = years[index];
 
-            document.getElementById('wordCloudYearDisplay').textContent = year;
+            const year = index === years.length ? 'all' : years[index];
 
-            // Update year marks
+            document.getElementById('wordCloudYearDisplay').textContent = year === 'all' ? 'All Years' : year;
+
+            // Update year marks - only show the current selected year
             const yearMarks = document.getElementById('wordCloudYearMarks');
-            if (index === 0) {
-                // First year: show 2012 and 2013
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[0]}</div>
-                    <div class="year-mark">${years[1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else if (index === years.length - 1) {
-                // Last year: show 2025 and 2026
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[years.length - 2]}</div>
-                    <div class="year-mark">${years[years.length - 1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
+            if (index === years.length) {
+                yearMarks.innerHTML = `<div class="year-mark">All Years</div>`;
             } else {
-                // Middle years: show Previous, Current, Next
-                yearMarks.innerHTML = `
-                    <div class="year-mark">Previous Year</div>
-                    <div class="year-mark">Current Year</div>
-                    <div class="year-mark">Next Year</div>
-                `;
-                yearMarks.style.justifyContent = 'space-between';
+                yearMarks.innerHTML = `<div class="year-mark">${years[index]}</div>`;
             }
+            yearMarks.style.justifyContent = 'center';
 
             generateWordCloud(year);
         }
