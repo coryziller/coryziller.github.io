@@ -476,11 +476,11 @@
             </div>
 
             <div class="tab-navigation">
-                <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
-                <button class="tab-btn" onclick="switchTab('evolution')">Artist Evolution</button>
-                <button class="tab-btn" onclick="switchTab('genres')">Genre Evolution</button>
-                <button class="tab-btn" onclick="switchTab('charts')">Charts & Trends</button>
-                <button class="tab-btn" onclick="switchTab('insights')">Word Cloud</button>
+                <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
+                <button class="tab-btn" onclick="switchTab('evolution', event)">Artist Evolution</button>
+                <button class="tab-btn" onclick="switchTab('genres', event)">Genre Evolution</button>
+                <button class="tab-btn" onclick="switchTab('charts', event)">Charts & Trends</button>
+                <button class="tab-btn" onclick="switchTab('insights', event)">Word Cloud</button>
             </div>
 
             <div id="dashboardContent">
@@ -557,11 +557,28 @@
             document.body.style.overflow = 'auto';
         }
 
-        function switchTab(tabName) {
+        function switchTab(tabName, event) {
             currentTab = tabName;
 
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+
+            // Find and activate the correct tab button
+            const tabButtons = {
+                'overview': 0,
+                'evolution': 1,
+                'genres': 2,
+                'charts': 3,
+                'insights': 4
+            };
+
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                const buttons = document.querySelectorAll('.tab-btn');
+                if (buttons[tabButtons[tabName]]) {
+                    buttons[tabButtons[tabName]].classList.add('active');
+                }
+            }
 
             renderTabContent(tabName);
         }
@@ -1106,8 +1123,10 @@
 
             const yearlyPlays = {};
             monthlyData.forEach(d => {
-                const year = d.month.split('-')[0];
-                yearlyPlays[year] = (yearlyPlays[year] || 0) + d.total_plays;
+                if (d && d.month && typeof d.month === 'string') {
+                    const year = d.month.split('-')[0];
+                    yearlyPlays[year] = (yearlyPlays[year] || 0) + d.total_plays;
+                }
             });
 
             const playsCtx = document.getElementById('playsChart');
@@ -1243,10 +1262,12 @@
             if (monthlyPatternCtx) {
                 const monthlyAvg = {};
                 monthlyData.forEach(d => {
-                    const month = d.month.split('-')[1];
-                    if (!monthlyAvg[month]) monthlyAvg[month] = { total: 0, count: 0 };
-                    monthlyAvg[month].total += d.total_hours;
-                    monthlyAvg[month].count += 1;
+                    if (d && d.month && typeof d.month === 'string') {
+                        const month = d.month.split('-')[1];
+                        if (!monthlyAvg[month]) monthlyAvg[month] = { total: 0, count: 0 };
+                        monthlyAvg[month].total += d.total_hours;
+                        monthlyAvg[month].count += 1;
+                    }
                 });
 
                 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
