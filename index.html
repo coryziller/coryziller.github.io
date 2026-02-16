@@ -421,7 +421,7 @@
                     </div>
 
                     <!-- Card 2: SPOTIFY TRENDS -->
-                    <div class="work-card quad-card" id="spotify-card" onclick="toggleCard('spotify-card')" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" onclick="openSpotifyDashboard()" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
@@ -433,76 +433,6 @@
                         <p style="font-size: 1rem; line-height: 1.6; color: #000000; font-weight: 500;">
                             Visualizes 13+ years of Spotify data showing artist evolution, top tracks, and listening patterns from 2012-2026. 6,500+ hours analyzed.
                         </p>
-
-                        <div class="work-details">
-                            <div style="border-top: 1px solid rgba(0,0,0,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
-
-                                    <div>
-                                        <div style="margin-bottom: 48px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px; color: #000000;">The Idea</h4>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7; color: #000000;">
-                                                13+ years of Spotify listening data sitting unused. Turn it into an interactive analytics dashboard that reveals listening patterns, artist evolution, and personal music DNA over time.
-                                            </p>
-                                        </div>
-
-                                        <div style="margin-bottom: 48px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 20px; color: #000000;">What I Built</h4>
-                                            <div style="display: flex; flex-direction: column; gap: 16px;">
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(0,0,0,0.3);">
-                                                    <div style="font-weight: 700; margin-bottom: 4px; color: #000000;">Extract</div>
-                                                    <div style="font-size: 0.9375rem; opacity: 0.75; color: #000000;">Request & download 13 years of data</div>
-                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px; color: #000000;">Spotify API</div>
-                                                </div>
-                                                <div style="opacity: 0.5; margin-left: 12px; color: #000000;">↓</div>
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(0,0,0,0.3);">
-                                                    <div style="font-weight: 700; margin-bottom: 4px; color: #000000;">Process</div>
-                                                    <div style="font-size: 0.9375rem; opacity: 0.75; color: #000000;">Clean & aggregate 100k+ records</div>
-                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px; color: #000000;">Python + Pandas</div>
-                                                </div>
-                                                <div style="opacity: 0.5; margin-left: 12px; color: #000000;">↓</div>
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(0,0,0,0.3);">
-                                                    <div style="font-weight: 700; margin-bottom: 4px; color: #000000;">Visualize</div>
-                                                    <div style="font-size: 0.9375rem; opacity: 0.75; color: #000000;">Interactive charts & analytics</div>
-                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px; color: #000000;">Chart.js + Custom HTML</div>
-                                                </div>
-                                                <div style="opacity: 0.5; margin-left: 12px; color: #000000;">↓</div>
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(0,0,0,0.3);">
-                                                    <div style="font-weight: 700; margin-bottom: 4px; color: #000000;">Deploy</div>
-                                                    <div style="font-size: 0.9375rem; opacity: 0.75; color: #000000;">Live dashboard on GitHub Pages</div>
-                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px; color: #000000;">GitHub Pages</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px; color: #000000;">The Impact</h4>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7; color: #000000;">
-                                                Interactive dashboard showcasing 6,500+ hours of listening across 13 years. Reveals artist evolution, genre trends, and personal music DNA.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="scroll-section" style="text-align: center; background: rgba(0,0,0,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.2);">
-                                            <div style="margin-bottom: 32px;">
-                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em; color: #000000;">See It In Action</span>
-                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px; color: #000000;">Explore the Dashboard</h3>
-                                                <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6; color: #000000;">
-                                                    Dive into 13 years of listening data with interactive charts, artist evolution, and music DNA analysis.
-                                                </p>
-                                            </div>
-                                            <button onclick="openSpotifyDashboard(); event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: #000000; color: #1DB954; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: all 0.3s;">
-                                                Explore Cory's Dashboard
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <button class="close-btn" onclick="toggleCard('spotify-card'); event.stopPropagation();">Close</button>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Card 3 -->
@@ -745,65 +675,44 @@
         function renderEvolutionTab() {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const yearCount = years.length;
+            const currentIndex = yearCount - 1;
 
             return `
                 <div class="year-filter-container">
                     <div class="year-filter-header">
                         <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="yearDisplay">${years[yearCount - 1]}</div>
+                        <div class="year-display" id="yearDisplay">${years[currentIndex]}</div>
                     </div>
-                    <div class="year-slider-wrapper">
-                        <input type="range" class="year-slider" id="yearSlider"
-                               min="0" max="${yearCount - 1}" value="${yearCount - 1}"
-                               oninput="updateYearFromSlider(this.value)">
-                        <div class="year-marks" id="yearMarks" style="justify-content: center;">
-                            <div class="year-mark">${years[yearCount - 1]}</div>
-                            <div class="year-mark" style="display: none;"></div>
-                        </div>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-4); margin-top: var(--space-3);">
+                        <button id="prevYearBtn" onclick="changeYear(-1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                            ←
+                        </button>
+                        <button id="nextYearBtn" onclick="changeYear(1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                            →
+                        </button>
                     </div>
                 </div>
 
                 <div id="artistEvolutionContainer">
-                    ${renderArtistEvolution(years[yearCount - 1], yearCount - 1)}
+                    ${renderArtistCarousel(currentIndex)}
                 </div>
             `;
         }
 
-        function updateYearFromSlider(value) {
+        let currentYearIndex = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort().length - 1;
+
+        function changeYear(direction) {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-            const index = parseInt(value);
+            currentYearIndex = Math.max(0, Math.min(years.length - 1, currentYearIndex + direction));
 
-            selectedYear = years[index];
+            document.getElementById('yearDisplay').textContent = years[currentYearIndex];
+            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistCarousel(currentYearIndex);
 
-            document.getElementById('yearDisplay').textContent = years[index];
-
-            // Update year marks to show adjacent years
-            const yearMarks = document.getElementById('yearMarks');
-            if (index === 0) {
-                // First year: only show 2012 and 2013
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[0]}</div>
-                    <div class="year-mark">${years[1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else if (index === years.length - 1) {
-                // Last year: only show 2025 and 2026
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[years.length - 2]}</div>
-                    <div class="year-mark">${years[years.length - 1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else {
-                // Middle years: show previous, current, next
-                yearMarks.innerHTML = `
-                    <div class="year-mark">Previous Year</div>
-                    <div class="year-mark">Current Year</div>
-                    <div class="year-mark">Next Year</div>
-                `;
-                yearMarks.style.justifyContent = 'space-between';
-            }
-
-            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(years[index], index);
+            // Update button states
+            const prevBtn = document.getElementById('prevYearBtn');
+            const nextBtn = document.getElementById('nextYearBtn');
+            if (prevBtn) prevBtn.disabled = currentYearIndex === 0;
+            if (nextBtn) nextBtn.disabled = currentYearIndex === years.length - 1;
         }
 
         function renderArtistEvolution(year, yearIndex) {
@@ -857,6 +766,92 @@
                             </div>
                             <div class="item-count">${artist.play_count.toLocaleString()} plays</div>
                         </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function renderArtistCarousel(yearIndex) {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const evolution = SPOTIFY_DATA.artistEvolution || {};
+
+            let cardsToShow = [];
+
+            if (yearIndex === 0) {
+                // First year: show 2012 and 2013 (centered)
+                cardsToShow = [
+                    { year: years[0], index: 0 },
+                    { year: years[1], index: 1 }
+                ];
+            } else if (yearIndex === years.length - 1) {
+                // Last year: show 2025 and 2026 (centered)
+                cardsToShow = [
+                    { year: years[yearIndex - 1], index: yearIndex - 1 },
+                    { year: years[yearIndex], index: yearIndex }
+                ];
+            } else {
+                // Middle years: show previous, current, next
+                cardsToShow = [
+                    { year: years[yearIndex - 1], index: yearIndex - 1 },
+                    { year: years[yearIndex], index: yearIndex },
+                    { year: years[yearIndex + 1], index: yearIndex + 1 }
+                ];
+            }
+
+            const numCards = cardsToShow.length;
+            const gridCols = numCards === 2 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
+
+            return `
+                <div style="display: grid; grid-template-columns: ${gridCols}; gap: var(--space-4); ${numCards === 2 ? 'max-width: 1200px; margin: 0 auto;' : ''}">
+                    ${cardsToShow.map(({ year, index }) => {
+                        const artists = evolution[year] || [];
+                        const isCurrent = index === yearIndex;
+
+                        // Get previous year rankings for comparison
+                        let previousYearRankings = {};
+                        if (index > 0) {
+                            const prevYear = years[index - 1];
+                            if (evolution[prevYear]) {
+                                evolution[prevYear].forEach((artist, idx) => {
+                                    previousYearRankings[artist.artist] = idx + 1;
+                                });
+                            }
+                        }
+
+                        return `
+                            <div class="data-table" style="${isCurrent ? 'border: 2px solid var(--spotify-green);' : ''}">
+                                <div class="table-header" style="${isCurrent ? 'background: rgba(29, 185, 84, 0.25);' : ''}">
+                                    <div class="table-title">${year} Top Artists</div>
+                                </div>
+                                ${artists.slice(0, 5).map((artist, i) => {
+                                    const currentRank = i + 1;
+                                    const previousRank = previousYearRankings[artist.artist];
+
+                                    let rankChange = '';
+                                    if (!previousRank || previousRank > 5) {
+                                        rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 0.875rem;">NEW</span>';
+                                    } else {
+                                        const change = previousRank - currentRank;
+                                        if (change > 0) {
+                                            rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 1.125rem;">↑</span>';
+                                        } else if (change < 0) {
+                                            rankChange = '<span style="color: #ec4899; font-weight: 700; font-size: 1.125rem;">↓</span>';
+                                        }
+                                    }
+
+                                    return `
+                                        <div class="table-row">
+                                            <div class="rank">#${currentRank}</div>
+                                            <div class="item-info">
+                                                <div class="item-name">${artist.artist}</div>
+                                                <div class="item-detail">${rankChange}</div>
+                                            </div>
+                                            <div class="item-count">${artist.play_count.toLocaleString()}</div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
                         `;
                     }).join('')}
                 </div>
