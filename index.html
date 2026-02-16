@@ -1067,10 +1067,10 @@
                 new Chart(hoursCtx, {
                     type: 'line',
                     data: {
-                        labels: monthlyData.map(d => d.month),
+                        labels: monthlyData.map(d => d.year_month),
                         datasets: [{
                             label: 'Hours',
-                            data: monthlyData.map(d => d.total_hours),
+                            data: monthlyData.map(d => d.minutes_played / 60),
                             borderColor: '#1DB954',
                             backgroundColor: 'rgba(29, 185, 84, 0.2)',
                             borderWidth: 3,
@@ -1123,9 +1123,9 @@
 
             const yearlyPlays = {};
             monthlyData.forEach(d => {
-                if (d && d.month && typeof d.month === 'string') {
-                    const year = d.month.split('-')[0];
-                    yearlyPlays[year] = (yearlyPlays[year] || 0) + d.total_plays;
+                if (d && d.year_month && typeof d.year_month === 'string') {
+                    const year = d.year_month.split('-')[0];
+                    yearlyPlays[year] = (yearlyPlays[year] || 0) + d.play_count;
                 }
             });
 
@@ -1262,10 +1262,10 @@
             if (monthlyPatternCtx) {
                 const monthlyAvg = {};
                 monthlyData.forEach(d => {
-                    if (d && d.month && typeof d.month === 'string') {
-                        const month = d.month.split('-')[1];
+                    if (d && d.year_month && typeof d.year_month === 'string') {
+                        const month = d.year_month.split('-')[1];
                         if (!monthlyAvg[month]) monthlyAvg[month] = { total: 0, count: 0 };
-                        monthlyAvg[month].total += d.total_hours;
+                        monthlyAvg[month].total += (d.minutes_played / 60);
                         monthlyAvg[month].count += 1;
                     }
                 });
@@ -1331,10 +1331,10 @@
                 new Chart(activityTimelineCtx, {
                     type: 'line',
                     data: {
-                        labels: monthlyData.map(d => d.month),
+                        labels: monthlyData.map(d => d.year_month),
                         datasets: [{
                             label: 'Total Plays',
-                            data: monthlyData.map(d => d.total_plays),
+                            data: monthlyData.map(d => d.play_count),
                             backgroundColor: 'rgba(139, 92, 246, 0.3)',
                             borderColor: '#8b5cf6',
                             borderWidth: 3,
