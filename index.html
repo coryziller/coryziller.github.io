@@ -177,8 +177,8 @@
         .table-title { font-size: 1.125rem; font-weight: 800; color: #FFFFFF; }
         
         .table-row {
-            display: grid; grid-template-columns: 50px 1fr 120px; gap: var(--space-2);
-            padding: var(--space-2) var(--space-3); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: grid; grid-template-columns: 50px 1fr 120px; gap: var(--space-3);
+            padding: var(--space-3) var(--space-3); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             align-items: center; transition: all 0.2s;
         }
 
@@ -615,7 +615,7 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-6);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-6);">
                     <div class="data-table">
                         <div class="table-header">
                             <div class="table-title">Top Artists (All Time)</div>
@@ -658,22 +658,21 @@
                 <div class="year-filter-container">
                     <div class="year-filter-header">
                         <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="yearDisplay">All Years</div>
+                        <div class="year-display" id="yearDisplay">${years[yearCount - 1]}</div>
                     </div>
                     <div class="year-slider-wrapper">
                         <input type="range" class="year-slider" id="yearSlider"
-                               min="0" max="${yearCount}" value="${yearCount}"
+                               min="0" max="${yearCount - 1}" value="${yearCount - 1}"
                                oninput="updateYearFromSlider(this.value)">
-                        <div class="year-marks">
-                            <div class="year-mark">${years[0]}</div>
-                            <div class="year-mark">All Years</div>
+                        <div class="year-marks" id="yearMarks" style="justify-content: center;">
                             <div class="year-mark">${years[yearCount - 1]}</div>
+                            <div class="year-mark" style="display: none;"></div>
                         </div>
                     </div>
                 </div>
 
                 <div id="artistEvolutionContainer">
-                    ${renderArtistEvolution('all')}
+                    ${renderArtistEvolution(years[yearCount - 1], yearCount - 1)}
                 </div>
             `;
         }
@@ -682,86 +681,90 @@
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const index = parseInt(value);
 
-            const year = years[index];
-            selectedYear = year;
+            selectedYear = years[index];
 
-            document.getElementById('yearDisplay').textContent = year;
-            renderYearCarousel(year);
-        }
+            document.getElementById('yearDisplay').textContent = years[index];
 
-        function renderYearCarousel(currentYear) {
-            const evolution = SPOTIFY_DATA.artistEvolution || {};
-            const years = Object.keys(evolution).sort();
-            const currentIndex = years.indexOf(currentYear);
-
-            if (currentIndex === -1) return;
-
-            const prevYear = currentIndex > 0 ? years[currentIndex - 1] : null;
-            const nextYear = currentIndex < years.length - 1 ? years[currentIndex + 1] : null;
-
-            const container = document.getElementById('artistEvolutionContainer');
-
-            // Determine column layout based on edge cases
-            let gridColumns = '';
-            let cardsToShow = [];
-
-            if (!prevYear) {
-                // 2012 - First year: show current and next only (NO empty left card)
-                gridColumns = 'grid-template-columns: 1fr 1fr; max-width: 900px; margin-left: auto; margin-right: auto;';
-                cardsToShow = [
-                    { year: currentYear, data: evolution[currentYear], isCurrent: true },
-                    { year: nextYear, data: evolution[nextYear], isCurrent: false }
-                ];
-            } else if (!nextYear) {
-                // 2026 - Last year: show previous and current only (NO empty right card)
-                gridColumns = 'grid-template-columns: 1fr 1fr; max-width: 900px; margin-left: auto; margin-right: auto;';
-                cardsToShow = [
-                    { year: prevYear, data: evolution[prevYear], isCurrent: false },
-                    { year: currentYear, data: evolution[currentYear], isCurrent: true }
-                ];
+            // Update year marks to show adjacent years
+            const yearMarks = document.getElementById('yearMarks');
+            if (index === 0) {
+                // First year: only show 2012 and 2013
+                yearMarks.innerHTML = `
+                    <div class="year-mark">${years[0]}</div>
+                    <div class="year-mark">${years[1]}</div>
+                `;
+                yearMarks.style.justifyContent = 'center';
+            } else if (index === years.length - 1) {
+                // Last year: only show 2025 and 2026
+                yearMarks.innerHTML = `
+                    <div class="year-mark">${years[years.length - 2]}</div>
+                    <div class="year-mark">${years[years.length - 1]}</div>
+                `;
+                yearMarks.style.justifyContent = 'center';
             } else {
-                // Middle years: show all three
-                gridColumns = 'grid-template-columns: 1fr 1fr 1fr;';
-                cardsToShow = [
-                    { year: prevYear, data: evolution[prevYear], isCurrent: false },
-                    { year: currentYear, data: evolution[currentYear], isCurrent: true },
-                    { year: nextYear, data: evolution[nextYear], isCurrent: false }
-                ];
+                // Middle years: show previous, current, next
+                yearMarks.innerHTML = `
+                    <div class="year-mark">Previous Year</div>
+                    <div class="year-mark">Current Year</div>
+                    <div class="year-mark">Next Year</div>
+                `;
+                yearMarks.style.justifyContent = 'space-between';
             }
 
-            container.innerHTML = `
-                <div style="display: grid; ${gridColumns} gap: var(--space-4); margin-top: var(--space-6);">
-                    ${cardsToShow.map(card => renderYearCard(card.year, card.data, card.isCurrent)).join('')}
-                </div>
-            `;
+            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(years[index], index);
         }
 
-        function renderYearCard(year, artists, isCurrent) {
-            if (!artists || !Array.isArray(artists)) return '';
+        function renderArtistEvolution(year, yearIndex) {
+            const evolution = SPOTIFY_DATA.artistEvolution || {};
+            const allYears = Object.keys(evolution).sort();
 
-            const borderColor = isCurrent ? 'var(--spotify-green)' : 'rgba(255, 255, 255, 0.1)';
-            const bgColor = isCurrent ? 'rgba(29, 185, 84, 0.05)' : 'rgba(255, 255, 255, 0.03)';
+            if (!evolution[year]) {
+                return '<div style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.5);">No data available for this year</div>';
+            }
+
+            // Get previous year's rankings for comparison
+            let previousYearRankings = {};
+            if (yearIndex > 0) {
+                const prevYear = allYears[yearIndex - 1];
+                if (evolution[prevYear]) {
+                    evolution[prevYear].forEach((artist, idx) => {
+                        previousYearRankings[artist.artist] = idx + 1;
+                    });
+                }
+            }
+
+            const artists = evolution[year];
 
             return `
-                <div style="background: ${bgColor}; border: 2px solid ${borderColor}; border-radius: 16px; padding: var(--space-4); transition: all 0.3s ease;">
-                    <div style="font-size: 1.75rem; font-weight: 800; color: var(--spotify-green); margin-bottom: var(--space-3); text-align: center;">${year}</div>
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">${year} Top Artists</div>
+                    </div>
                     ${artists.slice(0, 10).map((artist, i) => {
-                        const badges = [];
-                        if (artist.new_entry) badges.push('<span style="display: inline-block; padding: 2px 6px; background: var(--spotify-green); color: #000; font-size: 0.625rem; font-weight: 700; border-radius: 4px; text-transform: uppercase; margin-left: 6px;">NEW</span>');
-                        if (artist.rank_change > 0) badges.push(`<span style="display: inline-block; padding: 2px 6px; background: #10b981; color: #fff; font-size: 0.625rem; font-weight: 700; border-radius: 4px; margin-left: 6px;">↑${artist.rank_change}</span>`);
-                        if (artist.rank_change < 0) badges.push(`<span style="display: inline-block; padding: 2px 6px; background: #ef4444; color: #fff; font-size: 0.625rem; font-weight: 700; border-radius: 4px; margin-left: 6px;">↓${Math.abs(artist.rank_change)}</span>`);
+                        const currentRank = i + 1;
+                        const previousRank = previousYearRankings[artist.artist];
+
+                        let rankChange = '';
+                        if (!previousRank || previousRank > 10) {
+                            rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 0.875rem;">NEW</span>';
+                        } else {
+                            const change = previousRank - currentRank;
+                            if (change > 0) {
+                                rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 1.125rem;">↑</span>';
+                            } else if (change < 0) {
+                                rankChange = '<span style="color: #ec4899; font-weight: 700; font-size: 1.125rem;">↓</span>';
+                            }
+                        }
 
                         return `
-                            <div style="display: grid; grid-template-columns: 50px 1fr 80px; gap: var(--space-2); padding: var(--space-2); border-bottom: 1px solid rgba(255, 255, 255, 0.05); align-items: center;">
-                                <div style="font-size: 1rem; font-weight: 700; color: var(--spotify-green);">#${i + 1}</div>
-                                <div>
-                                    <div style="font-weight: 600; color: var(--text-primary);">
-                                        ${artist.artist}
-                                        ${badges.join('')}
-                                    </div>
-                                </div>
-                                <div style="font-weight: 700; color: var(--text-primary); text-align: right;">${artist.play_count.toLocaleString()}</div>
+                        <div class="table-row">
+                            <div class="rank">#${currentRank}</div>
+                            <div class="item-info">
+                                <div class="item-name">${artist.artist}</div>
+                                <div class="item-detail">${rankChange}</div>
                             </div>
+                            <div class="item-count">${artist.play_count.toLocaleString()} plays</div>
+                        </div>
                         `;
                     }).join('')}
                 </div>
@@ -771,8 +774,11 @@
         function renderGenresTab() {
             return `
                 <div style="margin-bottom: var(--space-4); text-align: center; color: rgba(255,255,255,0.7);">
-                    <p style="font-size: 1.125rem; margin-bottom: var(--space-2);">Genre Evolution Coming Soon</p>
-                    <p style="font-size: 0.875rem;">This feature requires Spotify's genre classification data</p>
+                    <p style="font-size: 1.125rem; margin-bottom: var(--space-2);">Genre Evolution</p>
+                    <p style="font-size: 0.875rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+                        Track how your music taste has evolved over 13 years. See which genres dominated each era of your listening history,
+                        from the genres you discovered first to the sounds you can't stop playing today.
+                    </p>
                 </div>
 
                 <div class="chart-container" style="height: 500px;">
@@ -835,6 +841,37 @@
                         legend: {
                             display: true,
                             labels: { color: 'rgba(255, 255, 255, 0.8)' }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            titleColor: '#1DB954',
+                            bodyColor: '#FFFFFF',
+                            borderColor: '#1DB954',
+                            borderWidth: 1,
+                            padding: 16,
+                            displayColors: false,
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].label + ' Top Artists';
+                                },
+                                label: function(context) {
+                                    return null; // Hide the default label
+                                },
+                                afterBody: function(context) {
+                                    const year = context[0].label;
+                                    const evolution = SPOTIFY_DATA.artistEvolution;
+
+                                    if (evolution && evolution[year]) {
+                                        const topArtists = evolution[year].slice(0, 5);
+                                        return topArtists.map((artist, i) =>
+                                            `${i + 1}. ${artist.artist}`
+                                        );
+                                    }
+                                    return ['No data available'];
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -855,35 +892,81 @@
 
         function renderChartsTab() {
             return `
-                <div class="chart-container">
-                    <div class="chart-title">Listening Hours Over Time</div>
-                    <canvas id="hoursChart"></canvas>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-bottom: var(--space-4);">
+                    <div class="chart-container">
+                        <div class="chart-title">Listening Hours Over Time</div>
+                        <canvas id="hoursChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Total Plays by Year</div>
+                        <canvas id="playsChart"></canvas>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-bottom: var(--space-4);">
+                    <div class="chart-container">
+                        <div class="chart-title">Top 10 Artists (All Time)</div>
+                        <canvas id="topArtistsChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Monthly Listening Pattern</div>
+                        <canvas id="monthlyPatternChart"></canvas>
+                    </div>
                 </div>
 
                 <div class="chart-container">
-                    <div class="chart-title">Total Plays by Year</div>
-                    <canvas id="playsChart"></canvas>
+                    <div class="chart-title">Listening Activity Timeline</div>
+                    <canvas id="activityTimelineChart"></canvas>
                 </div>
             `;
         }
 
         function renderInsightsTab() {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const yearCount = years.length;
+
             return `
                 <div style="margin-bottom: var(--space-3); text-align: center;">
                     <h3 style="font-size: 1.5rem; font-weight: 800; color: #FFFFFF; margin-bottom: var(--space-2);">Your Music DNA</h3>
                     <p style="color: rgba(255,255,255,0.6);">Most common words from your top tracks and artists</p>
                 </div>
+
+                <div class="year-filter-container">
+                    <div class="year-filter-header">
+                        <div class="year-filter-label">Select Year</div>
+                        <div class="year-display" id="wordCloudYearDisplay">All Years</div>
+                    </div>
+                    <div class="year-slider-wrapper">
+                        <input type="range" class="year-slider" id="wordCloudYearSlider"
+                               min="0" max="${yearCount}" value="${yearCount}"
+                               oninput="updateWordCloudYear(this.value)">
+                        <div class="year-marks" id="wordCloudYearMarks" style="justify-content: center;">
+                            <div class="year-mark">All Years</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="word-cloud-container" id="wordCloud"></div>
             `;
         }
 
-        function generateWordCloud() {
+        function generateWordCloud(year = 'all') {
             if (!SPOTIFY_DATA.stats) return;
 
             const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft'];
             const wordFreq = {};
 
-            SPOTIFY_DATA.stats.top_tracks_all_time.forEach(item => {
+            // Get data source based on year selection
+            let dataSource = [];
+            if (year === 'all') {
+                dataSource = SPOTIFY_DATA.stats.top_tracks_all_time;
+            } else if (SPOTIFY_DATA.topSongs && SPOTIFY_DATA.topSongs[year]) {
+                dataSource = SPOTIFY_DATA.topSongs[year];
+            }
+
+            dataSource.forEach(item => {
                 const words = `${item.track} ${item.artist}`.toLowerCase().split(/\W+/);
                 words.forEach(word => {
                     if (word.length > 2 && !stopWords.includes(word)) {
@@ -896,57 +979,65 @@
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 50);
 
+            if (sortedWords.length === 0) {
+                const cloudDiv = document.getElementById('wordCloud');
+                if (cloudDiv) {
+                    cloudDiv.innerHTML = '<p style="color: rgba(255,255,255,0.5);">No data available for this year</p>';
+                }
+                return;
+            }
+
             const maxFreq = sortedWords[0][1];
             const minFreq = sortedWords[sortedWords.length - 1][1];
 
-            // Neon color palette
-            const NEON_COLORS = [
-                '#00FF41',  // Matrix green
-                '#FF006E',  // Neon pink
-                '#00F0FF',  // Cyan
-                '#FFBE0B',  // Electric yellow
-                '#FB5607',  // Neon orange
-                '#8338EC',  // Electric purple
-                '#3A86FF',  // Bright blue
-                '#FF1493',  // Deep pink
-                '#06FFA5',  // Mint
-                '#FFD60A'   // Yellow
-            ];
-
             const cloudDiv = document.getElementById('wordCloud');
             if (cloudDiv) {
-                cloudDiv.style.position = 'relative';
-                cloudDiv.style.minHeight = '500px';
+                cloudDiv.innerHTML = sortedWords.map(([word, freq]) => {
+                    const size = 14 + ((freq - minFreq) / (maxFreq - minFreq)) * 60;
+                    const opacity = 0.6 + ((freq - minFreq) / (maxFreq - minFreq)) * 0.4;
+                    const colors = ['#1DB954', '#1ed760', '#ec4899', '#a855f7', '#3b82f6', '#f59e0b'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
 
-                cloudDiv.innerHTML = sortedWords.map(([word, freq], index) => {
-                    const normalizedFreq = (freq - minFreq) / (maxFreq - minFreq);
-                    const size = 18 + (normalizedFreq * 54); // 18px to 72px
-                    const color = NEON_COLORS[index % NEON_COLORS.length];
-
-                    // Cloud positioning - random but avoiding edges
-                    const left = 5 + Math.random() * 85; // 5% to 90%
-                    const top = 5 + Math.random() * 85;  // 5% to 90%
-
-                    return `<div style="
-                        position: absolute;
-                        left: ${left}%;
-                        top: ${top}%;
-                        font-size: ${size}px;
-                        color: ${color};
-                        font-weight: 800;
-                        padding: 12px 24px;
-                        border-radius: 50px;
-                        background: rgba(0, 0, 0, 0.3);
-                        border: 2px solid ${color};
-                        cursor: default;
-                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                        text-shadow: 0 0 20px ${color};
-                        box-shadow: 0 0 20px ${color};
-                        white-space: nowrap;
-                        z-index: ${Math.floor(normalizedFreq * 10)};
-                    " onmouseover="this.style.transform='scale(1.2) rotate(-2deg)'; this.style.boxShadow='0 0 40px ${color}'; this.style.zIndex='100';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px ${color}'; this.style.zIndex='${Math.floor(normalizedFreq * 10)}';">${word}</div>`;
+                    return `<span style="font-size: ${size}px; color: ${color}; opacity: ${opacity}; font-weight: 800; padding: 6px 12px; transition: all 0.3s ease; cursor: default;" onmouseover="this.style.transform='scale(1.3)'; this.style.opacity='1';" onmouseout="this.style.transform='scale(1)'; this.style.opacity='${opacity}';">${word}</span>`;
                 }).join('');
             }
+        }
+
+        function updateWordCloudYear(value) {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const index = parseInt(value);
+
+            const year = index === years.length ? 'all' : years[index];
+
+            document.getElementById('wordCloudYearDisplay').textContent = year === 'all' ? 'All Years' : year;
+
+            // Update year marks
+            const yearMarks = document.getElementById('wordCloudYearMarks');
+            if (index === 0) {
+                yearMarks.innerHTML = `
+                    <div class="year-mark">${years[0]}</div>
+                    <div class="year-mark">${years[1]}</div>
+                `;
+                yearMarks.style.justifyContent = 'center';
+            } else if (index === years.length) {
+                yearMarks.innerHTML = `<div class="year-mark">All Years</div>`;
+                yearMarks.style.justifyContent = 'center';
+            } else if (index === years.length - 1) {
+                yearMarks.innerHTML = `
+                    <div class="year-mark">${years[years.length - 2]}</div>
+                    <div class="year-mark">${years[years.length - 1]}</div>
+                `;
+                yearMarks.style.justifyContent = 'center';
+            } else {
+                yearMarks.innerHTML = `
+                    <div class="year-mark">Previous Year</div>
+                    <div class="year-mark">Current Year</div>
+                    <div class="year-mark">Next Year</div>
+                `;
+                yearMarks.style.justifyContent = 'space-between';
+            }
+
+            generateWordCloud(year);
         }
 
         function renderCharts() {
@@ -964,17 +1055,40 @@
                             label: 'Hours',
                             data: monthlyData.map(d => d.total_hours),
                             borderColor: '#1DB954',
-                            backgroundColor: 'rgba(29, 185, 84, 0.1)',
+                            backgroundColor: 'rgba(29, 185, 84, 0.2)',
                             borderWidth: 3,
                             fill: true,
                             tension: 0.4,
-                            pointRadius: 0
+                            pointRadius: 3,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#1DB954',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#1DB954',
+                                bodyColor: '#FFFFFF',
+                                borderColor: '#1DB954',
+                                borderWidth: 1,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y.toFixed(1) + ' hours';
+                                    }
+                                }
+                            }
+                        },
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -1008,13 +1122,31 @@
                             backgroundColor: 'rgba(29, 185, 84, 0.8)',
                             borderColor: '#1DB954',
                             borderWidth: 2,
-                            borderRadius: 8
+                            borderRadius: 8,
+                            hoverBackgroundColor: 'rgba(29, 185, 84, 1)',
+                            hoverBorderColor: '#1DB954',
+                            hoverBorderWidth: 3
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#1DB954',
+                                bodyColor: '#FFFFFF',
+                                borderColor: '#1DB954',
+                                borderWidth: 1,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y.toLocaleString() + ' plays';
+                                    }
+                                }
+                            }
+                        },
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -1024,6 +1156,211 @@
                             x: {
                                 grid: { display: false },
                                 ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                            }
+                        },
+                        onClick: (event, elements) => {
+                            if (elements.length > 0) {
+                                const year = Object.keys(yearlyPlays)[elements[0].index];
+                                const plays = Object.values(yearlyPlays)[elements[0].index];
+                                alert(`${year}: ${plays.toLocaleString()} total plays`);
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 3: Top 10 Artists (Horizontal Bar)
+            const topArtistsCtx = document.getElementById('topArtistsChart');
+            if (topArtistsCtx && SPOTIFY_DATA.stats) {
+                const topArtists = Object.entries(SPOTIFY_DATA.stats.top_artists_all_time).slice(0, 10);
+                new Chart(topArtistsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: topArtists.map(([artist]) => artist),
+                        datasets: [{
+                            label: 'Plays',
+                            data: topArtists.map(([, count]) => count),
+                            backgroundColor: [
+                                'rgba(29, 185, 84, 0.9)',
+                                'rgba(139, 92, 246, 0.9)',
+                                'rgba(236, 72, 153, 0.9)',
+                                'rgba(59, 130, 246, 0.9)',
+                                'rgba(245, 158, 11, 0.9)',
+                                'rgba(239, 68, 68, 0.9)',
+                                'rgba(99, 102, 241, 0.9)',
+                                'rgba(16, 185, 129, 0.9)',
+                                'rgba(251, 146, 60, 0.9)',
+                                'rgba(168, 85, 247, 0.9)'
+                            ],
+                            borderRadius: 8,
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#1DB954',
+                                bodyColor: '#FFFFFF',
+                                borderColor: '#1DB954',
+                                borderWidth: 1,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.x.toLocaleString() + ' plays';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                            },
+                            y: {
+                                grid: { display: false },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                            }
+                        },
+                        onClick: (event, elements) => {
+                            if (elements.length > 0) {
+                                const index = elements[0].index;
+                                const artist = topArtists[index][0];
+                                alert(`${artist}: ${topArtists[index][1].toLocaleString()} total plays`);
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 4: Monthly Listening Pattern (Average by Month)
+            const monthlyPatternCtx = document.getElementById('monthlyPatternChart');
+            if (monthlyPatternCtx) {
+                const monthlyAvg = {};
+                monthlyData.forEach(d => {
+                    const month = d.month.split('-')[1];
+                    if (!monthlyAvg[month]) monthlyAvg[month] = { total: 0, count: 0 };
+                    monthlyAvg[month].total += d.total_hours;
+                    monthlyAvg[month].count += 1;
+                });
+
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const avgData = monthNames.map((_, i) => {
+                    const monthKey = String(i + 1).padStart(2, '0');
+                    return monthlyAvg[monthKey] ? monthlyAvg[monthKey].total / monthlyAvg[monthKey].count : 0;
+                });
+
+                new Chart(monthlyPatternCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: monthNames,
+                        datasets: [{
+                            label: 'Avg Hours',
+                            data: avgData,
+                            backgroundColor: 'rgba(29, 185, 84, 0.2)',
+                            borderColor: '#1DB954',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#1DB954',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#1DB954',
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#1DB954',
+                                bodyColor: '#FFFFFF',
+                                borderColor: '#1DB954',
+                                borderWidth: 1,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.r.toFixed(1) + ' avg hours';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)', backdropColor: 'transparent' },
+                                pointLabels: { color: 'rgba(255, 255, 255, 0.8)', font: { size: 12 } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 5: Listening Activity Timeline (Area)
+            const activityTimelineCtx = document.getElementById('activityTimelineChart');
+            if (activityTimelineCtx) {
+                new Chart(activityTimelineCtx, {
+                    type: 'line',
+                    data: {
+                        labels: monthlyData.map(d => d.month),
+                        datasets: [{
+                            label: 'Total Plays',
+                            data: monthlyData.map(d => d.total_plays),
+                            backgroundColor: 'rgba(139, 92, 246, 0.3)',
+                            borderColor: '#8b5cf6',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#8b5cf6',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#8b5cf6',
+                                bodyColor: '#FFFFFF',
+                                borderColor: '#8b5cf6',
+                                borderWidth: 1,
+                                padding: 12,
+                                callbacks: {
+                                    title: function(context) {
+                                        return context[0].label;
+                                    },
+                                    label: function(context) {
+                                        return context.parsed.y.toLocaleString() + ' plays';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)', maxTicksLimit: 20 }
                             }
                         }
                     }
