@@ -604,7 +604,11 @@
                     break;
                 case 'insights':
                     content.innerHTML = renderInsightsTab();
-                    setTimeout(() => generateWordCloud('all'), 100);
+                    setTimeout(() => {
+                        const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+                        const latestYear = years[years.length - 1];
+                        generateWordCloud(latestYear);
+                    }, 100);
                     break;
             }
         }
@@ -639,7 +643,7 @@
                             <div class="table-title">Top Artists (All Time)</div>
                         </div>
                         ${Object.entries(stats.top_artists_all_time).slice(0, 10).map(([artist, count], i) => `
-                            <div class="table-row" style="min-height: 100px;">
+                            <div class="table-row">
                                 <div class="rank">#${i + 1}</div>
                                 <div class="item-info">
                                     <div class="item-name">${artist}</div>
@@ -654,7 +658,7 @@
                             <div class="table-title">Top Tracks (All Time)</div>
                         </div>
                         ${stats.top_tracks_all_time.slice(0, 10).map((item, i) => `
-                            <div class="table-row" style="min-height: 100px;">
+                            <div class="table-row">
                                 <div class="rank">#${i + 1}</div>
                                 <div class="item-info">
                                     <div class="item-name">${item.track}</div>
@@ -684,13 +688,12 @@
                                oninput="updateYearFromSlider(this.value)">
                         <div class="year-marks" id="yearMarks" style="justify-content: center;">
                             <div class="year-mark">${years[yearCount - 1]}</div>
-                            <div class="year-mark" style="display: none;"></div>
                         </div>
                     </div>
                 </div>
 
                 <div id="artistEvolutionContainer">
-                    ${renderArtistEvolution(years[yearCount - 1], yearCount - 1)}
+                    ${renderArtistCarousel(yearCount - 1)}
                 </div>
             `;
         }
@@ -729,7 +732,7 @@
                 yearMarks.style.justifyContent = 'space-between';
             }
 
-            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(years[index], index);
+            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistCarousel(index);
         }
 
         function renderArtistEvolution(year, yearIndex) {
@@ -783,6 +786,64 @@
                             </div>
                             <div class="item-count">${artist.play_count.toLocaleString()} plays</div>
                         </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function renderArtistCarousel(yearIndex) {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const evolution = SPOTIFY_DATA.artistEvolution || {};
+
+            let cardsToShow = [];
+
+            if (yearIndex === 0) {
+                // First year: show 2012 and 2013 (centered)
+                cardsToShow = [
+                    { year: years[0], index: 0 },
+                    { year: years[1], index: 1 }
+                ];
+            } else if (yearIndex === years.length - 1) {
+                // Last year: show 2025 and 2026 (centered)
+                cardsToShow = [
+                    { year: years[yearIndex - 1], index: yearIndex - 1 },
+                    { year: years[yearIndex], index: yearIndex }
+                ];
+            } else {
+                // Middle years: show previous, current, next
+                cardsToShow = [
+                    { year: years[yearIndex - 1], index: yearIndex - 1 },
+                    { year: years[yearIndex], index: yearIndex },
+                    { year: years[yearIndex + 1], index: yearIndex + 1 }
+                ];
+            }
+
+            const numCards = cardsToShow.length;
+            const gridCols = numCards === 2 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
+            const justifyContent = numCards === 2 ? 'center' : 'stretch';
+
+            return `
+                <div style="display: grid; grid-template-columns: ${gridCols}; gap: var(--space-4); ${numCards === 2 ? 'max-width: 1200px; margin: 0 auto;' : ''}">
+                    ${cardsToShow.map(({ year, index }) => {
+                        const artists = evolution[year] || [];
+                        const isCurrent = index === yearIndex;
+
+                        return `
+                            <div class="data-table" style="${isCurrent ? 'border: 2px solid var(--spotify-green);' : ''}">
+                                <div class="table-header" style="${isCurrent ? 'background: rgba(29, 185, 84, 0.25);' : ''}">
+                                    <div class="table-title">${year} Top Artists</div>
+                                </div>
+                                ${artists.slice(0, 5).map((artist, i) => `
+                                    <div class="table-row">
+                                        <div class="rank">#${i + 1}</div>
+                                        <div class="item-info">
+                                            <div class="item-name">${artist.artist}</div>
+                                        </div>
+                                        <div class="item-count">${artist.play_count.toLocaleString()}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
                         `;
                     }).join('')}
                 </div>
@@ -954,14 +1015,14 @@
                 <div class="year-filter-container">
                     <div class="year-filter-header">
                         <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="wordCloudYearDisplay">All Years</div>
+                        <div class="year-display" id="wordCloudYearDisplay">${years[yearCount - 1]}</div>
                     </div>
                     <div class="year-slider-wrapper">
                         <input type="range" class="year-slider" id="wordCloudYearSlider"
-                               min="0" max="${yearCount}" value="${yearCount}"
+                               min="0" max="${yearCount - 1}" value="${yearCount - 1}"
                                oninput="updateWordCloudYear(this.value)">
                         <div class="year-marks" id="wordCloudYearMarks" style="justify-content: center;">
-                            <div class="year-mark">All Years</div>
+                            <div class="year-mark">${years[yearCount - 1]}</div>
                         </div>
                     </div>
                 </div>
@@ -976,46 +1037,32 @@
             const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft'];
             const wordFreq = {};
 
-            if (year === 'all') {
-                // Use all-time top tracks data
-                if (SPOTIFY_DATA.stats && SPOTIFY_DATA.stats.top_tracks_all_time) {
-                    SPOTIFY_DATA.stats.top_tracks_all_time.forEach(item => {
-                        const words = `${item.track} ${item.artist}`.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
-                        words.forEach(word => {
-                            if (word.length > 2 && !stopWords.includes(word)) {
-                                wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
-                            }
-                        });
+            // Get data source for the specific year
+            let dataSource = [];
+            if (SPOTIFY_DATA.topSongs && SPOTIFY_DATA.topSongs[year]) {
+                dataSource = SPOTIFY_DATA.topSongs[year];
+            } else if (SPOTIFY_DATA.artistEvolution && SPOTIFY_DATA.artistEvolution[year]) {
+                // Fallback: use artist names from artist evolution data
+                SPOTIFY_DATA.artistEvolution[year].forEach(item => {
+                    const words = item.artist.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
+                    words.forEach(word => {
+                        if (word.length > 2 && !stopWords.includes(word)) {
+                            wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
+                        }
                     });
-                }
-            } else {
-                // Get data source for the specific year
-                let dataSource = [];
-                if (SPOTIFY_DATA.topSongs && SPOTIFY_DATA.topSongs[year]) {
-                    dataSource = SPOTIFY_DATA.topSongs[year];
-                } else if (SPOTIFY_DATA.artistEvolution && SPOTIFY_DATA.artistEvolution[year]) {
-                    // Fallback: use artist names from artist evolution data
-                    SPOTIFY_DATA.artistEvolution[year].forEach(item => {
-                        const words = item.artist.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
-                        words.forEach(word => {
-                            if (word.length > 2 && !stopWords.includes(word)) {
-                                wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
-                            }
-                        });
-                    });
-                }
+                });
+            }
 
-                // Process track data if available
-                if (dataSource.length > 0) {
-                    dataSource.forEach(item => {
-                        const words = `${item.track || ''} ${item.artist || ''}`.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
-                        words.forEach(word => {
-                            if (word.length > 2 && !stopWords.includes(word)) {
-                                wordFreq[word] = (wordFreq[word] || 0) + (item.play_count || 0);
-                            }
-                        });
+            // Process track data if available
+            if (dataSource.length > 0) {
+                dataSource.forEach(item => {
+                    const words = `${item.track || ''} ${item.artist || ''}`.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
+                    words.forEach(word => {
+                        if (word.length > 2 && !stopWords.includes(word)) {
+                            wordFreq[word] = (wordFreq[word] || 0) + (item.play_count || 0);
+                        }
                     });
-                }
+                });
             }
 
             const sortedWords = Object.entries(wordFreq)
@@ -1049,17 +1096,13 @@
         function updateWordCloudYear(value) {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const index = parseInt(value);
-            const year = index === years.length ? 'all' : years[index];
+            const year = years[index];
 
-            document.getElementById('wordCloudYearDisplay').textContent = year === 'all' ? 'All Years' : year;
+            document.getElementById('wordCloudYearDisplay').textContent = year;
 
             // Update year marks
             const yearMarks = document.getElementById('wordCloudYearMarks');
-            if (index === years.length) {
-                // All Years option
-                yearMarks.innerHTML = `<div class="year-mark">All Years</div>`;
-                yearMarks.style.justifyContent = 'center';
-            } else if (index === 0) {
+            if (index === 0) {
                 // First year: show 2012 and 2013
                 yearMarks.innerHTML = `
                     <div class="year-mark">${years[0]}</div>
