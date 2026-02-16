@@ -675,64 +675,42 @@
         function renderEvolutionTab() {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const yearCount = years.length;
+            const currentIndex = yearCount - 1;
 
             return `
                 <div class="year-filter-container">
                     <div class="year-filter-header">
                         <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="yearDisplay">${years[yearCount - 1]}</div>
+                        <div class="year-display" id="yearDisplay">${years[currentIndex]}</div>
                     </div>
-                    <div class="year-slider-wrapper">
-                        <input type="range" class="year-slider" id="yearSlider"
-                               min="0" max="${yearCount - 1}" value="${yearCount - 1}"
-                               oninput="updateYearFromSlider(this.value)">
-                        <div class="year-marks" id="yearMarks" style="justify-content: center;">
-                            <div class="year-mark">${years[yearCount - 1]}</div>
-                        </div>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-4); margin-top: var(--space-3);">
+                        <button id="prevYearBtn" onclick="changeYear(-1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                            ←
+                        </button>
+                        <button id="nextYearBtn" onclick="changeYear(1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                            →
+                        </button>
                     </div>
                 </div>
 
                 <div id="artistEvolutionContainer">
-                    ${renderArtistCarousel(yearCount - 1)}
+                    ${renderArtistCarousel(currentIndex)}
                 </div>
             `;
         }
 
-        function updateYearFromSlider(value) {
+        let currentYearIndex = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort().length - 1;
+
+        function changeYear(direction) {
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-            const index = parseInt(value);
+            currentYearIndex = Math.max(0, Math.min(years.length - 1, currentYearIndex + direction));
 
-            selectedYear = years[index];
+            document.getElementById('yearDisplay').textContent = years[currentYearIndex];
+            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistCarousel(currentYearIndex);
 
-            document.getElementById('yearDisplay').textContent = years[index];
-
-            // Update year marks to show adjacent years
-            const yearMarks = document.getElementById('yearMarks');
-            if (index === 0) {
-                // First year: only show 2012 and 2013
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[0]}</div>
-                    <div class="year-mark">${years[1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else if (index === years.length - 1) {
-                // Last year: only show 2025 and 2026
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[years.length - 2]}</div>
-                    <div class="year-mark">${years[years.length - 1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else {
-                // Middle years: show previous, current, next
-                yearMarks.innerHTML = `
-                    <div class="year-mark">Previous Year</div>
-                    <div class="year-mark">Current Year</div>
-                    <div class="year-mark">Next Year</div>
-                `;
-                yearMarks.style.justifyContent = 'space-between';
-            }
-
-            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistCarousel(index);
+            // Update button states
+            document.getElementById('prevYearBtn').disabled = currentYearIndex === 0;
+            document.getElementById('nextYearBtn').disabled = currentYearIndex === years.length - 1;
         }
 
         function renderArtistEvolution(year, yearIndex) {
@@ -821,7 +799,6 @@
 
             const numCards = cardsToShow.length;
             const gridCols = numCards === 2 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
-            const justifyContent = numCards === 2 ? 'center' : 'stretch';
 
             return `
                 <div style="display: grid; grid-template-columns: ${gridCols}; gap: var(--space-4); ${numCards === 2 ? 'max-width: 1200px; margin: 0 auto;' : ''}">
@@ -829,20 +806,49 @@
                         const artists = evolution[year] || [];
                         const isCurrent = index === yearIndex;
 
+                        // Get previous year rankings for comparison
+                        let previousYearRankings = {};
+                        if (index > 0) {
+                            const prevYear = years[index - 1];
+                            if (evolution[prevYear]) {
+                                evolution[prevYear].forEach((artist, idx) => {
+                                    previousYearRankings[artist.artist] = idx + 1;
+                                });
+                            }
+                        }
+
                         return `
                             <div class="data-table" style="${isCurrent ? 'border: 2px solid var(--spotify-green);' : ''}">
                                 <div class="table-header" style="${isCurrent ? 'background: rgba(29, 185, 84, 0.25);' : ''}">
                                     <div class="table-title">${year} Top Artists</div>
                                 </div>
-                                ${artists.slice(0, 5).map((artist, i) => `
-                                    <div class="table-row">
-                                        <div class="rank">#${i + 1}</div>
-                                        <div class="item-info">
-                                            <div class="item-name">${artist.artist}</div>
+                                ${artists.slice(0, 5).map((artist, i) => {
+                                    const currentRank = i + 1;
+                                    const previousRank = previousYearRankings[artist.artist];
+
+                                    let rankChange = '';
+                                    if (!previousRank || previousRank > 5) {
+                                        rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 0.875rem;">NEW</span>';
+                                    } else {
+                                        const change = previousRank - currentRank;
+                                        if (change > 0) {
+                                            rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 1.125rem;">↑</span>';
+                                        } else if (change < 0) {
+                                            rankChange = '<span style="color: #ec4899; font-weight: 700; font-size: 1.125rem;">↓</span>';
+                                        }
+                                    }
+
+                                    return `
+                                        <div class="table-row">
+                                            <div class="rank">#${currentRank}</div>
+                                            <div class="item-info">
+                                                <div class="item-name">${artist.artist}</div>
+                                                <div class="item-detail">${rankChange}</div>
+                                            </div>
+                                            <div class="item-count">${artist.play_count.toLocaleString()}</div>
                                         </div>
-                                        <div class="item-count">${artist.play_count.toLocaleString()}</div>
-                                    </div>
-                                `).join('')}
+                                    `;
+                                }).join('')}
                             </div>
                         `;
                     }).join('')}
@@ -1100,31 +1106,10 @@
 
             document.getElementById('wordCloudYearDisplay').textContent = year;
 
-            // Update year marks
+            // Update year marks - just show current year
             const yearMarks = document.getElementById('wordCloudYearMarks');
-            if (index === 0) {
-                // First year: show 2012 and 2013
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[0]}</div>
-                    <div class="year-mark">${years[1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else if (index === years.length - 1) {
-                // Last year: show 2025 and 2026
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[years.length - 2]}</div>
-                    <div class="year-mark">${years[years.length - 1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else {
-                // Middle years: show Previous, Current, Next
-                yearMarks.innerHTML = `
-                    <div class="year-mark">Previous Year</div>
-                    <div class="year-mark">Current Year</div>
-                    <div class="year-mark">Next Year</div>
-                `;
-                yearMarks.style.justifyContent = 'space-between';
-            }
+            yearMarks.innerHTML = `<div class="year-mark">${year}</div>`;
+            yearMarks.style.justifyContent = 'center';
 
             generateWordCloud(year);
         }
