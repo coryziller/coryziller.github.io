@@ -986,7 +986,7 @@
             } else if (SPOTIFY_DATA.artistEvolution && SPOTIFY_DATA.artistEvolution[year]) {
                 // Fallback: use artist names from artist evolution data
                 SPOTIFY_DATA.artistEvolution[year].forEach(item => {
-                    const words = item.artist.toLowerCase().split(/\W+/);
+                    const words = item.artist.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
                     words.forEach(word => {
                         if (word.length > 2 && !stopWords.includes(word)) {
                             wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
@@ -998,7 +998,7 @@
             // Process track data if available
             if (dataSource.length > 0) {
                 dataSource.forEach(item => {
-                    const words = `${item.track || ''} ${item.artist || ''}`.toLowerCase().split(/\W+/);
+                    const words = `${item.track || ''} ${item.artist || ''}`.toLowerCase().split(/[\s\-_.,!?;:()\[\]{}'"&/\\]+/);
                     words.forEach(word => {
                         if (word.length > 2 && !stopWords.includes(word)) {
                             wordFreq[word] = (wordFreq[word] || 0) + (item.play_count || 0);
