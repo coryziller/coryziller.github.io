@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cory Ziller - Portfolio</title>
 
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -356,7 +359,7 @@
         .work-card.expanded {
             grid-column: 1 / -1;
             transform: translateY(0);
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -659,7 +662,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #f59e0b, #ef4444, #ec4899, #8b5cf6);
+            background: linear-gradient(90deg, #1DB954, #1ed760, #ec4899, #8b5cf6);
             background-size: 200% 100%;
             animation: gradientShift 3s ease infinite;
         }
@@ -677,10 +680,8 @@
         .wrapped-stat-value {
             font-size: 3.5rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             margin-bottom: var(--space-2);
             line-height: 1;
         }
@@ -731,7 +732,7 @@
         .wrapped-rank {
             font-size: 1.5rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            background: linear-gradient(135deg, #1DB954, #1ed760);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -941,9 +942,9 @@
                     </div>
 
                     <!-- Card 2: SPOTIFY TRENDS -->
-                    <div class="work-card quad-card" id="trends-card" onclick="toggleCard('trends-card')" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" id="trends-card" onclick="toggleCard('trends-card')" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                             </svg>
                         </div>
@@ -1072,9 +1073,18 @@
             const stats = SPOTIFY_DATA.stats;
 
             document.getElementById('trendsContent').innerHTML = `
-                <!-- Stats Overview with Wrapped Style -->
-                <div style="margin-bottom: var(--space-8);">
-                    <h4 class="wrapped-section-title">Your 13-Year Journey</h4>
+                <!-- Data Updated Label -->
+                <div style="text-align: right; margin-bottom: var(--space-3); opacity: 0.6;">
+                    <span style="font-size: 0.875rem; color: rgba(255,255,255,0.7);">📅 Data through 2/15/26</span>
+                </div>
+
+                <!-- STATS SECTION -->
+                <div style="margin-bottom: var(--space-10); padding-bottom: var(--space-6); border-bottom: 2px solid rgba(255,255,255,0.1);">
+                    <h3 style="font-size: 3rem; font-weight: 900; color: white; margin-bottom: var(--space-6); text-transform: uppercase; letter-spacing: 0.05em;">📊 Stats</h3>
+
+                    <!-- Stats Overview -->
+                    <div style="margin-bottom: var(--space-8);">
+                        <h4 class="wrapped-section-title">Your 13-Year Journey</h4>
                     <div class="stat-grid">
                         <div class="wrapped-stat-card pulse-animation">
                             <div class="wrapped-stat-value">${(stats.total_hours / 1000).toFixed(1)}k</div>
@@ -1131,7 +1141,262 @@
                         `).join('')}
                     </div>
                 </div>
+                </div>
+                <!-- END STATS SECTION -->
+
+                <!-- TRENDING SECTION -->
+                <div style="margin-bottom: var(--space-8);">
+                    <h3 style="font-size: 3rem; font-weight: 900; color: white; margin-bottom: var(--space-6); text-transform: uppercase; letter-spacing: 0.05em;">📈 Trending</h3>
+
+                    <!-- Artist Evolution by Year -->
+                <div style="margin-bottom: var(--space-8);">
+                    <h4 class="wrapped-section-title">How Your Taste Evolved (2012-2026)</h4>
+                    <div style="display: grid; gap: var(--space-4);">
+                        ${Object.entries(SPOTIFY_DATA.artistEvolution || {}).reverse().map(([year, artists]) => `
+                            <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: var(--space-4); border: 1px solid rgba(255,255,255,0.1);">
+                                <h5 style="font-size: 1.5rem; font-weight: 800; color: white; margin-bottom: var(--space-3);">${year}</h5>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-2);">
+                                    ${artists.slice(0, 5).map((artist, i) => `
+                                        <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: var(--space-2); display: flex; align-items: center; gap: var(--space-2);">
+                                            <div style="font-size: 1.25rem; font-weight: 900; color: rgba(245, 158, 11, 0.9);">#${i + 1}</div>
+                                            <div style="flex: 1;">
+                                                <div style="font-weight: 700; color: white; font-size: 0.9375rem;">${artist.artist}</div>
+                                                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">${artist.play_count} plays</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Word Cloud from Song Titles & Artists -->
+                <div style="margin-bottom: var(--space-8);">
+                    <h4 class="wrapped-section-title">Words You Live By</h4>
+                    <div id="wordCloud" style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: var(--space-6); min-height: 400px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2);"></div>
+                </div>
+
+                <!-- Interactive Charts -->
+                <div style="margin-bottom: var(--space-8);">
+                    <h4 class="wrapped-section-title">Your Listening Journey</h4>
+
+                    <!-- Listening Hours Over Time -->
+                    <div class="chart-container" style="margin-bottom: var(--space-6);">
+                        <canvas id="hoursChart"></canvas>
+                    </div>
+
+                    <!-- Total Plays by Year -->
+                    <div class="chart-container" style="margin-bottom: var(--space-6);">
+                        <canvas id="playsChart"></canvas>
+                    </div>
+                </div>
+                </div>
+                <!-- END TRENDING SECTION -->
             `;
+
+            // Render Charts after DOM is updated
+            setTimeout(() => {
+                renderCharts();
+            }, 100);
+        }
+
+        function renderCharts() {
+            if (!SPOTIFY_DATA.monthlyTrends) return;
+
+            const monthlyData = SPOTIFY_DATA.monthlyTrends;
+
+            // Listening Hours Over Time Chart
+            const hoursCtx = document.getElementById('hoursChart');
+            if (hoursCtx) {
+                new Chart(hoursCtx, {
+                    type: 'line',
+                    data: {
+                        labels: monthlyData.map(d => d.month),
+                        datasets: [{
+                            label: 'Hours Listened',
+                            data: monthlyData.map(d => d.total_hours),
+                            borderColor: '#1DB954',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 6,
+                            pointHoverBackgroundColor: '#1DB954',
+                            pointHoverBorderColor: '#fff',
+                            pointHoverBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        aspectRatio: 2.5,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: '#1DB954',
+                                borderWidth: 1,
+                                padding: 12,
+                                displayColors: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Hours: ' + context.parsed.y.toFixed(1);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    callback: function(value) {
+                                        return value + 'h';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    maxTicksLimit: 12
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'nearest',
+                            axis: 'x',
+                            intersect: false
+                        }
+                    }
+                });
+            }
+
+            // Total Plays by Year Chart
+            const yearlyPlays = {};
+            monthlyData.forEach(d => {
+                const year = d.month.split('-')[0];
+                yearlyPlays[year] = (yearlyPlays[year] || 0) + d.total_plays;
+            });
+
+            const playsCtx = document.getElementById('playsChart');
+            if (playsCtx) {
+                new Chart(playsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(yearlyPlays),
+                        datasets: [{
+                            label: 'Total Plays',
+                            data: Object.values(yearlyPlays),
+                            backgroundColor: 'rgba(245, 158, 11, 0.8)',
+                            borderColor: '#1DB954',
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            hoverBackgroundColor: 'rgba(239, 68, 68, 0.8)',
+                            hoverBorderColor: '#1ed760'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        aspectRatio: 2.5,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: '#1DB954',
+                                borderWidth: 1,
+                                padding: 12,
+                                displayColors: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Plays: ' + context.parsed.y.toLocaleString();
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    callback: function(value) {
+                                        return (value / 1000).toFixed(0) + 'k';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Generate Word Cloud
+            generateWordCloud();
+        }
+
+        function generateWordCloud() {
+            if (!SPOTIFY_DATA.stats) return;
+
+            const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft'];
+            const wordFreq = {};
+
+            // Extract words from top tracks
+            SPOTIFY_DATA.stats.top_tracks_all_time.forEach(item => {
+                const words = `${item.track} ${item.artist}`.toLowerCase().split(/\W+/);
+                words.forEach(word => {
+                    if (word.length > 2 && !stopWords.includes(word)) {
+                        wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
+                    }
+                });
+            });
+
+            // Get top 40 words
+            const sortedWords = Object.entries(wordFreq)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 40);
+
+            const maxFreq = sortedWords[0][1];
+            const minFreq = sortedWords[sortedWords.length - 1][1];
+
+            const cloudDiv = document.getElementById('wordCloud');
+            if (cloudDiv) {
+                cloudDiv.innerHTML = sortedWords.map(([word, freq]) => {
+                    const size = 12 + ((freq - minFreq) / (maxFreq - minFreq)) * 48;
+                    const opacity = 0.6 + ((freq - minFreq) / (maxFreq - minFreq)) * 0.4;
+                    const colors = ['#1DB954', '#1ed760', '#ec4899', '#a855f7', '#3b82f6'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+
+                    return `<span style="font-size: ${size}px; color: ${color}; opacity: ${opacity}; font-weight: 700; padding: 4px 8px; transition: all 0.3s ease; cursor: default;" onmouseover="this.style.transform='scale(1.2)'; this.style.opacity='1';" onmouseout="this.style.transform='scale(1)'; this.style.opacity='${opacity}';">${word}</span>`;
+                }).join('');
+            }
         }
 
         // Scroll-triggered fade animations
