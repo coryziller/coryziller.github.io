@@ -1,0 +1,135 @@
+{
+  "total_plays": 132916,
+  "total_hours": 6528.806593055558,
+  "unique_tracks": 9458,
+  "unique_artists": 3819,
+  "date_range": {
+    "start": "2012-10-14",
+    "end": "2026-02-14"
+  },
+  "avg_skip_rate": 17.60961810466761,
+  "top_artists_all_time": {
+    "Stephen Day": 6543,
+    "Ariana Grande": 5561,
+    "Beyonc\u00e9": 3312,
+    "FLO": 2547,
+    "Sammy Rae & The Friends": 2484,
+    "Meghan Trainor": 2447,
+    "Michael Bubl\u00e9": 2071,
+    "Brayton Bowman": 1924,
+    "Juxtaposition": 1767,
+    "Pentatonix": 1536,
+    "Kelly Rowland": 1386,
+    "PJ Morton": 1371,
+    "Rene\u00e9 Rapp": 1259,
+    "Unknown": 1198,
+    "Ben Platt": 1100,
+    "Tom Misch": 1065,
+    "RAYE": 1049,
+    "Aqyila": 1037,
+    "Juice": 1022,
+    "Gloria Tells": 1017
+  },
+  "top_tracks_all_time": [
+    {
+      "track": "Jason's Song (Gave It Away)",
+      "artist": "Ariana Grande",
+      "play_count": 1744
+    },
+    {
+      "track": "Unknown",
+      "artist": "Unknown",
+      "play_count": 1198
+    },
+    {
+      "track": "Death of a Bachelor",
+      "artist": "Juxtaposition",
+      "play_count": 926
+    },
+    {
+      "track": "KUSTOM MADE - EDIT",
+      "artist": "Brayton Bowman",
+      "play_count": 924
+    },
+    {
+      "track": "September of '92",
+      "artist": "Zak Resnick",
+      "play_count": 832
+    },
+    {
+      "track": "Vibe for Me - Famba Remix",
+      "artist": "Aqyila",
+      "play_count": 787
+    },
+    {
+      "track": "Put You On - MJ Cole Remix",
+      "artist": "Amber Mark",
+      "play_count": 725
+    },
+    {
+      "track": "For Life (Take You Out, Treat You Right)",
+      "artist": "Stephen Day",
+      "play_count": 695
+    },
+    {
+      "track": "Crazy",
+      "artist": "Kelly Rowland",
+      "play_count": 594
+    },
+    {
+      "track": "COFFEE",
+      "artist": "Kelly Rowland",
+      "play_count": 586
+    },
+    {
+      "track": "yes, and?",
+      "artist": "Ariana Grande",
+      "play_count": 585
+    },
+    {
+      "track": "Jackie Onassis",
+      "artist": "Sammy Rae & The Friends",
+      "play_count": 580
+    },
+    {
+      "track": "On Top of the World",
+      "artist": "Stephen Day",
+      "play_count": 547
+    },
+    {
+      "track": "Dancing in the Street",
+      "artist": "Stephen Day",
+      "play_count": 546
+    },
+    {
+      "track": "September Told Me",
+      "artist": "Juice",
+      "play_count": 542
+    },
+    {
+      "track": "Worth It.",
+      "artist": "RAYE",
+      "play_count": 533
+    },
+    {
+      "track": "History",
+      "artist": "Cosmo's Midnight",
+      "play_count": 522
+    },
+    {
+      "track": "Waving Through A Window",
+      "artist": "Ben Platt",
+      "play_count": 487
+    },
+    {
+      "track": "Chandelier",
+      "artist": "Twisted Measure",
+      "play_count": 485
+    },
+    {
+      "track": "KUSTOM MADE (EDIT)",
+      "artist": "Bee's Knees",
+      "play_count": 472
+    }
+  ]
+}

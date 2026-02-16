@@ -1,0 +1,18 @@
+🚀 DEPLOY TO GITHUB PAGES
+
+1. Copy ALL files from this folder to your github_website directory:
+   - index.html
+   - spotify-trends/ (folder)
+   - update_spotify_data.py
+   - README.md
+   - DEPLOY.md
+
+2. Push to GitHub:
+   cd /path/to/github_website
+   git add .
+   git commit -m "Add Spotify Trends dashboard"
+   git push origin main
+
+3. Visit https://coryziller.github.io 🎉
+
+That's it! Everything is ready to deploy.

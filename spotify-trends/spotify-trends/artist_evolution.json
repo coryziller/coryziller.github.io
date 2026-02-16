@@ -1,0 +1,580 @@
+{
+  "2012": [
+    {
+      "artist": "Street Corner Renaissance",
+      "play_count": 1
+    }
+  ],
+  "2013": [
+    {
+      "artist": "Michael Bubl\u00e9",
+      "play_count": 24
+    },
+    {
+      "artist": "Glee Cast",
+      "play_count": 3
+    },
+    {
+      "artist": "The Alley Cats",
+      "play_count": 3
+    },
+    {
+      "artist": "In The Heights (Original Cast Recording)",
+      "play_count": 2
+    },
+    {
+      "artist": "Company",
+      "play_count": 1
+    },
+    {
+      "artist": "Robbie Williams",
+      "play_count": 1
+    }
+  ],
+  "2014": [
+    {
+      "artist": "Hunter Parrish",
+      "play_count": 331
+    },
+    {
+      "artist": "Maroon 5",
+      "play_count": 207
+    },
+    {
+      "artist": "Michael Bubl\u00e9",
+      "play_count": 166
+    },
+    {
+      "artist": "Nathan Lane",
+      "play_count": 162
+    },
+    {
+      "artist": "Fall Out Boy",
+      "play_count": 149
+    },
+    {
+      "artist": "Glee Cast",
+      "play_count": 143
+    },
+    {
+      "artist": "Wallace Smith",
+      "play_count": 128
+    },
+    {
+      "artist": "Mortician",
+      "play_count": 103
+    },
+    {
+      "artist": "Company",
+      "play_count": 88
+    },
+    {
+      "artist": "Nick Blaemire",
+      "play_count": 85
+    }
+  ],
+  "2015": [
+    {
+      "artist": "Michael Bubl\u00e9",
+      "play_count": 529
+    },
+    {
+      "artist": "Pentatonix",
+      "play_count": 379
+    },
+    {
+      "artist": "Meghan Trainor",
+      "play_count": 295
+    },
+    {
+      "artist": "Andy Grammer",
+      "play_count": 208
+    },
+    {
+      "artist": "Hunter Parrish",
+      "play_count": 203
+    },
+    {
+      "artist": "Original Cast Recording",
+      "play_count": 203
+    },
+    {
+      "artist": "Straight No Chaser",
+      "play_count": 203
+    },
+    {
+      "artist": "Jeremy Jordan",
+      "play_count": 197
+    },
+    {
+      "artist": "Anna Kendrick",
+      "play_count": 174
+    },
+    {
+      "artist": "The All-American Rejects",
+      "play_count": 173
+    }
+  ],
+  "2016": [
+    {
+      "artist": "Juxtaposition",
+      "play_count": 882
+    },
+    {
+      "artist": "Zak Resnick",
+      "play_count": 739
+    },
+    {
+      "artist": "Meghan Trainor",
+      "play_count": 512
+    },
+    {
+      "artist": "Twisted Measure",
+      "play_count": 405
+    },
+    {
+      "artist": "Leslie Odom Jr.",
+      "play_count": 314
+    },
+    {
+      "artist": "Lin-Manuel Miranda",
+      "play_count": 286
+    },
+    {
+      "artist": "Natalie Weiss",
+      "play_count": 282
+    },
+    {
+      "artist": "The Coda Conduct",
+      "play_count": 279
+    },
+    {
+      "artist": "John Jorge",
+      "play_count": 261
+    },
+    {
+      "artist": "Beyonc\u00e9",
+      "play_count": 231
+    }
+  ],
+  "2017": [
+    {
+      "artist": "Pitch Slapped",
+      "play_count": 572
+    },
+    {
+      "artist": "Ben Platt",
+      "play_count": 547
+    },
+    {
+      "artist": "Faux Paz",
+      "play_count": 420
+    },
+    {
+      "artist": "Beyonc\u00e9",
+      "play_count": 370
+    },
+    {
+      "artist": "Juxtaposition",
+      "play_count": 353
+    },
+    {
+      "artist": "Demi Lovato",
+      "play_count": 321
+    },
+    {
+      "artist": "Michael Bubl\u00e9",
+      "play_count": 300
+    },
+    {
+      "artist": "Megan McGinnis",
+      "play_count": 234
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 230
+    },
+    {
+      "artist": "Tori Kelly",
+      "play_count": 212
+    }
+  ],
+  "2018": [
+    {
+      "artist": "Pentatonix",
+      "play_count": 550
+    },
+    {
+      "artist": "Brayton Bowman",
+      "play_count": 492
+    },
+    {
+      "artist": "Bee's Knees",
+      "play_count": 421
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 363
+    },
+    {
+      "artist": "The Coda Conduct",
+      "play_count": 218
+    },
+    {
+      "artist": "Ben Platt",
+      "play_count": 155
+    },
+    {
+      "artist": "Michael Bubl\u00e9",
+      "play_count": 128
+    },
+    {
+      "artist": "Twisted Measure",
+      "play_count": 128
+    },
+    {
+      "artist": "Jonathan Reid Gealt",
+      "play_count": 124
+    },
+    {
+      "artist": "Tori Kelly",
+      "play_count": 118
+    }
+  ],
+  "2019": [
+    {
+      "artist": "Beyonc\u00e9",
+      "play_count": 502
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 474
+    },
+    {
+      "artist": "Brayton Bowman",
+      "play_count": 414
+    },
+    {
+      "artist": "Shawn Mendes",
+      "play_count": 262
+    },
+    {
+      "artist": "The Walls Group",
+      "play_count": 211
+    },
+    {
+      "artist": "Ben Platt",
+      "play_count": 193
+    },
+    {
+      "artist": "Ella Mai",
+      "play_count": 168
+    },
+    {
+      "artist": "Billie Eilish",
+      "play_count": 155
+    },
+    {
+      "artist": "Daniel Caesar",
+      "play_count": 139
+    },
+    {
+      "artist": "Bee's Knees",
+      "play_count": 118
+    }
+  ],
+  "2020": [
+    {
+      "artist": "Ariana Grande",
+      "play_count": 732
+    },
+    {
+      "artist": "Sammy Rae & The Friends",
+      "play_count": 615
+    },
+    {
+      "artist": "Beyonc\u00e9",
+      "play_count": 557
+    },
+    {
+      "artist": "Koryn Hawthorne",
+      "play_count": 532
+    },
+    {
+      "artist": "Brayton Bowman",
+      "play_count": 423
+    },
+    {
+      "artist": "Unknown",
+      "play_count": 328
+    },
+    {
+      "artist": "Jonathan McReynolds",
+      "play_count": 313
+    },
+    {
+      "artist": "Julia Harriman",
+      "play_count": 295
+    },
+    {
+      "artist": "Amber Mark",
+      "play_count": 275
+    },
+    {
+      "artist": "Citizen Queen",
+      "play_count": 253
+    }
+  ],
+  "2021": [
+    {
+      "artist": "Stephen Day",
+      "play_count": 853
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 599
+    },
+    {
+      "artist": "Unknown",
+      "play_count": 503
+    },
+    {
+      "artist": "Sammy Rae & The Friends",
+      "play_count": 482
+    },
+    {
+      "artist": "Lake Street Dive",
+      "play_count": 465
+    },
+    {
+      "artist": "Alex Newell",
+      "play_count": 258
+    },
+    {
+      "artist": "Brayton Bowman",
+      "play_count": 243
+    },
+    {
+      "artist": "Cosmo's Midnight",
+      "play_count": 233
+    },
+    {
+      "artist": "Oliver Nelson",
+      "play_count": 214
+    },
+    {
+      "artist": "Qveen Herby",
+      "play_count": 207
+    }
+  ],
+  "2022": [
+    {
+      "artist": "Stephen Day",
+      "play_count": 900
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 870
+    },
+    {
+      "artist": "Sammy Rae & The Friends",
+      "play_count": 675
+    },
+    {
+      "artist": "PJ Morton",
+      "play_count": 632
+    },
+    {
+      "artist": "Beyonc\u00e9",
+      "play_count": 518
+    },
+    {
+      "artist": "FLO",
+      "play_count": 505
+    },
+    {
+      "artist": "Stacey Ryan",
+      "play_count": 500
+    },
+    {
+      "artist": "Megan Thee Stallion",
+      "play_count": 455
+    },
+    {
+      "artist": "Justin Bieber",
+      "play_count": 365
+    },
+    {
+      "artist": "Citizen Queen",
+      "play_count": 312
+    }
+  ],
+  "2023": [
+    {
+      "artist": "Stephen Day",
+      "play_count": 2160
+    },
+    {
+      "artist": "Kelly Rowland",
+      "play_count": 1059
+    },
+    {
+      "artist": "Aqyila",
+      "play_count": 867
+    },
+    {
+      "artist": "FLO",
+      "play_count": 807
+    },
+    {
+      "artist": "Juice",
+      "play_count": 697
+    },
+    {
+      "artist": "Rene\u00e9 Rapp",
+      "play_count": 499
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 402
+    },
+    {
+      "artist": "Grace Kinstler",
+      "play_count": 402
+    },
+    {
+      "artist": "Sammy Rae & The Friends",
+      "play_count": 309
+    },
+    {
+      "artist": "PJ Morton",
+      "play_count": 291
+    }
+  ],
+  "2024": [
+    {
+      "artist": "Stephen Day",
+      "play_count": 1853
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 1503
+    },
+    {
+      "artist": "FLO",
+      "play_count": 852
+    },
+    {
+      "artist": "Meghan Trainor",
+      "play_count": 847
+    },
+    {
+      "artist": "RAYE",
+      "play_count": 768
+    },
+    {
+      "artist": "Gloria Tells",
+      "play_count": 723
+    },
+    {
+      "artist": "Rene\u00e9 Rapp",
+      "play_count": 687
+    },
+    {
+      "artist": "Amber Mark",
+      "play_count": 444
+    },
+    {
+      "artist": "Sabrina Carpenter",
+      "play_count": 426
+    },
+    {
+      "artist": "Beyonc\u00e9",
+      "play_count": 418
+    }
+  ],
+  "2025": [
+    {
+      "artist": "Stephen Day",
+      "play_count": 600
+    },
+    {
+      "artist": "REBBY",
+      "play_count": 416
+    },
+    {
+      "artist": "FLO",
+      "play_count": 381
+    },
+    {
+      "artist": "Beyonc\u00e9",
+      "play_count": 340
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 313
+    },
+    {
+      "artist": "Patrick Hizon",
+      "play_count": 302
+    },
+    {
+      "artist": "Gloria Tells",
+      "play_count": 294
+    },
+    {
+      "artist": "KATSEYE",
+      "play_count": 257
+    },
+    {
+      "artist": "Meghan Trainor",
+      "play_count": 204
+    },
+    {
+      "artist": "Couch",
+      "play_count": 198
+    }
+  ],
+  "2026": [
+    {
+      "artist": "Claire Ernst",
+      "play_count": 200
+    },
+    {
+      "artist": "Candee Sweet",
+      "play_count": 148
+    },
+    {
+      "artist": "Patrick Hizon",
+      "play_count": 120
+    },
+    {
+      "artist": "Lawrence",
+      "play_count": 54
+    },
+    {
+      "artist": "Stephen Day",
+      "play_count": 46
+    },
+    {
+      "artist": "REBBY",
+      "play_count": 45
+    },
+    {
+      "artist": "KATSEYE",
+      "play_count": 37
+    },
+    {
+      "artist": "SoCal VoCals",
+      "play_count": 37
+    },
+    {
+      "artist": "Brasstracks",
+      "play_count": 33
+    },
+    {
+      "artist": "Ariana Grande",
+      "play_count": 29
+    }
+  ]
+}
