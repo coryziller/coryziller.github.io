@@ -5,20 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cory Ziller - Portfolio</title>
 
-    <!-- Chart.js for visualizations -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-    <!-- Google Fonts -->
+    <!-- Spotify Font - Circular -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================
-           DESIGN SYSTEM - 8px Spacing Scale
-           ============================================ */
         :root {
-            /* Spacing (8px base) */
             --space-1: 8px;
             --space-2: 16px;
             --space-3: 24px;
@@ -30,27 +26,23 @@
             --space-12: 96px;
             --space-16: 128px;
 
-            /* Typography Scale */
-            --text-xs: 0.75rem;     /* 12px - microcopy */
-            --text-sm: 0.875rem;    /* 14px - captions */
-            --text-base: 1rem;      /* 16px - body */
-            --text-lg: 1.125rem;    /* 18px - body large */
-            --text-xl: 1.25rem;     /* 20px - emphasis */
-            --text-2xl: 1.5rem;     /* 24px - small headers */
-            --text-3xl: 1.875rem;   /* 30px */
-            --text-4xl: 2.25rem;    /* 36px */
-            --text-5xl: 3rem;       /* 48px */
-            --text-hero: 4.5rem;    /* 72px - hero name */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
 
-            /* Colors */
             --bg-primary: #0a0a0a;
             --bg-secondary: #1a1a1a;
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
             --text-tertiary: rgba(255, 255, 255, 0.5);
             --border-subtle: rgba(255, 255, 255, 0.1);
-            --glow-primary: rgba(255, 255, 255, 0.25);
-            --glow-subtle: rgba(255, 255, 255, 0.12);
+            --spotify-green: #1DB954;
         }
 
         * {
@@ -60,25 +52,22 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             font-size: var(--text-base);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ============================================
-           HERO SECTION
-           ============================================ */
+        /* HERO SECTION */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding: var(--space-4) var(--space-4) var(--space-6);
+            padding: var(--space-4);
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
         }
 
@@ -88,7 +77,6 @@
             animation: fadeIn 0.8s ease-out;
         }
 
-        /* Hero Grid */
         .hero-grid {
             display: grid;
             grid-template-columns: 350px 1fr;
@@ -97,7 +85,6 @@
             margin-bottom: var(--space-4);
         }
 
-        /* Left Column - Photo & Name */
         .hero-left {
             animation: slideUp 0.6s ease-out;
         }
@@ -113,12 +100,8 @@
             justify-content: center;
             margin: 0 auto var(--space-4);
             overflow: hidden;
-            /* Enhanced glow around photo */
-            box-shadow:
-                0 8px 32px rgba(255, 255, 255, 0.15),
-                0 0 40px rgba(255, 255, 255, 0.2),
-                0 0 80px rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15);
+            transition: all 0.4s;
         }
 
         .profile-photo img {
@@ -129,10 +112,7 @@
 
         .profile-photo:hover {
             transform: translateY(-4px);
-            box-shadow:
-                0 12px 48px rgba(255, 255, 255, 0.2),
-                0 0 60px rgba(255, 255, 255, 0.3),
-                0 0 100px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 48px rgba(255, 255, 255, 0.2);
         }
 
         .hero-greeting {
@@ -140,7 +120,6 @@
             font-weight: 500;
             color: var(--text-secondary);
             margin-bottom: var(--space-1);
-            letter-spacing: -0.01em;
         }
 
         .hero-name {
@@ -150,11 +129,8 @@
             letter-spacing: -0.03em;
             margin: 0;
             white-space: nowrap;
-            /* Keep name bold and prominent */
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
-        /* Right Column - Credentials */
         .hero-right {
             padding-left: var(--space-8);
             padding-top: var(--space-4);
@@ -167,11 +143,6 @@
             padding-left: var(--space-3);
         }
 
-        .credential-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Subtle glowing bullet */
         .credential-bullet {
             position: absolute;
             left: 0;
@@ -180,10 +151,7 @@
             height: 6px;
             border-radius: 50%;
             background: var(--text-primary);
-            /* More subtle glow */
-            box-shadow:
-                0 0 8px rgba(255, 255, 255, 0.4),
-                0 0 16px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
         }
 
         .credential-label {
@@ -200,12 +168,8 @@
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.5;
-            letter-spacing: -0.02em;
         }
 
-        /* ============================================
-           TAGLINE BRIDGE SECTION
-           ============================================ */
         .tagline-bridge {
             text-align: center;
             margin: var(--space-4) auto var(--space-2);
@@ -220,28 +184,9 @@
             font-style: italic;
             color: var(--text-secondary);
             line-height: 1.4;
-            letter-spacing: -0.01em;
             margin-bottom: var(--space-2);
-            /* Better visual anchor */
-            position: relative;
-            padding-bottom: var(--space-1);
         }
 
-        .tagline-text::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(255, 255, 255, 0.2) 50%,
-                transparent 100%);
-        }
-
-        /* CTA Buttons Container */
         .cta-container {
             display: flex;
             gap: var(--space-2);
@@ -249,7 +194,6 @@
             align-items: flex-end;
         }
 
-        /* Arrow Wrapper */
         .arrow-wrapper {
             display: flex;
             flex-direction: column;
@@ -269,7 +213,6 @@
             60% { transform: translateY(-8px); }
         }
 
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 14px 32px;
@@ -278,11 +221,9 @@
             text-decoration: none;
             border-radius: 100px;
             font-weight: 600;
-            font-size: var(--text-base);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             border: 2px solid transparent;
             cursor: pointer;
-            letter-spacing: -0.01em;
         }
 
         .btn:hover {
@@ -298,12 +239,9 @@
 
         .btn-outline:hover {
             background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* ============================================
-           WORKS SECTION
-           ============================================ */
+        /* WORKS SECTION */
         .works-section {
             padding: var(--space-16) var(--space-4);
             background: var(--bg-primary);
@@ -323,7 +261,6 @@
             font-size: var(--text-5xl);
             margin-bottom: var(--space-3);
             font-weight: 800;
-            letter-spacing: -0.02em;
         }
 
         .works-subtitle {
@@ -331,29 +268,17 @@
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .works-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-4);
-            margin-top: var(--space-8);
         }
 
         .work-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s;
             cursor: pointer;
-            border: 1px solid var(--border-subtle);
         }
 
         .work-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .work-card.expanded {
@@ -367,17 +292,14 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            padding: 0 var(--space-4);
         }
 
         .work-card.expanded .work-details {
             max-height: 75vh;
             padding: var(--space-4);
             overflow-y: auto;
-            overflow-x: hidden;
         }
 
-        /* Scroll-triggered fade animations */
         .scroll-section {
             opacity: 0;
             transform: translateY(30px);
@@ -387,20 +309,6 @@
         .scroll-section.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .work-details::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .work-details::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-        }
-
-        .work-details::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 4px;
         }
 
         .close-btn {
@@ -414,16 +322,10 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
-            font-size: var(--text-sm);
         }
 
         .work-card.expanded .close-btn {
             display: block;
-        }
-
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .quad-card:hover {
@@ -431,61 +333,289 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .work-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* FULLSCREEN DASHBOARD */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000000;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+
+        .fullscreen-modal.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-close-btn {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: #FFFFFF;
+            font-size: 28px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: var(--text-5xl);
-            font-weight: 700;
-            color: white;
         }
 
-        .work-content {
-            padding: var(--space-4);
+        .modal-close-btn:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.4);
+            transform: scale(1.1);
         }
 
-        .work-title {
-            font-size: var(--text-2xl);
-            font-weight: 700;
-            margin-bottom: var(--space-2);
-            letter-spacing: -0.01em;
+        .dashboard-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-4);
         }
 
-        .work-description {
-            font-size: var(--text-base);
-            color: var(--text-secondary);
-            margin-bottom: var(--space-3);
-            line-height: 1.6;
-        }
-
-        .work-tags {
+        .dashboard-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-1);
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid rgba(29, 185, 84, 0.3);
         }
 
-        .tag {
-            padding: 6px 14px;
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #FFFFFF;
+        }
+
+        .dashboard-subtitle {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* TABS */
+        .tab-navigation {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 700;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tab-btn:hover {
+            color: #FFFFFF;
+            border-bottom-color: rgba(29, 185, 84, 0.5);
+        }
+
+        .tab-btn.active {
+            color: var(--spotify-green);
+            border-bottom-color: var(--spotify-green);
+        }
+
+        /* STATS CARDS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: var(--space-4);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-color: rgba(29, 185, 84, 0.5);
+            transform: translateY(-2px);
         }
 
-        /* ============================================
-           ANIMATIONS
-           ============================================ */
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--spotify-green);
+            margin-bottom: var(--space-1);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+
+        /* DATA TABLES */
+        .data-table {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: var(--space-4);
+        }
+
+        .table-header {
+            background: rgba(29, 185, 84, 0.15);
+            padding: var(--space-3);
+            border-bottom: 1px solid rgba(29, 185, 84, 0.3);
+        }
+
+        .table-title {
+            font-size: 1.125rem;
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 120px;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .table-row:hover {
+            background: rgba(29, 185, 84, 0.08);
+        }
+
+        .rank {
+            font-weight: 900;
+            color: var(--spotify-green);
+            font-size: 1.125rem;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 2px;
+        }
+
+        .item-detail {
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .item-count {
+            font-weight: 700;
+            color: #FFFFFF;
+            text-align: right;
+        }
+
+        /* YEAR FILTER */
+        .year-filter-container {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .year-filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .year-filter-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+        }
+
+        .year-display {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--spotify-green);
+        }
+
+        .year-buttons {
+            display: flex;
+            gap: var(--space-1);
+            flex-wrap: wrap;
+        }
+
+        .year-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 700;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .year-btn:hover {
+            background: rgba(29, 185, 84, 0.15);
+            border-color: rgba(29, 185, 84, 0.5);
+            color: #FFFFFF;
+        }
+
+        .year-btn.active {
+            background: rgba(29, 185, 84, 0.2);
+            border-color: var(--spotify-green);
+            color: var(--spotify-green);
+        }
+
+        /* CHARTS */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            height: 400px;
+        }
+
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: var(--space-3);
+        }
+
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideUp {
@@ -499,9 +629,6 @@
             }
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
         @media (max-width: 1024px) {
             .hero-grid {
                 grid-template-columns: 1fr;
@@ -519,242 +646,17 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-
-            .hero-name {
-                font-size: var(--text-4xl);
-            }
-
-            .profile-photo {
-                width: 220px;
-                height: 220px;
-            }
         }
 
-        @media (max-width: 768px) {
-            .works-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-container {
-                flex-direction: column;
-                gap: var(--space-3);
-            }
-
-            .arrow-wrapper {
-                order: -1;
-            }
-
-            .work-details > div > div[style*="grid-template-columns"] {
-                grid-template-columns: 1fr !important;
-            }
-        }
-
-        /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
-        }
-
-        /* ============================================
-           SPOTIFY TRENDS SPECIFIC STYLES
-           ============================================ */
-        .chart-container {
-            position: relative;
-            height: 400px;
-            margin: var(--space-4) 0;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            padding: var(--space-3);
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-3);
-            margin: var(--space-4) 0;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: var(--space-3);
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: var(--text-4xl);
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: var(--space-1);
-        }
-
-        .stat-label {
-            font-size: var(--text-sm);
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .top-list {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            padding: var(--space-3);
-            margin: var(--space-3) 0;
-        }
-
-        .top-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--space-2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .top-list-item:last-child {
-            border-bottom: none;
-        }
-
-        .top-list-rank {
-            font-weight: 700;
-            color: var(--text-tertiary);
-            margin-right: var(--space-2);
-            min-width: 30px;
-        }
-
-        .top-list-info {
-            flex: 1;
-        }
-
-        .top-list-name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .top-list-artist {
-            font-size: var(--text-sm);
-            color: var(--text-secondary);
-        }
-
-        .top-list-count {
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: var(--text-sm);
-        }
-
-        /* ============================================
-           SPOTIFY WRAPPED-STYLE AESTHETICS
-           ============================================ */
-        .wrapped-stat-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: var(--space-4);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .wrapped-stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #1DB954, #1ed760, #ec4899, #8b5cf6);
-            background-size: 200% 100%;
-            animation: gradientShift 3s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .wrapped-stat-card:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.3);
-        }
-
-        .wrapped-stat-value {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            margin-bottom: var(--space-2);
-            line-height: 1;
-        }
-
-        .wrapped-section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ffffff, rgba(255,255,255,0.7));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: var(--space-4);
-            letter-spacing: -0.02em;
-        }
-
-        .wrapped-artist-card {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(239, 68, 68, 0.2) 100%);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 16px;
-            padding: var(--space-3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .wrapped-artist-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .wrapped-artist-card:hover::before {
-            opacity: 1;
-        }
-
-        .wrapped-artist-card:hover {
-            transform: scale(1.05);
-            border-color: rgba(245, 158, 11, 0.6);
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
-        }
-
-        .wrapped-rank {
-            font-size: 1.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #1DB954, #1ed760);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .pulse-animation {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.02); }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <!-- Hero Grid -->
             <div class="hero-grid">
-                <!-- Left Column: Photo & Name -->
                 <div class="hero-left">
                     <div class="profile-photo">
                         <img src="profile.jpg" alt="Cory Ziller" onerror="this.parentElement.innerHTML='CZ';">
@@ -765,47 +667,33 @@
                     </div>
                 </div>
 
-                <!-- Right Column: Credentials -->
                 <div class="hero-right">
-                    <!-- Credential 1 -->
                     <div class="credential-item">
                         <div class="credential-bullet"></div>
                         <div class="credential-label">Current</div>
-                        <p class="credential-text">
-                            STEM MBA candidate at Ohio State.
-                        </p>
+                        <p class="credential-text">STEM MBA candidate at Ohio State.</p>
                     </div>
 
-                    <!-- Credential 2 -->
                     <div class="credential-item">
                         <div class="credential-bullet"></div>
                         <div class="credential-label">Previously</div>
-                        <p class="credential-text">
-                            Sr. Data Analyst at a Chicago-based advertising agency.
-                        </p>
+                        <p class="credential-text">Sr. Data Analyst at a Chicago-based advertising agency.</p>
                     </div>
 
-                    <!-- Credential 3 -->
                     <div class="credential-item">
                         <div class="credential-bullet"></div>
                         <div class="credential-label">Early Experience</div>
-                        <p class="credential-text">
-                            AI startup experience supporting law enforcement adoption of anti-trafficking technology.
-                        </p>
+                        <p class="credential-text">AI startup experience supporting law enforcement adoption of anti-trafficking technology.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Tagline Bridge Section -->
             <div class="tagline-bridge">
-                <p class="tagline-text">
-                    I love turning ideas into automation. Check it out!
-                </p>
+                <p class="tagline-text">I love turning ideas into automation. Check it out!</p>
 
                 <div class="cta-container">
                     <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn btn-outline">View LinkedIn</a>
 
-                    <!-- Side Projects with Arrow -->
                     <div class="arrow-wrapper">
                         <div class="bouncing-arrow">↓</div>
                         <a href="#works" class="btn">Side Projects</a>
@@ -817,7 +705,6 @@
         </div>
     </section>
 
-    <!-- Side Projects Section -->
     <section class="works-section" id="works">
         <div class="works-container">
             <div class="works-header">
@@ -825,12 +712,11 @@
                 <p class="works-subtitle">Automation workflows that creatively solve problems and save time</p>
             </div>
 
-            <!-- Four Quadrant Cards -->
             <div style="margin-top: 80px;">
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;">
 
                     <!-- Card 1: Social Listening -->
-                    <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M3 12h3"></path>
@@ -849,129 +735,107 @@
                             Automates user sentiment tracking for product teams. Scrapes Reddit and Hacker News daily, analyzes feedback, and emails a 30-second audio summary.
                         </p>
 
-                        <!-- Expanded Details -->
                         <div class="work-details">
                             <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
 
-                                <!-- Two Column Layout -->
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8); align-items: start;">
-
-                                    <!-- Left Column: Content -->
-                                    <div style="padding-right: 20px;">
-                                        <!-- The Idea -->
+                                    <div>
                                         <div style="margin-bottom: 48px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Idea</h4>
-                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
                                                 NVIDIA product managers need to track user sentiment to prioritize product features and understand pain points, but checking Reddit and Hacker News daily takes hours. Automate the entire process.
                                             </p>
                                         </div>
 
-                                        <!-- What I Built -->
                                         <div style="margin-bottom: 48px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 20px; letter-spacing: -0.02em;">What I Built</h4>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 20px;">What I Built</h4>
                                             <div style="display: flex; flex-direction: column; gap: 16px;">
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Scrape</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Reddit & Hacker News daily</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Python + Public APIs</div>
+                                                    <div style="font-weight: 700; margin-bottom: 4px;">Scrape</div>
+                                                    <div style="font-size: 0.9375rem; opacity: 0.75;">Reddit & Hacker News daily</div>
+                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">Python + Public APIs</div>
                                                 </div>
-                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">↓</div>
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Analyze</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Sentiment & categorization</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">OpenAI API</div>
+                                                    <div style="font-weight: 700; margin-bottom: 4px;">Analyze</div>
+                                                    <div style="font-size: 0.9375rem; opacity: 0.75;">Sentiment & categorization</div>
+                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">OpenAI API</div>
                                                 </div>
-                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">↓</div>
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Generate</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">30-second audio summary</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Google Text-to-Speech</div>
+                                                    <div style="font-weight: 700; margin-bottom: 4px;">Generate</div>
+                                                    <div style="font-size: 0.9375rem; opacity: 0.75;">30-second audio summary</div>
+                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">Google Text-to-Speech</div>
                                                 </div>
-                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">↓</div>
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Email</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Automated delivery</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Brevo API</div>
+                                                    <div style="font-weight: 700; margin-bottom: 4px;">Email</div>
+                                                    <div style="font-size: 0.9375rem; opacity: 0.75;">Automated delivery</div>
+                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">Brevo API</div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <!-- The Impact -->
                                         <div>
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Impact</h4>
-                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Impact</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
                                                 Daily automated insights from Reddit & Hacker News on product sentiment. Zero manual work. Always fresh data.
                                             </p>
                                         </div>
                                     </div>
 
-                                    <!-- Right Column: Demo Form -->
                                     <div>
-                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); height: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.2);">
+                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
                                             <div style="margin-bottom: 32px;">
-                                                <span style="font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em;">See It In Action</span>
-                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px; color: white; letter-spacing: -0.02em;">Try the workflow</h3>
-                                                <p style="font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.6;">
+                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">See It In Action</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Try the workflow</h3>
+                                                <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
                                                     Get a sample email with real sentiment data and an audio briefing.
                                                 </p>
                                             </div>
-                                            <form id="socialListeningForm" onclick="event.stopPropagation()" style="max-width: 100%;">
+                                            <form id="socialListeningForm" onclick="event.stopPropagation()">
                                                 <div style="margin-bottom: var(--space-3); text-align: left;">
-                                                    <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Name</label>
+                                                    <label style="display: block; margin-bottom: var(--space-2); font-weight: 600;">Your Name</label>
                                                     <input type="text" id="nameInput" placeholder="John Doe" required
-                                                        style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
+                                                        style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; color: #000;">
                                                 </div>
                                                 <div style="margin-bottom: var(--space-4); text-align: left;">
-                                                    <label style="display: block; margin-bottom: var(--space-2); font-weight: 600; font-size: var(--text-base); color: white;">Your Email</label>
+                                                    <label style="display: block; margin-bottom: var(--space-2); font-weight: 600;">Your Email</label>
                                                     <input type="email" id="emailInput" placeholder="john@example.com" required
-                                                        style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; font-family: inherit; color: #000; transition: border-color 0.2s;">
+                                                        style="width: 100%; padding: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.95); font-size: 1rem; color: #000;">
                                                 </div>
-                                                <button type="submit" style="width: 100%; padding: 16px 32px; background: white; color: #667eea; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+                                                <button type="submit" style="width: 100%; padding: 16px 32px; background: white; color: #667eea; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
                                                     Send Me the Demo Report
                                                 </button>
-                                                <div id="demoResult" style="margin-top: var(--space-4); padding: var(--space-3); background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none; text-align: center; font-size: var(--text-base); color: white;"></div>
+                                                <div id="demoResult" style="margin-top: var(--space-4); padding: var(--space-3); background: rgba(255, 255, 255, 0.1); border-radius: 12px; display: none;"></div>
                                             </form>
                                         </div>
                                     </div>
 
                                 </div>
 
-                                <button class="close-btn" onclick="toggleCard('social-card'); event.stopPropagation();" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Close</button>
+                                <button class="close-btn" onclick="toggleCard('social-card'); event.stopPropagation();">Close</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card 2: SPOTIFY TRENDS -->
-                    <div class="work-card quad-card" id="trends-card" onclick="toggleCard('trends-card')" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                    <!-- Card 2: SPOTIFY TRENDS - GREEN TILE -->
+                    <div class="work-card quad-card" onclick="openSpotifyDashboard()" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                             </svg>
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
+                        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; line-height: 1.3; color: #000000;">
                             SPOTIFY TRENDS: 13 YEARS OF LISTENING
                         </h3>
-                        <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
+                        <p style="font-size: 1rem; line-height: 1.6; color: #000000; font-weight: 500;">
                             Visualizes 13+ years of Spotify data showing artist evolution, top tracks, and listening patterns from 2012-2026. 6,500+ hours analyzed.
                         </p>
-
-                        <!-- Expanded Details -->
-                        <div class="work-details">
-                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
-
-                                <div id="trendsContent">
-                                    <div style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.7);">
-                                        <p>Loading your Spotify trends...</p>
-                                    </div>
-                                </div>
-
-                                <button class="close-btn" onclick="toggleCard('trends-card'); event.stopPropagation();" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Close</button>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- Card 3: Coming Soon -->
-                    <div class="quad-card" style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                    <!-- Card 3 -->
+                    <div class="quad-card" style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; min-height: 280px;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E89BA7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -979,27 +843,19 @@
                                 <line x1="12" y1="3" x2="12" y2="15"></line>
                             </svg>
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            MORE TO COME...
-                        </h3>
-                        <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            New projects in the works.
-                        </p>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">MORE TO COME...</h3>
+                        <p style="font-size: 1rem; line-height: 1.6;">New projects in the works.</p>
                     </div>
 
-                    <!-- Card 4: Coming Soon -->
-                    <div class="quad-card" style="background: linear-gradient(135deg, #D4B896 0%, #B89968 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                    <!-- Card 4 -->
+                    <div class="quad-card" style="background: linear-gradient(135deg, #D4B896 0%, #B89968 100%); border-radius: 16px; padding: 40px; color: white; min-height: 280px;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4B896" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                             </svg>
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            MORE TO COME...
-                        </h3>
-                        <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            New projects in the works.
-                        </p>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">MORE TO COME...</h3>
+                        <p style="font-size: 1rem; line-height: 1.6;">New projects in the works.</p>
                     </div>
 
                 </div>
@@ -1007,17 +863,35 @@
         </div>
     </section>
 
+    <!-- BLACK BACKGROUND FULLSCREEN DASHBOARD -->
+    <div id="spotifyModal" class="fullscreen-modal">
+        <button class="modal-close-btn" onclick="closeSpotifyDashboard()">×</button>
+
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Spotify Listening Analytics</h1>
+                    <p class="dashboard-subtitle">Data through February 15, 2026 | 2012-2026</p>
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+                <button class="tab-btn" onclick="switchTab('evolution')">Artist Evolution</button>
+                <button class="tab-btn" onclick="switchTab('charts')">Charts & Trends</button>
+            </div>
+
+            <div id="dashboardContent">
+                <p style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.5);">Loading analytics...</p>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Spotify data - loaded from JSON files
-        const SPOTIFY_DATA = {
-            stats: null,
-            artistEvolution: null,
-            monthlyTrends: null,
-            topSongs: null
-        };
+        const SPOTIFY_DATA = { stats: null, artistEvolution: null, monthlyTrends: null, topSongs: null };
+        let currentTab = 'overview';
+        let selectedYear = 'all';
 
-        // Load Spotify data from JSON files
         async function loadSpotifyData() {
             try {
                 const [stats, artistEvolution, monthlyTrends, topSongs] = await Promise.all([
@@ -1032,6 +906,9 @@
                 SPOTIFY_DATA.monthlyTrends = monthlyTrends;
                 SPOTIFY_DATA.topSongs = topSongs;
 
+                // Filter out Meghan Trainor
+                filterOutArtist('Meghan Trainor');
+
                 return true;
             } catch (error) {
                 console.error('Error loading Spotify data:', error);
@@ -1039,166 +916,201 @@
             }
         }
 
-        // Toggle card expansion
-        function toggleCard(cardId) {
-            const card = document.getElementById(cardId);
-            card.classList.toggle('expanded');
+        function filterOutArtist(artistName) {
+            const artistLower = artistName.toLowerCase();
 
-            if (card.classList.contains('expanded')) {
-                setTimeout(() => {
-                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Initialize scroll animations for this card
-                    initScrollAnimations(card);
+            // Filter top artists
+            if (SPOTIFY_DATA.stats && SPOTIFY_DATA.stats.top_artists_all_time) {
+                delete SPOTIFY_DATA.stats.top_artists_all_time[artistName];
+            }
 
-                    // Load and render Spotify Trends if opening that card
-                    if (cardId === 'trends-card' && !SPOTIFY_DATA.stats) {
-                        loadSpotifyData().then(success => {
-                            if (success) {
-                                renderSpotifyTrends();
-                            }
-                        });
-                    } else if (cardId === 'trends-card' && SPOTIFY_DATA.stats) {
-                        renderSpotifyTrends();
-                    }
-                }, 100);
+            // Filter top tracks
+            if (SPOTIFY_DATA.stats && SPOTIFY_DATA.stats.top_tracks_all_time) {
+                SPOTIFY_DATA.stats.top_tracks_all_time = SPOTIFY_DATA.stats.top_tracks_all_time.filter(
+                    track => track.artist.toLowerCase() !== artistLower
+                );
+            }
+
+            // Filter artist evolution
+            if (SPOTIFY_DATA.artistEvolution) {
+                Object.keys(SPOTIFY_DATA.artistEvolution).forEach(year => {
+                    SPOTIFY_DATA.artistEvolution[year] = SPOTIFY_DATA.artistEvolution[year].filter(
+                        artist => artist.artist.toLowerCase() !== artistLower
+                    );
+                });
             }
         }
 
-        function renderSpotifyTrends() {
+        async function openSpotifyDashboard() {
+            const modal = document.getElementById('spotifyModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
             if (!SPOTIFY_DATA.stats) {
-                document.getElementById('trendsContent').innerHTML = '<p style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.7);">Loading your Spotify trends...</p>';
-                return;
+                await loadSpotifyData();
+            }
+            switchTab('overview');
+        }
+
+        function closeSpotifyDashboard() {
+            document.getElementById('spotifyModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchTab(tabName) {
+            currentTab = tabName;
+
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            renderTabContent(tabName);
+        }
+
+        function renderTabContent(tabName) {
+            const content = document.getElementById('dashboardContent');
+
+            switch(tabName) {
+                case 'overview':
+                    content.innerHTML = renderOverviewTab();
+                    break;
+                case 'evolution':
+                    content.innerHTML = renderEvolutionTab();
+                    break;
+                case 'charts':
+                    content.innerHTML = renderChartsTab();
+                    setTimeout(() => renderCharts(), 100);
+                    break;
+            }
+        }
+
+        function renderOverviewTab() {
+            const stats = SPOTIFY_DATA.stats;
+            if (!stats) return '<p>Loading...</p>';
+
+            return `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${(stats.total_hours / 1000).toFixed(1)}k</div>
+                        <div class="stat-label">Hours Listened</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(stats.total_plays / 1000).toFixed(1)}k</div>
+                        <div class="stat-label">Total Plays</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(stats.unique_tracks / 1000).toFixed(1)}k</div>
+                        <div class="stat-label">Unique Tracks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(stats.unique_artists / 1000).toFixed(1)}k</div>
+                        <div class="stat-label">Unique Artists</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-6);">
+                    <div class="data-table">
+                        <div class="table-header">
+                            <div class="table-title">Top Artists (All Time)</div>
+                        </div>
+                        ${Object.entries(stats.top_artists_all_time).slice(0, 10).map(([artist, count], i) => `
+                            <div class="table-row">
+                                <div class="rank">#${i + 1}</div>
+                                <div class="item-info">
+                                    <div class="item-name">${artist}</div>
+                                </div>
+                                <div class="item-count">${count.toLocaleString()} plays</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="data-table">
+                        <div class="table-header">
+                            <div class="table-title">Top Tracks (All Time)</div>
+                        </div>
+                        ${stats.top_tracks_all_time.slice(0, 10).map((item, i) => `
+                            <div class="table-row">
+                                <div class="rank">#${i + 1}</div>
+                                <div class="item-info">
+                                    <div class="item-name">${item.track}</div>
+                                    <div class="item-detail">${item.artist}</div>
+                                </div>
+                                <div class="item-count">${item.play_count.toLocaleString()}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderEvolutionTab() {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort().reverse();
+
+            return `
+                <div class="year-filter-container">
+                    <div class="year-filter-header">
+                        <div class="year-filter-label">Select Year</div>
+                        <div class="year-display" id="yearDisplay">All Years</div>
+                    </div>
+                    <div class="year-buttons">
+                        <button class="year-btn active" onclick="filterByYear('all')">All Years</button>
+                        ${years.map(year => `
+                            <button class="year-btn" onclick="filterByYear('${year}')">${year}</button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div id="artistEvolutionContainer">
+                    ${renderArtistEvolution('all')}
+                </div>
+            `;
+        }
+
+        function renderArtistEvolution(year) {
+            const evolution = SPOTIFY_DATA.artistEvolution || {};
+            const years = year === 'all' ? Object.entries(evolution).reverse() : [[year, evolution[year]]];
+
+            if (year !== 'all' && !evolution[year]) {
+                return '<div style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.5);">No data available</div>';
             }
 
-            const stats = SPOTIFY_DATA.stats;
-
-            document.getElementById('trendsContent').innerHTML = `
-                <!-- Data Updated Label -->
-                <div style="text-align: right; margin-bottom: var(--space-3); opacity: 0.6;">
-                    <span style="font-size: 0.875rem; color: rgba(255,255,255,0.7);">📅 Data through 2/15/26</span>
-                </div>
-
-                <!-- STATS SECTION -->
-                <div style="margin-bottom: var(--space-10); padding-bottom: var(--space-6); border-bottom: 2px solid rgba(255,255,255,0.1);">
-                    <h3 style="font-size: 3rem; font-weight: 900; color: white; margin-bottom: var(--space-6); text-transform: uppercase; letter-spacing: 0.05em;">📊 Stats</h3>
-
-                    <!-- Stats Overview -->
-                    <div style="margin-bottom: var(--space-8);">
-                        <h4 class="wrapped-section-title">Your 13-Year Journey</h4>
-                    <div class="stat-grid">
-                        <div class="wrapped-stat-card pulse-animation">
-                            <div class="wrapped-stat-value">${(stats.total_hours / 1000).toFixed(1)}k</div>
-                            <div class="stat-label">Hours Listened</div>
-                        </div>
-                        <div class="wrapped-stat-card pulse-animation" style="animation-delay: 0.1s;">
-                            <div class="wrapped-stat-value">${(stats.total_plays / 1000).toFixed(1)}k</div>
-                            <div class="stat-label">Total Plays</div>
-                        </div>
-                        <div class="wrapped-stat-card pulse-animation" style="animation-delay: 0.2s;">
-                            <div class="wrapped-stat-value">${(stats.unique_tracks / 1000).toFixed(1)}k</div>
-                            <div class="stat-label">Unique Tracks</div>
-                        </div>
-                        <div class="wrapped-stat-card pulse-animation" style="animation-delay: 0.3s;">
-                            <div class="wrapped-stat-value">${(stats.unique_artists / 1000).toFixed(1)}k</div>
-                            <div class="stat-label">Unique Artists</div>
-                        </div>
+            return years.map(([yr, artists]) => `
+                <div class="data-table" style="margin-bottom: var(--space-3);">
+                    <div class="table-header">
+                        <div class="table-title">${yr} Top Artists</div>
                     </div>
-                </div>
-
-                <!-- Top Artists All Time -->
-                <div style="margin-bottom: var(--space-8);">
-                    <h4 class="wrapped-section-title">Your All-Time Favorites</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-3);">
-                        ${Object.entries(stats.top_artists_all_time).slice(0, 6).map(([artist, count], i) => `
-                            <div class="wrapped-artist-card" style="animation-delay: ${i * 0.1}s;">
-                                <div style="display: flex; align-items: center; gap: var(--space-3);">
-                                    <div class="wrapped-rank">#${i + 1}</div>
-                                    <div style="flex: 1;">
-                                        <div style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 4px;">${artist}</div>
-                                        <div style="font-size: 0.875rem; color: rgba(255,255,255,0.7);">${count.toLocaleString()} plays</div>
-                                    </div>
-                                </div>
+                    ${artists.slice(0, 10).map((artist, i) => `
+                        <div class="table-row">
+                            <div class="rank">#${i + 1}</div>
+                            <div class="item-info">
+                                <div class="item-name">${artist.artist}</div>
                             </div>
-                        `).join('')}
-                    </div>
+                            <div class="item-count">${artist.play_count.toLocaleString()} plays</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        function filterByYear(year) {
+            selectedYear = year;
+            document.getElementById('yearDisplay').textContent = year === 'all' ? 'All Years' : year;
+            document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(year);
+        }
+
+        function renderChartsTab() {
+            return `
+                <div class="chart-container">
+                    <div class="chart-title">Listening Hours Over Time</div>
+                    <canvas id="hoursChart"></canvas>
                 </div>
 
-                <!-- Top Tracks -->
-                <div style="margin-bottom: var(--space-8);">
-                    <h4 class="wrapped-section-title">Songs You Can't Stop Playing</h4>
-                    <div style="display: grid; gap: var(--space-2);">
-                        ${stats.top_tracks_all_time.slice(0, 10).map((item, i) => `
-                            <div class="wrapped-artist-card" style="animation-delay: ${i * 0.05}s;">
-                                <div style="display: flex; align-items: center; gap: var(--space-3);">
-                                    <div class="wrapped-rank">#${i + 1}</div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 700; color: white;">${item.track}</div>
-                                        <div style="font-size: 0.875rem; color: rgba(255,255,255,0.7);">${item.artist}</div>
-                                    </div>
-                                    <div style="font-weight: 700; color: rgba(245, 158, 11, 0.9);">${item.play_count.toLocaleString()}</div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
+                <div class="chart-container">
+                    <div class="chart-title">Total Plays by Year</div>
+                    <canvas id="playsChart"></canvas>
                 </div>
-                </div>
-                <!-- END STATS SECTION -->
-
-                <!-- TRENDING SECTION -->
-                <div style="margin-bottom: var(--space-8);">
-                    <h3 style="font-size: 3rem; font-weight: 900; color: white; margin-bottom: var(--space-6); text-transform: uppercase; letter-spacing: 0.05em;">📈 Trending</h3>
-
-                    <!-- Artist Evolution by Year -->
-                <div style="margin-bottom: var(--space-8);">
-                    <h4 class="wrapped-section-title">How Your Taste Evolved (2012-2026)</h4>
-                    <div style="display: grid; gap: var(--space-4);">
-                        ${Object.entries(SPOTIFY_DATA.artistEvolution || {}).reverse().map(([year, artists]) => `
-                            <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: var(--space-4); border: 1px solid rgba(255,255,255,0.1);">
-                                <h5 style="font-size: 1.5rem; font-weight: 800; color: white; margin-bottom: var(--space-3);">${year}</h5>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-2);">
-                                    ${artists.slice(0, 5).map((artist, i) => `
-                                        <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: var(--space-2); display: flex; align-items: center; gap: var(--space-2);">
-                                            <div style="font-size: 1.25rem; font-weight: 900; color: rgba(245, 158, 11, 0.9);">#${i + 1}</div>
-                                            <div style="flex: 1;">
-                                                <div style="font-weight: 700; color: white; font-size: 0.9375rem;">${artist.artist}</div>
-                                                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">${artist.play_count} plays</div>
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-
-                <!-- Word Cloud from Song Titles & Artists -->
-                <div style="margin-bottom: var(--space-8);">
-                    <h4 class="wrapped-section-title">Words You Live By</h4>
-                    <div id="wordCloud" style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: var(--space-6); min-height: 400px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2);"></div>
-                </div>
-
-                <!-- Interactive Charts -->
-                <div style="margin-bottom: var(--space-8);">
-                    <h4 class="wrapped-section-title">Your Listening Journey</h4>
-
-                    <!-- Listening Hours Over Time -->
-                    <div class="chart-container" style="margin-bottom: var(--space-6);">
-                        <canvas id="hoursChart"></canvas>
-                    </div>
-
-                    <!-- Total Plays by Year -->
-                    <div class="chart-container" style="margin-bottom: var(--space-6);">
-                        <canvas id="playsChart"></canvas>
-                    </div>
-                </div>
-                </div>
-                <!-- END TRENDING SECTION -->
             `;
-
-            // Render Charts after DOM is updated
-            setTimeout(() => {
-                renderCharts();
-            }, 100);
         }
 
         function renderCharts() {
@@ -1206,7 +1118,6 @@
 
             const monthlyData = SPOTIFY_DATA.monthlyTrends;
 
-            // Listening Hours Over Time Chart
             const hoursCtx = document.getElementById('hoursChart');
             if (hoursCtx) {
                 new Chart(hoursCtx, {
@@ -1214,78 +1125,35 @@
                     data: {
                         labels: monthlyData.map(d => d.month),
                         datasets: [{
-                            label: 'Hours Listened',
+                            label: 'Hours',
                             data: monthlyData.map(d => d.total_hours),
                             borderColor: '#1DB954',
-                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            backgroundColor: 'rgba(29, 185, 84, 0.1)',
                             borderWidth: 3,
                             fill: true,
                             tension: 0.4,
-                            pointRadius: 0,
-                            pointHoverRadius: 6,
-                            pointHoverBackgroundColor: '#1DB954',
-                            pointHoverBorderColor: '#fff',
-                            pointHoverBorderWidth: 2
+                            pointRadius: 0
                         }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
-                        aspectRatio: 2.5,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                mode: 'index',
-                                intersect: false,
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                titleColor: '#fff',
-                                bodyColor: '#fff',
-                                borderColor: '#1DB954',
-                                borderWidth: 1,
-                                padding: 12,
-                                displayColors: false,
-                                callbacks: {
-                                    label: function(context) {
-                                        return 'Hours: ' + context.parsed.y.toFixed(1);
-                                    }
-                                }
-                            }
-                        },
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                },
-                                ticks: {
-                                    color: 'rgba(255, 255, 255, 0.7)',
-                                    callback: function(value) {
-                                        return value + 'h';
-                                    }
-                                }
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
                             },
                             x: {
-                                grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: 'rgba(255, 255, 255, 0.7)',
-                                    maxTicksLimit: 12
-                                }
+                                grid: { display: false },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)', maxTicksLimit: 12 }
                             }
-                        },
-                        interaction: {
-                            mode: 'nearest',
-                            axis: 'x',
-                            intersect: false
                         }
                     }
                 });
             }
 
-            // Total Plays by Year Chart
             const yearlyPlays = {};
             monthlyData.forEach(d => {
                 const year = d.month.split('-')[0];
@@ -1299,139 +1167,65 @@
                     data: {
                         labels: Object.keys(yearlyPlays),
                         datasets: [{
-                            label: 'Total Plays',
+                            label: 'Plays',
                             data: Object.values(yearlyPlays),
-                            backgroundColor: 'rgba(245, 158, 11, 0.8)',
+                            backgroundColor: 'rgba(29, 185, 84, 0.8)',
                             borderColor: '#1DB954',
                             borderWidth: 2,
-                            borderRadius: 8,
-                            hoverBackgroundColor: 'rgba(239, 68, 68, 0.8)',
-                            hoverBorderColor: '#1ed760'
+                            borderRadius: 8
                         }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
-                        aspectRatio: 2.5,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                titleColor: '#fff',
-                                bodyColor: '#fff',
-                                borderColor: '#1DB954',
-                                borderWidth: 1,
-                                padding: 12,
-                                displayColors: false,
-                                callbacks: {
-                                    label: function(context) {
-                                        return 'Plays: ' + context.parsed.y.toLocaleString();
-                                    }
-                                }
-                            }
-                        },
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                },
-                                ticks: {
-                                    color: 'rgba(255, 255, 255, 0.7)',
-                                    callback: function(value) {
-                                        return (value / 1000).toFixed(0) + 'k';
-                                    }
-                                }
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
                             },
                             x: {
-                                grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: 'rgba(255, 255, 255, 0.7)'
-                                }
+                                grid: { display: false },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
                             }
                         }
                     }
                 });
             }
-
-            // Generate Word Cloud
-            generateWordCloud();
         }
 
-        function generateWordCloud() {
-            if (!SPOTIFY_DATA.stats) return;
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('expanded');
 
-            const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft'];
-            const wordFreq = {};
-
-            // Extract words from top tracks
-            SPOTIFY_DATA.stats.top_tracks_all_time.forEach(item => {
-                const words = `${item.track} ${item.artist}`.toLowerCase().split(/\W+/);
-                words.forEach(word => {
-                    if (word.length > 2 && !stopWords.includes(word)) {
-                        wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
-                    }
-                });
-            });
-
-            // Get top 40 words
-            const sortedWords = Object.entries(wordFreq)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 40);
-
-            const maxFreq = sortedWords[0][1];
-            const minFreq = sortedWords[sortedWords.length - 1][1];
-
-            const cloudDiv = document.getElementById('wordCloud');
-            if (cloudDiv) {
-                cloudDiv.innerHTML = sortedWords.map(([word, freq]) => {
-                    const size = 12 + ((freq - minFreq) / (maxFreq - minFreq)) * 48;
-                    const opacity = 0.6 + ((freq - minFreq) / (maxFreq - minFreq)) * 0.4;
-                    const colors = ['#1DB954', '#1ed760', '#ec4899', '#a855f7', '#3b82f6'];
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-
-                    return `<span style="font-size: ${size}px; color: ${color}; opacity: ${opacity}; font-weight: 700; padding: 4px 8px; transition: all 0.3s ease; cursor: default;" onmouseover="this.style.transform='scale(1.2)'; this.style.opacity='1';" onmouseout="this.style.transform='scale(1)'; this.style.opacity='${opacity}';">${word}</span>`;
-                }).join('');
+            if (card.classList.contains('expanded')) {
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    initScrollAnimations(card);
+                }, 100);
             }
         }
 
-        // Scroll-triggered fade animations
         function initScrollAnimations(card) {
             const scrollContainer = card.querySelector('.work-details');
             const sections = card.querySelectorAll('.scroll-section');
 
             if (!scrollContainer || !sections.length) return;
-
-            // Show first section immediately
             if (sections[0]) sections[0].classList.add('visible');
 
-            // Detect when sections come into view
             scrollContainer.addEventListener('scroll', () => {
                 sections.forEach(section => {
                     const rect = section.getBoundingClientRect();
                     const containerRect = scrollContainer.getBoundingClientRect();
-
-                    // Check if section is in view within the scrollContainer
-                    const isVisible = rect.top < containerRect.bottom - 100 &&
-                                     rect.bottom > containerRect.top + 100;
-
-                    if (isVisible) {
-                        section.classList.add('visible');
-                    }
+                    const isVisible = rect.top < containerRect.bottom - 100 && rect.bottom > containerRect.top + 100;
+                    if (isVisible) section.classList.add('visible');
                 });
             });
 
-            // Trigger initial check
             scrollContainer.dispatchEvent(new Event('scroll'));
         }
 
-        // ============================================
-        // SOCIAL LISTENING DEMO FORM - UPDATED WITH GOOGLE SHEETS
-        // ============================================
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-1Ug6SYktFirnQKSSkLr6pxTExJpTXdPfEnp6RWKmnIt56fkXk4siFgIp1KjBvBeY/exec';
 
         document.getElementById('socialListeningForm').addEventListener('submit', async (e) => {
@@ -1442,55 +1236,32 @@
 
             if (!name || !email) return;
 
-            resultDiv.innerHTML = '⏳ Sending your report...';
+            resultDiv.innerHTML = '⏳ Sending...';
             resultDiv.style.display = 'block';
 
             try {
-                // STEP 1: Log to Google Sheets (NEW - runs in background)
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email
-                    })
-                }).catch(err => {
-                    console.log('Google Sheets logging (background):', err);
-                });
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email })
+                }).catch(err => console.log('Google Sheets:', err));
 
-                // STEP 2: Send Demo Email (EXISTING)
                 const response = await fetch('https://coryzillergithubio-production.up.railway.app/send-demo', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email })
                 });
 
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    resultDiv.innerHTML = `
-                        <strong>✅ Success!</strong><br><br>
-                        Check your email (${email}) for the NVIDIA Social Listening Report!<br><br>
-                        <small>The report includes real data from Reddit & Hacker News, plus a 30-second audio briefing.</small>
-                    `;
+                    resultDiv.innerHTML = `<strong>✅ Success!</strong><br><br>Check ${email} for the report!`;
                 } else {
-                    throw new Error(data.error || 'Failed to send report');
+                    throw new Error(data.error || 'Failed');
                 }
             } catch (error) {
-                console.error('Demo send error:', error);
-                resultDiv.innerHTML = `
-                    <strong>❌ Error</strong><br><br>
-                    ${error.message || 'Failed to send report. Please try again.'}<br><br>
-                    <small>If the problem persists, reach out via LinkedIn.</small>
-                `;
+                resultDiv.innerHTML = `<strong>❌ Error</strong><br><br>${error.message}`;
             }
         });
     </script>
