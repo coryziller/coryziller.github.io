@@ -556,6 +556,15 @@
         function closeSpotifyDashboard() {
             document.getElementById('spotifyModal').classList.remove('active');
             document.body.style.overflow = 'auto';
+
+            // Keep the green Spotify card expanded when closing the modal
+            const spotifyCard = document.getElementById('spotify-card');
+            if (spotifyCard && !spotifyCard.classList.contains('expanded')) {
+                spotifyCard.classList.add('expanded');
+                setTimeout(() => {
+                    spotifyCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
         }
 
         function switchTab(tabName, event) {
@@ -678,19 +687,23 @@
             const currentIndex = yearCount - 1;
 
             return `
-                <div class="year-filter-container">
-                    <div class="year-filter-header">
-                        <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="yearDisplay">${years[currentIndex]}</div>
+                <div style="margin-bottom: var(--space-4); text-align: center;">
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9375rem; line-height: 1.5;">
+                        Explore how rankings are changing over time and when you first discovered an artist
+                    </p>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                    <button id="prevYearBtn" onclick="changeYear(-1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                        ←
+                    </button>
+                    <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 12px 20px; min-width: 140px; text-align: center;">
+                        <div style="font-size: 0.75rem; font-weight: 600; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Select Year</div>
+                        <div id="yearDisplay" style="font-size: 1.25rem; font-weight: 800; color: var(--spotify-green);">${years[currentIndex]}</div>
                     </div>
-                    <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-4); margin-top: var(--space-3);">
-                        <button id="prevYearBtn" onclick="changeYear(-1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
-                            ←
-                        </button>
-                        <button id="nextYearBtn" onclick="changeYear(1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
-                            →
-                        </button>
-                    </div>
+                    <button id="nextYearBtn" onclick="changeYear(1)" style="background: rgba(29, 185, 84, 0.2); border: 2px solid var(--spotify-green); color: var(--spotify-green); font-size: 1.5rem; font-weight: 800; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                        →
+                    </button>
                 </div>
 
                 <div id="artistEvolutionContainer">
