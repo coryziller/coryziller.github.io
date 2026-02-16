@@ -677,25 +677,33 @@
             const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
             const yearCount = years.length;
 
+            // Start with the most recent year as center
+            const centerIndex = yearCount - 1;
+
             return `
-                <div class="year-filter-container">
-                    <div class="year-filter-header">
-                        <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="yearDisplay">${years[yearCount - 1]}</div>
-                    </div>
-                    <div class="year-slider-wrapper">
-                        <input type="range" class="year-slider" id="yearSlider"
-                               min="0" max="${yearCount - 1}" value="${yearCount - 1}"
-                               oninput="updateYearFromSlider(this.value)">
-                        <div class="year-marks" id="yearMarks" style="justify-content: center;">
-                            <div class="year-mark">${years[yearCount - 1]}</div>
-                            <div class="year-mark" style="display: none;"></div>
-                        </div>
-                    </div>
+                <div style="text-align: center; margin-bottom: var(--space-4);">
+                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-2);">Artist Evolution</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem;">Slide to explore year-over-year changes</p>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                    <button id="prevYearBtn" onclick="navigateYears(-1)"
+                            style="width: 48px; height: 48px; border-radius: 50%; background: rgba(29, 185, 84, 0.2); border: 2px solid rgba(29, 185, 84, 0.5); color: #1DB954; font-size: 24px; cursor: pointer; font-weight: bold; transition: all 0.3s;"
+                            onmouseover="this.style.background='rgba(29, 185, 84, 0.3)'"
+                            onmouseout="this.style.background='rgba(29, 185, 84, 0.2)'">
+                        ◀
+                    </button>
+
+                    <button id="nextYearBtn" onclick="navigateYears(1)"
+                            style="width: 48px; height: 48px; border-radius: 50%; background: rgba(29, 185, 84, 0.2); border: 2px solid rgba(29, 185, 84, 0.5); color: #1DB954; font-size: 24px; cursor: pointer; font-weight: bold; transition: all 0.3s;"
+                            onmouseover="this.style.background='rgba(29, 185, 84, 0.3)'"
+                            onmouseout="this.style.background='rgba(29, 185, 84, 0.2)'">
+                        ▶
+                    </button>
                 </div>
 
                 <div id="artistEvolutionContainer">
-                    ${renderArtistEvolution(years[yearCount - 1], yearCount - 1)}
+                    ${renderThreeYearCards(centerIndex)}
                 </div>
             `;
         }
@@ -792,6 +800,150 @@
                     }).join('')}
                 </div>
             `;
+        }
+
+        let currentCenterIndex = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort().length - 1;
+
+        function renderThreeYearCards(centerIndex) {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const yearCount = years.length;
+
+            currentCenterIndex = centerIndex;
+
+            const prevIndex = centerIndex - 1;
+            const nextIndex = centerIndex + 1;
+
+            let html = '';
+            let gridStyle = '';
+
+            // Edge case: First year (only show current + next)
+            if (centerIndex === 0) {
+                gridStyle = 'display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); max-width: 900px; margin: 0 auto;';
+                html += renderYearCard(years[centerIndex], centerIndex, 'current');
+                if (nextIndex < yearCount) {
+                    html += renderYearCard(years[nextIndex], nextIndex, 'next');
+                }
+            }
+            // Edge case: Last year (only show prev + current)
+            else if (centerIndex === yearCount - 1) {
+                gridStyle = 'display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); max-width: 900px; margin: 0 auto;';
+                if (prevIndex >= 0) {
+                    html += renderYearCard(years[prevIndex], prevIndex, 'prev');
+                }
+                html += renderYearCard(years[centerIndex], centerIndex, 'current');
+            }
+            // Normal case: Show 3 cards
+            else {
+                gridStyle = 'display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); max-width: 1400px; margin: 0 auto;';
+
+                // Left card (Previous Year)
+                if (prevIndex >= 0) {
+                    html += renderYearCard(years[prevIndex], prevIndex, 'prev');
+                } else {
+                    html += '<div></div>'; // Empty space
+                }
+
+                // Center card (Current Year) - with ranking changes
+                html += renderYearCard(years[centerIndex], centerIndex, 'current');
+
+                // Right card (Next Year)
+                if (nextIndex < yearCount) {
+                    html += renderYearCard(years[nextIndex], nextIndex, 'next');
+                } else {
+                    html += '<div></div>'; // Empty space
+                }
+            }
+
+            // Wrap in a div with the appropriate grid style
+            return `<div style="${gridStyle}">${html}</div>`;
+        }
+
+        function renderYearCard(year, yearIndex, position) {
+            const evolution = SPOTIFY_DATA.artistEvolution || {};
+            const allYears = Object.keys(evolution).sort();
+
+            if (!evolution[year]) {
+                return `<div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: var(--space-4); text-align: center; color: rgba(255,255,255,0.5);">No data</div>`;
+            }
+
+            // Get previous year rankings for comparison (only for current year card)
+            let previousYearRankings = {};
+            if (position === 'current' && yearIndex > 0) {
+                const prevYear = allYears[yearIndex - 1];
+                if (evolution[prevYear]) {
+                    evolution[prevYear].forEach((artist, idx) => {
+                        previousYearRankings[artist.artist] = idx + 1;
+                    });
+                }
+            }
+
+            const artists = evolution[year];
+            const opacity = position === 'current' ? '1' : '0.7';
+            const scale = position === 'current' ? '1.05' : '1';
+
+            return `
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, ${position === 'current' ? '0.3' : '0.15'}); border-radius: 16px; overflow: hidden; transition: all 0.3s; opacity: ${opacity}; transform: scale(${scale}); box-shadow: ${position === 'current' ? '0 8px 32px rgba(29, 185, 84, 0.2)' : 'none'};">
+                    <div style="background: rgba(29, 185, 84, ${position === 'current' ? '0.2' : '0.1'}); padding: var(--space-3); border-bottom: 1px solid rgba(29, 185, 84, 0.3);">
+                        <div style="font-size: 1.125rem; font-weight: 800; color: #FFFFFF; text-align: center;">${year} Top Artists</div>
+                    </div>
+                    <div style="padding: var(--space-2);">
+                        ${artists.slice(0, 10).map((artist, i) => {
+                            const currentRank = i + 1;
+                            const previousRank = previousYearRankings[artist.artist];
+
+                            let rankChange = '';
+                            if (position === 'current' && yearIndex > 0) {
+                                if (!previousRank || previousRank > 10) {
+                                    rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 0.875rem; margin-left: 8px;">NEW</span>';
+                                } else {
+                                    const change = previousRank - currentRank;
+                                    if (change > 0) {
+                                        rankChange = `<span style="color: #1DB954; font-weight: 700; font-size: 0.875rem; margin-left: 8px;">+${change} ↑</span>`;
+                                    } else if (change < 0) {
+                                        rankChange = `<span style="color: #ec4899; font-weight: 700; font-size: 0.875rem; margin-left: 8px;">${change} ↓</span>`;
+                                    }
+                                }
+                            }
+
+                            return `
+                            <div style="padding: var(--space-2); border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: space-between; min-height: 60px;">
+                                <div style="display: flex; align-items: center; gap: var(--space-2); flex: 1;">
+                                    <div style="font-weight: 900; color: var(--spotify-green); font-size: 0.875rem; min-width: 30px;">#${currentRank}</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700; color: #FFFFFF; font-size: 0.9375rem;">${artist.artist}${rankChange}</div>
+                                    </div>
+                                </div>
+                                <div style="font-weight: 600; color: rgba(255,255,255,0.6); font-size: 0.8125rem;">${artist.play_count.toLocaleString()}</div>
+                            </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function navigateYears(direction) {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const yearCount = years.length;
+
+            let newCenterIndex = currentCenterIndex + direction;
+
+            // Bounds checking
+            if (newCenterIndex < 0) newCenterIndex = 0;
+            if (newCenterIndex >= yearCount) newCenterIndex = yearCount - 1;
+
+            if (newCenterIndex === currentCenterIndex) return; // No change
+
+            currentCenterIndex = newCenterIndex;
+
+            // Update the cards
+            document.getElementById('artistEvolutionContainer').innerHTML = renderThreeYearCards(currentCenterIndex);
+
+            // Update button states
+            document.getElementById('prevYearBtn').style.opacity = currentCenterIndex === 0 ? '0.3' : '1';
+            document.getElementById('prevYearBtn').style.cursor = currentCenterIndex === 0 ? 'not-allowed' : 'pointer';
+            document.getElementById('nextYearBtn').style.opacity = currentCenterIndex === yearCount - 1 ? '0.3' : '1';
+            document.getElementById('nextYearBtn').style.cursor = currentCenterIndex === yearCount - 1 ? 'not-allowed' : 'pointer';
         }
 
         function renderGenresTab() {
