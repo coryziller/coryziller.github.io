@@ -50,7 +50,7 @@
         .hero-content { max-width: 1100px; width: 100%; animation: fadeIn 0.8s ease-out; }
         .hero-grid { display: grid; grid-template-columns: 350px 1fr; gap: var(--space-8); align-items: start; margin-bottom: var(--space-4); }
         .hero-left { animation: slideUp 0.6s ease-out; }
-        
+
         .profile-photo {
             width: 240px; height: 240px; border-radius: 16px;
             background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.2);
@@ -73,7 +73,7 @@
         .cta-container { display: flex; gap: var(--space-2); justify-content: center; align-items: flex-end; }
         .arrow-wrapper { display: flex; flex-direction: column; align-items: center; }
         .bouncing-arrow { font-size: var(--text-5xl); margin-bottom: var(--space-2); animation: bounce 2s ease-in-out infinite; color: var(--text-secondary); }
-        
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-16px); }
@@ -106,7 +106,7 @@
         .work-card.expanded .close-btn { display: block; }
         .quad-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
 
-        /* FULLSCREEN DASHBOARD */
+        /* FULLSCREEN SPOTIFY MODAL */
         .fullscreen-modal {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: #000000; z-index: 9999; overflow-y: auto;
@@ -129,122 +129,246 @@
         }
 
         .dashboard-container { max-width: 1800px; margin: 0 auto; padding: var(--space-8) var(--space-4); }
-        
+
         .dashboard-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: var(--space-6); padding-bottom: var(--space-4);
-            border-bottom: 1px solid rgba(29, 185, 84, 0.3);
+            border-bottom: 2px solid #1db954;
         }
 
-        .dashboard-title { font-size: 2rem; font-weight: 900; color: #FFFFFF; }
-        .dashboard-subtitle { font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.1em; }
+        .dashboard-title { font-size: 2.5rem; font-weight: 900; color: #1db954; }
+        .dashboard-subtitle { font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; }
 
         /* TABS */
-        .tab-navigation { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
-        
+        .tab-navigation {
+            display: flex; gap: 0; margin-bottom: var(--space-6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            overflow-x: auto;
+        }
+
         .tab-btn {
-            padding: 12px 24px; background: transparent; border: none;
-            border-bottom: 3px solid transparent; color: rgba(255, 255, 255, 0.6);
-            font-weight: 700; font-size: 0.9375rem; cursor: pointer; transition: all 0.2s;
-            text-transform: uppercase; letter-spacing: 0.05em;
+            padding: 16px 24px; background: transparent; border: none;
+            border-bottom: 3px solid transparent; color: rgba(255, 255, 255, 0.5);
+            font-weight: 700; font-size: 0.875rem; cursor: pointer; transition: all 0.2s;
+            text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
         }
 
         .tab-btn:hover { color: #FFFFFF; border-bottom-color: rgba(29, 185, 84, 0.5); }
-        .tab-btn.active { color: var(--spotify-green); border-bottom-color: var(--spotify-green); }
+        .tab-btn.active { color: #1db954; border-bottom-color: #1db954; }
 
-        /* STATS CARDS */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+        /* STATS GRID */
         .stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: var(--space-3); margin-bottom: var(--space-6);
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; padding: var(--space-4); transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px; padding: var(--space-4); transition: all 0.3s;
         }
 
-        .stat-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(29, 185, 84, 0.5); transform: translateY(-2px); }
-        .stat-value { font-size: 2.5rem; font-weight: 900; color: var(--spotify-green); margin-bottom: var(--space-1); line-height: 1; }
+        .stat-card:hover { background: rgba(29, 185, 84, 0.1); border-color: #1db954; transform: translateY(-2px); }
+        .stat-value { font-size: 2.5rem; font-weight: 900; color: #1db954; margin-bottom: 8px; line-height: 1; }
         .stat-label { font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
 
-        /* DATA TABLES */
-        .data-table {
+        /* TOP LISTS */
+        .top-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-4); }
+
+        .top-list {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; overflow: hidden; margin-bottom: var(--space-4);
+            border-radius: 8px; overflow: hidden;
         }
 
-        .table-header { background: rgba(29, 185, 84, 0.15); padding: var(--space-3); border-bottom: 1px solid rgba(29, 185, 84, 0.3); }
-        .table-title { font-size: 1.125rem; font-weight: 800; color: #FFFFFF; }
-        
-        .table-row {
-            display: grid; grid-template-columns: 50px 1fr 120px; gap: var(--space-2);
-            padding: var(--space-2) var(--space-3); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            align-items: center; transition: all 0.2s;
+        .list-header {
+            background: rgba(29, 185, 84, 0.15); padding: var(--space-3);
+            border-bottom: 1px solid rgba(29, 185, 84, 0.3);
+        }
+        .list-title { font-size: 1.125rem; font-weight: 800; color: #FFFFFF; }
+
+        .list-item {
+            display: flex; align-items: center; gap: var(--space-2);
+            padding: 12px var(--space-3); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s;
         }
 
-        .table-row:hover { background: rgba(29, 185, 84, 0.08); }
-        .rank { font-weight: 900; color: var(--spotify-green); font-size: 1.125rem; }
-        .item-info { flex: 1; }
-        .item-name { font-weight: 700; color: #FFFFFF; margin-bottom: 2px; }
-        .item-detail { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.6); }
-        .item-count { font-weight: 700; color: #FFFFFF; text-align: right; }
+        .list-item:hover { background: rgba(29, 185, 84, 0.08); }
+        .list-item:last-child { border-bottom: none; }
+        .item-rank { font-weight: 900; color: #1db954; font-size: 1.125rem; min-width: 40px; }
+        .item-info { flex: 1; min-width: 0; }
+        .item-name { font-weight: 700; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .item-artist { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.6); }
+        .item-count { font-weight: 700; color: #FFFFFF; white-space: nowrap; }
 
-        /* YEAR SLIDER */
-        .year-filter-container {
-            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; padding: var(--space-4); margin-bottom: var(--space-6);
+        /* YEAR CAROUSEL */
+        .year-filter {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px; padding: var(--space-4); margin-bottom: var(--space-4);
         }
 
-        .year-filter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3); }
-        .year-filter-label { font-size: 0.875rem; font-weight: 700; color: rgba(255, 255, 255, 0.8); text-transform: uppercase; }
-        .year-display { font-size: 1.5rem; font-weight: 900; color: var(--spotify-green); }
+        .year-filter h3 { color: #1db954; margin-bottom: 12px; font-size: 1.125rem; }
+        .year-filter p { color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin-bottom: var(--space-3); }
 
-        .year-slider-wrapper { margin-top: var(--space-3); }
-        
+        .current-year {
+            text-align: center; font-size: 2rem; font-weight: 900;
+            color: #1db954; margin-bottom: 16px;
+        }
+
         .year-slider {
-            width: 100%; height: 8px; border-radius: 4px;
-            background: linear-gradient(to right, var(--spotify-green) 0%, rgba(29, 185, 84, 0.3) 100%);
-            outline: none; -webkit-appearance: none; appearance: none;
+            width: 100%; height: 6px; -webkit-appearance: none; appearance: none;
+            background: #333; border-radius: 3px; outline: none;
         }
 
         .year-slider::-webkit-slider-thumb {
             -webkit-appearance: none; appearance: none;
-            width: 24px; height: 24px; border-radius: 50%;
-            background: var(--spotify-green); cursor: pointer;
-            box-shadow: 0 2px 8px rgba(29, 185, 84, 0.5);
-            border: 3px solid #000;
+            width: 20px; height: 20px; background: #1db954;
+            border-radius: 50%; cursor: pointer; border: 3px solid #000;
         }
 
         .year-slider::-moz-range-thumb {
-            width: 24px; height: 24px; border-radius: 50%;
-            background: var(--spotify-green); cursor: pointer; border: 3px solid #000;
-            box-shadow: 0 2px 8px rgba(29, 185, 84, 0.5);
+            width: 20px; height: 20px; background: #1db954;
+            border-radius: 50%; cursor: pointer; border: 3px solid #000;
         }
 
         .year-marks {
-            display: flex; justify-content: space-between; margin-top: var(--space-1);
-            padding: 0 12px;
+            display: flex; justify-content: space-between; margin-top: 8px;
+            color: rgba(255, 255, 255, 0.5); font-size: 0.75rem; font-weight: 600;
         }
 
-        .year-mark {
-            font-size: 0.75rem; color: rgba(255, 255, 255, 0.5);
-            font-weight: 600;
+        .year-carousel {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--space-3); margin-top: var(--space-4);
+        }
+
+        .year-column {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px; padding: var(--space-3);
+        }
+
+        .year-column.current {
+            border: 2px solid #1db954;
+            background: rgba(29, 185, 84, 0.05);
+        }
+
+        .year-column h4 {
+            color: #1db954; margin-bottom: 16px; text-align: center;
+            font-size: 1.25rem; font-weight: 800;
+        }
+
+        .year-column.current h4 {
+            font-size: 1.5rem;
+            color: #1ed760;
+        }
+
+        .rank-change {
+            font-size: 11px; margin-left: 8px;
+            padding: 2px 6px; border-radius: 4px; font-weight: 700;
+        }
+
+        .rank-change.up {
+            color: #1db954;
+            background: rgba(29, 185, 84, 0.15);
+        }
+
+        .rank-change.down {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.15);
+        }
+
+        .rank-change.new {
+            color: #4dabf7;
+            background: rgba(77, 171, 247, 0.15);
+        }
+
+        /* GENRE SECTIONS */
+        .genre-section { margin-bottom: var(--space-4); }
+
+        .genre-header {
+            background: rgba(255, 255, 255, 0.05); padding: var(--space-3);
+            border-radius: 8px 8px 0 0; border: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: none; cursor: pointer; display: flex;
+            justify-content: space-between; align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .genre-header:hover { background: rgba(255, 255, 255, 0.08); }
+        .genre-name { font-size: 1.25rem; font-weight: 800; color: #1db954; }
+        .genre-toggle { font-size: 1.5rem; color: #1db954; }
+
+        .genre-content {
+            background: rgba(0, 0, 0, 0.3); padding: var(--space-4);
+            border-radius: 0 0 8px 8px; border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: none; display: none;
+        }
+
+        .genre-content.active { display: block; }
+        .genre-content p { color: rgba(255, 255, 255, 0.6); margin-bottom: var(--space-3); }
+
+        .subgenre-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .subgenre-card {
+            background: rgba(255, 255, 255, 0.05); padding: var(--space-3);
+            border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subgenre-card h4 {
+            color: #1ed760; font-size: 1rem;
+            margin-bottom: 12px; font-weight: 700;
+        }
+
+        .subgenre-artists {
+            font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
         }
 
         /* CHARTS */
         .chart-container {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; padding: var(--space-4); margin-bottom: var(--space-4); height: 400px;
+            border-radius: 8px; padding: var(--space-4); margin-bottom: var(--space-4);
         }
 
-        .chart-title { font-size: 1.125rem; font-weight: 800; color: #FFFFFF; margin-bottom: var(--space-3); }
+        .chart-container h3 {
+            color: #1db954; margin-bottom: 8px;
+            font-size: 1.125rem; font-weight: 800;
+        }
 
-        /* WORD CLOUD */
-        .word-cloud-container {
+        .chart-description {
+            color: rgba(255, 255, 255, 0.6); font-size: 0.875rem;
+            margin-bottom: var(--space-3); line-height: 1.6;
+        }
+
+        .chart-wrapper {
+            position: relative; height: 300px;
+        }
+
+        .chart-wrapper.large {
+            height: 400px;
+        }
+
+        /* LYRIC CLOUD */
+        #lyricCloudDisplay {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; padding: var(--space-6); min-height: 400px;
-            display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-            gap: var(--space-2);
+            border-radius: 8px; padding: var(--space-6); min-height: 400px;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            align-items: center; gap: 12px;
+        }
+
+        .word-item {
+            display: inline-block; padding: 8px 16px; margin: 4px;
+            background: rgba(29, 185, 84, 0.1); border: 1px solid rgba(29, 185, 84, 0.3);
+            border-radius: 6px; color: #1db954; font-weight: 600;
+            transition: all 0.3s ease; cursor: default;
+        }
+
+        .word-item:hover {
+            background: rgba(29, 185, 84, 0.2);
+            border-color: #1db954;
+            transform: scale(1.1);
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -254,6 +378,7 @@
             .hero-grid { grid-template-columns: 1fr; gap: var(--space-8); text-align: center; }
             .hero-right { padding-left: 0; }
             .credential-item { text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
+            .year-carousel { grid-template-columns: 1fr; }
         }
 
         html { scroll-behavior: smooth; }
@@ -430,7 +555,7 @@
                             SPOTIFY TRENDS: 13 YEARS OF LISTENING
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; color: #000000; font-weight: 500;">
-                            Visualizes 13+ years of Spotify data showing artist evolution, top tracks, and listening patterns from 2012-2026. 6,500+ hours analyzed.
+                            Unlike Spotify Wrapped™ which captures a single year, this dashboard analyzes 13 years of listening history to reveal how my musical preferences, favorite artists, and lyrical themes have evolved.
                         </p>
                     </div>
 
@@ -463,7 +588,9 @@
         </div>
     </section>
 
-    <!-- FULLSCREEN BLACK DASHBOARD -->
+    <!-- FULL
+
+SCREEN SPOTIFY MODAL -->
     <div id="spotifyModal" class="fullscreen-modal">
         <button class="modal-close-btn" onclick="closeSpotifyDashboard()">×</button>
 
@@ -471,29 +598,41 @@
             <div class="dashboard-header">
                 <div>
                     <h1 class="dashboard-title">Spotify Listening Analytics</h1>
-                    <p class="dashboard-subtitle">Data through February 15, 2026 | 2012-2026</p>
+                    <p class="dashboard-subtitle">Data through February 15, 2026 | 13 Years • 6,500+ Hours • 132,000+ Plays</p>
                 </div>
             </div>
 
             <div class="tab-navigation">
-                <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
-                <button class="tab-btn" onclick="switchTab('evolution')">Artist Evolution</button>
-                <button class="tab-btn" onclick="switchTab('genres')">Genre Evolution</button>
-                <button class="tab-btn" onclick="switchTab('charts')">Charts & Trends</button>
-                <button class="tab-btn" onclick="switchTab('insights')">Word Cloud</button>
+                <button class="tab-btn active" onclick="switchTab(event, 'overview')">Overview</button>
+                <button class="tab-btn" onclick="switchTab(event, 'artistEvolution')">Artist Evolution</button>
+                <button class="tab-btn" onclick="switchTab(event, 'genreEvolution')">Genre Evolution</button>
+                <button class="tab-btn" onclick="switchTab(event, 'charts')">Charts & Trends</button>
+                <button class="tab-btn" onclick="switchTab(event, 'lyricCloud')">Lyric Cloud</button>
             </div>
 
-            <div id="dashboardContent">
-                <p style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.5);">Loading analytics...</p>
-            </div>
+            <!-- Tab Contents -->
+            <div id="overview" class="tab-content active"></div>
+            <div id="artistEvolution" class="tab-content"></div>
+            <div id="genreEvolution" class="tab-content"></div>
+            <div id="charts" class="tab-content"></div>
+            <div id="lyricCloud" class="tab-content"></div>
         </div>
     </div>
 
     <script>
-        const SPOTIFY_DATA = { stats: null, artistEvolution: null, monthlyTrends: null, topSongs: null };
-        let currentTab = 'overview';
-        let selectedYear = 'all';
+        // Global Data
+        const SPOTIFY_DATA = { stats: null, artistEvolution: null, monthlyTrends: null, topSongsByPeriod: null };
+        const FILTERED_ARTISTS = ['meghan trainor', 'unknown'];
+        let charts = {};
 
+        // Filter Functions
+        function shouldFilterArtist(artistName) {
+            if (!artistName) return true;
+            const lowerName = artistName.toLowerCase();
+            return FILTERED_ARTISTS.some(filtered => lowerName === filtered);
+        }
+
+        // Load Data
         async function loadSpotifyData() {
             try {
                 const [stats, artistEvolution, monthlyTrends, topSongs] = await Promise.all([
@@ -506,41 +645,16 @@
                 SPOTIFY_DATA.stats = stats;
                 SPOTIFY_DATA.artistEvolution = artistEvolution;
                 SPOTIFY_DATA.monthlyTrends = monthlyTrends;
-                SPOTIFY_DATA.topSongs = topSongs;
-
-                // Filter out unwanted artists
-                filterOutArtist('Meghan Trainor');
-                filterOutArtist('Unknown');
+                SPOTIFY_DATA.topSongsByPeriod = topSongs;
 
                 return true;
             } catch (error) {
-                console.error('Error loading Spotify data:', error);
+                console.error('Error loading data:', error);
                 return false;
             }
         }
 
-        function filterOutArtist(artistName) {
-            const artistLower = artistName.toLowerCase();
-
-            if (SPOTIFY_DATA.stats && SPOTIFY_DATA.stats.top_artists_all_time) {
-                delete SPOTIFY_DATA.stats.top_artists_all_time[artistName];
-            }
-
-            if (SPOTIFY_DATA.stats && SPOTIFY_DATA.stats.top_tracks_all_time) {
-                SPOTIFY_DATA.stats.top_tracks_all_time = SPOTIFY_DATA.stats.top_tracks_all_time.filter(
-                    track => track.artist.toLowerCase() !== artistLower
-                );
-            }
-
-            if (SPOTIFY_DATA.artistEvolution) {
-                Object.keys(SPOTIFY_DATA.artistEvolution).forEach(year => {
-                    SPOTIFY_DATA.artistEvolution[year] = SPOTIFY_DATA.artistEvolution[year].filter(
-                        artist => artist.artist.toLowerCase() !== artistLower
-                    );
-                });
-            }
-        }
-
+        // Modal Functions
         async function openSpotifyDashboard() {
             const modal = document.getElementById('spotifyModal');
             modal.classList.add('active');
@@ -548,8 +662,8 @@
 
             if (!SPOTIFY_DATA.stats) {
                 await loadSpotifyData();
+                renderOverview();
             }
-            switchTab('overview');
         }
 
         function closeSpotifyDashboard() {
@@ -557,72 +671,89 @@
             document.body.style.overflow = 'auto';
         }
 
-        function switchTab(tabName) {
-            currentTab = tabName;
-
+        // Tab Switching
+        function switchTab(event, tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
             event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
 
-            renderTabContent(tabName);
-        }
-
-        function renderTabContent(tabName) {
-            const content = document.getElementById('dashboardContent');
-
+            // Render content for each tab
             switch(tabName) {
                 case 'overview':
-                    content.innerHTML = renderOverviewTab();
+                    if (!document.getElementById('overview').innerHTML) renderOverview();
                     break;
-                case 'evolution':
-                    content.innerHTML = renderEvolutionTab();
+                case 'artistEvolution':
+                    if (!document.getElementById('artistEvolution').innerHTML) renderArtistEvolution();
                     break;
-                case 'genres':
-                    content.innerHTML = renderGenresTab();
-                    setTimeout(() => renderGenreChart(), 100);
+                case 'genreEvolution':
+                    if (!document.getElementById('genreEvolution').innerHTML) renderGenreEvolution();
                     break;
                 case 'charts':
-                    content.innerHTML = renderChartsTab();
-                    setTimeout(() => renderCharts(), 100);
+                    if (!document.getElementById('charts').innerHTML) {
+                        renderChartsTab();
+                        setTimeout(renderAllCharts, 100);
+                    }
                     break;
-                case 'insights':
-                    content.innerHTML = renderInsightsTab();
-                    setTimeout(() => generateWordCloud(), 100);
+                case 'lyricCloud':
+                    if (!document.getElementById('lyricCloud').innerHTML) {
+                        renderLyricCloudTab();
+                        setTimeout(() => updateLyricCloud(getAllYears().length), 100);
+                    }
                     break;
             }
         }
 
-        function renderOverviewTab() {
+        // OVERVIEW TAB
+        function renderOverview() {
             const stats = SPOTIFY_DATA.stats;
-            if (!stats) return '<p>Loading...</p>';
+            if (!stats) return;
 
-            return `
+            const topArtists = Object.entries(stats.top_artists_all_time)
+                .filter(([artist]) => !shouldFilterArtist(artist))
+                .slice(0, 10);
+
+            const topTracks = stats.top_tracks_all_time
+                .filter(track => !shouldFilterArtist(track.artist))
+                .slice(0, 10);
+
+            document.getElementById('overview').innerHTML = `
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-value">${(stats.total_hours / 1000).toFixed(1)}k</div>
-                        <div class="stat-label">Hours Listened</div>
+                        <div class="stat-value">${(stats.total_hours).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                        <div class="stat-label">Total Hours</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">${(stats.total_plays / 1000).toFixed(1)}k</div>
+                        <div class="stat-value">${stats.total_plays.toLocaleString()}</div>
                         <div class="stat-label">Total Plays</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">${(stats.unique_tracks / 1000).toFixed(1)}k</div>
+                        <div class="stat-value">${stats.unique_tracks.toLocaleString()}</div>
                         <div class="stat-label">Unique Tracks</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">${(stats.unique_artists / 1000).toFixed(1)}k</div>
+                        <div class="stat-value">${stats.unique_artists.toLocaleString()}</div>
                         <div class="stat-label">Unique Artists</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.avg_skip_rate.toFixed(1)}%</div>
+                        <div class="stat-label">Avg Skip Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">13</div>
+                        <div class="stat-label">Years of Data</div>
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-6);">
-                    <div class="data-table">
-                        <div class="table-header">
-                            <div class="table-title">Top Artists (All Time)</div>
+                <div class="top-lists">
+                    <div class="top-list">
+                        <div class="list-header">
+                            <div class="list-title">Top Artists of All Time</div>
                         </div>
-                        ${Object.entries(stats.top_artists_all_time).slice(0, 10).map(([artist, count], i) => `
-                            <div class="table-row">
-                                <div class="rank">#${i + 1}</div>
+                        ${topArtists.map(([artist, count], i) => `
+                            <div class="list-item">
+                                <div class="item-rank">#${i + 1}</div>
                                 <div class="item-info">
                                     <div class="item-name">${artist}</div>
                                 </div>
@@ -631,18 +762,18 @@
                         `).join('')}
                     </div>
 
-                    <div class="data-table">
-                        <div class="table-header">
-                            <div class="table-title">Top Tracks (All Time)</div>
+                    <div class="top-list">
+                        <div class="list-header">
+                            <div class="list-title">Top Tracks of All Time</div>
                         </div>
-                        ${stats.top_tracks_all_time.slice(0, 10).map((item, i) => `
-                            <div class="table-row">
-                                <div class="rank">#${i + 1}</div>
+                        ${topTracks.map((track, i) => `
+                            <div class="list-item">
+                                <div class="item-rank">#${i + 1}</div>
                                 <div class="item-info">
-                                    <div class="item-name">${item.track}</div>
-                                    <div class="item-detail">${item.artist}</div>
+                                    <div class="item-name">${track.track}</div>
+                                    <div class="item-artist">${track.artist}</div>
                                 </div>
-                                <div class="item-count">${item.play_count.toLocaleString()}</div>
+                                <div class="item-count">${track.play_count.toLocaleString()}</div>
                             </div>
                         `).join('')}
                     </div>
@@ -650,290 +781,649 @@
             `;
         }
 
-        function renderEvolutionTab() {
-            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-            const yearCount = years.length;
+        // ARTIST EVOLUTION TAB
+        function getAllYears() {
+            return Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+        }
 
-            return `
-                <div class="year-filter-container">
-                    <div class="year-filter-header">
-                        <div class="year-filter-label">Select Year</div>
-                        <div class="year-display" id="yearDisplay">All Years</div>
-                    </div>
-                    <div class="year-slider-wrapper">
-                        <input type="range" class="year-slider" id="yearSlider"
-                               min="0" max="${yearCount}" value="${yearCount}"
-                               oninput="updateYearFromSlider(this.value)">
+        function renderArtistEvolution() {
+            const years = getAllYears();
+
+            document.getElementById('artistEvolution').innerHTML = `
+                <div class="year-filter">
+                    <h3>Select Year</h3>
+                    <p>Slide through years to see how your top artists changed over time. The carousel below shows year-over-year comparisons with ranking changes.</p>
+                    <div class="current-year" id="artistCurrentYear">2013</div>
+                    <div>
+                        <input type="range" class="year-slider" id="artistYearSlider"
+                               min="0" max="${years.length - 1}" value="1" oninput="updateArtistCarousel(this.value)">
                         <div class="year-marks">
-                            <div class="year-mark">${years[0]}</div>
-                            <div class="year-mark">All Years</div>
-                            <div class="year-mark">${years[yearCount - 1]}</div>
+                            <div>${years[0]}</div>
+                            <div>${years[Math.floor(years.length / 2)]}</div>
+                            <div>${years[years.length - 1]}</div>
                         </div>
                     </div>
                 </div>
-
-                <div id="artistEvolutionContainer">
-                    ${renderArtistEvolution('all')}
-                </div>
+                <div id="yearCarousel" class="year-carousel"></div>
             `;
+
+            setTimeout(() => updateArtistCarousel(1), 100);
         }
 
-        function updateYearFromSlider(value) {
-            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-            const index = parseInt(value);
-            
-            const year = index === years.length ? 'all' : years[index];
-            selectedYear = year;
+        function updateArtistCarousel(value) {
+            const years = getAllYears();
+            const idx = parseInt(value);
+            const currentYear = years[idx];
+            const prevYear = idx > 0 ? years[idx - 1] : null;
+            const nextYear = idx < years.length - 1 ? years[idx + 1] : null;
 
-            document.getElementById('yearDisplay').textContent = year === 'all' ? 'All Years' : year;
-            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(year);
-        }
+            document.getElementById('artistCurrentYear').textContent = currentYear;
 
-        function renderArtistEvolution(year) {
-            const evolution = SPOTIFY_DATA.artistEvolution || {};
-            const years = year === 'all' ? Object.entries(evolution).reverse() : [[year, evolution[year]]];
+            const carousel = document.getElementById('yearCarousel');
+            let html = '';
 
-            if (year !== 'all' && !evolution[year]) {
-                return '<div style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.5);">No data available for this year</div>';
-            }
+            // Previous Year
+            if (prevYear) {
+                const data = SPOTIFY_DATA.artistEvolution[prevYear]
+                    .filter(item => !shouldFilterArtist(item.artist))
+                    .slice(0, 10);
 
-            return years.map(([yr, artists]) => `
-                <div class="data-table" style="margin-bottom: var(--space-3);">
-                    <div class="table-header">
-                        <div class="table-title">${yr} Top Artists</div>
-                    </div>
-                    ${artists.slice(0, 10).map((artist, i) => `
-                        <div class="table-row">
-                            <div class="rank">#${i + 1}</div>
-                            <div class="item-info">
-                                <div class="item-name">${artist.artist}</div>
+                html += `
+                    <div class="year-column">
+                        <h4>${prevYear}</h4>
+                        ${data.map((item, i) => `
+                            <div class="list-item">
+                                <div class="item-rank">#${i + 1}</div>
+                                <div class="item-info">
+                                    <div class="item-name">${item.artist}</div>
+                                </div>
+                                <div class="item-count">${item.play_count.toLocaleString()}</div>
                             </div>
-                            <div class="item-count">${artist.play_count.toLocaleString()} plays</div>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                html += '<div class="year-column"></div>';
+            }
+
+            // Current Year
+            const currentData = SPOTIFY_DATA.artistEvolution[currentYear]
+                .filter(item => !shouldFilterArtist(item.artist))
+                .slice(0, 10);
+
+            const prevYearData = prevYear ? SPOTIFY_DATA.artistEvolution[prevYear]
+                .filter(item => !shouldFilterArtist(item.artist)) : null;
+
+            html += `
+                <div class="year-column current">
+                    <h4>${currentYear}</h4>
+                    ${currentData.map((item, i) => {
+                        const rankChange = getRankChange(item.artist, prevYearData, currentData);
+                        return `
+                            <div class="list-item">
+                                <div class="item-rank">#${i + 1}</div>
+                                <div class="item-info">
+                                    <div class="item-name">
+                                        ${item.artist}
+                                        ${rankChange.text !== '−' ? `<span class="rank-change ${rankChange.type}">${rankChange.text}</span>` : ''}
+                                    </div>
+                                </div>
+                                <div class="item-count">${item.play_count.toLocaleString()}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            // Next Year
+            if (nextYear) {
+                const nextData = SPOTIFY_DATA.artistEvolution[nextYear]
+                    .filter(item => !shouldFilterArtist(item.artist))
+                    .slice(0, 10);
+
+                html += `
+                    <div class="year-column">
+                        <h4>${nextYear}</h4>
+                        ${nextData.map((item, i) => {
+                            const rankChange = getRankChange(item.artist, currentData, nextData);
+                            return `
+                                <div class="list-item">
+                                    <div class="item-rank">#${i + 1}</div>
+                                    <div class="item-info">
+                                        <div class="item-name">
+                                            ${item.artist}
+                                            ${rankChange.text !== '−' ? `<span class="rank-change ${rankChange.type}">${rankChange.text}</span>` : ''}
+                                        </div>
+                                    </div>
+                                    <div class="item-count">${item.play_count.toLocaleString()}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else {
+                html += '<div class="year-column"></div>';
+            }
+
+            carousel.innerHTML = html;
+        }
+
+        function getRankChange(artist, prevYearData, currentYearData) {
+            if (!prevYearData) return { type: 'new', text: 'NEW' };
+
+            const prevRank = prevYearData.findIndex(a => a.artist === artist);
+            const currentRank = currentYearData.findIndex(a => a.artist === artist);
+
+            if (prevRank === -1) return { type: 'new', text: 'NEW' };
+
+            const change = prevRank - currentRank;
+            if (change > 0) return { type: 'up', text: `↑${change}` };
+            if (change < 0) return { type: 'down', text: `↓${Math.abs(change)}` };
+            return { type: 'same', text: '−' };
+        }
+
+        // GENRE EVOLUTION TAB
+        const GENRE_MAP = {
+            pop: ['Ariana Grande', 'Meghan Trainor', 'Renée Rapp', 'RAYE', 'FLO', 'Gloria Tells', 'Aqyila'],
+            rnb: ['Beyoncé', 'Kelly Rowland', 'PJ Morton', 'Amber Mark', 'Tom Misch', 'Juice'],
+            jazz: ['Michael Bublé', 'Sammy Rae & The Friends'],
+            acappella: ['Pentatonix', 'Juxtaposition', 'Twisted Measure', 'Street Corner Renaissance'],
+            indie: ['Stephen Day', 'Brayton Bowman', 'Ben Platt', 'Zak Resnick']
+        };
+
+        const POP_SUBGENRES = {
+            'Dance Pop': ['Ariana Grande', 'FLO', 'RAYE'],
+            'Disco Pop': ['Renée Rapp', 'Gloria Tells'],
+            'R&B Pop': ['Aqyila']
+        };
+
+        function renderGenreEvolution() {
+            const years = getAllYears();
+
+            document.getElementById('genreEvolution').innerHTML = `
+                <div class="year-filter">
+                    <h3>Year Filter</h3>
+                    <div class="current-year" id="genreCurrentYear">All Years</div>
+                    <div>
+                        <input type="range" class="year-slider" id="genreYearSlider"
+                               min="0" max="${years.length}" value="${years.length}" oninput="updateGenreYear(this.value)">
+                        <div class="year-marks">
+                            <div>${years[0]}</div>
+                            <div>All Years</div>
+                            <div>${years[years.length - 1]}</div>
                         </div>
-                    `).join('')}
-                </div>
-            `).join('');
-        }
-
-        function renderGenresTab() {
-            return `
-                <div style="margin-bottom: var(--space-4); text-align: center; color: rgba(255,255,255,0.7);">
-                    <p style="font-size: 1.125rem; margin-bottom: var(--space-2);">Genre Evolution Coming Soon</p>
-                    <p style="font-size: 0.875rem;">This feature requires Spotify's genre classification data</p>
+                    </div>
                 </div>
 
-                <div class="chart-container" style="height: 500px;">
-                    <div class="chart-title">Genre Distribution Over Time (Simulated)</div>
-                    <canvas id="genreChart"></canvas>
-                </div>
-            `;
-        }
+                <div id="genreContainer">
+                    <div class="genre-section">
+                        <div class="genre-header" onclick="toggleGenre('pop')">
+                            <span class="genre-name">Pop</span>
+                            <span class="genre-toggle">+</span>
+                        </div>
+                        <div class="genre-content" id="genre-pop">
+                            <p>Modern pop music with subcategories ranging from dance-pop to R&B-influenced pop styles.</p>
+                            <div class="subgenre-grid" id="popSubgenres"></div>
+                        </div>
+                    </div>
 
-        function renderGenreChart() {
-            const ctx = document.getElementById('genreChart');
-            if (!ctx) return;
+                    <div class="genre-section">
+                        <div class="genre-header" onclick="toggleGenre('rnb')">
+                            <span class="genre-name">R&B / Soul</span>
+                            <span class="genre-toggle">+</span>
+                        </div>
+                        <div class="genre-content" id="genre-rnb">
+                            <p>R&B, soul, and neo-soul artists featuring smooth vocals and groove-based rhythms.</p>
+                            <div class="subgenre-grid" id="rnbSubgenres"></div>
+                        </div>
+                    </div>
 
-            // Simulated genre data based on artist names
-            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
-            
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: years,
-                    datasets: [
-                        {
-                            label: 'Pop',
-                            data: years.map(() => Math.random() * 40 + 20),
-                            borderColor: '#1DB954',
-                            backgroundColor: 'rgba(29, 185, 84, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Electronic',
-                            data: years.map(() => Math.random() * 30 + 15),
-                            borderColor: '#8b5cf6',
-                            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Hip Hop',
-                            data: years.map(() => Math.random() * 25 + 10),
-                            borderColor: '#ec4899',
-                            backgroundColor: 'rgba(236, 72, 153, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Rock',
-                            data: years.map(() => Math.random() * 20 + 5),
-                            borderColor: '#f59e0b',
-                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            labels: { color: 'rgba(255, 255, 255, 0.8)' }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                            ticks: { color: 'rgba(255, 255, 255, 0.7)' },
-                            title: { display: true, text: 'Percentage of Listening', color: 'rgba(255, 255, 255, 0.7)' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: 'rgba(255, 255, 255, 0.7)' }
-                        }
-                    }
-                }
-            });
-        }
+                    <div class="genre-section">
+                        <div class="genre-header" onclick="toggleGenre('jazz')">
+                            <span class="genre-name">Jazz / Standards</span>
+                            <span class="genre-toggle">+</span>
+                        </div>
+                        <div class="genre-content" id="genre-jazz">
+                            <p>Jazz standards, vocal jazz, and contemporary jazz-influenced artists.</p>
+                            <div class="subgenre-grid" id="jazzSubgenres"></div>
+                        </div>
+                    </div>
 
-        function renderChartsTab() {
-            return `
-                <div class="chart-container">
-                    <div class="chart-title">Listening Hours Over Time</div>
-                    <canvas id="hoursChart"></canvas>
-                </div>
+                    <div class="genre-section">
+                        <div class="genre-header" onclick="toggleGenre('acappella')">
+                            <span class="genre-name">A Cappella / Vocal Groups</span>
+                            <span class="genre-toggle">+</span>
+                        </div>
+                        <div class="genre-content" id="genre-acappella">
+                            <p>Vocal groups performing without instrumental accompaniment.</p>
+                            <div class="subgenre-grid" id="acappellaSubgenres"></div>
+                        </div>
+                    </div>
 
-                <div class="chart-container">
-                    <div class="chart-title">Total Plays by Year</div>
-                    <canvas id="playsChart"></canvas>
+                    <div class="genre-section">
+                        <div class="genre-header" onclick="toggleGenre('indie')">
+                            <span class="genre-name">Indie / Alternative</span>
+                            <span class="genre-toggle">+</span>
+                        </div>
+                        <div class="genre-content" id="genre-indie">
+                            <p>Independent and alternative artists with unique, genre-blending sounds.</p>
+                            <div class="subgenre-grid" id="indieSubgenres"></div>
+                        </div>
+                    </div>
                 </div>
             `;
+
+            setTimeout(() => updateGenreYear(years.length), 100);
         }
 
-        function renderInsightsTab() {
-            return `
-                <div style="margin-bottom: var(--space-3); text-align: center;">
-                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #FFFFFF; margin-bottom: var(--space-2);">Your Music DNA</h3>
-                    <p style="color: rgba(255,255,255,0.6);">Most common words from your top tracks and artists</p>
-                </div>
-                <div class="word-cloud-container" id="wordCloud"></div>
-            `;
-        }
+        function toggleGenre(genreId) {
+            const content = document.getElementById(`genre-${genreId}`);
+            const header = event.currentTarget;
+            const toggle = header.querySelector('.genre-toggle');
 
-        function generateWordCloud() {
-            if (!SPOTIFY_DATA.stats) return;
-
-            const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft'];
-            const wordFreq = {};
-
-            SPOTIFY_DATA.stats.top_tracks_all_time.forEach(item => {
-                const words = `${item.track} ${item.artist}`.toLowerCase().split(/\W+/);
-                words.forEach(word => {
-                    if (word.length > 2 && !stopWords.includes(word)) {
-                        wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
-                    }
-                });
-            });
-
-            const sortedWords = Object.entries(wordFreq)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 50);
-
-            const maxFreq = sortedWords[0][1];
-            const minFreq = sortedWords[sortedWords.length - 1][1];
-
-            const cloudDiv = document.getElementById('wordCloud');
-            if (cloudDiv) {
-                cloudDiv.innerHTML = sortedWords.map(([word, freq]) => {
-                    const size = 14 + ((freq - minFreq) / (maxFreq - minFreq)) * 60;
-                    const opacity = 0.6 + ((freq - minFreq) / (maxFreq - minFreq)) * 0.4;
-                    const colors = ['#1DB954', '#1ed760', '#ec4899', '#a855f7', '#3b82f6', '#f59e0b'];
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-
-                    return `<span style="font-size: ${size}px; color: ${color}; opacity: ${opacity}; font-weight: 800; padding: 6px 12px; transition: all 0.3s ease; cursor: default;" onmouseover="this.style.transform='scale(1.3)'; this.style.opacity='1';" onmouseout="this.style.transform='scale(1)'; this.style.opacity='${opacity}';">${word}</span>`;
-                }).join('');
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                toggle.textContent = '+';
+            } else {
+                content.classList.add('active');
+                toggle.textContent = '−';
             }
         }
 
-        function renderCharts() {
+        function updateGenreYear(value) {
+            const years = getAllYears();
+            const isAllYears = value == years.length;
+
+            document.getElementById('genreCurrentYear').textContent = isAllYears ? 'All Years' : years[value];
+
+            let artistData;
+            if (isAllYears) {
+                artistData = Object.entries(SPOTIFY_DATA.stats.top_artists_all_time)
+                    .filter(([artist]) => !shouldFilterArtist(artist))
+                    .slice(0, 50)
+                    .map(([artist, play_count]) => ({ artist, play_count }));
+            } else {
+                artistData = SPOTIFY_DATA.artistEvolution[years[value]]
+                    .filter(item => !shouldFilterArtist(item.artist));
+            }
+
+            // Render Pop subgenres
+            const popHtml = Object.entries(POP_SUBGENRES).map(([subgenre, artists]) => {
+                const matchingArtists = artistData
+                    .filter(item => artists.includes(item.artist))
+                    .slice(0, 5);
+
+                if (matchingArtists.length === 0) return '';
+
+                return `
+                    <div class="subgenre-card">
+                        <h4>${subgenre}</h4>
+                        <div class="subgenre-artists">
+                            ${matchingArtists.map(item =>
+                                `${item.artist} (${item.play_count.toLocaleString()} plays)`
+                            ).join('<br>')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('popSubgenres').innerHTML = popHtml || '<p style="color: #888;">No data for this year</p>';
+
+            // Render other genres
+            ['rnb', 'jazz', 'acappella', 'indie'].forEach(genre => {
+                const genreArtists = GENRE_MAP[genre];
+                const matchingArtists = artistData
+                    .filter(item => genreArtists.includes(item.artist))
+                    .slice(0, 10);
+
+                const html = matchingArtists.length > 0 ? `
+                    <div class="subgenre-card">
+                        <h4>Top Artists</h4>
+                        <div class="subgenre-artists">
+                            ${matchingArtists.map(item =>
+                                `${item.artist} (${item.play_count.toLocaleString()} plays)`
+                            ).join('<br>')}
+                        </div>
+                    </div>
+                ` : '<p style="color: #888;">No data for this year</p>';
+
+                document.getElementById(`${genre}Subgenres`).innerHTML = html;
+            });
+        }
+
+        // CHARTS & TRENDS TAB
+        function renderChartsTab() {
+            document.getElementById('charts').innerHTML = `
+                <div class="chart-container">
+                    <h3>Listening Hours Over Time</h3>
+                    <p class="chart-description">Track your total listening hours month by month to see when you were most engaged with music. Peaks often correspond to new album releases or life events.</p>
+                    <div class="chart-wrapper large">
+                        <canvas id="listeningHoursChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Total Plays by Year</h3>
+                    <p class="chart-description">Annual play counts reveal how your listening intensity has changed over time. Hover to see top artists for each year.</p>
+                    <div class="chart-wrapper">
+                        <canvas id="playsByYearChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Skip Rate Analysis</h3>
+                    <p class="chart-description">Your skip rate indicates how often you skip songs. Lower rates suggest stronger playlist curation or deeper album listening.</p>
+                    <div class="chart-wrapper">
+                        <canvas id="skipRateChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Artist Discovery Timeline</h3>
+                    <p class="chart-description">See when new artists entered your rotation. Each point represents an artist's first appearance in your top artists. Size indicates their peak popularity.</p>
+                    <div class="chart-wrapper large">
+                        <canvas id="artistDiscoveryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Monthly Listening Intensity</h3>
+                    <p class="chart-description">This heatmap reveals seasonal listening patterns. Darker colors indicate heavier listening months, showing how your music consumption varies throughout the year.</p>
+                    <div class="chart-wrapper large">
+                        <canvas id="listeningHeatmapChart"></canvas>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAllCharts() {
             if (!SPOTIFY_DATA.monthlyTrends) return;
 
-            const monthlyData = SPOTIFY_DATA.monthlyTrends;
-
-            const hoursCtx = document.getElementById('hoursChart');
-            if (hoursCtx) {
-                new Chart(hoursCtx, {
+            // Chart 1: Listening Hours
+            const ctx1 = document.getElementById('listeningHoursChart');
+            if (ctx1 && !charts.listeningHours) {
+                charts.listeningHours = new Chart(ctx1, {
                     type: 'line',
                     data: {
-                        labels: monthlyData.map(d => d.month),
+                        labels: SPOTIFY_DATA.monthlyTrends.map(d => d.year_month),
                         datasets: [{
                             label: 'Hours',
-                            data: monthlyData.map(d => d.total_hours),
-                            borderColor: '#1DB954',
+                            data: SPOTIFY_DATA.monthlyTrends.map(d => (d.minutes_played / 60).toFixed(2)),
+                            borderColor: '#1db954',
                             backgroundColor: 'rgba(29, 185, 84, 0.1)',
-                            borderWidth: 3,
                             fill: true,
-                            tension: 0.4,
-                            pointRadius: 0
+                            tension: 0.4
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#000',
+                                titleColor: '#1db954',
+                                bodyColor: '#fff',
+                                borderColor: '#1db954',
+                                borderWidth: 1
+                            }
+                        },
                         scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
-                            },
                             x: {
-                                grid: { display: false },
-                                ticks: { color: 'rgba(255, 255, 255, 0.7)', maxTicksLimit: 12 }
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: 'rgba(255,255,255,0.7)', maxRotation: 45, minRotation: 45 }
+                            },
+                            y: {
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: 'rgba(255,255,255,0.7)' }
                             }
                         }
                     }
                 });
             }
 
-            const yearlyPlays = {};
-            monthlyData.forEach(d => {
-                const year = d.month.split('-')[0];
-                yearlyPlays[year] = (yearlyPlays[year] || 0) + d.total_plays;
+            // Chart 2: Plays by Year
+            const yearData = {};
+            SPOTIFY_DATA.monthlyTrends.forEach(month => {
+                const year = month.year_month.split('-')[0];
+                yearData[year] = (yearData[year] || 0) + month.play_count;
             });
 
-            const playsCtx = document.getElementById('playsChart');
-            if (playsCtx) {
-                new Chart(playsCtx, {
+            const ctx2 = document.getElementById('playsByYearChart');
+            if (ctx2 && !charts.playsByYear) {
+                charts.playsByYear = new Chart(ctx2, {
                     type: 'bar',
                     data: {
-                        labels: Object.keys(yearlyPlays),
+                        labels: Object.keys(yearData).sort(),
                         datasets: [{
                             label: 'Plays',
-                            data: Object.values(yearlyPlays),
-                            backgroundColor: 'rgba(29, 185, 84, 0.8)',
-                            borderColor: '#1DB954',
-                            borderWidth: 2,
-                            borderRadius: 8
+                            data: Object.keys(yearData).sort().map(y => yearData[y]),
+                            backgroundColor: '#1db954',
+                            borderColor: '#1ed760',
+                            borderWidth: 1
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#000',
+                                titleColor: '#1db954',
+                                bodyColor: '#fff',
+                                borderColor: '#1db954',
+                                borderWidth: 1,
+                                callbacks: {
+                                    afterBody: (tooltipItems) => {
+                                        const year = tooltipItems[0].label;
+                                        if (SPOTIFY_DATA.artistEvolution[year]) {
+                                            const topArtists = SPOTIFY_DATA.artistEvolution[year]
+                                                .filter(a => !shouldFilterArtist(a.artist))
+                                                .slice(0, 3)
+                                                .map(a => a.artist);
+                                            return '\n\nTop Artists:\n' + topArtists.join(', ');
+                                        }
+                                        return '';
+                                    }
+                                }
+                            }
+                        },
                         scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
-                            },
                             x: {
                                 grid: { display: false },
-                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                                ticks: { color: 'rgba(255,255,255,0.7)' }
+                            },
+                            y: {
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: 'rgba(255,255,255,0.7)' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 3: Skip Rate
+            const ctx3 = document.getElementById('skipRateChart');
+            if (ctx3 && !charts.skipRate) {
+                charts.skipRate = new Chart(ctx3, {
+                    type: 'line',
+                    data: {
+                        labels: SPOTIFY_DATA.monthlyTrends.map(d => d.year_month),
+                        datasets: [{
+                            label: 'Skip Rate %',
+                            data: SPOTIFY_DATA.monthlyTrends.map(d => d.skip_rate.toFixed(2)),
+                            borderColor: '#1ed760',
+                            backgroundColor: 'rgba(30, 215, 96, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#000',
+                                titleColor: '#1db954',
+                                bodyColor: '#fff',
+                                borderColor: '#1db954',
+                                borderWidth: 1
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: 'rgba(255,255,255,0.7)', maxRotation: 45, minRotation: 45 }
+                            },
+                            y: {
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: 'rgba(255,255,255,0.7)' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 4: Artist Discovery
+            const artistFirstAppearance = {};
+            const artistPeakPlays = {};
+
+            getAllYears().forEach(year => {
+                SPOTIFY_DATA.artistEvolution[year].forEach(item => {
+                    if (shouldFilterArtist(item.artist)) return;
+
+                    if (!artistFirstAppearance[item.artist]) {
+                        artistFirstAppearance[item.artist] = year;
+                    }
+
+                    artistPeakPlays[item.artist] = Math.max(
+                        artistPeakPlays[item.artist] || 0,
+                        item.play_count
+                    );
+                });
+            });
+
+            const topArtists = Object.entries(artistPeakPlays)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 30);
+
+            const scatterData = topArtists.map(([artist, peakPlays]) => ({
+                x: artistFirstAppearance[artist],
+                y: Math.random() * 10,
+                r: Math.sqrt(peakPlays) / 5,
+                artist: artist,
+                plays: peakPlays
+            }));
+
+            const ctx4 = document.getElementById('artistDiscoveryChart');
+            if (ctx4 && !charts.artistDiscovery) {
+                charts.artistDiscovery = new Chart(ctx4, {
+                    type: 'bubble',
+                    data: {
+                        datasets: [{
+                            label: 'Artists',
+                            data: scatterData,
+                            backgroundColor: 'rgba(29, 185, 84, 0.6)',
+                            borderColor: '#1db954',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#000',
+                                titleColor: '#1db954',
+                                bodyColor: '#fff',
+                                borderColor: '#1db954',
+                                borderWidth: 1,
+                                callbacks: {
+                                    title: (items) => items[0].raw.artist,
+                                    label: (context) => [
+                                        `First appeared: ${context.raw.x}`,
+                                        `Peak plays: ${context.raw.plays.toLocaleString()}`
+                                    ]
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: 'rgba(255,255,255,0.7)' }
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 5: Listening Heatmap
+            const yearMonthData = {};
+            SPOTIFY_DATA.monthlyTrends.forEach(month => {
+                const [year, monthNum] = month.year_month.split('-');
+                if (!yearMonthData[year]) yearMonthData[year] = {};
+                yearMonthData[year][monthNum] = month.minutes_played / 60;
+            });
+
+            const years = Object.keys(yearMonthData).sort();
+            const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+
+            const heatmapData = years.map(year => {
+                return months.map(month => yearMonthData[year]?.[month] || 0);
+            }).flat();
+
+            const ctx5 = document.getElementById('listeningHeatmapChart');
+            if (ctx5 && !charts.listeningHeatmap) {
+                charts.listeningHeatmap = new Chart(ctx5, {
+                    type: 'bar',
+                    data: {
+                        labels: years.flatMap(y => months.map(m => `${y}-${m}`)),
+                        datasets: [{
+                            label: 'Hours',
+                            data: heatmapData,
+                            backgroundColor: heatmapData.map(hours => {
+                                const opacity = Math.min(hours / 100, 1);
+                                return `rgba(29, 185, 84, ${opacity})`;
+                            }),
+                            borderColor: '#1db954',
+                            borderWidth: 0.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#000',
+                                titleColor: '#1db954',
+                                bodyColor: '#fff',
+                                borderColor: '#1db954',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: (context) => `${context.parsed.y.toFixed(1)} hours`
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: {
+                                    color: 'rgba(255,255,255,0.7)',
+                                    maxRotation: 90,
+                                    minRotation: 90,
+                                    font: { size: 9 }
+                                }
+                            },
+                            y: {
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: 'rgba(255,255,255,0.7)' }
                             }
                         }
                     }
@@ -941,6 +1431,90 @@
             }
         }
 
+        // LYRIC CLOUD TAB
+        function renderLyricCloudTab() {
+            const years = [...new Set(Object.keys(SPOTIFY_DATA.topSongsByPeriod).map(p => p.split('-')[0]))].sort();
+
+            document.getElementById('lyricCloud').innerHTML = `
+                <div class="year-filter">
+                    <h3>Lyric Cloud</h3>
+                    <p>Explore the evolution of your musical vocabulary. Slide through years to see which words and themes dominated your top tracks each year from 2012 to 2026. Words are extracted from your top 5 most-played song titles per year.</p>
+                    <div class="current-year" id="lyricCurrentYear">All Years</div>
+                    <div>
+                        <input type="range" class="year-slider" id="lyricYearSlider"
+                               min="0" max="${years.length}" value="${years.length}" oninput="updateLyricCloud(this.value)">
+                        <div class="year-marks">
+                            <div>${years[0]}</div>
+                            <div>All Years</div>
+                            <div>${years[years.length - 1]}</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lyricCloudDisplay"></div>
+            `;
+        }
+
+        function updateLyricCloud(value) {
+            const years = [...new Set(Object.keys(SPOTIFY_DATA.topSongsByPeriod).map(p => p.split('-')[0]))].sort();
+            const isAllYears = value == years.length;
+
+            const year = isAllYears ? null : years[value];
+            document.getElementById('lyricCurrentYear').textContent = isAllYears ? 'All Years' : year;
+
+            const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft', 'remix', 'edit', 'version', 'remaster', 'live', 'radio', 'original', 'cast', 'recording'];
+            let songs = [];
+
+            if (year) {
+                const yearPeriods = Object.keys(SPOTIFY_DATA.topSongsByPeriod)
+                    .filter(period => period.startsWith(year));
+
+                const songCounts = {};
+                yearPeriods.forEach(period => {
+                    SPOTIFY_DATA.topSongsByPeriod[period].forEach(song => {
+                        if (!shouldFilterArtist(song.artist)) {
+                            const key = `${song.track}|${song.artist}`;
+                            songCounts[key] = (songCounts[key] || 0) + song.play_count;
+                        }
+                    });
+                });
+
+                songs = Object.entries(songCounts)
+                    .sort(([, a], [, b]) => b - a)
+                    .slice(0, 5)
+                    .map(([key]) => key.split('|')[0]);
+            } else {
+                songs = SPOTIFY_DATA.stats.top_tracks_all_time
+                    .filter(track => !shouldFilterArtist(track.artist))
+                    .slice(0, 10)
+                    .map(track => track.track);
+            }
+
+            const wordCounts = {};
+            songs.forEach(title => {
+                const words = title.toLowerCase()
+                    .replace(/[^a-z\s]/g, '')
+                    .split(/\s+/)
+                    .filter(word => word.length > 2 && !stopWords.includes(word));
+
+                words.forEach(word => {
+                    wordCounts[word] = (wordCounts[word] || 0) + 1;
+                });
+            });
+
+            const sortedWords = Object.entries(wordCounts)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 30);
+
+            const maxCount = Math.max(...sortedWords.map(([, count]) => count));
+            const html = sortedWords.map(([word, count]) => {
+                const size = Math.max(14, (count / maxCount) * 32);
+                return `<span class="word-item" style="font-size: ${size}px;">${word}</span>`;
+            }).join('');
+
+            document.getElementById('lyricCloudDisplay').innerHTML = html || '<p style="color: #888; text-align: center;">No lyrics available for this year</p>';
+        }
+
+        // Social Listening Form
         function toggleCard(cardId) {
             const card = document.getElementById(cardId);
             card.classList.toggle('expanded');
