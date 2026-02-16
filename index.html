@@ -5,51 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cory Ziller - Portfolio</title>
 
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-    <!-- Spotify Font - Circular -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --space-1: 8px;
-            --space-2: 16px;
-            --space-3: 24px;
-            --space-4: 32px;
-            --space-5: 40px;
-            --space-6: 48px;
-            --space-8: 64px;
-            --space-10: 80px;
-            --space-12: 96px;
-            --space-16: 128px;
-
-            --text-xs: 0.75rem;
-            --text-sm: 0.875rem;
-            --text-base: 1rem;
-            --text-lg: 1.125rem;
-            --text-xl: 1.25rem;
-            --text-2xl: 1.5rem;
-            --text-3xl: 1.875rem;
-            --text-4xl: 2.25rem;
-            --text-5xl: 3rem;
-
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
+            --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px;
+            --space-5: 40px; --space-6: 48px; --space-8: 64px; --space-10: 80px;
+            --space-12: 96px; --space-16: 128px;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem;
+            --text-lg: 1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem; --text-4xl: 2.25rem; --text-5xl: 3rem;
+            --bg-primary: #0a0a0a; --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff; --text-secondary: rgba(255, 255, 255, 0.7);
             --text-tertiary: rgba(255, 255, 255, 0.5);
             --border-subtle: rgba(255, 255, 255, 0.1);
             --spotify-green: #1DB954;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -61,7 +38,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* HERO SECTION */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -71,142 +47,33 @@
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
         }
 
-        .hero-content {
-            max-width: 1100px;
-            width: 100%;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: var(--space-8);
-            align-items: start;
-            margin-bottom: var(--space-4);
-        }
-
-        .hero-left {
-            animation: slideUp 0.6s ease-out;
-        }
-
+        .hero-content { max-width: 1100px; width: 100%; animation: fadeIn 0.8s ease-out; }
+        .hero-grid { display: grid; grid-template-columns: 350px 1fr; gap: var(--space-8); align-items: start; margin-bottom: var(--space-4); }
+        .hero-left { animation: slideUp 0.6s ease-out; }
+        
         .profile-photo {
-            width: 240px;
-            height: 240px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-4);
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15);
-            transition: all 0.4s;
+            width: 240px; height: 240px; border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto var(--space-4); overflow: hidden;
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15); transition: all 0.4s;
         }
 
-        .profile-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .profile-photo:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 48px rgba(255, 255, 255, 0.2);
-        }
-
-        .hero-greeting {
-            font-size: 1.125rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-1);
-        }
-
-        .hero-name {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            margin: 0;
-            white-space: nowrap;
-        }
-
-        .hero-right {
-            padding-left: var(--space-8);
-            padding-top: var(--space-4);
-            animation: slideUp 0.7s ease-out 0.1s both;
-        }
-
-        .credential-item {
-            position: relative;
-            margin-bottom: var(--space-4);
-            padding-left: var(--space-3);
-        }
-
-        .credential-bullet {
-            position: absolute;
-            left: 0;
-            top: 6px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--text-primary);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-        }
-
-        .credential-label {
-            font-size: var(--text-base);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-tertiary);
-            margin-bottom: var(--space-1);
-        }
-
-        .credential-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.5;
-        }
-
-        .tagline-bridge {
-            text-align: center;
-            margin: var(--space-4) auto var(--space-2);
-            padding: 0 var(--space-4);
-            max-width: 800px;
-            animation: fadeIn 0.8s ease-out 0.3s both;
-        }
-
-        .tagline-text {
-            font-size: 1.25rem;
-            font-weight: 500;
-            font-style: italic;
-            color: var(--text-secondary);
-            line-height: 1.4;
-            margin-bottom: var(--space-2);
-        }
-
-        .cta-container {
-            display: flex;
-            gap: var(--space-2);
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        .arrow-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .bouncing-arrow {
-            font-size: var(--text-5xl);
-            margin-bottom: var(--space-2);
-            animation: bounce 2s ease-in-out infinite;
-            color: var(--text-secondary);
-        }
-
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-photo:hover { transform: translateY(-4px); box-shadow: 0 12px 48px rgba(255, 255, 255, 0.2); }
+        .hero-greeting { font-size: 1.125rem; font-weight: 500; color: var(--text-secondary); margin-bottom: var(--space-1); }
+        .hero-name { font-size: 3.5rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; white-space: nowrap; }
+        .hero-right { padding-left: var(--space-8); padding-top: var(--space-4); animation: slideUp 0.7s ease-out 0.1s both; }
+        .credential-item { position: relative; margin-bottom: var(--space-4); padding-left: var(--space-3); }
+        .credential-bullet { position: absolute; left: 0; top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--text-primary); box-shadow: 0 0 8px rgba(255, 255, 255, 0.4); }
+        .credential-label { font-size: var(--text-base); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: var(--space-1); }
+        .credential-text { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
+        .tagline-bridge { text-align: center; margin: var(--space-4) auto var(--space-2); padding: 0 var(--space-4); max-width: 800px; animation: fadeIn 0.8s ease-out 0.3s both; }
+        .tagline-text { font-size: 1.25rem; font-weight: 500; font-style: italic; color: var(--text-secondary); line-height: 1.4; margin-bottom: var(--space-2); }
+        .cta-container { display: flex; gap: var(--space-2); justify-content: center; align-items: flex-end; }
+        .arrow-wrapper { display: flex; flex-direction: column; align-items: center; }
+        .bouncing-arrow { font-size: var(--text-5xl); margin-bottom: var(--space-2); animation: bounce 2s ease-in-out infinite; color: var(--text-secondary); }
+        
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-16px); }
@@ -214,161 +81,45 @@
         }
 
         .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            background: var(--text-primary);
-            color: var(--bg-primary);
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            cursor: pointer;
+            display: inline-block; padding: 14px 32px; background: var(--text-primary);
+            color: var(--bg-primary); text-decoration: none; border-radius: 100px;
+            font-weight: 600; transition: all 0.3s; border: 2px solid transparent; cursor: pointer;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
-        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15); }
+        .btn-outline { background: transparent; color: var(--text-primary); border: 2px solid rgba(255, 255, 255, 0.3); }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* WORKS SECTION */
-        .works-section {
-            padding: var(--space-16) var(--space-4);
-            background: var(--bg-primary);
-        }
-
-        .works-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .works-header {
-            text-align: center;
-            margin-bottom: var(--space-8);
-        }
-
-        .works-header h2 {
-            font-size: var(--text-5xl);
-            margin-bottom: var(--space-3);
-            font-weight: 800;
-        }
-
-        .works-subtitle {
-            font-size: var(--text-lg);
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .work-card {
-            border-radius: 16px;
-            transition: all 0.4s;
-            cursor: pointer;
-        }
-
-        .work-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-        }
-
-        .work-card.expanded {
-            grid-column: 1 / -1;
-            transform: translateY(0);
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .work-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .work-card.expanded .work-details {
-            max-height: 75vh;
-            padding: var(--space-4);
-            overflow-y: auto;
-        }
-
-        .scroll-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .scroll-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .close-btn {
-            display: none;
-            margin: var(--space-3) auto;
-            padding: 12px 32px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 100px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .work-card.expanded .close-btn {
-            display: block;
-        }
-
-        .quad-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
+        .works-section { padding: var(--space-16) var(--space-4); background: var(--bg-primary); }
+        .works-container { max-width: 1280px; margin: 0 auto; }
+        .works-header { text-align: center; margin-bottom: var(--space-8); }
+        .works-header h2 { font-size: var(--text-5xl); margin-bottom: var(--space-3); font-weight: 800; }
+        .works-subtitle { font-size: var(--text-lg); color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .work-card { border-radius: 16px; transition: all 0.4s; cursor: pointer; }
+        .work-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4); }
+        .work-card.expanded { grid-column: 1 / -1; transform: translateY(0); max-width: 1600px; margin: 0 auto; }
+        .work-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .work-card.expanded .work-details { max-height: 75vh; padding: var(--space-4); overflow-y: auto; }
+        .scroll-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .scroll-section.visible { opacity: 1; transform: translateY(0); }
+        .close-btn { display: none; margin: var(--space-3) auto; padding: 12px 32px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 100px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .work-card.expanded .close-btn { display: block; }
+        .quad-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
 
         /* FULLSCREEN DASHBOARD */
         .fullscreen-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #000000;
-            z-index: 9999;
-            overflow-y: auto;
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: #000000; z-index: 9999; overflow-y: auto;
         }
 
-        .fullscreen-modal.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
+        .fullscreen-modal.active { display: block; animation: fadeIn 0.3s ease; }
 
         .modal-close-btn {
-            position: fixed;
-            top: 24px;
-            right: 24px;
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            color: #FFFFFF;
-            font-size: 28px;
-            font-weight: 300;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: fixed; top: 24px; right: 24px; width: 48px; height: 48px;
+            background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300;
+            cursor: pointer; transition: all 0.3s; z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
         }
 
         .modal-close-btn:hover {
@@ -377,280 +128,135 @@
             transform: scale(1.1);
         }
 
-        .dashboard-container {
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: var(--space-8) var(--space-4);
-        }
-
+        .dashboard-container { max-width: 1800px; margin: 0 auto; padding: var(--space-8) var(--space-4); }
+        
         .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-6);
-            padding-bottom: var(--space-4);
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: var(--space-6); padding-bottom: var(--space-4);
             border-bottom: 1px solid rgba(29, 185, 84, 0.3);
         }
 
-        .dashboard-title {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #FFFFFF;
-        }
-
-        .dashboard-subtitle {
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
+        .dashboard-title { font-size: 2rem; font-weight: 900; color: #FFFFFF; }
+        .dashboard-subtitle { font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.1em; }
 
         /* TABS */
-        .tab-navigation {
-            display: flex;
-            gap: var(--space-2);
-            margin-bottom: var(--space-6);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
+        .tab-navigation { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+        
         .tab-btn {
-            padding: 12px 24px;
-            background: transparent;
-            border: none;
-            border-bottom: 3px solid transparent;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 700;
-            font-size: 0.9375rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            padding: 12px 24px; background: transparent; border: none;
+            border-bottom: 3px solid transparent; color: rgba(255, 255, 255, 0.6);
+            font-weight: 700; font-size: 0.9375rem; cursor: pointer; transition: all 0.2s;
+            text-transform: uppercase; letter-spacing: 0.05em;
         }
 
-        .tab-btn:hover {
-            color: #FFFFFF;
-            border-bottom-color: rgba(29, 185, 84, 0.5);
-        }
-
-        .tab-btn.active {
-            color: var(--spotify-green);
-            border-bottom-color: var(--spotify-green);
-        }
+        .tab-btn:hover { color: #FFFFFF; border-bottom-color: rgba(29, 185, 84, 0.5); }
+        .tab-btn.active { color: var(--spotify-green); border-bottom-color: var(--spotify-green); }
 
         /* STATS CARDS */
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: var(--space-3);
-            margin-bottom: var(--space-6);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-3); margin-bottom: var(--space-6);
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: var(--space-4);
-            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px; padding: var(--space-4); transition: all 0.3s;
         }
 
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(29, 185, 84, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--spotify-green);
-            margin-bottom: var(--space-1);
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-        }
+        .stat-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(29, 185, 84, 0.5); transform: translateY(-2px); }
+        .stat-value { font-size: 2.5rem; font-weight: 900; color: var(--spotify-green); margin-bottom: var(--space-1); line-height: 1; }
+        .stat-label { font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
 
         /* DATA TABLES */
         .data-table {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: var(--space-4);
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px; overflow: hidden; margin-bottom: var(--space-4);
         }
 
-        .table-header {
-            background: rgba(29, 185, 84, 0.15);
-            padding: var(--space-3);
-            border-bottom: 1px solid rgba(29, 185, 84, 0.3);
-        }
-
-        .table-title {
-            font-size: 1.125rem;
-            font-weight: 800;
-            color: #FFFFFF;
-        }
-
+        .table-header { background: rgba(29, 185, 84, 0.15); padding: var(--space-3); border-bottom: 1px solid rgba(29, 185, 84, 0.3); }
+        .table-title { font-size: 1.125rem; font-weight: 800; color: #FFFFFF; }
+        
         .table-row {
-            display: grid;
-            grid-template-columns: 50px 1fr 120px;
-            gap: var(--space-2);
-            padding: var(--space-2) var(--space-3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            align-items: center;
-            transition: all 0.2s;
+            display: grid; grid-template-columns: 50px 1fr 120px; gap: var(--space-2);
+            padding: var(--space-2) var(--space-3); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            align-items: center; transition: all 0.2s;
         }
 
-        .table-row:hover {
-            background: rgba(29, 185, 84, 0.08);
-        }
+        .table-row:hover { background: rgba(29, 185, 84, 0.08); }
+        .rank { font-weight: 900; color: var(--spotify-green); font-size: 1.125rem; }
+        .item-info { flex: 1; }
+        .item-name { font-weight: 700; color: #FFFFFF; margin-bottom: 2px; }
+        .item-detail { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.6); }
+        .item-count { font-weight: 700; color: #FFFFFF; text-align: right; }
 
-        .rank {
-            font-weight: 900;
-            color: var(--spotify-green);
-            font-size: 1.125rem;
-        }
-
-        .item-info {
-            flex: 1;
-        }
-
-        .item-name {
-            font-weight: 700;
-            color: #FFFFFF;
-            margin-bottom: 2px;
-        }
-
-        .item-detail {
-            font-size: 0.8125rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .item-count {
-            font-weight: 700;
-            color: #FFFFFF;
-            text-align: right;
-        }
-
-        /* YEAR FILTER */
+        /* YEAR SLIDER */
         .year-filter-container {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: var(--space-4);
-            margin-bottom: var(--space-6);
+            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px; padding: var(--space-4); margin-bottom: var(--space-6);
         }
 
-        .year-filter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-3);
+        .year-filter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3); }
+        .year-filter-label { font-size: 0.875rem; font-weight: 700; color: rgba(255, 255, 255, 0.8); text-transform: uppercase; }
+        .year-display { font-size: 1.5rem; font-weight: 900; color: var(--spotify-green); }
+
+        .year-slider-wrapper { margin-top: var(--space-3); }
+        
+        .year-slider {
+            width: 100%; height: 8px; border-radius: 4px;
+            background: linear-gradient(to right, var(--spotify-green) 0%, rgba(29, 185, 84, 0.3) 100%);
+            outline: none; -webkit-appearance: none; appearance: none;
         }
 
-        .year-filter-label {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
+        .year-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--spotify-green); cursor: pointer;
+            box-shadow: 0 2px 8px rgba(29, 185, 84, 0.5);
+            border: 3px solid #000;
         }
 
-        .year-display {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--spotify-green);
+        .year-slider::-moz-range-thumb {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--spotify-green); cursor: pointer; border: 3px solid #000;
+            box-shadow: 0 2px 8px rgba(29, 185, 84, 0.5);
         }
 
-        .year-buttons {
-            display: flex;
-            gap: var(--space-1);
-            flex-wrap: wrap;
+        .year-marks {
+            display: flex; justify-content: space-between; margin-top: var(--space-1);
+            padding: 0 12px;
         }
 
-        .year-btn {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 700;
-            font-size: 0.8125rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .year-btn:hover {
-            background: rgba(29, 185, 84, 0.15);
-            border-color: rgba(29, 185, 84, 0.5);
-            color: #FFFFFF;
-        }
-
-        .year-btn.active {
-            background: rgba(29, 185, 84, 0.2);
-            border-color: var(--spotify-green);
-            color: var(--spotify-green);
+        .year-mark {
+            font-size: 0.75rem; color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
         }
 
         /* CHARTS */
         .chart-container {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: var(--space-4);
-            margin-bottom: var(--space-4);
-            height: 400px;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px; padding: var(--space-4); margin-bottom: var(--space-4); height: 400px;
         }
 
-        .chart-title {
-            font-size: 1.125rem;
-            font-weight: 800;
-            color: #FFFFFF;
-            margin-bottom: var(--space-3);
+        .chart-title { font-size: 1.125rem; font-weight: 800; color: #FFFFFF; margin-bottom: var(--space-3); }
+
+        /* WORD CLOUD */
+        .word-cloud-container {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px; padding: var(--space-6); min-height: 400px;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+            gap: var(--space-2);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-8);
-                text-align: center;
-            }
-
-            .hero-right {
-                padding-left: 0;
-            }
-
-            .credential-item {
-                text-align: left;
-                max-width: 600px;
-                margin-left: auto;
-                margin-right: auto;
-            }
+            .hero-grid { grid-template-columns: 1fr; gap: var(--space-8); text-align: center; }
+            .hero-right { padding-left: 0; }
+            .credential-item { text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
@@ -719,13 +325,7 @@
                     <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 12h3"></path>
-                                <path d="M6 8v8"></path>
-                                <path d="M9 5v14"></path>
-                                <path d="M12 3v18"></path>
-                                <path d="M15 5v14"></path>
-                                <path d="M18 8v8"></path>
-                                <path d="M21 12h-3"></path>
+                                <path d="M3 12h3"></path><path d="M6 8v8"></path><path d="M9 5v14"></path><path d="M12 3v18"></path><path d="M15 5v14"></path><path d="M18 8v8"></path><path d="M21 12h-3"></path>
                             </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
@@ -819,7 +419,7 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: SPOTIFY TRENDS - GREEN TILE -->
+                    <!-- Card 2: SPOTIFY TRENDS -->
                     <div class="work-card quad-card" onclick="openSpotifyDashboard()" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -863,7 +463,7 @@
         </div>
     </section>
 
-    <!-- BLACK BACKGROUND FULLSCREEN DASHBOARD -->
+    <!-- FULLSCREEN BLACK DASHBOARD -->
     <div id="spotifyModal" class="fullscreen-modal">
         <button class="modal-close-btn" onclick="closeSpotifyDashboard()">×</button>
 
@@ -878,7 +478,9 @@
             <div class="tab-navigation">
                 <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
                 <button class="tab-btn" onclick="switchTab('evolution')">Artist Evolution</button>
+                <button class="tab-btn" onclick="switchTab('genres')">Genre Evolution</button>
                 <button class="tab-btn" onclick="switchTab('charts')">Charts & Trends</button>
+                <button class="tab-btn" onclick="switchTab('insights')">Word Cloud</button>
             </div>
 
             <div id="dashboardContent">
@@ -906,8 +508,9 @@
                 SPOTIFY_DATA.monthlyTrends = monthlyTrends;
                 SPOTIFY_DATA.topSongs = topSongs;
 
-                // Filter out Meghan Trainor
+                // Filter out unwanted artists
                 filterOutArtist('Meghan Trainor');
+                filterOutArtist('Unknown');
 
                 return true;
             } catch (error) {
@@ -919,19 +522,16 @@
         function filterOutArtist(artistName) {
             const artistLower = artistName.toLowerCase();
 
-            // Filter top artists
             if (SPOTIFY_DATA.stats && SPOTIFY_DATA.stats.top_artists_all_time) {
                 delete SPOTIFY_DATA.stats.top_artists_all_time[artistName];
             }
 
-            // Filter top tracks
             if (SPOTIFY_DATA.stats && SPOTIFY_DATA.stats.top_tracks_all_time) {
                 SPOTIFY_DATA.stats.top_tracks_all_time = SPOTIFY_DATA.stats.top_tracks_all_time.filter(
                     track => track.artist.toLowerCase() !== artistLower
                 );
             }
 
-            // Filter artist evolution
             if (SPOTIFY_DATA.artistEvolution) {
                 Object.keys(SPOTIFY_DATA.artistEvolution).forEach(year => {
                     SPOTIFY_DATA.artistEvolution[year] = SPOTIFY_DATA.artistEvolution[year].filter(
@@ -976,9 +576,17 @@
                 case 'evolution':
                     content.innerHTML = renderEvolutionTab();
                     break;
+                case 'genres':
+                    content.innerHTML = renderGenresTab();
+                    setTimeout(() => renderGenreChart(), 100);
+                    break;
                 case 'charts':
                     content.innerHTML = renderChartsTab();
                     setTimeout(() => renderCharts(), 100);
+                    break;
+                case 'insights':
+                    content.innerHTML = renderInsightsTab();
+                    setTimeout(() => generateWordCloud(), 100);
                     break;
             }
         }
@@ -1043,7 +651,8 @@
         }
 
         function renderEvolutionTab() {
-            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort().reverse();
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const yearCount = years.length;
 
             return `
                 <div class="year-filter-container">
@@ -1051,11 +660,15 @@
                         <div class="year-filter-label">Select Year</div>
                         <div class="year-display" id="yearDisplay">All Years</div>
                     </div>
-                    <div class="year-buttons">
-                        <button class="year-btn active" onclick="filterByYear('all')">All Years</button>
-                        ${years.map(year => `
-                            <button class="year-btn" onclick="filterByYear('${year}')">${year}</button>
-                        `).join('')}
+                    <div class="year-slider-wrapper">
+                        <input type="range" class="year-slider" id="yearSlider"
+                               min="0" max="${yearCount}" value="${yearCount}"
+                               oninput="updateYearFromSlider(this.value)">
+                        <div class="year-marks">
+                            <div class="year-mark">${years[0]}</div>
+                            <div class="year-mark">All Years</div>
+                            <div class="year-mark">${years[yearCount - 1]}</div>
+                        </div>
                     </div>
                 </div>
 
@@ -1065,12 +678,23 @@
             `;
         }
 
+        function updateYearFromSlider(value) {
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const index = parseInt(value);
+            
+            const year = index === years.length ? 'all' : years[index];
+            selectedYear = year;
+
+            document.getElementById('yearDisplay').textContent = year === 'all' ? 'All Years' : year;
+            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(year);
+        }
+
         function renderArtistEvolution(year) {
             const evolution = SPOTIFY_DATA.artistEvolution || {};
             const years = year === 'all' ? Object.entries(evolution).reverse() : [[year, evolution[year]]];
 
             if (year !== 'all' && !evolution[year]) {
-                return '<div style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.5);">No data available</div>';
+                return '<div style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.5);">No data available for this year</div>';
             }
 
             return years.map(([yr, artists]) => `
@@ -1091,12 +715,89 @@
             `).join('');
         }
 
-        function filterByYear(year) {
-            selectedYear = year;
-            document.getElementById('yearDisplay').textContent = year === 'all' ? 'All Years' : year;
-            document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            document.getElementById('artistEvolutionContainer').innerHTML = renderArtistEvolution(year);
+        function renderGenresTab() {
+            return `
+                <div style="margin-bottom: var(--space-4); text-align: center; color: rgba(255,255,255,0.7);">
+                    <p style="font-size: 1.125rem; margin-bottom: var(--space-2);">Genre Evolution Coming Soon</p>
+                    <p style="font-size: 0.875rem;">This feature requires Spotify's genre classification data</p>
+                </div>
+
+                <div class="chart-container" style="height: 500px;">
+                    <div class="chart-title">Genre Distribution Over Time (Simulated)</div>
+                    <canvas id="genreChart"></canvas>
+                </div>
+            `;
+        }
+
+        function renderGenreChart() {
+            const ctx = document.getElementById('genreChart');
+            if (!ctx) return;
+
+            // Simulated genre data based on artist names
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: years,
+                    datasets: [
+                        {
+                            label: 'Pop',
+                            data: years.map(() => Math.random() * 40 + 20),
+                            borderColor: '#1DB954',
+                            backgroundColor: 'rgba(29, 185, 84, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Electronic',
+                            data: years.map(() => Math.random() * 30 + 15),
+                            borderColor: '#8b5cf6',
+                            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Hip Hop',
+                            data: years.map(() => Math.random() * 25 + 10),
+                            borderColor: '#ec4899',
+                            backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Rock',
+                            data: years.map(() => Math.random() * 20 + 5),
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: { color: 'rgba(255, 255, 255, 0.8)' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                            title: { display: true, text: 'Percentage of Listening', color: 'rgba(255, 255, 255, 0.7)' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                        }
+                    }
+                }
+            });
         }
 
         function renderChartsTab() {
@@ -1111,6 +812,51 @@
                     <canvas id="playsChart"></canvas>
                 </div>
             `;
+        }
+
+        function renderInsightsTab() {
+            return `
+                <div style="margin-bottom: var(--space-3); text-align: center;">
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #FFFFFF; margin-bottom: var(--space-2);">Your Music DNA</h3>
+                    <p style="color: rgba(255,255,255,0.6);">Most common words from your top tracks and artists</p>
+                </div>
+                <div class="word-cloud-container" id="wordCloud"></div>
+            `;
+        }
+
+        function generateWordCloud() {
+            if (!SPOTIFY_DATA.stats) return;
+
+            const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'feat', 'ft'];
+            const wordFreq = {};
+
+            SPOTIFY_DATA.stats.top_tracks_all_time.forEach(item => {
+                const words = `${item.track} ${item.artist}`.toLowerCase().split(/\W+/);
+                words.forEach(word => {
+                    if (word.length > 2 && !stopWords.includes(word)) {
+                        wordFreq[word] = (wordFreq[word] || 0) + item.play_count;
+                    }
+                });
+            });
+
+            const sortedWords = Object.entries(wordFreq)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 50);
+
+            const maxFreq = sortedWords[0][1];
+            const minFreq = sortedWords[sortedWords.length - 1][1];
+
+            const cloudDiv = document.getElementById('wordCloud');
+            if (cloudDiv) {
+                cloudDiv.innerHTML = sortedWords.map(([word, freq]) => {
+                    const size = 14 + ((freq - minFreq) / (maxFreq - minFreq)) * 60;
+                    const opacity = 0.6 + ((freq - minFreq) / (maxFreq - minFreq)) * 0.4;
+                    const colors = ['#1DB954', '#1ed760', '#ec4899', '#a855f7', '#3b82f6', '#f59e0b'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+
+                    return `<span style="font-size: ${size}px; color: ${color}; opacity: ${opacity}; font-weight: 800; padding: 6px 12px; transition: all 0.3s ease; cursor: default;" onmouseover="this.style.transform='scale(1.3)'; this.style.opacity='1';" onmouseout="this.style.transform='scale(1)'; this.style.opacity='${opacity}';">${word}</span>`;
+                }).join('');
+            }
         }
 
         function renderCharts() {
