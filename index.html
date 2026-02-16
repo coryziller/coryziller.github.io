@@ -550,6 +550,201 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* ============================================
+           SPOTIFY TRENDS SPECIFIC STYLES
+           ============================================ */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: var(--space-4) 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: var(--space-3);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-3);
+            margin: var(--space-4) 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: var(--space-3);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--text-4xl);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .top-list {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: var(--space-3);
+            margin: var(--space-3) 0;
+        }
+
+        .top-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .top-list-rank {
+            font-weight: 700;
+            color: var(--text-tertiary);
+            margin-right: var(--space-2);
+            min-width: 30px;
+        }
+
+        .top-list-info {
+            flex: 1;
+        }
+
+        .top-list-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .top-list-artist {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+
+        .top-list-count {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: var(--text-sm);
+        }
+
+        /* ============================================
+           SPOTIFY WRAPPED-STYLE AESTHETICS
+           ============================================ */
+        .wrapped-stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: var(--space-4);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .wrapped-stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f59e0b, #ef4444, #ec4899, #8b5cf6);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .wrapped-stat-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.3);
+        }
+
+        .wrapped-stat-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-2);
+            line-height: 1;
+        }
+
+        .wrapped-section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, rgba(255,255,255,0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-4);
+            letter-spacing: -0.02em;
+        }
+
+        .wrapped-artist-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(239, 68, 68, 0.2) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 16px;
+            padding: var(--space-3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wrapped-artist-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wrapped-artist-card:hover::before {
+            opacity: 1;
+        }
+
+        .wrapped-artist-card:hover {
+            transform: scale(1.05);
+            border-color: rgba(245, 158, 11, 0.6);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+        }
+
+        .wrapped-rank {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
     </style>
 </head>
 <body>
@@ -745,105 +940,31 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Music Memory Timeline -->
-                    <div class="work-card quad-card" id="spotify-card" onclick="toggleCard('spotify-card')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+                    <!-- Card 2: SPOTIFY TRENDS -->
+                    <div class="work-card quad-card" id="trends-card" onclick="toggleCard('trends-card')" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M9 18V5l12-2v13"></path>
-                                <circle cx="6" cy="18" r="3"></circle>
-                                <circle cx="18" cy="16" r="3"></circle>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                             </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            MUSIC MEMORY TIMELINE
+                            SPOTIFY TRENDS: 13 YEARS OF LISTENING
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            Links your Spotify listening history to photos taken at the same time. Creates a searchable music memory timeline that connects songs to life moments.
+                            Visualizes 13+ years of Spotify data showing artist evolution, top tracks, and listening patterns from 2012-2026. 6,500+ hours analyzed.
                         </p>
 
                         <!-- Expanded Details -->
                         <div class="work-details">
                             <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
 
-                                <!-- Two Column Layout -->
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8); align-items: start;">
-
-                                    <!-- Left Column: Content -->
-                                    <div style="padding-right: 20px;">
-                                        <!-- The Idea -->
-                                        <div style="margin-bottom: 48px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Idea</h4>
-                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
-                                                Music is tied to memory. Every photo you take has a timestamp. What if you could see what song was playing when you took that beach sunset photo? Or find all the photos from that road trip playlist?
-                                            </p>
-                                        </div>
-
-                                        <!-- How It Works -->
-                                        <div style="margin-bottom: 48px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 20px; letter-spacing: -0.02em;">How It Works</h4>
-                                            <div style="display: flex; flex-direction: column; gap: 16px;">
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Connect Spotify</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">OAuth authorization to access listening history</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Spotify Web API</div>
-                                                </div>
-                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Extract EXIF Data</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Pull timestamps and GPS from your photos</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Python + PIL</div>
-                                                </div>
-                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Match Timestamps</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Link songs to photos by time</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">Custom algorithm</div>
-                                                </div>
-                                                <div style="color: rgba(255,255,255,0.5); margin-left: 12px;">↓</div>
-                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
-                                                    <div style="font-weight: 700; color: white; margin-bottom: 4px; font-size: 1.0625rem;">Build Timeline</div>
-                                                    <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75);">Searchable music memory map</div>
-                                                    <div style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-top: 2px;">JavaScript + HTML</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- The Result -->
-                                        <div>
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">The Result</h4>
-                                            <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.7; font-weight: 400;">
-                                                A searchable timeline connecting your Spotify history to life moments. Search by song to find photos, or browse photos to discover what you were listening to.
-                                            </p>
-                                        </div>
+                                <div id="trendsContent">
+                                    <div style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.7);">
+                                        <p>Loading your Spotify trends...</p>
                                     </div>
-
-                                    <!-- Right Column: CTA -->
-                                    <div>
-                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); height: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.2);">
-                                            <div style="margin-bottom: 32px;">
-                                                <span style="font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em;">Try It Now</span>
-                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px; color: white; letter-spacing: -0.02em;">Launch the App</h3>
-                                                <p style="font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 24px;">
-                                                    Connect your Spotify, upload photos, and discover your music memories.
-                                                </p>
-                                                <a href="music-memory-timeline.html" target="_blank" onclick="event.stopPropagation()" style="display: inline-block; width: 100%; padding: 16px 32px; background: white; color: #10b981; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); text-decoration: none; text-align: center;">
-                                                    🚀 Launch Music Memory Timeline
-                                                </a>
-                                                <div style="margin-top: 24px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                                                    <p style="font-size: 0.875rem; color: rgba(255,255,255,0.7); line-height: 1.5;">
-                                                        <strong>What you'll do:</strong><br>
-                                                        1. Connect Spotify (OAuth)<br>
-                                                        2. Upload your photos<br>
-                                                        3. See matched songs & photos
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
 
-                                <button class="close-btn" onclick="toggleCard('spotify-card'); event.stopPropagation();" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Close</button>
+                                <button class="close-btn" onclick="toggleCard('trends-card'); event.stopPropagation();" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Close</button>
                             </div>
                         </div>
                     </div>
@@ -887,6 +1008,36 @@
 
 
     <script>
+        // Spotify data - loaded from JSON files
+        const SPOTIFY_DATA = {
+            stats: null,
+            artistEvolution: null,
+            monthlyTrends: null,
+            topSongs: null
+        };
+
+        // Load Spotify data from JSON files
+        async function loadSpotifyData() {
+            try {
+                const [stats, artistEvolution, monthlyTrends, topSongs] = await Promise.all([
+                    fetch('spotify-trends/basic_stats.json').then(r => r.json()),
+                    fetch('spotify-trends/artist_evolution.json').then(r => r.json()),
+                    fetch('spotify-trends/monthly_trends.json').then(r => r.json()),
+                    fetch('spotify-trends/top_songs_by_period.json').then(r => r.json())
+                ]);
+
+                SPOTIFY_DATA.stats = stats;
+                SPOTIFY_DATA.artistEvolution = artistEvolution;
+                SPOTIFY_DATA.monthlyTrends = monthlyTrends;
+                SPOTIFY_DATA.topSongs = topSongs;
+
+                return true;
+            } catch (error) {
+                console.error('Error loading Spotify data:', error);
+                return false;
+            }
+        }
+
         // Toggle card expansion
         function toggleCard(cardId) {
             const card = document.getElementById(cardId);
@@ -897,8 +1048,90 @@
                     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     // Initialize scroll animations for this card
                     initScrollAnimations(card);
+
+                    // Load and render Spotify Trends if opening that card
+                    if (cardId === 'trends-card' && !SPOTIFY_DATA.stats) {
+                        loadSpotifyData().then(success => {
+                            if (success) {
+                                renderSpotifyTrends();
+                            }
+                        });
+                    } else if (cardId === 'trends-card' && SPOTIFY_DATA.stats) {
+                        renderSpotifyTrends();
+                    }
                 }, 100);
             }
+        }
+
+        function renderSpotifyTrends() {
+            if (!SPOTIFY_DATA.stats) {
+                document.getElementById('trendsContent').innerHTML = '<p style="text-align: center; padding: var(--space-8); color: rgba(255,255,255,0.7);">Loading your Spotify trends...</p>';
+                return;
+            }
+
+            const stats = SPOTIFY_DATA.stats;
+
+            document.getElementById('trendsContent').innerHTML = `
+                <!-- Stats Overview with Wrapped Style -->
+                <div style="margin-bottom: var(--space-8);">
+                    <h4 class="wrapped-section-title">Your 13-Year Journey</h4>
+                    <div class="stat-grid">
+                        <div class="wrapped-stat-card pulse-animation">
+                            <div class="wrapped-stat-value">${(stats.total_hours / 1000).toFixed(1)}k</div>
+                            <div class="stat-label">Hours Listened</div>
+                        </div>
+                        <div class="wrapped-stat-card pulse-animation" style="animation-delay: 0.1s;">
+                            <div class="wrapped-stat-value">${(stats.total_plays / 1000).toFixed(1)}k</div>
+                            <div class="stat-label">Total Plays</div>
+                        </div>
+                        <div class="wrapped-stat-card pulse-animation" style="animation-delay: 0.2s;">
+                            <div class="wrapped-stat-value">${(stats.unique_tracks / 1000).toFixed(1)}k</div>
+                            <div class="stat-label">Unique Tracks</div>
+                        </div>
+                        <div class="wrapped-stat-card pulse-animation" style="animation-delay: 0.3s;">
+                            <div class="wrapped-stat-value">${(stats.unique_artists / 1000).toFixed(1)}k</div>
+                            <div class="stat-label">Unique Artists</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Artists All Time -->
+                <div style="margin-bottom: var(--space-8);">
+                    <h4 class="wrapped-section-title">Your All-Time Favorites</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-3);">
+                        ${Object.entries(stats.top_artists_all_time).slice(0, 6).map(([artist, count], i) => `
+                            <div class="wrapped-artist-card" style="animation-delay: ${i * 0.1}s;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3);">
+                                    <div class="wrapped-rank">#${i + 1}</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 4px;">${artist}</div>
+                                        <div style="font-size: 0.875rem; color: rgba(255,255,255,0.7);">${count.toLocaleString()} plays</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Top Tracks -->
+                <div style="margin-bottom: var(--space-8);">
+                    <h4 class="wrapped-section-title">Songs You Can't Stop Playing</h4>
+                    <div style="display: grid; gap: var(--space-2);">
+                        ${stats.top_tracks_all_time.slice(0, 10).map((item, i) => `
+                            <div class="wrapped-artist-card" style="animation-delay: ${i * 0.05}s;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3);">
+                                    <div class="wrapped-rank">#${i + 1}</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700; color: white;">${item.track}</div>
+                                        <div style="font-size: 0.875rem; color: rgba(255,255,255,0.7);">${item.artist}</div>
+                                    </div>
+                                    <div style="font-weight: 700; color: rgba(245, 158, 11, 0.9);">${item.play_count.toLocaleString()}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
         }
 
         // Scroll-triggered fade animations
