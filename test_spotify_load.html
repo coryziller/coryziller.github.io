@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Spotify Data Load</title>
+</head>
+<body>
+    <h1>Testing Spotify Data Loading</h1>
+    <button onclick="testLoad()">Click to Load Spotify Data</button>
+    <div id="result"></div>
+
+    <script>
+        async function testLoad() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Loading...';
+
+            try {
+                const stats = await fetch('spotify-trends/basic_stats.json').then(r => r.json());
+                resultDiv.innerHTML = `
+                    <h2>✅ Success!</h2>
+                    <p>Total Plays: ${stats.total_plays.toLocaleString()}</p>
+                    <p>Total Hours: ${stats.total_hours.toFixed(0)}</p>
+                    <p>Unique Tracks: ${stats.unique_tracks.toLocaleString()}</p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<h2>❌ Error</h2><p>${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
