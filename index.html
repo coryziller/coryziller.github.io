@@ -1607,81 +1607,154 @@
         });
     </script>
 
+    
+
+    
     <!-- Work History & Education Timeline -->
-    <section id="history" style="max-width: 800px; margin: 0 auto; padding: 80px 24px 120px;">
-        <h2 style="font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 8px; font-style: italic;">Work History &amp; Education</h2>
-        <p style="text-align: center; color: rgba(255,255,255,0.5); margin-bottom: 64px;">Where I've been and what I've learned</p>
+    <section id="history" style="max-width: 900px; margin: 0 auto; padding: 100px 24px 120px;">
+        <h2 style="font-size: 3rem; font-weight: 800; text-align: center; margin-bottom: 12px; color: #fff;">Work History &amp; Education</h2>
+        <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 72px; font-size: 1.125rem; font-weight: 400;">5+ years in data, strategy, and product thinking</p>
 
         <style>
-            .tl-node { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-            .tl-node.visible { opacity: 1; transform: translateY(0); }
+            .tl-item { opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; }
+            .tl-left { transform: translateX(-40px); }
+            .tl-right { transform: translateX(40px); }
+            .tl-item.visible { opacity: 1; transform: translateX(0); }
+            .tl-card {
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 12px;
+                padding: 20px 24px;
+            }
+            .tl-card:hover {
+                background: rgba(255,255,255,0.07);
+                border-color: rgba(255,255,255,0.15);
+                transition: all 0.3s ease;
+            }
+            .tl-date {
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: rgba(255,255,255,0.4);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-bottom: 6px;
+            }
+            .tl-title {
+                font-weight: 800;
+                font-size: 1.15rem;
+                margin-bottom: 4px;
+                color: #fff;
+            }
+            .tl-role {
+                color: rgba(255,255,255,0.6);
+                font-size: 0.9rem;
+                font-weight: 500;
+                margin-bottom: 6px;
+            }
+            .tl-desc {
+                color: rgba(255,255,255,0.4);
+                font-size: 0.8rem;
+                font-weight: 400;
+                line-height: 1.5;
+            }
+            .tl-dot {
+                position: absolute;
+                top: 24px;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                border: 3px solid #1a1a2e;
+                z-index: 2;
+            }
+            @media (max-width: 600px) {
+                .tl-left, .tl-right { text-align: left !important; padding-left: 32px !important; padding-right: 0 !important; }
+                .tl-left .tl-dot, .tl-right .tl-dot { left: -7px !important; right: auto !important; }
+            }
         </style>
 
-        <div style="position: relative; padding-left: 40px;">
-            <!-- Vertical line -->
-            <div style="position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.15);"></div>
+        <div style="position: relative;">
+            <!-- Center line -->
+            <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.1); transform: translateX(-1px);"></div>
 
-            <!-- Ohio State MBA -->
-            <div class="tl-node" style="position: relative; margin-bottom: 48px;">
-                <div style="position: absolute; left: -34px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #BB0000; border: 2px solid #1a1a2e;"></div>
-                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">2025 &ndash; 2027 &bull; Expected May 2027</div>
-                <div style="font-weight: 800; font-size: 1.125rem; margin-bottom: 2px;">The Ohio State University &mdash; Fisher College of Business</div>
-                <div style="color: rgba(255,255,255,0.6); font-size: 0.875rem; margin-bottom: 8px;">STEM MBA</div>
-                <div style="color: rgba(255,255,255,0.35); font-size: 0.8125rem; line-height: 1.6;">Focused on product strategy, growth analytics, and technology-driven decision making. Building at the intersection of data, product, and business.</div>
+            <!-- OSU - LEFT -->
+            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 48px;">
+                <div style="width: 50%; padding-right: 40px; text-align: right;">
+                    <div class="tl-card">
+                        <div class="tl-date">Expected May 2027</div>
+                        <div class="tl-title">The Ohio State University</div>
+                        <div class="tl-role">STEM MBA &mdash; Fisher College of Business</div>
+                    </div>
+                </div>
+                <div class="tl-dot" style="left: calc(50% - 7px); background: #BB0000;"></div>
+                <div style="width: 50%;"></div>
             </div>
 
-            <!-- Basis Technologies -->
-            <div class="tl-node" style="position: relative; margin-bottom: 48px;">
-                <div style="position: absolute; left: -34px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #4A90D9; border: 2px solid #1a1a2e;"></div>
-                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">2021 &ndash; 2025 &bull; Chicago, IL</div>
-                <div style="font-weight: 800; font-size: 1.125rem; margin-bottom: 2px;">Basis Technologies</div>
-                <div style="color: rgba(255,255,255,0.6); font-size: 0.875rem; margin-bottom: 4px;">Senior Data Analyst &rarr; Data Analyst</div>
-                <div style="color: rgba(255,255,255,0.35); font-size: 0.8125rem; margin-bottom: 8px;">Chicago-based advertising agency managing $26MM+ in ad spend across 52 brands in financial services, healthcare, and CPG</div>
-                <div style="color: rgba(255,255,255,0.3); font-size: 0.75rem; line-height: 1.6;">Exceeded deposit growth KPIs by 147% through attribution modeling and channel prioritization &bull; Drove 33% lift in lead gen via experimentation and first-party data strategy &bull; Built automated analytics tools (Custom GPT) to accelerate insight delivery &bull; Designed 7 executive dashboards for real-time KPI visibility &bull; Mentored 6 analysts and led standardization trainings for 40+ team members</div>
+            <!-- Basis - RIGHT -->
+            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 48px;">
+                <div style="width: 50%;"></div>
+                <div class="tl-dot" style="left: calc(50% - 7px); background: #4A90D9;"></div>
+                <div style="width: 50%; padding-left: 40px;">
+                    <div class="tl-card">
+                        <div class="tl-date">2021 &ndash; 2025 &bull; Chicago, IL</div>
+                        <div class="tl-title">Basis Technologies</div>
+                        <div class="tl-role">Senior Data Analyst &rarr; Data Analyst</div>
+                        <div class="tl-desc">Chicago-based advertising agency. Led attribution modeling and executive dashboards across 52 brands.</div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Yelp -->
-            <div class="tl-node" style="position: relative; margin-bottom: 48px;">
-                <div style="position: absolute; left: -34px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #D32323; border: 2px solid #1a1a2e;"></div>
-                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">2019 &ndash; 2020 &bull; Washington D.C.</div>
-                <div style="font-weight: 800; font-size: 1.125rem; margin-bottom: 2px;">Yelp</div>
-                <div style="color: rgba(255,255,255,0.6); font-size: 0.875rem; margin-bottom: 8px;">Account Executive</div>
-                <div style="color: rgba(255,255,255,0.3); font-size: 0.75rem; line-height: 1.6;">Closed $180K in new advertising contracts in under a year &bull; Advised ~300 small business owners monthly on digital strategy and customer acquisition</div>
+            <!-- Yelp - LEFT -->
+            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 48px;">
+                <div style="width: 50%; padding-right: 40px; text-align: right;">
+                    <div class="tl-card">
+                        <div class="tl-date">2019 &ndash; 2020 &bull; Washington D.C.</div>
+                        <div class="tl-title">Yelp</div>
+                        <div class="tl-role">Account Executive</div>
+                    </div>
+                </div>
+                <div class="tl-dot" style="left: calc(50% - 7px); background: #D32323;"></div>
+                <div style="width: 50%;"></div>
             </div>
 
-            <!-- Marinus Analytics -->
-            <div class="tl-node" style="position: relative; margin-bottom: 48px;">
-                <div style="position: absolute; left: -34px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #7B68EE; border: 2px solid #1a1a2e;"></div>
-                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">2017 &ndash; 2019 &bull; Pittsburgh, PA</div>
-                <div style="font-weight: 800; font-size: 1.125rem; margin-bottom: 2px;">Marinus Analytics</div>
-                <div style="color: rgba(255,255,255,0.6); font-size: 0.875rem; margin-bottom: 4px;">Impact &amp; Business Development Intern</div>
-                <div style="color: rgba(255,255,255,0.35); font-size: 0.8125rem; margin-bottom: 8px;">AI startup building tools for law enforcement to combat human trafficking. Used by agencies across the U.S. and internationally.</div>
-                <div style="color: rgba(255,255,255,0.3); font-size: 0.75rem; line-height: 1.6;">Researched AI adoption across law enforcement agencies to guide product engagement strategy &bull; Created 50+ onboarding resources simplifying AI/ML concepts for non-technical users &bull; Co-delivered executive webinars to drive awareness and business development</div>
+            <!-- Marinus - RIGHT -->
+            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 48px;">
+                <div style="width: 50%;"></div>
+                <div class="tl-dot" style="left: calc(50% - 7px); background: #7B68EE;"></div>
+                <div style="width: 50%; padding-left: 40px;">
+                    <div class="tl-card">
+                        <div class="tl-date">2017 &ndash; 2019 &bull; Pittsburgh, PA</div>
+                        <div class="tl-title">Marinus Analytics</div>
+                        <div class="tl-role">Impact &amp; Business Development Intern</div>
+                        <div class="tl-desc">AI startup building tools for law enforcement to combat human trafficking.</div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Penn State -->
-            <div class="tl-node" style="position: relative;">
-                <div style="position: absolute; left: -34px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #003893; border: 2px solid #1a1a2e;"></div>
-                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">2015 &ndash; 2019 &bull; State College, PA</div>
-                <div style="font-weight: 800; font-size: 1.125rem; margin-bottom: 2px;">Penn State University</div>
-                <div style="color: rgba(255,255,255,0.6); font-size: 0.875rem;">BS Information Science &amp; Technology &bull; BS Applied Spanish</div>
+            <!-- Penn State - LEFT -->
+            <div class="tl-item tl-left" style="position: relative; display: flex;">
+                <div style="width: 50%; padding-right: 40px; text-align: right;">
+                    <div class="tl-card">
+                        <div class="tl-date">2015 &ndash; 2019 &bull; State College, PA</div>
+                        <div class="tl-title">Penn State University</div>
+                        <div class="tl-role">BS Information Science &amp; Technology &bull; BS Applied Spanish</div>
+                    </div>
+                </div>
+                <div class="tl-dot" style="left: calc(50% - 7px); background: #003893;"></div>
+                <div style="width: 50%;"></div>
             </div>
         </div>
     </section>
 
-    <!-- Scroll-in animation -->
     <script>
     (function() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) e.target.classList.add('visible');
             });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('.tl-node').forEach(node => observer.observe(node));
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.tl-item').forEach(function(n) { obs.observe(n); });
     })();
     </script>
 
-    </body>
+</body>
 </html>
