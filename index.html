@@ -757,23 +757,23 @@
 
             switch(tabName) {
                 case 'overview':
-                    content.innerHTML = renderOverviewTab();
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:600px;line-height:1.5;">A snapshot of my listening history across 13+ years. These numbers represent every song, every artist, and every late-night listening session since 2012.</div>' + renderOverviewTab();
                     break;
                 case 'evolution':
-                    content.innerHTML = renderEvolutionTab();
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:600px;line-height:1.5;">How my top artists have shifted year over year. Use the carousel to travel through time and see who defined each era of my listening.</div>' + renderEvolutionTab();
                     currentEvolutionIndex = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort().length - 1;
                     renderEvolutionPanels();
                     break;
                 case 'genres':
-                    content.innerHTML = renderGenresTab();
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:600px;line-height:1.5;">A look at how my genre preferences have evolved over the years. Each artist is mapped to their real genre based on my actual listening data.</div>' + renderGenresTab();
                     setTimeout(() => renderGenreChart(), 100);
                     break;
                 case 'charts':
-                    content.innerHTML = renderChartsTab();
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:600px;line-height:1.5;">The deeper trends behind my listening habits, from monthly patterns to yearly totals. These charts tell the story of how music fits into my life.</div>' + renderChartsTab();
                     setTimeout(() => renderCharts(), 100);
                     break;
                 case 'insights':
-                    content.innerHTML = renderInsightsTab();
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:600px;line-height:1.5;">The most common words from my top tracks and artists, visualized as a word cloud. Slide through the years to see how the language of my music has changed.</div>' + renderInsightsTab();
                     setTimeout(() => {
                         const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
                         const latestYear = years[years.length - 1];
@@ -1103,7 +1103,7 @@
 
             return `
                 <div style="margin-bottom: var(--space-3); text-align: center;">
-                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #FFFFFF; margin-bottom: var(--space-2);">Your Music DNA</h3>
+                    
                     <p style="color: rgba(255,255,255,0.6);">Most common words from your top tracks and artists</p>
                 </div>
 
