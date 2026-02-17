@@ -337,7 +337,7 @@
                         </p>
 
                         <div class="work-details" style="position: relative;">
-                            <button onclick="toggleCard('social-card'); event.stopPropagation();" style="position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; color: #FFFFFF; font-size: 24px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;">×</button>
+                            <button onclick="toggleCard('social-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; color: #FFFFFF; font-size: 24px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;">×</button>
                             <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
 
@@ -965,9 +965,6 @@
                         <input type="range" class="year-slider" id="wordCloudYearSlider"
                                min="0" max="${yearCount - 1}" value="${yearCount - 1}"
                                oninput="updateWordCloudYear(this.value)">
-                        <div class="year-marks" id="wordCloudYearMarks" style="justify-content: center;">
-                            <div class="year-mark">${years[yearCount - 1]}</div>
-                        </div>
                     </div>
                 </div>
 
