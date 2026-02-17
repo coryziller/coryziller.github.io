@@ -302,7 +302,7 @@
                     <a href="https://www.linkedin.com/in/cory-ziller/" target="_blank" class="btn btn-outline">View LinkedIn</a>
 
                     <div class="arrow-wrapper">
-                        <div class="bouncing-arrow">↓</div>
+                        <div class="bouncing-arrow">â</div>
                         <a href="#works" class="btn">Side Projects</a>
                     </div>
 
@@ -337,7 +337,7 @@
                         </p>
 
                         <div class="work-details" style="position: relative;">
-                            <button onclick="toggleCard('social-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; color: #FFFFFF; font-size: 24px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;">×</button>
+                            <button onclick="toggleCard('social-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; color: #FFFFFF; font-size: 24px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;">Ã</button>
                             <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
 
@@ -357,19 +357,19 @@
                                                     <div style="font-size: 0.9375rem; opacity: 0.75;">Reddit & Hacker News daily</div>
                                                     <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">Python + Public APIs</div>
                                                 </div>
-                                                <div style="opacity: 0.5; margin-left: 12px;">↓</div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">â</div>
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
                                                     <div style="font-weight: 700; margin-bottom: 4px;">Analyze</div>
                                                     <div style="font-size: 0.9375rem; opacity: 0.75;">Sentiment & categorization</div>
                                                     <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">OpenAI API</div>
                                                 </div>
-                                                <div style="opacity: 0.5; margin-left: 12px;">↓</div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">â</div>
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
                                                     <div style="font-weight: 700; margin-bottom: 4px;">Generate</div>
                                                     <div style="font-size: 0.9375rem; opacity: 0.75;">30-second audio summary</div>
                                                     <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">Google Text-to-Speech</div>
                                                 </div>
-                                                <div style="opacity: 0.5; margin-left: 12px;">↓</div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">â</div>
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3);">
                                                     <div style="font-weight: 700; margin-bottom: 4px;">Email</div>
                                                     <div style="font-size: 0.9375rem; opacity: 0.75;">Automated delivery</div>
@@ -467,7 +467,7 @@
 
     <!-- FULLSCREEN BLACK DASHBOARD -->
     <div id="spotifyModal" class="fullscreen-modal">
-        <button class="modal-close-btn" onclick="closeSpotifyDashboard()">×</button>
+        <button class="modal-close-btn" onclick="closeSpotifyDashboard()">Ã</button>
 
         <div class="dashboard-container">
             <div class="dashboard-header">
@@ -773,9 +773,9 @@
                         } else {
                             const change = previousRank - currentRank;
                             if (change > 0) {
-                                rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 1.125rem;">↑</span>';
+                                rankChange = '<span style="color: #1DB954; font-weight: 700; font-size: 1.125rem;">â</span>';
                             } else if (change < 0) {
-                                rankChange = '<span style="color: #ec4899; font-weight: 700; font-size: 1.125rem;">↓</span>';
+                                rankChange = '<span style="color: #ec4899; font-weight: 700; font-size: 1.125rem;">â</span>';
                             }
                         }
 
@@ -965,6 +965,10 @@
                         <input type="range" class="year-slider" id="wordCloudYearSlider"
                                min="0" max="${yearCount - 1}" value="${yearCount - 1}"
                                oninput="updateWordCloudYear(this.value)">
+                        <div class="year-marks" id="wordCloudYearMarks">
+                            <div class="year-mark">${years[0]}</div>
+                            <div class="year-mark">${years[yearCount - 1]}</div>
+                        </div>
                     </div>
                 </div>
 
@@ -1043,28 +1047,11 @@
 
             // Update year marks
             const yearMarks = document.getElementById('wordCloudYearMarks');
-            if (index === 0) {
-                // First year: show 2012 and 2013
+            if (yearMarks) {
                 yearMarks.innerHTML = `
                     <div class="year-mark">${years[0]}</div>
-                    <div class="year-mark">${years[1]}</div>
-                `;
-                yearMarks.style.justifyContent = 'center';
-            } else if (index === years.length - 1) {
-                // Last year: show 2025 and 2026
-                yearMarks.innerHTML = `
-                    <div class="year-mark">${years[years.length - 2]}</div>
                     <div class="year-mark">${years[years.length - 1]}</div>
                 `;
-                yearMarks.style.justifyContent = 'center';
-            } else {
-                // Middle years: show Previous, Current, Next
-                yearMarks.innerHTML = `
-                    <div class="year-mark">Previous Year</div>
-                    <div class="year-mark">Current Year</div>
-                    <div class="year-mark">Next Year</div>
-                `;
-                yearMarks.style.justifyContent = 'space-between';
             }
 
             generateWordCloud(year);
@@ -1443,7 +1430,7 @@
 
             if (!name || !email) return;
 
-            resultDiv.innerHTML = '⏳ Sending...';
+            resultDiv.innerHTML = 'â³ Sending...';
             resultDiv.style.display = 'block';
 
             try {
@@ -1463,12 +1450,12 @@
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    resultDiv.innerHTML = `<strong>✅ Success!</strong><br><br>Check ${email} for the report!`;
+                    resultDiv.innerHTML = `<strong>â Success!</strong><br><br>Check ${email} for the report!`;
                 } else {
                     throw new Error(data.error || 'Failed');
                 }
             } catch (error) {
-                resultDiv.innerHTML = `<strong>❌ Error</strong><br><br>${error.message}`;
+                resultDiv.innerHTML = `<strong>â Error</strong><br><br>${error.message}`;
             }
         });
     </script>
