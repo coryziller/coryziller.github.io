@@ -773,7 +773,7 @@
                     setTimeout(() => renderCharts(), 100);
                     break;
                 case 'insights':
-                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:600px;line-height:1.5;">The most common words from my top tracks and artists, visualized as a word cloud. Slide through the years to see how the language of my music has changed.</div>' + renderInsightsTab();
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:600px;line-height:1.5;">Artist and track names broken down into a word cloud. Use the slider to explore how the words defining my music have shifted year by year.</div>' + renderInsightsTab();
                     setTimeout(() => {
                         const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
                         const latestYear = years[years.length - 1];
@@ -951,12 +951,6 @@
 
         function renderGenresTab() {
             return `
-                <div style="margin-bottom: var(--space-4); text-align: center; color: rgba(255,255,255,0.7);">
-                    <p style="font-size: 1.125rem; margin-bottom: var(--space-2);">Genre Evolution</p>
-                    <p style="font-size: 0.875rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-                        Each artist categorized into real genres based on your actual listening data.
-                    </p>
-                </div>
 
                 <div class="chart-container" style="height: 500px;">
                     <div class="chart-title">Genre Distribution Over Time</div>
@@ -1102,10 +1096,6 @@
             const yearCount = years.length;
 
             return `
-                <div style="margin-bottom: var(--space-3); text-align: center;">
-                    
-                    <p style="color: rgba(255,255,255,0.6);">Most common words from your top tracks and artists</p>
-                </div>
 
                 <div class="year-filter-container">
                     <div class="year-filter-header">
