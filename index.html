@@ -117,7 +117,7 @@
         .work-card.expanded .close-btn { display: block; }
         .work-card.expanded .card-close-x { display: flex !important; }
         .card-close-x:hover { background: rgba(220, 50, 50, 0.7) !important; border-color: white !important; }
-        .quad-card { aspect-ratio: auto; display: flex; flex-direction: column; justify-content: center; }
+        .quad-card { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; }
         .quad-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
         .work-card.expanded.quad-card { aspect-ratio: auto; }
 
@@ -665,7 +665,7 @@
             </div>
 
             <div style="margin-top: 32px;">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1200px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 800px; margin: 0 auto;">
 
                     <!-- Card 1: RAPIDS vs Pandas -->
                     <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; transition: transform 0.3s ease; cursor: pointer;">
@@ -682,7 +682,7 @@
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">PANDAS VS RAPIDS cuDF: GPU SPEED TEST</h3>
                         <p style="font-size: 1rem; line-height: 1.6;">Run a live simulation comparing CPU-based Pandas with NVIDIA's GPU-accelerated RAPIDS cuDF on 100M rows of paid media data.</p>
-                        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                        <div style="margin-top: 16px; text-align: center;">
                             <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Simulation & Technical Writing</span>
                         </div>
 
@@ -766,7 +766,7 @@
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
                             Automates user sentiment tracking for product teams. Scrapes Reddit and Hacker News daily, analyzes feedback, and emails a 30-second audio summary.
                         </p>
-                        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                        <div style="margin-top: 16px; text-align: center;">
                             <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Automation Workflow</span>
                         </div>
 
@@ -870,7 +870,7 @@
                         <p style="font-size: 1rem; line-height: 1.6; color: #000000; font-weight: 500;">
                             Visualizes 13+ years of Spotify data showing artist evolution, top tracks, and listening patterns from 2012-2026. 6,500+ hours analyzed.
                         </p>
-                        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                        <div style="margin-top: 16px; text-align: center;">
                             <span style="font-size: 0.75rem; font-weight: 700; background: rgba(0,0,0,0.15); color: #000; padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Automation Workflow & Real-Time Dashboard</span>
                         </div>
 
