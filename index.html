@@ -869,7 +869,7 @@
                             Visualizes 13+ years of Spotify data showing artist evolution, top tracks, and listening patterns from 2012-2026. 6,500+ hours analyzed.
                         </p>
                         <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
-                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(0,0,0,0.15); color: #000; padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Automation Workflow</span>
+                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(0,0,0,0.15); color: #000; padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Automation Workflow & Real-Time Dashboard</span>
                         </div>
 
                         <div class="work-details" style="position: relative;">
@@ -1956,20 +1956,20 @@
             .tl-right { transform: translateX(40px); }
             .tl-item.visible { opacity: 1; transform: translateX(0); }
             .tl-card {
-                background: rgba(255,255,255,0.04);
-                border: 1px solid rgba(255,255,255,0.08);
+                background: rgba(255,255,255,0.07);
+                border: 1px solid rgba(255,255,255,0.14);
                 border-radius: 12px;
                 padding: 20px 24px;
             }
             .tl-card:hover {
-                background: rgba(255,255,255,0.07);
-                border-color: rgba(255,255,255,0.15);
+                background: rgba(255,255,255,0.11);
+                border-color: rgba(255,255,255,0.22);
                 transition: all 0.3s ease;
             }
             .tl-date {
                 font-size: 0.75rem;
-                font-weight: 500;
-                color: rgba(255,255,255,0.4);
+                font-weight: 600;
+                color: rgba(255,255,255,0.6);
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
                 margin-bottom: 6px;
@@ -1981,13 +1981,13 @@
                 color: #fff;
             }
             .tl-role {
-                color: rgba(255,255,255,0.6);
+                color: rgba(255,255,255,0.85);
                 font-size: 0.9rem;
                 font-weight: 500;
                 margin-bottom: 6px;
             }
             .tl-desc {
-                color: rgba(255,255,255,0.4);
+                color: rgba(255,255,255,0.65);
                 font-size: 0.8rem;
                 font-weight: 400;
                 line-height: 1.5;
@@ -2248,6 +2248,7 @@
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">When to Use RAPIDS</h2>
                     <p style="margin-bottom: 16px;"><strong style="color: white;">Use RAPIDS for:</strong> ETL pipelines at scale, ML feature engineering, real-time analytics on large datasets, exploratory analysis on 100M+ rows.</p>
                     <p style="margin-bottom: 16px;"><strong style="color: white;">Stick with Pandas for:</strong> Small datasets under 100K rows, quick one-off scripts, operations not yet supported by cuDF.</p>
+                    <p style="margin-bottom: 16px; color: #aaa;">RAPIDS fits into a broader GPU-accelerated workflow. Pair it with tools like <strong style="color: white;">NVIDIA's LLM Suite for Code</strong> to generate and optimize your data pipelines even faster — letting LLMs write the cuDF code while GPUs execute it.</p>
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Get Started Free</h2>
                     <p style="margin-bottom: 16px;">Google Colab provides a free NVIDIA T4 GPU. Install RAPIDS and start benchmarking in minutes:</p>
                     <div style="background: #1a1a1a; border-left: 4px solid #76B900; border-radius: 4px; padding: 20px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #a8d700;">!pip install cudf-cu12<br>import cudf<br>df = cudf.read_csv('data.csv')<br>print(df.describe())</div>
