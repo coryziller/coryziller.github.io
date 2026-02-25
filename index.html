@@ -72,8 +72,11 @@
         .hero-greeting { font-size: 1.125rem; font-weight: 500; color: var(--text-secondary); margin-bottom: var(--space-1); }
         .hero-name { font-size: 3.5rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; white-space: nowrap; }
         .hero-right { padding-left: var(--space-8); padding-top: var(--space-4); animation: slideUp 0.7s ease-out 0.1s both; }
-        .credential-item { position: relative; margin-bottom: var(--space-4); padding-left: var(--space-3); }
-        .credential-bullet { position: absolute; left: 0; top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--text-primary); box-shadow: 0 0 8px rgba(255, 255, 255, 0.4); }
+        .credential-item { position: relative; margin-bottom: var(--space-4); padding-left: 28px; }
+        .credential-bullet { position: absolute; left: 0; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--text-primary); box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); z-index: 2; }
+        .credential-item:nth-child(2) .credential-bullet { opacity: 0.55; width: 8px; height: 8px; left: 1px; }
+        .credential-item:nth-child(3) .credential-bullet { opacity: 0.3; width: 7px; height: 7px; left: 1.5px; }
+        .credential-timeline-line { position: absolute; left: 4px; top: 18px; bottom: 20px; width: 0; border-left: 2px dotted rgba(255,255,255,0.15); z-index: 1; }
         .credential-label { font-size: var(--text-base); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: var(--space-1); }
         .credential-text { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
         .tagline-bridge { text-align: center; margin: var(--space-4) auto var(--space-2); padding: 0 var(--space-4); max-width: 800px; animation: fadeIn 0.8s ease-out 0.3s both; }
@@ -613,11 +616,12 @@
                     </div>
                 </div>
 
-                <div class="hero-right">
+                <div class="hero-right" style="position: relative;">
+                    <div class="credential-timeline-line"></div>
                     <div class="credential-item">
                         <div class="credential-bullet"></div>
                         <div class="credential-label">Current</div>
-                        <p class="credential-text">STEM MBA candidate at Ohio State.</p>
+                        <p class="credential-text">STEM MBA candidate at Ohio State (Class of 2027).</p>
                     </div>
 
                     <div class="credential-item">
@@ -674,7 +678,7 @@
                             </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">PANDAS VS RAPIDS cuDF: GPU SPEED TEST</h3>
-                        <p style="font-size: 1rem; line-height: 1.6;">Run a live simulation comparing CPU-based Pandas with NVIDIA's GPU-accelerated RAPIDS cuDF on 100M rows.</p>
+                        <p style="font-size: 1rem; line-height: 1.6;">Run a live simulation comparing CPU-based Pandas with NVIDIA's GPU-accelerated RAPIDS cuDF on 100M rows of paid media data.</p>
                         <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
                             <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Simulation & Technical Writing</span>
                         </div>
@@ -2066,34 +2070,66 @@
             const ws = document.getElementById('rapidsWritingSample');
             btn.style.display = 'none';
             sim.style.display = 'block';
-            sim.innerHTML = '';
-            const steps = [
-                {text: '> Initializing NVIDIA T4 GPU (16GB VRAM)...', delay: 0, color: '#a8d700'},
-                {text: '> Loading dataset: 100M rows x 12 columns', delay: 600, color: '#a8d700'},
-                {text: '> Running Pandas (CPU) groupby aggregation...', delay: 1200, color: '#888'},
-                {text: '  Result: 12.4s', delay: 2000, color: '#ff6b6b'},
-                {text: '> Running RAPIDS cuDF (T4 GPU) groupby aggregation...', delay: 2600, color: '#a8d700'},
-                {text: '  Result: 0.3s', delay: 3400, color: '#76B900'},
-                {text: '> RAPIDS cuDF is 41x faster on NVIDIA T4', delay: 4000, color: '#76B900', bold: true}
-            ];
-            steps.forEach(function(step) {
-                setTimeout(function() {
-                    var line = document.createElement('div');
-                    line.style.opacity = '0';
-                    line.style.transform = 'translateY(10px)';
-                    line.style.transition = 'all 0.5s ease';
-                    line.style.color = step.color;
-                    line.style.marginBottom = '8px';
-                    if (step.bold) line.style.fontWeight = '700';
-                    line.textContent = step.text;
-                    sim.appendChild(line);
-                    setTimeout(function() { line.style.opacity = '1'; line.style.transform = 'translateY(0)'; }, 50);
-                }, step.delay);
-            });
+            sim.innerHTML = `
+                <div id="simInit" style="font-family: 'Courier New', monospace; font-size: 0.85rem; margin-bottom: 24px;">
+                    <div id="simLine1" style="color: #a8d700; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px;">> Initializing NVIDIA T4 GPU (16GB VRAM)...</div>
+                    <div id="simLine2" style="color: #a8d700; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px;">> Loading paid media dataset: 100M rows</div>
+                    <div id="simSchema" style="color: #555; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px; padding-left: 16px; font-size: 0.8rem;">
+                        <span style="color:#76B900;">campaign_id</span> · <span style="color:#76B900;">date</span> · <span style="color:#76B900;">impressions</span> · <span style="color:#76B900;">clicks</span> · <span style="color:#76B900;">spend</span> · <span style="color:#76B900;">conversions</span> · <span style="color:#76B900;">revenue</span> · <span style="color:#76B900;">channel</span> · <span style="color:#76B900;">geo</span> · <span style="color:#76B900;">device</span> · <span style="color:#76B900;">creative_id</span> · <span style="color:#76B900;">ctr</span>
+                    </div>
+                    <div id="simLine3" style="color: #a8d700; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px;">> GroupBy: total spend by campaign × channel × geo</div>
+                    <div id="simExplain" style="color: #888; opacity: 0; transition: opacity 0.4s; margin-bottom: 16px; font-family: Montserrat, sans-serif; font-size: 0.85rem; line-height: 1.6; padding: 12px 0;">
+                        Both engines aggregate 100 million ad performance rows — grouping spend, clicks, and conversions by campaign, channel, and geography. Same operation, same data. Only difference: CPU vs GPU.
+                    </div>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                        <div style="width: 140px; font-family: Montserrat, sans-serif; font-size: 0.85rem; font-weight: 700; color: #888;">Pandas (CPU)</div>
+                        <div style="flex: 1; background: #1a1a1a; border-radius: 6px; height: 40px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
+                            <div id="pandasBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ee5a24); border-radius: 6px; transition: width 3.5s linear; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px;">
+                                <span id="pandasTime" style="font-family: 'Courier New', monospace; font-size: 0.85rem; font-weight: 700; color: white; opacity: 0; transition: opacity 0.3s;">12.4s</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <div style="width: 140px; font-family: Montserrat, sans-serif; font-size: 0.85rem; font-weight: 700; color: #76B900;">RAPIDS (GPU)</div>
+                        <div style="flex: 1; background: #1a1a1a; border-radius: 6px; height: 40px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
+                            <div id="rapidsBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #76B900, #a8d700); border-radius: 6px; transition: width 0.3s ease-out; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px;">
+                                <span id="rapidsTime" style="font-family: 'Courier New', monospace; font-size: 0.85rem; font-weight: 700; color: white; opacity: 0; transition: opacity 0.3s;">0.3s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="speedupResult" style="text-align: center; margin-top: 24px; opacity: 0; transition: opacity 0.5s;">
+                    <span style="font-family: Montserrat, sans-serif; font-size: 1.5rem; font-weight: 800; color: #76B900;">41x faster</span>
+                    <span style="font-family: Montserrat, sans-serif; font-size: 1rem; color: #888; margin-left: 8px;">on NVIDIA T4</span>
+                </div>
+                <div style="text-align: center; margin-top: 12px; font-size: 0.75rem; color: #555; font-family: Montserrat, sans-serif;">
+                    *Simulated results based on published RAPIDS benchmarks
+                </div>
+            `;
+            // Animate init lines one by one
+            setTimeout(function() { document.getElementById('simLine1').style.opacity = '1'; }, 100);
+            setTimeout(function() { document.getElementById('simLine2').style.opacity = '1'; }, 600);
+            setTimeout(function() { document.getElementById('simSchema').style.opacity = '1'; }, 1100);
+            setTimeout(function() { document.getElementById('simLine3').style.opacity = '1'; }, 1800);
+            setTimeout(function() { document.getElementById('simExplain').style.opacity = '1'; }, 2300);
+            // Start both bars racing at the same time (after text finishes)
+            setTimeout(function() {
+                document.getElementById('rapidsBar').style.width = '100%';
+                document.getElementById('pandasBar').style.width = '100%';
+            }, 3000);
+            // Show RAPIDS time after it finishes (nearly instant)
+            setTimeout(function() { document.getElementById('rapidsTime').style.opacity = '1'; }, 3500);
+            // Show Pandas time after it finishes (crawls for 3.5s)
+            setTimeout(function() { document.getElementById('pandasTime').style.opacity = '1'; }, 6600);
+            // Show speedup result
+            setTimeout(function() { document.getElementById('speedupResult').style.opacity = '1'; }, 7000);
+            // Show writing sample
             setTimeout(function() {
                 ws.style.opacity = '1';
                 setTimeout(function() { ws.scrollIntoView({behavior: 'smooth'}); }, 200);
-            }, 4800);
+            }, 7800);
         }
     </script>
 
@@ -2124,7 +2160,7 @@
                             <span style="color: #76B900;">import</span> cudf<br>df = cudf.read_csv(<span style="color: #f0c674;">'data.csv'</span>)<br>result = df.groupby(<span style="color: #f0c674;">'cat'</span>).sum()
                         </div>
                     </div>
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Benchmark Results (100M Rows, NVIDIA T4)</h2>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Benchmark Results (100M Rows Paid Media Data, NVIDIA T4)</h2>
                     <table style="width: 100%; border-collapse: collapse; margin: 24px 0; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a;">
                         <thead><tr style="background: rgba(118,185,0,0.15);">
                             <th style="padding: 16px; text-align: left; color: #76B900; font-weight: 700;">Operation</th>
