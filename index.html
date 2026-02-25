@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>x
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLB8SZECVV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NLB8SZECVV');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cory Ziller - Portfolio</title>
@@ -348,6 +356,239 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
+        
+
+        /* ===== MOBILE RESPONSIVE FIXES ===== */
+        @keyframes rainbow-flash {
+            0% { border-color: #ff0000; box-shadow: 0 0 8px #ff0000, 0 0 20px rgba(255,0,0,0.3); }
+            14% { border-color: #ff8800; box-shadow: 0 0 8px #ff8800, 0 0 20px rgba(255,136,0,0.3); }
+            28% { border-color: #ffff00; box-shadow: 0 0 8px #ffff00, 0 0 20px rgba(255,255,0,0.3); }
+            42% { border-color: #00ff00; box-shadow: 0 0 8px #00ff00, 0 0 20px rgba(0,255,0,0.3); }
+            57% { border-color: #0088ff; box-shadow: 0 0 8px #0088ff, 0 0 20px rgba(0,136,255,0.3); }
+            71% { border-color: #8800ff; box-shadow: 0 0 8px #8800ff, 0 0 20px rgba(136,0,255,0.3); }
+            85% { border-color: #ff00ff; box-shadow: 0 0 8px #ff00ff, 0 0 20px rgba(255,0,255,0.3); }
+            100% { border-color: #ff0000; box-shadow: 0 0 8px #ff0000, 0 0 20px rgba(255,0,0,0.3); }
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @media (max-width: 768px) {
+            /* Hero Section */
+            .hero { padding: 0 var(--space-3) 0; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+            .hero-grid { grid-template-columns: 1fr !important; gap: 6px; text-align: center; }
+            .hero-left { display: flex; flex-direction: column; align-items: center; gap: 0; }
+            .hero-right { padding: 0 !important; margin-top: 0 !important; }
+            .profile-photo { width: 80px; height: 80px; margin-bottom: 2px !important; }
+            .hero-name { font-size: 1.5rem; margin-bottom: 0; margin-top: 0; }
+            .hero-greeting { font-size: var(--text-sm); margin-bottom: 0; margin-top: 0; }
+            .credential-bullet { display: none !important; }
+            .credential-item { text-align: center; max-width: 100%; margin-bottom: 2px !important; padding: 4px 0 !important; }
+            .credential-label { font-size: 0.6rem !important; margin-bottom: 0 !important; letter-spacing: 1px; }
+            .credential-text { font-size: var(--text-sm); margin: 0 !important; }
+
+            /* CTA Buttons - stacked, even 16px spacing */
+            .cta-container { flex-direction: column !important; align-items: center !important; gap: 10px !important; margin-top: 8px !important; }
+            .cta-container > a.btn,
+            .cta-container .arrow-wrapper .btn { width: 100% !important; max-width: 260px; padding: 10px 18px !important; font-size: 0.85rem !important; text-align: center !important; display: block !important; box-sizing: border-box !important; }
+            .arrow-wrapper { width: 100%; max-width: 280px; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 0 !important; margin: 0 !important; padding: 0 !important; }
+            .bouncing-arrow { display: none !important; }
+            .arrow-wrapper .btn { border: 2px solid #ff0000 !important; border-radius: 12px !important; animation: rainbow-flash 1.5s linear infinite, flicker 0.8s ease-in-out infinite !important; }
+
+            /* Scroll indicator after CTA buttons */
+            .cta-container::after { content: 'Scroll down for more'; display: block; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-top: 8px; letter-spacing: 1px; }
+
+            /* Projects - single column */
+            .works-section { padding: var(--space-6) var(--space-3); }
+            .works-container { padding: 0; }
+            .works-header { padding: 0 var(--space-2); text-align: center; }
+            .works-container > div[style*="grid"],
+            div[style*="grid-template-columns"]:not(.evolution-panels):not(.evolution-artist-row) { grid-template-columns: 1fr !important; gap: 16px !important; }
+            .work-card { border-radius: 12px; overflow: hidden; box-sizing: border-box; max-width: 100%; }
+            .quad-card { padding: var(--space-3); overflow: hidden; box-sizing: border-box; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
+            .quad-title { font-size: 1.1rem !important; }
+
+            /* Project detail popouts - single column */
+            .work-details { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; }
+            .work-details > div,
+            .work-details div[style*="grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+            .work-details div[style*="grid"] > div:last-child {
+                order: -1 !important;
+            }
+            .work-details div[style*="grid"] > div { width: 100% !important; max-width: 100% !important; margin-bottom: 16px; }
+            .work-details div[style*="border-radius"],
+            .work-details span[style*="border-radius"] { display: inline-block !important; margin: 4px !important; font-size: 0.8rem !important; }
+
+            /* Fullscreen modal */
+            .fullscreen-modal { overflow-y: auto !important; -webkit-overflow-scrolling: touch; padding: var(--space-2) !important; }
+            .fullscreen-modal > div { max-width: 100% !important; padding: var(--space-3) !important; overflow-x: hidden !important; }
+
+            /* Spotify Dashboard */
+            .dashboard-container { padding: var(--space-3) var(--space-2); max-width: 100% !important; overflow-x: hidden !important; }
+            .dashboard-header { flex-direction: column; gap: var(--space-3); align-items: flex-start; }
+            .dashboard-title { font-size: 1.5rem; }
+            .dashboard-subtitle { font-size: var(--text-sm); }
+            .tab-navigation { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; padding-bottom: 8px; justify-content: center; }
+            .tab-btn { padding: 6px 10px; font-size: 0.6rem; white-space: nowrap; flex-shrink: 0; }
+
+            /* Evolution panels - single column so artist names show fully */
+            .evolution-panels { grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; margin-bottom: var(--space-2) !important; overflow-x: auto !important; max-width: 100% !important; }
+            .evolution-panel { padding: 6px !important; min-width: 0 !important; overflow: hidden; }
+            .evolution-panel-title { font-size: 0.7rem !important; margin-bottom: 4px !important; }
+            .evolution-rank { font-size: 0.55rem !important; white-space: normal !important; overflow: visible !important; line-height: 1.3; padding: 1px 0 !important; word-break: break-word; }
+            .evolution-artist-row { gap: 2px !important; padding: 2px 4px !important; }
+            .evolution-controls { flex-wrap: wrap; gap: 6px !important; }
+            .evolution-btn { min-height: 36px !important; min-width: 70px !important; font-size: 0.75rem !important; padding: 8px 12px !important; }
+            .evolution-artist-name { font-size: 0.85rem !important; white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
+            .evolution-change { font-size: 0.75rem !important; white-space: nowrap; }
+
+            /* Word cloud - scale to fit mobile */
+            .word-cloud-container {
+                transform: scale(0.38) !important;
+                transform-origin: top center !important;
+                width: 100% !important;
+                margin-bottom: -250px !important;
+                overflow: visible !important;
+            }
+
+            .chart-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .chart-container canvas { min-width: 280px; }
+
+            /* Timeline - hide gray center line on mobile */
+            #history > div > div[style*="position: absolute"][style*="width: 2px"] { left: 8px !important; transform: translateX(-50%) !important; }
+
+            /* Timeline - single column, dots as circles */
+            .tl-item.tl-left, .tl-item.tl-right { flex-direction: column !important; align-items: flex-start !important; margin-bottom: var(--space-4) !important; padding-left: 30px !important; }
+            .tl-item > div:not(.tl-dot) { width: 100% !important; padding-left: 0 !important; padding-right: 0 !important; text-align: left !important; }
+            .tl-dot {
+                width: 20px !important;
+                height: 20px !important;
+                min-width: 20px !important;
+                min-height: 20px !important;
+                left: 8px !important;
+                transform: translateX(-50%) !important;
+                z-index: 5 !important;
+                border-radius: 50% !important;
+                position: absolute !important;
+            }
+            .tl-left > div:nth-child(3) { display: none !important; }
+            .tl-right > div:first-child { display: none !important; }
+            .tl-item .tl-dot {
+                width: 20px !important;
+                height: 20px !important;
+                min-width: 20px !important;
+                min-height: 20px !important;
+                border-radius: 50% !important;
+                left: 8px !important;
+                transform: translateX(-50%) !important;
+            }
+            .tl-card { padding: var(--space-3); width: 100% !important; box-sizing: border-box; background: #1a1a1a !important; position: relative; z-index: 1; }
+            .tl-title { font-size: var(--text-base); }
+            .tl-date { font-size: var(--text-xs); }
+            .tl-desc { font-size: var(--text-sm); }
+
+            .close-btn, .modal-close-btn, .card-close-x { font-size: 1.5rem; padding: var(--space-2); }
+            h2, .section-title { font-size: 1.5rem !important; }
+            .scroll-section { padding: var(--space-4) var(--space-3); }
+
+            .work-card.expanded { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; z-index: 1000 !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; padding: var(--space-3) !important; box-sizing: border-box !important; }
+            .work-card.expanded .work-details { overflow-y: auto !important; max-height: none !important; }
+        
+            /* Make tabs show there are more options */
+            .work-details div[style*="space-between"] {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 4px !important;
+            }
+            .evolution-btn {
+                min-height: 52px !important;
+                min-width: 110px !important;
+                font-size: 16px !important;
+                padding: 14px 22px !important;
+                touch-action: manipulation !important;
+            }
+            .evolution-controls { gap: 12px !important; }
+            .fullscreen-modal button, .fullscreen-modal .tab-btn {
+                touch-action: manipulation !important;
+            }
+
+            /* === Spotify & Social Listening Card Detail Mobile Fixes === */
+            .work-details { padding: var(--space-3) !important; }
+            .work-details > div > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+            .work-details div[style*="flex-direction: column"][style*="gap: 16px"] {
+                gap: 10px !important;
+            }
+            .work-details div[style*="space-between"] span {
+                font-size: 0.7rem !important;
+                padding: 2px 6px !important;
+            }
+            .work-details h3 { font-size: 1rem !important; }
+            .work-details h4 { font-size: 0.85rem !important; }
+            .work-details p { font-size: 0.85rem !important; line-height: 1.5 !important; }
+            .work-details label { font-size: 0.7rem !important; }
+            .scroll-section { max-height: none !important; overflow: visible !important; }
+            .scroll-section img { width: 100% !important; height: auto !important; border-radius: 8px; }
+            /* Step items - stack badge below text */
+            .work-details div[style*="space-between"] > div:first-child {
+                max-width: 100% !important;
+            }
+            /* Impact metrics grid */
+            .work-details div[style*="grid"][style*="repeat"] {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+            }
+            /* Close button positioning for mobile */
+            .work-details > button[style*="absolute"] {
+                top: -60px !important;
+                right: 10px !important;
+            }
+            /* Dashboard charts and tab content */
+            .dashboard-container { padding: var(--space-2) !important; }
+            .dashboard-header { flex-direction: column !important; gap: 8px !important; }
+            .dashboard-title { font-size: 1.1rem !important; }
+            .dashboard-subtitle { font-size: 0.75rem !important; }
+            /* Card modal on mobile */
+            .fullscreen-modal .quad-card { padding: var(--space-3) !important; }
+        
+            /* === Additional mobile centering & optimization === */
+            .works-section { padding: var(--space-3) !important; }
+            .works-section h2 { text-align: center !important; font-size: 1.3rem !important; }
+            .work-card { margin-bottom: var(--space-3) !important; }
+            .work-card h3 { font-size: 0.9rem !important; text-align: center !important; }
+            .work-card p { font-size: 0.8rem !important; line-height: 1.5 !important; }
+            /* Charts responsive */
+            canvas { max-width: 100% !important; height: auto !important; }
+            .chart-container, div[style*="chart"] { width: 100% !important; overflow: hidden !important; }
+            /* Tab content area */
+            .tab-content { padding: var(--space-2) !important; }
+            /* Dashboard mobile optimization */
+            .dashboard-header { text-align: center !important; }
+            /* Word cloud */
+            .word-cloud-container, div[id*="cloud"] { max-width: 100% !important; overflow: hidden !important; }
+            /* Timeline line over fix */
+            #history > div > div[style*="position: absolute"][style*="width: 2px"] { z-index: 1 !important; }
+        }
+        @media (max-width: 480px) {
+            .hero-name { font-size: 1.5rem; }
+            .profile-photo { width: 120px; height: 120px; }
+            .cta-container > a.btn,
+            .cta-container .arrow-wrapper .btn { max-width: 260px; padding: 10px 16px !important; font-size: 0.85rem !important; }
+            .arrow-wrapper { max-width: 260px; }
+            .tab-btn { padding: 6px 10px; font-size: 0.65rem; }
+            .dashboard-title { font-size: 1.25rem; }
+            .credential-text { font-size: var(--text-sm); }
+            h2, .section-title { font-size: 1.25rem !important; }
+            .quad-card { padding: var(--space-2); }
+            .quad-title { font-size: 1rem !important; }
+            .word-cloud-container { transform: scale(0.55) !important; margin-bottom: -80px !important; }
+        }
+
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; gap: var(--space-8); text-align: center; }
             .hero-right { padding-left: 0; }
@@ -413,14 +654,33 @@
     <section class="works-section" id="works">
         <div class="works-container">
             <div class="works-header">
-                <h2>Side Projects</h2>
-                <p class="works-subtitle">Automation workflows that creatively solve problems and save time</p>
+                <h2>Side Projects & Writing Samples</h2>
+                <p class="works-subtitle">Automation workflows and technical content that showcase data skills</p>
             </div>
 
             <div style="margin-top: 80px;">
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;">
 
-                    <!-- Card 1: Social Listening -->
+                    <!-- Card 1: RAPIDS vs Pandas -->
+                    <div class="work-card quad-card" onclick="document.getElementById('rapidsModal').classList.add('active'); document.body.style.overflow='hidden';" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
+                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="1.5">
+                                <rect x="6" y="6" width="12" height="12" rx="2"/>
+                                <rect x="9" y="9" width="6" height="6" rx="1" fill="#76B900" stroke="none"/>
+                                <line x1="8" y1="6" x2="8" y2="3"/><line x1="12" y1="6" x2="12" y2="3"/><line x1="16" y1="6" x2="16" y2="3"/>
+                                <line x1="8" y1="18" x2="8" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="16" y1="18" x2="16" y2="21"/>
+                                <line x1="6" y1="8" x2="3" y2="8"/><line x1="6" y1="12" x2="3" y2="12"/><line x1="6" y1="16" x2="3" y2="16"/>
+                                <line x1="18" y1="8" x2="21" y2="8"/><line x1="18" y1="12" x2="21" y2="12"/><line x1="18" y1="16" x2="21" y2="16"/>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">PANDAS VS RAPIDS cuDF: GPU SPEED TEST</h3>
+                        <p style="font-size: 1rem; line-height: 1.6;">Run a live simulation comparing CPU-based Pandas with NVIDIA's GPU-accelerated RAPIDS cuDF on 100M rows.</p>
+                        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Simulation & Technical Writing</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Social Listening -->
                     <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
                         <button onclick="toggleCard('social-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
@@ -434,6 +694,9 @@
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
                             Automates user sentiment tracking for product teams. Scrapes Reddit and Hacker News daily, analyzes feedback, and emails a 30-second audio summary.
                         </p>
+                        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Automation Workflow</span>
+                        </div>
 
                         <div class="work-details" style="position: relative;">
                             <button onclick="toggleCard('social-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
@@ -521,7 +784,7 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: SPOTIFY TRENDS -->
+                    <!-- Card 3: SPOTIFY TRENDS -->
                     <div class="work-card quad-card" id="spotify-card" onclick="toggleCard('spotify-card')" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
                         <button onclick="toggleCard('spotify-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
@@ -535,6 +798,9 @@
                         <p style="font-size: 1rem; line-height: 1.6; color: #000000; font-weight: 500;">
                             Visualizes 13+ years of Spotify data showing artist evolution, top tracks, and listening patterns from 2012-2026. 6,500+ hours analyzed.
                         </p>
+                        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(0,0,0,0.15); color: #000; padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Automation Workflow</span>
+                        </div>
 
                         <div class="work-details" style="position: relative;">
                             <button onclick="toggleCard('spotify-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(0, 0, 0, 0.08); border: 2px solid rgba(0, 0, 0, 0.2); border-radius: 50%; color: #000000; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(0,0,0,0.08)'; this.style.borderColor='rgba(0,0,0,0.2)'; this.style.transform='scale(1)'">&times;</button>
@@ -609,19 +875,6 @@
                         </div>
                     </div>
 
-                    <!-- Card 3 -->
-                    <div class="quad-card" style="background: linear-gradient(135deg, #E89BA7 0%, #D67886 100%); border-radius: 16px; padding: 40px; color: white; min-height: 280px;">
-                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E89BA7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="17 8 12 3 7 8"></polyline>
-                                <line x1="12" y1="3" x2="12" y2="15"></line>
-                            </svg>
-                        </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">MORE TO COME...</h3>
-                        <p style="font-size: 1rem; line-height: 1.6;">New projects in the works.</p>
-                    </div>
-
                     <!-- Card 4 -->
                     <div class="quad-card" style="background: linear-gradient(135deg, #D4B896 0%, #B89968 100%); border-radius: 16px; padding: 40px; color: white; min-height: 280px;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
@@ -646,7 +899,7 @@
             <div class="dashboard-header">
                 <div>
                     <h1 class="dashboard-title">Spotify Listening Analytics</h1>
-                    <p class="dashboard-subtitle">Data through February 17, 2026 | 2012-2026</p>
+                    <p class="dashboard-subtitle">Data through February 25, 2026 | 2012-2026</p>
                 </div>
             </div>
 
@@ -665,6 +918,14 @@
     </div>
 
     <script>
+        // Prevent browser scroll restoration - always start at top
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+            window.scrollTo(0, 0);
+        }
+
         const SPOTIFY_DATA = { stats: null, artistEvolution: null, monthlyTrends: null, topSongs: null };
         let currentTab = 'overview';
         let selectedYear = 'all';
@@ -1761,5 +2022,139 @@
     })();
     </script>
 
+
+    <!-- Google Analytics Event Tracking -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function trackClick(category, action, label) {
+        gtag('event', action, { 'event_category': category, 'event_label': label });
+      }
+      document.querySelectorAll('a').forEach(function(link) {
+        var t = link.textContent.trim();
+        if (t === 'View LinkedIn') link.addEventListener('click', function() { trackClick('Navigation', 'click_view_linkedin', 'View LinkedIn Button'); });
+        if (t === 'Side Projects') link.addEventListener('click', function() { trackClick('Navigation', 'click_side_projects', 'Side Projects Button'); });
+        if (t === 'Work History') link.addEventListener('click', function() { trackClick('Navigation', 'click_work_history', 'Work History Button'); });
+      });
+      document.querySelectorAll('button').forEach(function(btn) {
+        var t = btn.textContent.trim();
+        if (t === 'Send Me the Demo Report') btn.addEventListener('click', function() { trackClick('Social_Listening', 'click_send_demo_report', 'Send Demo Report Button'); });
+        if (t.includes('Explore') && t.includes('Dashboard')) btn.addEventListener('click', function() { trackClick('Spotify_Project', 'click_explore_dashboard', 'Explore Spotify Dashboard Button'); });
+        if (t === 'Overview') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_overview_tab', 'Spotify Dashboard - Overview Tab'); });
+        if (t === 'Artist Evolution') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_artist_evolution_tab', 'Spotify Dashboard - Artist Evolution Tab'); });
+        if (t === 'Genre Evolution') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_genre_evolution_tab', 'Spotify Dashboard - Genre Evolution Tab'); });
+        if (t === 'Charts & Trends') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_charts_trends_tab', 'Spotify Dashboard - Charts & Trends Tab'); });
+        if (t === 'Word Cloud') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_word_cloud_tab', 'Spotify Dashboard - Word Cloud Tab'); });
+      });
+      document.querySelectorAll('[onclick]').forEach(function(el) {
+        var oc = (el.getAttribute('onclick') || '').toLowerCase();
+        if (oc.includes('sentiment') || oc.includes('reddit') || oc.includes('social')) {
+          el.addEventListener('click', function() { trackClick('Project_Tiles', 'click_sentiment_tile', 'Reddit and HN Sentiment Tile'); });
+        }
+        if (oc.includes('spotify') || oc.includes('music') || oc.includes('listening')) {
+          el.addEventListener('click', function() { trackClick('Project_Tiles', 'click_spotify_tile', 'Spotify Trends Tile'); });
+        }
+      });
+      document.querySelectorAll('form').forEach(function(form) {
+        form.addEventListener('submit', function() { trackClick('Form', 'submit_contact_form', 'Name and Email Form Submission'); });
+      });
+    });
+
+        // RAPIDS Speed Test Simulation
+        function runRapidsSimulation() {
+            const btn = document.getElementById('rapidsRunBtn');
+            const sim = document.getElementById('rapidsSimSection');
+            const ws = document.getElementById('rapidsWritingSample');
+            btn.style.display = 'none';
+            sim.style.display = 'block';
+            sim.innerHTML = '';
+            const steps = [
+                {text: '> Initializing NVIDIA T4 GPU (16GB VRAM)...', delay: 0, color: '#a8d700'},
+                {text: '> Loading dataset: 100M rows x 12 columns', delay: 600, color: '#a8d700'},
+                {text: '> Running Pandas (CPU) groupby aggregation...', delay: 1200, color: '#888'},
+                {text: '  Result: 12.4s', delay: 2000, color: '#ff6b6b'},
+                {text: '> Running RAPIDS cuDF (T4 GPU) groupby aggregation...', delay: 2600, color: '#a8d700'},
+                {text: '  Result: 0.3s', delay: 3400, color: '#76B900'},
+                {text: '> RAPIDS cuDF is 41x faster on NVIDIA T4', delay: 4000, color: '#76B900', bold: true}
+            ];
+            steps.forEach(function(step) {
+                setTimeout(function() {
+                    var line = document.createElement('div');
+                    line.style.opacity = '0';
+                    line.style.transform = 'translateY(10px)';
+                    line.style.transition = 'all 0.5s ease';
+                    line.style.color = step.color;
+                    line.style.marginBottom = '8px';
+                    if (step.bold) line.style.fontWeight = '700';
+                    line.textContent = step.text;
+                    sim.appendChild(line);
+                    setTimeout(function() { line.style.opacity = '1'; line.style.transform = 'translateY(0)'; }, 50);
+                }, step.delay);
+            });
+            setTimeout(function() {
+                ws.style.opacity = '1';
+                setTimeout(function() { ws.scrollIntoView({behavior: 'smooth'}); }, 200);
+            }, 4800);
+        }
+    </script>
+
+    <!-- RAPIDS vs Pandas Modal -->
+    <div id="rapidsModal" class="fullscreen-modal">
+        <button class="modal-close-btn" onclick="document.getElementById('rapidsModal').classList.remove('active'); document.body.style.overflow='auto'; document.getElementById('rapidsSimSection').style.display='none'; document.getElementById('rapidsWritingSample').style.opacity='0'; document.getElementById('rapidsRunBtn').style.display='inline-block';">&times;</button>
+        <div style="max-width: 900px; margin: 0 auto; padding: 64px 40px;">
+            <div style="text-align: center; margin-bottom: 64px;">
+                <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 24px; background: linear-gradient(135deg, #76B900, #a8d700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Pandas vs RAPIDS cuDF</h1>
+                <p style="font-size: 1.25rem; color: #e0e0e0; font-weight: 500;">GPU-Accelerated Data Processing Speed Test</p>
+            </div>
+            <div style="text-align: center;">
+                <button id="rapidsRunBtn" onclick="runRapidsSimulation()" style="display: inline-block; padding: 18px 48px; background: #76B900; color: #0a0a0a; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; font-family: Montserrat, sans-serif; cursor: pointer; box-shadow: 0 10px 30px rgba(118,185,0,0.3); transition: all 0.3s;">RUN SPEED TEST</button>
+            </div>
+            <div id="rapidsSimSection" style="display: none; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 40px; margin: 40px 0; font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 2; color: #a8d700;"></div>
+            <div id="rapidsWritingSample" style="opacity: 0; transition: opacity 0.8s ease;">
+                <article style="font-size: 1rem; line-height: 1.8; color: #e0e0e0;">
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Why GPU-Accelerated Data Processing Matters</h2>
+                    <p style="margin-bottom: 16px;">Pandas is the backbone of Python data processing. But at 100M+ rows, it hits a wall. RAPIDS cuDF runs the <strong style="color: white;">same Pandas API on NVIDIA GPUs</strong>, delivering 10-50x speedups with minimal code changes.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">One Import Change. Massive Speedup.</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;">
+                        <div style="background: #1a1a1a; border-left: 4px solid #888; border-radius: 4px; padding: 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #61dafb;">
+                            <div style="color: #888; font-size: 0.75rem; margin-bottom: 8px; font-family: Montserrat;">PANDAS (CPU)</div>
+                            <span style="color: #76B900;">import</span> pandas <span style="color: #76B900;">as</span> pd<br>df = pd.read_csv(<span style="color: #f0c674;">'data.csv'</span>)<br>result = df.groupby(<span style="color: #f0c674;">'cat'</span>).sum()
+                        </div>
+                        <div style="background: #1a1a1a; border-left: 4px solid #76B900; border-radius: 4px; padding: 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #61dafb;">
+                            <div style="color: #76B900; font-size: 0.75rem; margin-bottom: 8px; font-family: Montserrat;">RAPIDS cuDF (GPU)</div>
+                            <span style="color: #76B900;">import</span> cudf<br>df = cudf.read_csv(<span style="color: #f0c674;">'data.csv'</span>)<br>result = df.groupby(<span style="color: #f0c674;">'cat'</span>).sum()
+                        </div>
+                    </div>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Benchmark Results (100M Rows, NVIDIA T4)</h2>
+                    <table style="width: 100%; border-collapse: collapse; margin: 24px 0; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a;">
+                        <thead><tr style="background: rgba(118,185,0,0.15);">
+                            <th style="padding: 16px; text-align: left; color: #76B900; font-weight: 700;">Operation</th>
+                            <th style="padding: 16px; text-align: left; color: #888;">Pandas</th>
+                            <th style="padding: 16px; text-align: left; color: #76B900;">cuDF</th>
+                            <th style="padding: 16px; text-align: left; color: #76B900; font-weight: 700;">Speedup</th>
+                        </tr></thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #2a2a2a;"><td style="padding: 16px;"><strong style="color: white;">Read CSV</strong></td><td style="padding: 16px;">8.2s</td><td style="padding: 16px;">0.4s</td><td style="padding: 16px; color: #76B900; font-weight: 700;">20x</td></tr>
+                            <tr style="border-bottom: 1px solid #2a2a2a;"><td style="padding: 16px;"><strong style="color: white;">GroupBy</strong></td><td style="padding: 16px;">12.4s</td><td style="padding: 16px;">0.3s</td><td style="padding: 16px; color: #76B900; font-weight: 700;">41x</td></tr>
+                            <tr style="border-bottom: 1px solid #2a2a2a;"><td style="padding: 16px;"><strong style="color: white;">Merge/Join</strong></td><td style="padding: 16px;">15.1s</td><td style="padding: 16px;">0.6s</td><td style="padding: 16px; color: #76B900; font-weight: 700;">25x</td></tr>
+                            <tr style="border-bottom: 1px solid #2a2a2a;"><td style="padding: 16px;"><strong style="color: white;">Sort</strong></td><td style="padding: 16px;">6.8s</td><td style="padding: 16px;">0.2s</td><td style="padding: 16px; color: #76B900; font-weight: 700;">34x</td></tr>
+                            <tr><td style="padding: 16px;"><strong style="color: white;">Filter</strong></td><td style="padding: 16px;">3.2s</td><td style="padding: 16px;">0.1s</td><td style="padding: 16px; color: #76B900; font-weight: 700;">32x</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="background: rgba(118,185,0,0.1); border-left: 4px solid #76B900; padding: 20px; margin: 24px 0; border-radius: 4px;">
+                        <strong style="color: #a8d700;">41x faster groupby.</strong> <span style="color: #e0e0e0;">What took 12.4 seconds on CPU completes in 300ms on a single NVIDIA T4. For pipelines running hourly, that compounds into hours saved daily.</span>
+                    </div>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">When to Use RAPIDS</h2>
+                    <p style="margin-bottom: 16px;"><strong style="color: white;">Use RAPIDS for:</strong> ETL pipelines at scale, ML feature engineering, real-time analytics on large datasets, exploratory analysis on 100M+ rows.</p>
+                    <p style="margin-bottom: 16px;"><strong style="color: white;">Stick with Pandas for:</strong> Small datasets under 100K rows, quick one-off scripts, operations not yet supported by cuDF.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Get Started Free</h2>
+                    <p style="margin-bottom: 16px;">Google Colab provides a free NVIDIA T4 GPU. Install RAPIDS and start benchmarking in minutes:</p>
+                    <div style="background: #1a1a1a; border-left: 4px solid #76B900; border-radius: 4px; padding: 20px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #a8d700;">!pip install cudf-cu12<br>import cudf<br>df = cudf.read_csv('data.csv')<br>print(df.describe())</div>
+                    <div style="text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #2a2a2a; color: #888; font-size: 0.875rem;">
+                        <p>Technical writing sample by Cory Ziller | NVIDIA Product Marketing</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
