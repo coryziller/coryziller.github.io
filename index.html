@@ -666,7 +666,8 @@
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto;">
 
                     <!-- Card 1: RAPIDS vs Pandas -->
-                    <div class="work-card quad-card" onclick="document.getElementById('rapidsModal').classList.add('active'); document.body.style.overflow='hidden';" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 40px; color: white; position: relative; min-height: 280px; transition: transform 0.3s ease; cursor: pointer;">
+                        <button onclick="toggleCard('rapids-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="1.5">
                                 <rect x="6" y="6" width="12" height="12" rx="2"/>
@@ -681,6 +682,71 @@
                         <p style="font-size: 1rem; line-height: 1.6;">Run a live simulation comparing CPU-based Pandas with NVIDIA's GPU-accelerated RAPIDS cuDF on 100M rows of paid media data.</p>
                         <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
                             <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Simulation & Technical Writing</span>
+                        </div>
+
+                        <div class="work-details" style="position: relative;">
+                            <button onclick="toggleCard('rapids-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
+
+                                    <div>
+                                        <div style="margin-bottom: 48px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
+                                                Pandas is the backbone of Python data work, but it chokes on 100M+ rows. NVIDIA's RAPIDS cuDF runs the same Pandas API on GPUs — 10-50x faster with minimal code changes. I built a simulation to show exactly how dramatic the difference is.
+                                            </p>
+                                        </div>
+
+                                        <div style="margin-bottom: 48px;">
+                                            <div style="display:flex;justify-content:space-between;align-items:baseline;"><h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 20px;">What I Built</h4><span style="font-size:0.75rem;font-weight:700;color:rgba(0,0,0,0.5);text-transform:uppercase;letter-spacing:0.05em;">Technical Skills</span></div>
+                                            <div style="display: flex; flex-direction: column; gap: 16px;">
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3); position:relative;">
+                                                    <div style="font-weight: 700; margin-bottom: 4px;">Simulated Benchmark<span style="position:absolute;right:0;top:0;font-size:0.6875rem;font-weight:700;color:rgba(0,0,0,0.55);background:rgba(255,255,255,0.45);padding:2px 10px;border-radius:10px;white-space:nowrap;">Data Engineering</span></div>
+                                                    <div style="font-size: 0.9375rem; opacity: 0.75;">100M rows of paid media data</div>
+                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">Pandas vs cuDF on NVIDIA T4</div>
+                                                </div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">&#8595;</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3); position:relative;">
+                                                    <div style="font-weight: 700; margin-bottom: 4px;">Racing Bar Visualization<span style="position:absolute;right:0;top:0;font-size:0.6875rem;font-weight:700;color:rgba(0,0,0,0.55);background:rgba(255,255,255,0.45);padding:2px 10px;border-radius:10px;white-space:nowrap;">Product Demo</span></div>
+                                                    <div style="font-size: 0.9375rem; opacity: 0.75;">Animated CPU vs GPU comparison</div>
+                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">JavaScript + CSS animations</div>
+                                                </div>
+                                                <div style="opacity: 0.5; margin-left: 12px;">&#8595;</div>
+                                                <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3); position:relative;">
+                                                    <div style="font-weight: 700; margin-bottom: 4px;">Technical Write-Up<span style="position:absolute;right:0;top:0;font-size:0.6875rem;font-weight:700;color:rgba(0,0,0,0.55);background:rgba(255,255,255,0.45);padding:2px 10px;border-radius:10px;white-space:nowrap;">Product Marketing</span></div>
+                                                    <div style="font-size: 0.9375rem; opacity: 0.75;">Code comparisons, benchmarks, use cases</div>
+                                                    <div style="font-size: 0.8125rem; opacity: 0.5; margin-top: 2px;">NVIDIA product marketing voice</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Impact</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
+                                                41x faster groupby on 100M rows. What takes Pandas 12.4 seconds completes in 0.3 seconds on a single NVIDIA T4 GPU — with one import change.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                                            <div style="margin-bottom: 32px;">
+                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">See It In Action</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">View Simulation & Write-Up</h3>
+                                                <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
+                                                    Watch the racing bar speed test and read the full technical article on GPU-accelerated data processing.
+                                                </p>
+                                            </div>
+                                            <button onclick="document.getElementById('rapidsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #4A7A00; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
+                                                Launch Speed Test
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button class="close-btn" onclick="toggleCard('rapids-card'); event.stopPropagation();">Close</button>
+                            </div>
                         </div>
                     </div>
 
@@ -2074,11 +2140,11 @@
                 <div id="simInit" style="font-family: 'Courier New', monospace; font-size: 0.85rem; margin-bottom: 24px;">
                     <div id="simLine1" style="color: #a8d700; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px;">> Initializing NVIDIA T4 GPU (16GB VRAM)...</div>
                     <div id="simLine2" style="color: #a8d700; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px;">> Loading paid media dataset: 100M rows</div>
-                    <div id="simSchema" style="color: #555; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px; padding-left: 16px; font-size: 0.8rem;">
+                    <div id="simSchema" style="color: #999; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px; padding-left: 16px; font-size: 0.8rem;">
                         <span style="color:#76B900;">campaign_id</span> · <span style="color:#76B900;">date</span> · <span style="color:#76B900;">impressions</span> · <span style="color:#76B900;">clicks</span> · <span style="color:#76B900;">spend</span> · <span style="color:#76B900;">conversions</span> · <span style="color:#76B900;">revenue</span> · <span style="color:#76B900;">channel</span> · <span style="color:#76B900;">geo</span> · <span style="color:#76B900;">device</span> · <span style="color:#76B900;">creative_id</span> · <span style="color:#76B900;">ctr</span>
                     </div>
                     <div id="simLine3" style="color: #a8d700; opacity: 0; transition: opacity 0.4s; margin-bottom: 6px;">> GroupBy: total spend by campaign × channel × geo</div>
-                    <div id="simExplain" style="color: #888; opacity: 0; transition: opacity 0.4s; margin-bottom: 16px; font-family: Montserrat, sans-serif; font-size: 0.85rem; line-height: 1.6; padding: 12px 0;">
+                    <div id="simExplain" style="color: #ccc; opacity: 0; transition: opacity 0.4s; margin-bottom: 16px; font-family: Montserrat, sans-serif; font-size: 0.95rem; line-height: 1.6; padding: 12px 0;">
                         Both engines aggregate 100 million ad performance rows — grouping spend, clicks, and conversions by campaign, channel, and geography. Same operation, same data. Only difference: CPU vs GPU.
                     </div>
                 </div>
@@ -2104,7 +2170,7 @@
                     <span style="font-family: Montserrat, sans-serif; font-size: 1.5rem; font-weight: 800; color: #76B900;">41x faster</span>
                     <span style="font-family: Montserrat, sans-serif; font-size: 1rem; color: #888; margin-left: 8px;">on NVIDIA T4</span>
                 </div>
-                <div style="text-align: center; margin-top: 12px; font-size: 0.75rem; color: #555; font-family: Montserrat, sans-serif;">
+                <div style="text-align: center; margin-top: 12px; font-size: 0.75rem; color: #777; font-family: Montserrat, sans-serif;">
                     *Simulated results based on published RAPIDS benchmarks
                 </div>
             `;
