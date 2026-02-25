@@ -117,7 +117,9 @@
         .work-card.expanded .close-btn { display: block; }
         .work-card.expanded .card-close-x { display: flex !important; }
         .card-close-x:hover { background: rgba(220, 50, 50, 0.7) !important; border-color: white !important; }
+        .quad-card { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; }
         .quad-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+        .work-card.expanded.quad-card { aspect-ratio: auto; }
 
         /* FULLSCREEN DASHBOARD */
         .fullscreen-modal {
@@ -408,7 +410,7 @@
             .works-container > div[style*="grid"],
             div[style*="grid-template-columns"]:not(.evolution-panels):not(.evolution-artist-row) { grid-template-columns: 1fr !important; gap: 16px !important; }
             .work-card { border-radius: 12px; overflow: hidden; box-sizing: border-box; max-width: 100%; }
-            .quad-card { padding: var(--space-3); overflow: hidden; box-sizing: border-box; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
+            .quad-card { padding: var(--space-3); overflow: hidden; box-sizing: border-box; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; aspect-ratio: auto !important; }
             .quad-title { font-size: 1.1rem !important; }
 
             /* Project detail popouts - single column */
