@@ -101,23 +101,24 @@
         .btn-outline { background: transparent; color: var(--text-primary); border: 2px solid rgba(255, 255, 255, 0.3); }
         .btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
 
-        .works-section { padding: var(--space-16) var(--space-4); background: var(--bg-primary); }
-        .works-container { max-width: 1280px; margin: 0 auto; }
+        .works-section { padding: var(--space-16) var(--space-4); background: var(--bg-primary); overflow-x: hidden; }
+        .works-container { max-width: 1280px; margin: 0 auto; overflow-x: hidden; }
         .works-header { text-align: center; margin-bottom: var(--space-8); }
         .works-header h2 { font-size: var(--text-5xl); margin-bottom: var(--space-3); font-weight: 800; }
         .works-subtitle { font-size: var(--text-lg); color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
         .work-card { border-radius: 16px; transition: all 0.4s; cursor: pointer; }
         .work-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4); }
-        .work-card.expanded { grid-column: 1 / -1; transform: translateY(0); max-width: 1600px; margin: 0 auto; }
+        .work-card.expanded { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vw; max-width: 1200px; max-height: 90vh; z-index: 1000; overflow-y: auto; border-radius: 16px; box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
         .work-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-        .work-card.expanded .work-details { max-height: 85vh; padding: var(--space-3); overflow-y: auto; }
+        .work-card.expanded .work-details { max-height: none; padding: var(--space-3); overflow-y: visible; }
         .scroll-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .scroll-section.visible { opacity: 1; transform: translateY(0); }
         .close-btn { display: none; margin: var(--space-3) auto; padding: 12px 32px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 100px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
         .work-card.expanded .close-btn { display: block; }
         .work-card.expanded .card-close-x { display: flex !important; }
         .card-close-x:hover { background: rgba(220, 50, 50, 0.7) !important; border-color: white !important; }
-        .quad-card { display: flex; flex-direction: column; justify-content: center; padding: 32px !important; }
+        .tiles-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 20px !important; max-width: 900px !important; margin: 0 auto !important; width: 100% !important; box-sizing: border-box !important; }
+        .quad-card { display: flex; flex-direction: column; justify-content: center; padding: 32px !important; box-sizing: border-box; overflow: hidden; }
         .quad-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
         .work-card.expanded.quad-card { }
 
@@ -408,7 +409,8 @@
             .works-container { padding: 0; }
             .works-header { padding: 0 var(--space-2); text-align: center; }
             .works-container > div[style*="grid"],
-            div[style*="grid-template-columns"]:not(.evolution-panels):not(.evolution-artist-row) { grid-template-columns: 1fr !important; gap: 16px !important; }
+            div[style*="grid-template-columns"]:not(.evolution-panels):not(.evolution-artist-row):not(.tiles-grid) { grid-template-columns: 1fr !important; gap: 16px !important; }
+            .tiles-grid { grid-template-columns: 1fr !important; gap: 16px !important; max-width: 100% !important; }
             .work-card { border-radius: 12px; overflow: hidden; box-sizing: border-box; max-width: 100%; }
             .quad-card { padding: var(--space-3); overflow: hidden; box-sizing: border-box; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
             .quad-title { font-size: 1.1rem !important; }
@@ -665,7 +667,7 @@
             </div>
 
             <div style="margin-top: 32px;">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; padding: 0; box-sizing: border-box;">
+                <div class="tiles-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; box-sizing: border-box;">
 
                     <!-- Card 1: RAPIDS vs Pandas -->
                     <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; transition: transform 0.3s ease; cursor: pointer;">
@@ -2227,9 +2229,9 @@
                         <p style="font-size: 0.95rem; color: #999; font-family: Montserrat, sans-serif;">The following is a hypothetical NVIDIA developer blog post explaining the benefits of RAPIDS cuDF for data teams — the kind of product-focused technical content this role would produce.</p>
                     </div>
                 <article style="font-size: 1.05rem; line-height: 1.85; color: #e0e0e0;">
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Your Data Pipeline Is Bottlenecked — and RAPIDS cuDF Fixes It</h2>
-                    <p style="margin-bottom: 16px;">If your team is running ETL jobs in Pandas, you've hit the ceiling. That groupby on 100M rows that takes 12 seconds? Your dashboards are stale. Your pipeline is backing up. And throwing more CPU cores at it has diminishing returns.</p>
-                    <p style="margin-bottom: 16px;">RAPIDS cuDF is an open-source GPU DataFrame library that accelerates your existing Pandas workflows by 10-50x. <strong style="color: white;">Same API. Same code patterns. Massively faster.</strong> It works by moving DataFrame operations from the CPU to the GPU — and the migration path is one import change.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Your CPU Is the Bottleneck. The GPU Is the Fix.</h2>
+                    <p style="margin-bottom: 16px;">If your team is running ETL jobs in Pandas, you're leaving massive performance on the table. That groupby on 100M rows that takes 12 seconds on CPU? It takes 300 milliseconds on an NVIDIA GPU. Your dashboards could be real-time. Your pipelines could run 41x faster. The hardware exists — you're just not using it yet.</p>
+                    <p style="margin-bottom: 16px;">RAPIDS cuDF is NVIDIA's open-source GPU DataFrame library. It mirrors the Pandas API exactly, so your existing code works with one import change — but now it runs on NVIDIA CUDA cores instead of CPU threads. <strong style="color: white;">Same API. Same code. GPU speed.</strong></p>
 
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">One Import Change. Massive Speedup.</h2>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;">
@@ -2265,14 +2267,14 @@
                         <strong style="color: #c8f04d; font-size: 1.1rem;">41x faster groupby.</strong> <span style="color: #e0e0e0;">What took 12.4 seconds on CPU completes in 300ms with cuDF. For ETL pipelines running hourly, that compounds into hours saved per day — and the difference between real-time dashboards and stale data.</span>
                     </div>
 
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Where RAPIDS cuDF Fits in Your Stack</h2>
-                    <p style="margin-bottom: 16px;">Most data teams aren't running everything in Python. You query a warehouse, transform in Python, then feed into ML pipelines or BI tools. RAPIDS cuDF accelerates that Python transformation layer — the part where Pandas does the heavy lifting — without changing your architecture.</p>
-                    <p style="margin-bottom: 16px;">The workflow stays the same: pull your data, load it into a cuDF DataFrame instead of Pandas, run your aggregations and feature engineering at GPU speed, then push results downstream. Your warehouse still handles storage. cuDF handles the compute — faster.</p>
-                    <p style="margin-bottom: 16px;">And because cuDF is open-source and part of the broader RAPIDS ecosystem, it integrates with the tools teams already use: <strong style="color: white;">Dask</strong> for distributed computing, <strong style="color: white;">scikit-learn</strong> compatible preprocessing, and native support for reading from Parquet, ORC, CSV, and JSON. No proprietary lock-in — just faster DataFrames.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Drop Into Any Stack. Accelerate Immediately.</h2>
+                    <p style="margin-bottom: 16px;">RAPIDS cuDF isn't a new architecture — it's an upgrade to the one you already have. Your team queries a warehouse, transforms in Python, and feeds into ML pipelines or BI tools. cuDF accelerates that Python transformation layer on NVIDIA GPUs — turning minutes of processing into seconds, without rewriting a single pipeline.</p>
+                    <p style="margin-bottom: 16px;">And because it's built on the NVIDIA CUDA platform, cuDF takes full advantage of GPU parallelism across every operation — reads, joins, aggregations, filtering. The more data you throw at it, the wider the gap between CPU and GPU performance becomes. At 100M+ rows, there's no comparison.</p>
+                    <p style="margin-bottom: 16px;">cuDF also integrates with the broader NVIDIA RAPIDS ecosystem: <strong style="color: white;">cuML</strong> for GPU-accelerated machine learning, <strong style="color: white;">cuGraph</strong> for graph analytics, and <strong style="color: white;">Dask-cuDF</strong> for scaling across multi-GPU clusters. Every layer of your pipeline — from ETL to training — benefits from GPU acceleration.</p>
 
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">When to Reach for RAPIDS cuDF</h2>
-                    <p style="margin-bottom: 16px;"><strong style="color: white;">Switch to cuDF when:</strong> your ETL jobs take minutes instead of seconds, you're doing ML feature engineering on large datasets, you need real-time analytics on 100M+ rows, or your scikit-learn preprocessing is the bottleneck in your training pipeline.</p>
-                    <p style="margin-bottom: 16px;"><strong style="color: white;">Stay with Pandas when:</strong> you're exploring datasets under a million rows, writing quick one-off scripts, or prototyping. But when you're ready to scale, cuDF is the fastest path from slow pipelines to real-time results — and it feels exactly like the Pandas you already know.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">The GPU Advantage Compounds</h2>
+                    <p style="margin-bottom: 16px;">A single ETL job that runs 41x faster is impressive. But the real value shows up at scale: hourly pipelines that now run in real-time. Feature engineering that no longer bottlenecks model training. Dashboards that refresh in seconds instead of minutes. Every downstream process gets faster because the data layer got faster.</p>
+                    <p style="margin-bottom: 16px;">With NVIDIA GPUs already deployed across every major cloud — and available free on Google Colab — there's no hardware barrier. The only thing between your team and 10-50x faster data processing is <strong style="color: white;">one import change</strong>.</p>
                 </article>
                 </div>
             </div>
