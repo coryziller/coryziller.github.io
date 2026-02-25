@@ -117,7 +117,7 @@
         .work-card.expanded .close-btn { display: block; }
         .work-card.expanded .card-close-x { display: flex !important; }
         .card-close-x:hover { background: rgba(220, 50, 50, 0.7) !important; border-color: white !important; }
-        .quad-card { aspect-ratio: 4/3; display: flex; flex-direction: column; justify-content: center; }
+        .quad-card { aspect-ratio: auto; display: flex; flex-direction: column; justify-content: center; }
         .quad-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
         .work-card.expanded.quad-card { aspect-ratio: auto; }
 
@@ -664,11 +664,11 @@
                 <p class="works-subtitle">Automation workflows and technical content that showcase data skills</p>
             </div>
 
-            <div style="margin-top: 40px;">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;">
+            <div style="margin-top: 32px;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1200px; margin: 0 auto;">
 
                     <!-- Card 1: RAPIDS vs Pandas -->
-                    <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 28px; color: white; position: relative; min-height: 200px; transition: transform 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; transition: transform 0.3s ease; cursor: pointer;">
                         <button onclick="toggleCard('rapids-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="1.5">
@@ -753,7 +753,7 @@
                     </div>
 
                     <!-- Card 2: Social Listening -->
-                    <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 28px; color: white; position: relative; min-height: 200px; transition: transform 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; transition: transform 0.3s ease; cursor: pointer;">
                         <button onclick="toggleCard('social-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -857,7 +857,7 @@
                     </div>
 
                     <!-- Card 3: SPOTIFY TRENDS -->
-                    <div class="work-card quad-card" id="spotify-card" onclick="toggleCard('spotify-card')" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 28px; color: white; position: relative; min-height: 200px; transition: transform 0.3s ease; cursor: pointer;">
+                    <div class="work-card quad-card" id="spotify-card" onclick="toggleCard('spotify-card')" style="background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; transition: transform 0.3s ease; cursor: pointer;">
                         <button onclick="toggleCard('spotify-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -953,7 +953,7 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="quad-card" style="background: linear-gradient(135deg, #D4B896 0%, #B89968 100%); border-radius: 16px; padding: 28px; color: white; min-height: 200px;">
+                    <div class="quad-card" style="background: linear-gradient(135deg, #D4B896 0%, #B89968 100%); border-radius: 16px; padding: 24px; color: white; min-height: 0;">
                         <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4B896" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
