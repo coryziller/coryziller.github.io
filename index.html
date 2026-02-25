@@ -28,8 +28,8 @@
             --text-lg: 1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
             --text-3xl: 1.875rem; --text-4xl: 2.25rem; --text-5xl: 3rem;
             --bg-primary: #0a0a0a; --bg-secondary: #1a1a1a;
-            --text-primary: #ffffff; --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --text-primary: #ffffff; --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-tertiary: rgba(255, 255, 255, 0.7);
             --border-subtle: rgba(255, 255, 255, 0.1);
             --spotify-green: #1DB954;
         }
@@ -110,7 +110,7 @@
         .work-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4); }
         .work-card.expanded { grid-column: 1 / -1; transform: translateY(0); max-width: 1600px; margin: 0 auto; }
         .work-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-        .work-card.expanded .work-details { max-height: 75vh; padding: var(--space-4); overflow-y: auto; }
+        .work-card.expanded .work-details { max-height: 85vh; padding: var(--space-3); overflow-y: auto; }
         .scroll-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .scroll-section.visible { opacity: 1; transform: translateY(0); }
         .close-btn { display: none; margin: var(--space-3) auto; padding: 12px 32px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 100px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
@@ -686,18 +686,18 @@
 
                         <div class="work-details" style="position: relative;">
                             <button onclick="toggleCard('rapids-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
-                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-2); padding-top: var(--space-3);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: var(--space-4);">
 
                                     <div>
-                                        <div style="margin-bottom: 48px;">
+                                        <div style="margin-bottom: 24px;">
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
                                                 Pandas is the backbone of Python data work, but it chokes on 100M+ rows. NVIDIA's RAPIDS cuDF runs the same Pandas API on GPUs — 10-50x faster with minimal code changes. I built a simulation to show exactly how dramatic the difference is.
                                             </p>
                                         </div>
 
-                                        <div style="margin-bottom: 48px;">
+                                        <div style="margin-bottom: 24px;">
                                             <div style="display:flex;justify-content:space-between;align-items:baseline;"><h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 20px;">What I Built</h4><span style="font-size:0.75rem;font-weight:700;color:rgba(0,0,0,0.5);text-transform:uppercase;letter-spacing:0.05em;">Technical Skills</span></div>
                                             <div style="display: flex; flex-direction: column; gap: 16px;">
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3); position:relative;">
@@ -770,11 +770,11 @@
 
                         <div class="work-details" style="position: relative;">
                             <button onclick="toggleCard('social-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
-                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-2); padding-top: var(--space-3);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: var(--space-4);">
 
                                     <div>
-                                        <div style="margin-bottom: 48px;">
+                                        <div style="margin-bottom: 24px;">
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
                                                 NVIDIA product managers need to track user sentiment to prioritize product features and understand pain points, but checking Reddit and Hacker News daily takes hours. Automate the entire process.
@@ -782,7 +782,7 @@
                                         </div>
                 
 
-                                        <div style="margin-bottom: 48px;">
+                                        <div style="margin-bottom: 24px;">
                                             <div style="display:flex;justify-content:space-between;align-items:baseline;"><h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 20px;">What I Built</h4><span style="font-size:0.75rem;font-weight:700;color:rgba(0,0,0,0.5);text-transform:uppercase;letter-spacing:0.05em;">Technical Skills</span></div>
                                             <div style="display: flex; flex-direction: column; gap: 16px;">
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(255,255,255,0.3); position:relative; position:relative;">
@@ -874,18 +874,18 @@
 
                         <div class="work-details" style="position: relative;">
                             <button onclick="toggleCard('spotify-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(0, 0, 0, 0.08); border: 2px solid rgba(0, 0, 0, 0.2); border-radius: 50%; color: #000000; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(0,0,0,0.08)'; this.style.borderColor='rgba(0,0,0,0.2)'; this.style.transform='scale(1)'">&times;</button>
-                            <div style="border-top: 1px solid rgba(0,0,0,0.2); margin-top: var(--space-4); padding-top: var(--space-6);">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: var(--space-8);">
+                            <div style="border-top: 1px solid rgba(0,0,0,0.2); margin-top: var(--space-2); padding-top: var(--space-3);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: var(--space-4);">
 
                                     <div>
-                                        <div style="margin-bottom: 48px;">
+                                        <div style="margin-bottom: 24px;">
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px; color: #000;">The Idea</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7; color: #000;">
                                                 Spotify Wrapped only gives a snapshot of one year. I wanted the full picture&mdash;how my taste evolved over 13+ years, which artists defined each era, and what patterns emerge across 6,500+ hours.
                                             </p>
                                         </div>
 
-                                        <div style="margin-bottom: 48px;">
+                                        <div style="margin-bottom: 24px;">
                                             <div style="display:flex;justify-content:space-between;align-items:baseline;"><h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 20px; color: #000;">What I Built</h4><span style="font-size:0.75rem;font-weight:700;color:rgba(0,0,0,0.5);text-transform:uppercase;letter-spacing:0.05em;">Technical Skills</span></div>
                                             <div style="display: flex; flex-direction: column; gap: 16px;">
                                                 <div style="padding-left: 12px; border-left: 2px solid rgba(0,0,0,0.3); position:relative; position:relative;">
@@ -1956,39 +1956,39 @@
             .tl-right { transform: translateX(40px); }
             .tl-item.visible { opacity: 1; transform: translateX(0); }
             .tl-card {
-                background: rgba(255,255,255,0.07);
-                border: 1px solid rgba(255,255,255,0.14);
+                background: rgba(255,255,255,0.09);
+                border: 1px solid rgba(255,255,255,0.18);
                 border-radius: 12px;
                 padding: 20px 24px;
             }
             .tl-card:hover {
-                background: rgba(255,255,255,0.11);
-                border-color: rgba(255,255,255,0.22);
+                background: rgba(255,255,255,0.13);
+                border-color: rgba(255,255,255,0.28);
                 transition: all 0.3s ease;
             }
             .tl-date {
-                font-size: 0.75rem;
-                font-weight: 600;
-                color: rgba(255,255,255,0.6);
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: rgba(255,255,255,0.8);
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
                 margin-bottom: 6px;
             }
             .tl-title {
                 font-weight: 800;
-                font-size: 1.15rem;
+                font-size: 1.2rem;
                 margin-bottom: 4px;
                 color: #fff;
             }
             .tl-role {
-                color: rgba(255,255,255,0.85);
-                font-size: 0.9rem;
+                color: rgba(255,255,255,0.95);
+                font-size: 0.95rem;
                 font-weight: 500;
                 margin-bottom: 6px;
             }
             .tl-desc {
-                color: rgba(255,255,255,0.65);
-                font-size: 0.8rem;
+                color: rgba(255,255,255,0.8);
+                font-size: 0.85rem;
                 font-weight: 400;
                 line-height: 1.5;
                 margin-bottom: 10px;
@@ -2013,7 +2013,7 @@
             <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.1); transform: translateX(-1px);"></div>
 
             <!-- OSU - LEFT -->
-            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 48px;">
+            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 24px;">
                 <div style="width: 50%; padding-right: 40px; text-align: right;">
                     <div class="tl-card">
                         <div class="tl-date">Expected May 2027</div>
@@ -2026,7 +2026,7 @@
             </div>
 
             <!-- Basis - RIGHT -->
-            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 48px;">
+            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 24px;">
                 <div style="width: 50%;"></div>
                 <div class="tl-dot" style="left: calc(50% - 7px); background: #4A90D9;"></div>
                 <div style="width: 50%; padding-left: 40px;">
@@ -2040,7 +2040,7 @@
             </div>
 
             <!-- Yelp - LEFT -->
-            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 48px;">
+            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 24px;">
                 <div style="width: 50%; padding-right: 40px; text-align: right;">
                     <div class="tl-card">
                         <div class="tl-date">2019 &ndash; 2020 &bull; Washington D.C.</div>
@@ -2053,7 +2053,7 @@
             </div>
 
             <!-- Marinus - RIGHT -->
-            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 48px;">
+            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 24px;">
                 <div style="width: 50%;"></div>
                 <div class="tl-dot" style="left: calc(50% - 7px); background: #7B68EE;"></div>
                 <div style="width: 50%; padding-left: 40px;">
