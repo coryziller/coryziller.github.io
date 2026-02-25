@@ -117,9 +117,9 @@
         .work-card.expanded .close-btn { display: block; }
         .work-card.expanded .card-close-x { display: flex !important; }
         .card-close-x:hover { background: rgba(220, 50, 50, 0.7) !important; border-color: white !important; }
-        .quad-card { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; }
+        .quad-card { display: flex; flex-direction: column; justify-content: center; padding: 32px !important; }
         .quad-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
-        .work-card.expanded.quad-card { aspect-ratio: auto; }
+        .work-card.expanded.quad-card { }
 
         /* FULLSCREEN DASHBOARD */
         .fullscreen-modal {
@@ -410,7 +410,7 @@
             .works-container > div[style*="grid"],
             div[style*="grid-template-columns"]:not(.evolution-panels):not(.evolution-artist-row) { grid-template-columns: 1fr !important; gap: 16px !important; }
             .work-card { border-radius: 12px; overflow: hidden; box-sizing: border-box; max-width: 100%; }
-            .quad-card { padding: var(--space-3); overflow: hidden; box-sizing: border-box; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; aspect-ratio: auto !important; }
+            .quad-card { padding: var(--space-3); overflow: hidden; box-sizing: border-box; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
             .quad-title { font-size: 1.1rem !important; }
 
             /* Project detail popouts - single column */
@@ -665,7 +665,7 @@
             </div>
 
             <div style="margin-top: 32px;">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 800px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; padding: 0 24px;">
 
                     <!-- Card 1: RAPIDS vs Pandas -->
                     <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; transition: transform 0.3s ease; cursor: pointer;">
@@ -2224,14 +2224,14 @@
                         <span style="font-family: Montserrat, sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #c8f04d;">Hypothetical Writing Sample</span>
                     </div>
                     <div style="text-align: center; margin-bottom: 32px;">
-                        <p style="font-size: 0.95rem; color: #999; font-family: Montserrat, sans-serif;">The following is a hypothetical NVIDIA developer blog post showcasing the T4 GPU's data processing capabilities through RAPIDS cuDF — the kind of product-focused technical content this role would produce.</p>
+                        <p style="font-size: 0.95rem; color: #999; font-family: Montserrat, sans-serif;">The following is a hypothetical NVIDIA developer blog post explaining the benefits of RAPIDS cuDF for data teams — the kind of product-focused technical content this role would produce.</p>
                     </div>
                 <article style="font-size: 1.05rem; line-height: 1.85; color: #e0e0e0;">
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">The NVIDIA T4: Not Just for Inference</h2>
-                    <p style="margin-bottom: 16px;">Most teams know the T4 as a cost-efficient inference GPU — available free on Google Colab and widely deployed across every major cloud. But the T4's 2,560 CUDA cores and 16GB of GDDR6 memory make it quietly powerful for something else entirely: <strong style="color: white;">accelerating the data processing layer that feeds your ML models and dashboards.</strong></p>
-                    <p style="margin-bottom: 16px;">With RAPIDS cuDF, the T4 transforms from an inference card into a full data processing engine. <strong style="color: white;">Same Pandas API. Same code patterns. 10-50x faster.</strong> And the migration path is one import change.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Your Data Pipeline Is Bottlenecked — and RAPIDS cuDF Fixes It</h2>
+                    <p style="margin-bottom: 16px;">If your team is running ETL jobs in Pandas, you've hit the ceiling. That groupby on 100M rows that takes 12 seconds? Your dashboards are stale. Your pipeline is backing up. And throwing more CPU cores at it has diminishing returns.</p>
+                    <p style="margin-bottom: 16px;">RAPIDS cuDF is an open-source GPU DataFrame library that accelerates your existing Pandas workflows by 10-50x. <strong style="color: white;">Same API. Same code patterns. Massively faster.</strong> It works by moving DataFrame operations from the CPU to the GPU — and the migration path is one import change.</p>
 
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">One Import Change. Full GPU Acceleration.</h2>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">One Import Change. Massive Speedup.</h2>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;">
                         <div style="background: #1a1a1a; border-left: 4px solid #888; border-radius: 4px; padding: 20px; font-family: 'Courier New', monospace; font-size: 0.9rem; color: #e0e0e0;">
                             <div style="color: #999; font-size: 0.8rem; margin-bottom: 8px; font-family: Montserrat; font-weight: 600;">PANDAS (CPU)</div>
@@ -2242,10 +2242,10 @@
                             <span style="color: #c8f04d;">import</span> cudf<br>df = cudf.read_csv(<span style="color: #f0c674;">'campaign_data.csv'</span>)<br>result = df.groupby(<span style="color: #f0c674;">'campaign_id'</span>).agg({<br>&nbsp;&nbsp;<span style="color: #f0c674;">'spend'</span>: <span style="color: #f0c674;">'sum'</span>,<br>&nbsp;&nbsp;<span style="color: #f0c674;">'conversions'</span>: <span style="color: #f0c674;">'sum'</span><br>})
                         </div>
                     </div>
-                    <p style="margin-bottom: 16px; color: #bbb;">The code is identical. The only difference is the import. cuDF mirrors the Pandas API, so your existing workflows, notebooks, and scikit-learn preprocessing pipelines move to the T4's GPU cores with minimal refactoring — no CUDA knowledge required.</p>
+                    <p style="margin-bottom: 16px; color: #bbb;">The code is identical. cuDF mirrors the Pandas API, so your existing workflows, notebooks, and scikit-learn preprocessing pipelines work on the GPU with minimal refactoring — no CUDA knowledge required.</p>
 
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">What a Single T4 Can Do: 100M Rows of Paid Media Data</h2>
-                    <p style="margin-bottom: 16px;">To show what the T4 is capable of in a data processing context, we benchmarked five core DataFrame operations on 100 million rows of ad performance data — the kind of dataset you'd pull from BigQuery or Redshift for campaign analysis. One T4. No cluster. Free on Google Colab.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Benchmarks: 100M Rows of Paid Media Data</h2>
+                    <p style="margin-bottom: 16px;">We benchmarked five core DataFrame operations on 100 million rows of ad performance data — the kind of dataset you'd process for campaign reporting. Pandas on CPU vs. cuDF on a single NVIDIA GPU.</p>
                     <table style="width: 100%; border-collapse: collapse; margin: 24px 0; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a;">
                         <thead><tr style="background: rgba(118,185,0,0.15);">
                             <th style="padding: 16px; text-align: left; color: #c8f04d; font-weight: 700;">Operation</th>
@@ -2262,17 +2262,17 @@
                         </tbody>
                     </table>
                     <div style="background: rgba(118,185,0,0.1); border-left: 4px solid #76B900; padding: 24px; margin: 24px 0; border-radius: 4px;">
-                        <strong style="color: #c8f04d; font-size: 1.1rem;">41x faster groupby on a single T4.</strong> <span style="color: #e0e0e0;">What took 12.4 seconds on CPU completes in 300ms on one GPU. For ETL pipelines running hourly, that's hours saved per day — and the difference between real-time dashboards and stale data. All on a GPU that costs $0.35/hr on most clouds.</span>
+                        <strong style="color: #c8f04d; font-size: 1.1rem;">41x faster groupby.</strong> <span style="color: #e0e0e0;">What took 12.4 seconds on CPU completes in 300ms with cuDF. For ETL pipelines running hourly, that compounds into hours saved per day — and the difference between real-time dashboards and stale data.</span>
                     </div>
 
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">The T4 in Your Data Stack</h2>
-                    <p style="margin-bottom: 16px;">Most data teams aren't running everything in Python. You're pulling from <strong style="color: white;">BigQuery</strong>, <strong style="color: white;">Snowflake</strong>, or <strong style="color: white;">Amazon Redshift</strong>, transforming in Python, then feeding into ML pipelines or BI tools. The T4 with RAPIDS accelerates that Python transformation layer — the part where Pandas and <strong style="color: white;">Polars</strong> do the heavy lifting — without changing your architecture.</p>
-                    <p style="margin-bottom: 16px;">The workflow: query your warehouse, land the data in a GPU DataFrame with cuDF on the T4, run your aggregations and feature engineering at GPU speed, then push results downstream. The warehouse handles storage. The T4 handles compute. And because it's already in your cloud environment for inference, there's no new hardware to provision.</p>
-                    <p style="margin-bottom: 16px;">This is one piece of a broader NVIDIA data processing ecosystem. Pair your T4 with <strong style="color: white;">Spark RAPIDS Accelerator</strong> for distributed workloads across GPU clusters, or with <strong style="color: white;">NVIDIA's LLM Suite for Code</strong> to generate and optimize your cuDF pipelines using AI — letting LLMs write the GPU-accelerated code while the T4 executes it.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Where RAPIDS cuDF Fits in Your Stack</h2>
+                    <p style="margin-bottom: 16px;">Most data teams aren't running everything in Python. You query a warehouse, transform in Python, then feed into ML pipelines or BI tools. RAPIDS cuDF accelerates that Python transformation layer — the part where Pandas does the heavy lifting — without changing your architecture.</p>
+                    <p style="margin-bottom: 16px;">The workflow stays the same: pull your data, load it into a cuDF DataFrame instead of Pandas, run your aggregations and feature engineering at GPU speed, then push results downstream. Your warehouse still handles storage. cuDF handles the compute — faster.</p>
+                    <p style="margin-bottom: 16px;">And because cuDF is open-source and part of the broader RAPIDS ecosystem, it integrates with the tools teams already use: <strong style="color: white;">Dask</strong> for distributed computing, <strong style="color: white;">scikit-learn</strong> compatible preprocessing, and native support for reading from Parquet, ORC, CSV, and JSON. No proprietary lock-in — just faster DataFrames.</p>
 
-                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">When the T4 Makes Sense for Data</h2>
-                    <p style="margin-bottom: 16px;"><strong style="color: white;">Reach for the T4 + RAPIDS when:</strong> your ETL jobs take minutes instead of seconds, you're doing ML feature engineering on large datasets, you need real-time analytics on 100M+ rows, or your scikit-learn preprocessing is the bottleneck in your training pipeline. If you're already running T4s for inference, you have the hardware — now use it for data too.</p>
-                    <p style="margin-bottom: 16px;"><strong style="color: white;">Stay with CPU when:</strong> you're exploring datasets under a million rows, writing quick one-off scripts, or prototyping. But when you're ready to scale, the T4 is the lowest-cost entry point into GPU-accelerated data processing — and RAPIDS makes it feel like Pandas.</p>
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">When to Reach for RAPIDS cuDF</h2>
+                    <p style="margin-bottom: 16px;"><strong style="color: white;">Switch to cuDF when:</strong> your ETL jobs take minutes instead of seconds, you're doing ML feature engineering on large datasets, you need real-time analytics on 100M+ rows, or your scikit-learn preprocessing is the bottleneck in your training pipeline.</p>
+                    <p style="margin-bottom: 16px;"><strong style="color: white;">Stay with Pandas when:</strong> you're exploring datasets under a million rows, writing quick one-off scripts, or prototyping. But when you're ready to scale, cuDF is the fastest path from slow pipelines to real-time results — and it feels exactly like the Pandas you already know.</p>
                 </article>
                 </div>
             </div>
