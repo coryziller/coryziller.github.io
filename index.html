@@ -76,7 +76,7 @@
         .credential-bullet { position: absolute; left: 0; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--text-primary); box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); z-index: 2; }
         .credential-item:nth-child(2) .credential-bullet { opacity: 1; width: 10px; height: 10px; left: 0; }
         .credential-item:nth-child(3) .credential-bullet { opacity: 1; width: 10px; height: 10px; left: 0; }
-        .credential-timeline-line { display: none; }
+        .credential-timeline-line { position: absolute; left: 4px; top: 18px; bottom: 20px; width: 0; border-left: 2px dotted rgba(255,255,255,0.15); z-index: 1; }
         .credential-label { font-size: var(--text-base); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: var(--space-1); }
         .credential-text { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); line-height: 1.5; }
         .tagline-bridge { text-align: center; margin: var(--space-4) auto var(--space-2); padding: 0 var(--space-4); max-width: 800px; animation: fadeIn 0.8s ease-out 0.3s both; }
@@ -391,6 +391,7 @@
             .tagline-bridge { margin: 2px auto 0 !important; }
             .tagline-text { font-size: 0.95rem !important; margin-bottom: 2px !important; }
             .credential-bullet { display: none !important; }
+            .credential-timeline-line { display: none !important; }
             .credential-item { text-align: center; max-width: 100%; margin-bottom: 2px !important; padding: 4px 0 !important; }
             .credential-label { font-size: 0.6rem !important; margin-bottom: 0 !important; letter-spacing: 1px; }
             .credential-text { font-size: var(--text-sm); margin: 0 !important; }
