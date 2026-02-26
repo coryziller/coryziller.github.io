@@ -904,7 +904,7 @@
                                                 <div style="flex: 1; text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
                                                     <div style="font-size: 1.5rem; margin-bottom: 8px;">&#9998;</div>
                                                     <div style="font-weight: 700; font-size: 1rem; margin-bottom: 6px;">Product Blog Post</div>
-                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Hypothetical NVIDIA developer blog — code samples, benchmarks, and RAPIDS ecosystem positioning</div>
+                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Hypothetical NVIDIA developer blog â code samples, benchmarks, and RAPIDS ecosystem positioning</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -912,7 +912,7 @@
                                         <div>
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">Key Result</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                <strong style="color: white;">41x faster groupby on 100M rows.</strong> What takes Pandas 12.4 seconds completes in 0.3 seconds on a single NVIDIA T4 GPU — with one import change. The article walks data teams through exactly why and how to switch.
+                                                <strong style="color: white;">41x faster groupby on 100M rows.</strong> What takes Pandas 12.4 seconds completes in 0.3 seconds on a single NVIDIA T4 GPU â with one import change. The article walks data teams through exactly why and how to switch.
                                             </p>
                                         </div>
                                     </div>
@@ -2376,113 +2376,282 @@
 
     <!-- Google Analytics Event Tracking -->
     <script>
+    /* ============================================================
+       GOOGLE ANALYTICS — COMPREHENSIVE EVENT TRACKING
+       Site: coryziller.github.io
+       Updated: Feb 2026
+       Naming: [section]_[element]_[action]
+       Every event includes page_title, page_location, page_section
+       ============================================================ */
     document.addEventListener('DOMContentLoaded', function() {
-      function trackClick(category, action, label) {
-        gtag('event', action, { 'event_category': category, 'event_label': label });
-      }
-      document.querySelectorAll('a').forEach(function(link) {
-        var t = link.textContent.trim();
-        if (t === 'View LinkedIn') link.addEventListener('click', function() { trackClick('Navigation', 'click_view_linkedin', 'View LinkedIn Button'); });
-        if (t === 'Side Projects') link.addEventListener('click', function() { trackClick('Navigation', 'click_side_projects', 'Side Projects Button'); });
-        if (t === 'Work History') link.addEventListener('click', function() { trackClick('Navigation', 'click_work_history', 'Work History Button'); });
-      });
-      document.querySelectorAll('button').forEach(function(btn) {
-        var t = btn.textContent.trim();
-        if (t === 'Send Me the Demo Report') btn.addEventListener('click', function() { trackClick('Social_Listening', 'click_send_demo_report', 'Send Demo Report Button'); });
-        if (t.includes('Explore') && t.includes('Dashboard')) btn.addEventListener('click', function() { trackClick('Spotify_Project', 'click_explore_dashboard', 'Explore Spotify Dashboard Button'); });
-        if (t === 'Overview') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_overview_tab', 'Spotify Dashboard - Overview Tab'); });
-        if (t === 'Artist Evolution') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_artist_evolution_tab', 'Spotify Dashboard - Artist Evolution Tab'); });
-        if (t === 'Genre Evolution') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_genre_evolution_tab', 'Spotify Dashboard - Genre Evolution Tab'); });
-        if (t === 'Charts & Trends') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_charts_trends_tab', 'Spotify Dashboard - Charts & Trends Tab'); });
-        if (t === 'Word Cloud') btn.addEventListener('click', function() { trackClick('Spotify_Dashboard', 'click_word_cloud_tab', 'Spotify Dashboard - Word Cloud Tab'); });
-      });
-      document.querySelectorAll('[onclick]').forEach(function(el) {
-        var oc = (el.getAttribute('onclick') || '').toLowerCase();
-        if (oc.includes('sentiment') || oc.includes('reddit') || oc.includes('social')) {
-          el.addEventListener('click', function() { trackClick('Project_Tiles', 'click_sentiment_tile', 'Reddit and HN Sentiment Tile'); });
-        }
-        if (oc.includes('spotify') || oc.includes('music') || oc.includes('listening')) {
-          el.addEventListener('click', function() { trackClick('Project_Tiles', 'click_spotify_tile', 'Spotify Trends Tile'); });
-        }
-      });
-      document.querySelectorAll('form').forEach(function(form) {
-        form.addEventListener('submit', function() { trackClick('Form', 'submit_contact_form', 'Name and Email Form Submission'); });
-      });
-    });
 
-        // RAPIDS Speed Test Simulation
-        function runRapidsSimulation() {
-            const btn = document.getElementById('rapidsRunBtn');
-            const sim = document.getElementById('rapidsSimSection');
-            const ws = document.getElementById('rapidsWritingSample');
-            btn.style.display = 'none';
-            sim.style.display = 'block';
-            sim.innerHTML = `
-                <div id="simInit" style="font-family: Montserrat, sans-serif; margin-bottom: 32px;">
-                    <div id="simLine1" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 16px;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #76B900;">Step 1: Initialize GPU</div>
-                        <div style="font-size: 1rem; color: #ccc; margin-top: 4px;">Connecting to NVIDIA T4 GPU (16GB VRAM)</div>
-                    </div>
-                    <div id="simLine2" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 16px;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #76B900;">Step 2: Load Data</div>
-                        <div style="font-size: 1rem; color: #ccc; margin-top: 4px;">100 million rows of paid media data (campaign_id, spend, clicks, conversions, channel, geo)</div>
-                    </div>
-                    <div id="simLine3" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 16px;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #76B900;">Step 3: Run GroupBy</div>
-                        <div style="font-size: 1rem; color: #ccc; margin-top: 4px;">Aggregate total spend by campaign × channel × geography</div>
-                    </div>
-                    <div id="simExplain" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 8px; padding: 16px 20px; background: rgba(118,185,0,0.08); border-radius: 8px; border-left: 3px solid #76B900;">
-                        <div style="font-size: 1.1rem; color: #fff; line-height: 1.6; font-weight: 500;">Both engines run the <strong>exact same operation</strong> on the <strong>exact same data</strong>. The only difference: Pandas runs on CPU, cuDF runs on GPU. Watch the race below.</div>
-                    </div>
-                </div>
-                <div style="margin-bottom: 24px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 16px;">
-                        <div style="width: 160px; font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 700; color: #ff6b6b;">Pandas (CPU)</div>
-                        <div style="flex: 1; background: #1a1a1a; border-radius: 8px; height: 48px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
-                            <div id="pandasBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ee5a24); border-radius: 8px; transition: width 3.5s linear; display: flex; align-items: center; justify-content: flex-end; padding-right: 16px;">
-                                <span id="pandasTime" style="font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 800; color: white; opacity: 0; transition: opacity 0.3s;">12.4 sec</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 160px; font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 700; color: #76B900;">RAPIDS (GPU)</div>
-                        <div style="flex: 1; background: #1a1a1a; border-radius: 8px; height: 48px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
-                            <div id="rapidsBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #76B900, #a8d700); border-radius: 8px; transition: width 0.3s ease-out; display: flex; align-items: center; justify-content: flex-end; padding-right: 16px;">
-                                <span id="rapidsTime" style="font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 800; color: white; opacity: 0; transition: opacity 0.3s;">0.3 sec</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="speedupResult" style="text-align: center; margin-top: 32px; opacity: 0; transition: opacity 0.5s;">
-                    <div style="font-family: Montserrat, sans-serif; font-size: 2.5rem; font-weight: 800; color: #76B900;">41x faster</div>
-                    <div style="font-family: Montserrat, sans-serif; font-size: 1.1rem; color: #aaa; margin-top: 4px;">Same code. Same data. NVIDIA T4 GPU.</div>
-                </div>
-                <div style="text-align: center; margin-top: 16px; font-size: 0.8rem; color: #666; font-family: Montserrat, sans-serif;">
-                    *Simulated results based on published RAPIDS benchmarks
-                </div>
-            `;
-            // Animate init lines one by one
-            setTimeout(function() { document.getElementById('simLine1').style.opacity = '1'; }, 100);
-            setTimeout(function() { document.getElementById('simLine2').style.opacity = '1'; }, 800);
-            setTimeout(function() { document.getElementById('simLine3').style.opacity = '1'; }, 1500);
-            setTimeout(function() { document.getElementById('simExplain').style.opacity = '1'; }, 2200);
-            // Start both bars racing at the same time (after text finishes)
-            setTimeout(function() {
-                document.getElementById('rapidsBar').style.width = '100%';
-                document.getElementById('pandasBar').style.width = '100%';
-            }, 3000);
-            // Show RAPIDS time after it finishes (nearly instant)
-            setTimeout(function() { document.getElementById('rapidsTime').style.opacity = '1'; }, 3500);
-            // Show Pandas time after it finishes (crawls for 3.5s)
-            setTimeout(function() { document.getElementById('pandasTime').style.opacity = '1'; }, 6600);
-            // Show speedup result
-            setTimeout(function() { document.getElementById('speedupResult').style.opacity = '1'; }, 7000);
-            // Show writing sample
-            setTimeout(function() {
-                ws.style.opacity = '1';
-                setTimeout(function() { ws.scrollIntoView({behavior: 'smooth'}); }, 200);
-            }, 7800);
+      function trackEvent(eventName, category, label, extraParams) {
+        var params = {
+          'event_category': category,
+          'event_label': label,
+          'page_title': document.title,
+          'page_location': window.location.href,
+          'page_section': getCurrentSection()
+        };
+        if (extraParams) {
+          for (var key in extraParams) {
+            if (extraParams.hasOwnProperty(key)) params[key] = extraParams[key];
+          }
         }
+        gtag('event', eventName, params);
+      }
+
+      function getCurrentSection() {
+        var scrollY = window.scrollY + window.innerHeight / 2;
+        var sections = document.querySelectorAll('section, [id]');
+        var current = 'hero';
+        sections.forEach(function(s) {
+          if (s.id && s.offsetTop <= scrollY) current = s.id;
+        });
+        return current;
+      }
+
+      // ── 1. HERO NAVIGATION ──────────────────────────────────
+
+      document.querySelectorAll('a').forEach(function(link) {
+        if (link.textContent.trim() === 'View LinkedIn') {
+          link.addEventListener('click', function() {
+            trackEvent('hero_linkedin_outbound_click', 'Hero_Navigation',
+              'Clicked View LinkedIn button in hero — opens LinkedIn profile in new tab',
+              { 'link_type': 'outbound', 'destination': 'linkedin.com/in/coryziller' });
+          });
+        }
+      });
+
+      document.querySelectorAll('a').forEach(function(link) {
+        if (link.textContent.trim().includes('Writing Samples')) {
+          link.addEventListener('click', function() {
+            trackEvent('hero_writing_samples_scroll_click', 'Hero_Navigation',
+              'Clicked Writing Samples & Side Projects button — scrolls to projects section',
+              { 'scroll_target': '#works' });
+          });
+        }
+      });
+
+      document.querySelectorAll('a').forEach(function(link) {
+        if (link.textContent.trim() === 'Work History') {
+          link.addEventListener('click', function() {
+            trackEvent('hero_work_history_scroll_click', 'Hero_Navigation',
+              'Clicked Work History button — scrolls to work history and education section',
+              { 'scroll_target': '#history' });
+          });
+        }
+      });
+
+      // ── 2. PROJECT CARD EXPAND / COLLAPSE ───────────────────
+
+      var rapidsCard = document.getElementById('rapids-card');
+      if (rapidsCard) {
+        rapidsCard.addEventListener('click', function(e) {
+          if (!e.target.closest('.card-close-x') && !e.target.closest('button')) {
+            trackEvent('project_rapids_cudf_card_expand', 'Project_Card_Interaction',
+              'Expanded RAPIDS cuDF GPU Speed Test project card to view details',
+              { 'project_name': 'Pandas vs RAPIDS cuDF GPU Speed Test' });
+          }
+        });
+      }
+
+      var conversionsCard = document.getElementById('conversions-card');
+      if (conversionsCard) {
+        conversionsCard.addEventListener('click', function(e) {
+          if (!e.target.closest('.card-close-x') && !e.target.closest('button')) {
+            trackEvent('project_sql_conversions_card_expand', 'Project_Card_Interaction',
+              'Expanded Reconstructing Conversion Paths in SQL project card to view details',
+              { 'project_name': 'Reconstructing Conversion Paths in SQL' });
+          }
+        });
+      }
+
+      var socialCard = document.getElementById('social-card');
+      if (socialCard) {
+        socialCard.addEventListener('click', function(e) {
+          if (!e.target.closest('.card-close-x') && !e.target.closest('button')) {
+            trackEvent('project_reddit_hn_sentiment_card_expand', 'Project_Card_Interaction',
+              'Expanded Reddit & Hacker News Sentiment Tracking project card to view details',
+              { 'project_name': 'Track User Product Sentiment Across Reddit & Hacker News' });
+          }
+        });
+      }
+
+      var spotifyCard = document.getElementById('spotify-card');
+      if (spotifyCard) {
+        spotifyCard.addEventListener('click', function(e) {
+          if (!e.target.closest('.card-close-x') && !e.target.closest('button')) {
+            trackEvent('project_spotify_trends_card_expand', 'Project_Card_Interaction',
+              'Expanded Spotify Trends 13 Years of Listening project card to view details',
+              { 'project_name': 'Spotify Trends: 13 Years of Listening' });
+          }
+        });
+      }
+
+      document.querySelectorAll('.card-close-x').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var card = btn.closest('.work-card');
+          var cardId = card ? card.id : 'unknown';
+          trackEvent('project_card_close_click', 'Project_Card_Interaction',
+            'Closed expanded project card: ' + cardId, { 'card_id': cardId });
+        });
+      });
+
+      // ── 3. FULLSCREEN MODALS ────────────────────────────────
+
+      document.querySelectorAll('button').forEach(function(btn) {
+        if (btn.textContent.trim() === 'Launch Speed Test') {
+          btn.addEventListener('click', function() {
+            trackEvent('rapids_modal_launch_speed_test_open', 'Modal_Interaction',
+              'Clicked Launch Speed Test — opens fullscreen RAPIDS cuDF article and benchmark modal',
+              { 'modal_name': 'rapidsModal', 'project_name': 'RAPIDS cuDF GPU Speed Test' });
+          });
+        }
+      });
+
+      var runBtn = document.getElementById('rapidsRunBtn');
+      if (runBtn) {
+        runBtn.addEventListener('click', function() {
+          trackEvent('rapids_modal_run_speed_test_execute', 'Modal_Interaction',
+            'Clicked RUN SPEED TEST — executing Pandas vs cuDF GPU benchmark simulation inside modal',
+            { 'modal_name': 'rapidsModal', 'action_type': 'simulation_start' });
+        });
+      }
+
+      document.querySelectorAll('button').forEach(function(btn) {
+        if (btn.textContent.trim() === 'Open Documentation') {
+          btn.addEventListener('click', function() {
+            trackEvent('conversions_modal_open_documentation_click', 'Modal_Interaction',
+              'Clicked Open Documentation — opens fullscreen SQL Conversion Paths README modal',
+              { 'modal_name': 'conversionsModal', 'project_name': 'Reconstructing Conversion Paths in SQL' });
+          });
+        }
+      });
+
+      document.querySelectorAll('button').forEach(function(btn) {
+        if (btn.textContent.trim().includes('Explore') && btn.textContent.trim().includes('Dashboard')) {
+          btn.addEventListener('click', function() {
+            trackEvent('spotify_modal_explore_dashboard_open', 'Modal_Interaction',
+              'Clicked Explore Historical Dashboard — opens fullscreen Spotify Trends interactive dashboard modal',
+              { 'modal_name': 'spotifyModal', 'project_name': 'Spotify Trends: 13 Years of Listening' });
+          });
+        }
+      });
+
+      document.querySelectorAll('.close-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var modal = btn.closest('.fullscreen-modal');
+          var modalId = modal ? modal.id : 'unknown';
+          trackEvent('modal_close_button_click', 'Modal_Interaction',
+            'Closed fullscreen modal: ' + modalId, { 'modal_name': modalId });
+        });
+      });
+
+      // ── 4. SPOTIFY DASHBOARD TABS ───────────────────────────
+
+      document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var tabName = btn.textContent.trim();
+          var slug = tabName.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+          trackEvent('spotify_dashboard_tab_' + slug + '_click', 'Spotify_Dashboard_Navigation',
+            'Switched to Spotify Dashboard tab: ' + tabName + ' — inside fullscreen Spotify Trends modal',
+            { 'tab_name': tabName, 'modal_name': 'spotifyModal' });
+        });
+      });
+
+      // ── 5. SOCIAL LISTENING FORM ────────────────────────────
+
+      var formFields = document.querySelectorAll('#socialListeningForm input');
+      formFields.forEach(function(field) {
+        var tracked = false;
+        field.addEventListener('focus', function() {
+          if (!tracked) {
+            tracked = true;
+            trackEvent('sentiment_demo_form_field_focus', 'Form_Engagement',
+              'Started filling out Reddit & HN Sentiment demo report request form — focused on: ' + (field.name || field.type),
+              { 'field_name': field.name || field.type, 'form_name': 'socialListeningForm' });
+          }
+        });
+      });
+
+      var socialForm = document.getElementById('socialListeningForm');
+      if (socialForm) {
+        socialForm.addEventListener('submit', function() {
+          trackEvent('sentiment_demo_form_submit_request_report', 'Form_Submission',
+            'Submitted Reddit & HN Sentiment demo report request form with name and email — requesting automated audio summary report',
+            { 'form_name': 'socialListeningForm', 'action_type': 'lead_capture' });
+        });
+      }
+
+      document.querySelectorAll('button').forEach(function(btn) {
+        if (btn.textContent.trim().includes('Send Me the Demo Report')) {
+          btn.addEventListener('click', function() {
+            trackEvent('sentiment_demo_send_report_button_click', 'Form_Engagement',
+              'Clicked Send Me the Demo Report button inside Reddit & HN Sentiment project card',
+              { 'project_name': 'Reddit & HN Sentiment Tracking' });
+          });
+        }
+      });
+
+      // ── 6. SCROLL DEPTH TRACKING ────────────────────────────
+
+      var scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var scrollPercent = Math.round((scrollTop / docHeight) * 100);
+        [25, 50, 75, 100].forEach(function(milestone) {
+          if (scrollPercent >= milestone && !scrollMilestones[milestone]) {
+            scrollMilestones[milestone] = true;
+            trackEvent('page_scroll_depth_' + milestone + '_percent_reached', 'Scroll_Engagement',
+              'Scrolled to ' + milestone + '% of portfolio page — currently viewing section: ' + getCurrentSection(),
+              { 'scroll_depth': milestone, 'visible_section': getCurrentSection() });
+          }
+        });
+      });
+
+      // ── 7. SECTION VISIBILITY ───────────────────────────────
+
+      var sectionsSeen = {};
+      var sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !sectionsSeen[entry.target.id]) {
+            sectionsSeen[entry.target.id] = true;
+            var sectionId = entry.target.id;
+            var sectionLabel = {
+              'works': 'Writing Samples & Side Projects grid',
+              'history': 'Work History & Education timeline',
+              'rapids-card': 'RAPIDS cuDF GPU Speed Test project tile',
+              'conversions-card': 'SQL Conversion Paths project tile',
+              'social-card': 'Reddit & HN Sentiment Tracking project tile',
+              'spotify-card': 'Spotify Trends 13 Years project tile'
+            };
+            trackEvent('section_' + sectionId.replace(/-/g, '_') + '_first_visible', 'Section_Visibility',
+              'User first scrolled into view: ' + (sectionLabel[sectionId] || sectionId),
+              { 'section_id': sectionId });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      ['works', 'history', 'rapids-card', 'conversions-card', 'social-card', 'spotify-card'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) sectionObserver.observe(el);
+      });
+
+      // ── 8. TIME ON PAGE MILESTONES ──────────────────────────
+
+      var timeMilestones = [30, 60, 120, 300];
+      timeMilestones.forEach(function(seconds) {
+        setTimeout(function() {
+          var labels = { 30: '30 seconds', 60: '1 minute', 120: '2 minutes', 300: '5 minutes' };
+          trackEvent('page_time_on_site_' + seconds + 's_milestone', 'Time_Engagement',
+            'User has been on portfolio page for ' + labels[seconds] + ' — currently viewing: ' + getCurrentSection(),
+            { 'time_seconds': seconds, 'visible_section': getCurrentSection() });
+        }, seconds * 1000);
+      });
+
+    });
     </script>
 
     <!-- RAPIDS vs Pandas Modal -->
@@ -2748,7 +2917,7 @@
 
                         <div id="guideExample" style="margin-top: 18px; padding: 14px 18px; background: rgba(96,165,250,0.08); border-radius: 8px; border-left: 3px solid #60A5FA; display: block;">
                             <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #60A5FA; margin-bottom: 8px;">Example</div>
-                            <div id="guideExampleText" style="font-size: 1.05rem; color: #8b949e; line-height: 1.6;">An analyst selects a Q1 date range with 30-day click and 7-day impression windows to analyze a specific media campaign across Facebook, Google, and DSP — just by updating the five parameters at the top. No other SQL needs to change.</div>
+                            <div id="guideExampleText" style="font-size: 1.05rem; color: #8b949e; line-height: 1.6;">An analyst selects a Q1 date range with 30-day click and 7-day impression windows to analyze a specific media campaign across Facebook, Google, and DSP â just by updating the five parameters at the top. No other SQL needs to change.</div>
                         </div>
 
                         <div style="margin-top: 20px; padding-top: 12px; border-top: 1px solid #21262d;">
@@ -2770,7 +2939,7 @@
             params: {
                 title: 'Parameters',
                 desc: 'The query starts by declaring configurable inputs: date range, lookback windows for clicks (30 days) and impressions (7 days), and a regex filter for campaign types. An analyst can change these without touching the SQL logic.',
-                example: 'An analyst selects a Q1 date range with 30-day click and 7-day impression windows to analyze a specific media campaign across Facebook, Google, and DSP — just by updating the five parameters at the top. No other SQL needs to change.',
+                example: 'An analyst selects a Q1 date range with 30-day click and 7-day impression windows to analyze a specific media campaign across Facebook, Google, and DSP â just by updating the five parameters at the top. No other SQL needs to change.',
                 index: 1
             },
             step1: {
