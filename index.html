@@ -695,39 +695,32 @@
 
                                     <div>
                                         <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">Why This Matters</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                Pandas is the backbone of Python data work, but it chokes on 100M+ rows. NVIDIA's RAPIDS cuDF runs the same Pandas API on GPUs — 10-50x faster with minimal code changes. I built a simulation to show exactly how dramatic the difference is.
+                                                The JD asks for <strong style="color: white;">"writing samples of public-facing technical content"</strong> and <strong style="color: white;">"published workflow samples showing how to process data at scale."</strong> So I built both — a live speed test simulation and a product blog post written in NVIDIA's voice to show how I'd market RAPIDS cuDF to data teams.
                                             </p>
                                         </div>
 
                                         <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What I Built</h4>
-                                            <div style="display: flex; align-items: flex-start; gap: 0;">
-                                                <div style="flex: 1; text-align: center; padding: 12px 8px; background: rgba(255,255,255,0.08); border-radius: 10px;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Benchmark</div>
-                                                    <div style="font-size: 0.75rem; opacity: 0.7;">100M rows</div>
-                                                    <div style="font-size: 0.65rem; opacity: 0.45; margin-top: 2px;">Pandas vs cuDF</div>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What's Inside</h4>
+                                            <div style="display: flex; align-items: stretch; gap: 12px;">
+                                                <div style="flex: 1; text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
+                                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">&#9654;</div>
+                                                    <div style="font-weight: 700; font-size: 1rem; margin-bottom: 6px;">Interactive Speed Test</div>
+                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Racing bar simulation comparing Pandas vs cuDF on 5 operations across 100M rows</div>
                                                 </div>
-                                                <div style="display: flex; align-items: center; padding: 0 4px; opacity: 0.4; font-size: 1.2rem;">&#8594;</div>
-                                                <div style="flex: 1; text-align: center; padding: 12px 8px; background: rgba(255,255,255,0.08); border-radius: 10px;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Visualize</div>
-                                                    <div style="font-size: 0.75rem; opacity: 0.7;">Racing bars</div>
-                                                    <div style="font-size: 0.65rem; opacity: 0.45; margin-top: 2px;">JS + CSS</div>
-                                                </div>
-                                                <div style="display: flex; align-items: center; padding: 0 4px; opacity: 0.4; font-size: 1.2rem;">&#8594;</div>
-                                                <div style="flex: 1; text-align: center; padding: 12px 8px; background: rgba(255,255,255,0.08); border-radius: 10px;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Write-Up</div>
-                                                    <div style="font-size: 0.75rem; opacity: 0.7;">Technical article</div>
-                                                    <div style="font-size: 0.65rem; opacity: 0.45; margin-top: 2px;">NVIDIA voice</div>
+                                                <div style="flex: 1; text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
+                                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">&#9998;</div>
+                                                    <div style="font-weight: 700; font-size: 1rem; margin-bottom: 6px;">Product Blog Post</div>
+                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Hypothetical NVIDIA developer blog — code samples, benchmarks, and RAPIDS ecosystem positioning</div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Impact</h4>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">Key Result</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                41x faster groupby on 100M rows. What takes Pandas 12.4 seconds completes in 0.3 seconds on a single NVIDIA T4 GPU — with one import change.
+                                                <strong style="color: white;">41x faster groupby on 100M rows.</strong> What takes Pandas 12.4 seconds completes in 0.3 seconds on a single NVIDIA T4 GPU — with one import change. The article walks data teams through exactly why and how to switch.
                                             </p>
                                         </div>
                                     </div>
@@ -735,10 +728,10 @@
                                     <div>
                                         <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
                                             <div style="margin-bottom: 32px;">
-                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">See It In Action</span>
-                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">View Simulation & Write-Up</h3>
+                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">Try It Yourself</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Run the Speed Test & Read the Article</h3>
                                                 <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
-                                                    Watch the racing bar speed test and read the full technical article on GPU-accelerated data processing.
+                                                    Click to launch the interactive Pandas vs cuDF benchmark, then read the full product blog post I wrote in NVIDIA's voice.
                                                 </p>
                                             </div>
                                             <button onclick="document.getElementById('rapidsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #4A7A00; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
@@ -2153,49 +2146,54 @@
             btn.style.display = 'none';
             sim.style.display = 'block';
             sim.innerHTML = `
-                <div id="simInit" style="font-family: 'Courier New', monospace; font-size: 0.85rem; margin-bottom: 24px;">
-                    <div id="simLine1" style="color: #e0e0e0; opacity: 0; transition: opacity 0.4s; margin-bottom: 8px; font-size: 1rem;"><span style="color:#c8f04d;">></span> Initializing NVIDIA T4 GPU (16GB VRAM)...</div>
-                    <div id="simLine2" style="color: #e0e0e0; opacity: 0; transition: opacity 0.4s; margin-bottom: 8px; font-size: 1rem;"><span style="color:#c8f04d;">></span> Loading paid media dataset: 100M rows</div>
-                    <div id="simSchema" style="color: #bbb; opacity: 0; transition: opacity 0.4s; margin-bottom: 8px; padding-left: 16px; font-size: 0.9rem;">
-                        <span style="color:#c8f04d;">campaign_id</span> · <span style="color:#c8f04d;">date</span> · <span style="color:#c8f04d;">impressions</span> · <span style="color:#c8f04d;">clicks</span> · <span style="color:#c8f04d;">spend</span> · <span style="color:#c8f04d;">conversions</span> · <span style="color:#c8f04d;">revenue</span> · <span style="color:#c8f04d;">channel</span> · <span style="color:#c8f04d;">geo</span> · <span style="color:#c8f04d;">device</span> · <span style="color:#c8f04d;">creative_id</span> · <span style="color:#c8f04d;">ctr</span>
+                <div id="simInit" style="font-family: Montserrat, sans-serif; margin-bottom: 32px;">
+                    <div id="simLine1" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 16px;">
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #76B900;">Step 1: Initialize GPU</div>
+                        <div style="font-size: 1rem; color: #ccc; margin-top: 4px;">Connecting to NVIDIA T4 GPU (16GB VRAM)</div>
                     </div>
-                    <div id="simLine3" style="color: #e0e0e0; opacity: 0; transition: opacity 0.4s; margin-bottom: 8px; font-size: 1rem;"><span style="color:#c8f04d;">></span> GroupBy: total spend by campaign × channel × geo</div>
-                    <div id="simExplain" style="color: #e0e0e0; opacity: 0; transition: opacity 0.4s; margin-bottom: 16px; font-family: Montserrat, sans-serif; font-size: 1rem; line-height: 1.7; padding: 12px 0;">
-                        Both engines aggregate 100 million ad performance rows — grouping spend, clicks, and conversions by campaign, channel, and geography. Same operation, same data. Only difference: CPU vs GPU.
+                    <div id="simLine2" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 16px;">
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #76B900;">Step 2: Load Data</div>
+                        <div style="font-size: 1rem; color: #ccc; margin-top: 4px;">100 million rows of paid media data (campaign_id, spend, clicks, conversions, channel, geo)</div>
+                    </div>
+                    <div id="simLine3" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 16px;">
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #76B900;">Step 3: Run GroupBy</div>
+                        <div style="font-size: 1rem; color: #ccc; margin-top: 4px;">Aggregate total spend by campaign × channel × geography</div>
+                    </div>
+                    <div id="simExplain" style="opacity: 0; transition: opacity 0.4s; margin-bottom: 8px; padding: 16px 20px; background: rgba(118,185,0,0.08); border-radius: 8px; border-left: 3px solid #76B900;">
+                        <div style="font-size: 1.1rem; color: #fff; line-height: 1.6; font-weight: 500;">Both engines run the <strong>exact same operation</strong> on the <strong>exact same data</strong>. The only difference: Pandas runs on CPU, cuDF runs on GPU. Watch the race below.</div>
                     </div>
                 </div>
-                <div style="margin-bottom: 20px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                        <div style="width: 140px; font-family: Montserrat, sans-serif; font-size: 0.85rem; font-weight: 700; color: #888;">Pandas (CPU)</div>
-                        <div style="flex: 1; background: #1a1a1a; border-radius: 6px; height: 40px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
-                            <div id="pandasBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ee5a24); border-radius: 6px; transition: width 3.5s linear; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px;">
-                                <span id="pandasTime" style="font-family: 'Courier New', monospace; font-size: 0.85rem; font-weight: 700; color: white; opacity: 0; transition: opacity 0.3s;">12.4s</span>
+                <div style="margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <div style="width: 160px; font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 700; color: #ff6b6b;">Pandas (CPU)</div>
+                        <div style="flex: 1; background: #1a1a1a; border-radius: 8px; height: 48px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
+                            <div id="pandasBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ee5a24); border-radius: 8px; transition: width 3.5s linear; display: flex; align-items: center; justify-content: flex-end; padding-right: 16px;">
+                                <span id="pandasTime" style="font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 800; color: white; opacity: 0; transition: opacity 0.3s;">12.4 sec</span>
                             </div>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center;">
-                        <div style="width: 140px; font-family: Montserrat, sans-serif; font-size: 0.85rem; font-weight: 700; color: #76B900;">RAPIDS (GPU)</div>
-                        <div style="flex: 1; background: #1a1a1a; border-radius: 6px; height: 40px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
-                            <div id="rapidsBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #76B900, #a8d700); border-radius: 6px; transition: width 0.3s ease-out; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px;">
-                                <span id="rapidsTime" style="font-family: 'Courier New', monospace; font-size: 0.85rem; font-weight: 700; color: white; opacity: 0; transition: opacity 0.3s;">0.3s</span>
+                        <div style="width: 160px; font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 700; color: #76B900;">RAPIDS (GPU)</div>
+                        <div style="flex: 1; background: #1a1a1a; border-radius: 8px; height: 48px; overflow: hidden; border: 1px solid #2a2a2a; position: relative;">
+                            <div id="rapidsBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #76B900, #a8d700); border-radius: 8px; transition: width 0.3s ease-out; display: flex; align-items: center; justify-content: flex-end; padding-right: 16px;">
+                                <span id="rapidsTime" style="font-family: Montserrat, sans-serif; font-size: 1rem; font-weight: 800; color: white; opacity: 0; transition: opacity 0.3s;">0.3 sec</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="speedupResult" style="text-align: center; margin-top: 24px; opacity: 0; transition: opacity 0.5s;">
-                    <span style="font-family: Montserrat, sans-serif; font-size: 1.5rem; font-weight: 800; color: #76B900;">41x faster</span>
-                    <span style="font-family: Montserrat, sans-serif; font-size: 1rem; color: #888; margin-left: 8px;">on NVIDIA T4</span>
+                <div id="speedupResult" style="text-align: center; margin-top: 32px; opacity: 0; transition: opacity 0.5s;">
+                    <div style="font-family: Montserrat, sans-serif; font-size: 2.5rem; font-weight: 800; color: #76B900;">41x faster</div>
+                    <div style="font-family: Montserrat, sans-serif; font-size: 1.1rem; color: #aaa; margin-top: 4px;">Same code. Same data. NVIDIA T4 GPU.</div>
                 </div>
-                <div style="text-align: center; margin-top: 12px; font-size: 0.75rem; color: #777; font-family: Montserrat, sans-serif;">
+                <div style="text-align: center; margin-top: 16px; font-size: 0.8rem; color: #666; font-family: Montserrat, sans-serif;">
                     *Simulated results based on published RAPIDS benchmarks
                 </div>
             `;
             // Animate init lines one by one
             setTimeout(function() { document.getElementById('simLine1').style.opacity = '1'; }, 100);
-            setTimeout(function() { document.getElementById('simLine2').style.opacity = '1'; }, 600);
-            setTimeout(function() { document.getElementById('simSchema').style.opacity = '1'; }, 1100);
-            setTimeout(function() { document.getElementById('simLine3').style.opacity = '1'; }, 1800);
-            setTimeout(function() { document.getElementById('simExplain').style.opacity = '1'; }, 2300);
+            setTimeout(function() { document.getElementById('simLine2').style.opacity = '1'; }, 800);
+            setTimeout(function() { document.getElementById('simLine3').style.opacity = '1'; }, 1500);
+            setTimeout(function() { document.getElementById('simExplain').style.opacity = '1'; }, 2200);
             // Start both bars racing at the same time (after text finishes)
             setTimeout(function() {
                 document.getElementById('rapidsBar').style.width = '100%';
@@ -2233,12 +2231,12 @@
                         <span style="font-family: Montserrat, sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #c8f04d;">Hypothetical Writing Sample</span>
                     </div>
                     <div style="text-align: center; margin-bottom: 32px;">
-                        <p style="font-size: 0.95rem; color: #999; font-family: Montserrat, sans-serif;">The following is a hypothetical NVIDIA developer blog post explaining the benefits of RAPIDS cuDF for data teams — the kind of product-focused technical content this role would produce.</p>
+                        <p style="font-size: 0.95rem; color: #999; font-family: Montserrat, sans-serif;">Below is a hypothetical NVIDIA developer blog post I wrote to demonstrate how I would market RAPIDS cuDF to data engineering teams. This is the type of product-focused technical content this role produces.</p>
                     </div>
                 <article style="font-size: 1.05rem; line-height: 1.85; color: #e0e0e0;">
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Your CPU Is the Bottleneck. The GPU Is the Fix.</h2>
-                    <p style="margin-bottom: 16px;">If your team is running ETL jobs in Pandas, you're leaving massive performance on the table. That groupby on 100M rows that takes 12 seconds on CPU? It takes 300 milliseconds on an NVIDIA GPU. Your dashboards could be real-time. Your pipelines could run 41x faster. The hardware exists — you're just not using it yet.</p>
-                    <p style="margin-bottom: 16px;">RAPIDS cuDF is NVIDIA's open-source GPU DataFrame library. It mirrors the Pandas API exactly, so your existing code works with one import change — but now it runs on NVIDIA CUDA cores instead of CPU threads. <strong style="color: white;">Same API. Same code. GPU speed.</strong></p>
+                    <p style="margin-bottom: 16px;">If your team runs ETL jobs in Pandas, you are leaving massive performance on the table. A <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #c8f04d; font-size: 0.95em;">groupby()</code> on 100M rows takes 12.4 seconds on CPU. On an NVIDIA GPU, it takes 0.3 seconds. That is a 41x speedup with zero code changes. Your dashboards could be real-time. Your pipelines could finish before the next one starts. The hardware already exists in every major cloud provider. You just need to use it.</p>
+                    <p style="margin-bottom: 16px;">RAPIDS cuDF is NVIDIA's open-source GPU DataFrame library. It implements the Pandas API on top of NVIDIA CUDA cores, so your existing Python code works with a single import swap. No CUDA programming required. No new syntax. <strong style="color: white;">Same API. Same code. GPU speed.</strong></p>
 
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">One Import Change. Massive Speedup.</h2>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;">
@@ -2251,10 +2249,10 @@
                             <span style="color: #c8f04d;">import</span> cudf<br>df = cudf.read_csv(<span style="color: #f0c674;">'campaign_data.csv'</span>)<br>result = df.groupby(<span style="color: #f0c674;">'campaign_id'</span>).agg({<br>&nbsp;&nbsp;<span style="color: #f0c674;">'spend'</span>: <span style="color: #f0c674;">'sum'</span>,<br>&nbsp;&nbsp;<span style="color: #f0c674;">'conversions'</span>: <span style="color: #f0c674;">'sum'</span><br>})
                         </div>
                     </div>
-                    <p style="margin-bottom: 16px; color: #bbb;">The code is identical. cuDF mirrors the Pandas API, so your existing workflows, notebooks, and scikit-learn preprocessing pipelines work on the GPU with minimal refactoring — no CUDA knowledge required.</p>
+                    <p style="margin-bottom: 16px; color: #bbb;">The code is identical. cuDF implements the full Pandas API surface, so your existing workflows, Jupyter notebooks, and scikit-learn preprocessing pipelines run on GPU without refactoring. You do not need to write any CUDA kernels or learn a new framework.</p>
 
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Benchmarks: 100M Rows of Paid Media Data</h2>
-                    <p style="margin-bottom: 16px;">We benchmarked five core DataFrame operations on 100 million rows of ad performance data — the kind of dataset you'd process for campaign reporting. Pandas on CPU vs. cuDF on a single NVIDIA GPU.</p>
+                    <p style="margin-bottom: 16px;">We benchmarked five core DataFrame operations on a 100-million-row ad performance dataset (the kind of table you would process for campaign reporting). Environment: Pandas 2.1 on a 4-core CPU vs. cuDF 24.02 on a single NVIDIA T4 GPU.</p>
                     <table style="width: 100%; border-collapse: collapse; margin: 24px 0; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a;">
                         <thead><tr style="background: rgba(118,185,0,0.15);">
                             <th style="padding: 16px; text-align: left; color: #c8f04d; font-weight: 700;">Operation</th>
@@ -2271,17 +2269,17 @@
                         </tbody>
                     </table>
                     <div style="background: rgba(118,185,0,0.1); border-left: 4px solid #76B900; padding: 24px; margin: 24px 0; border-radius: 4px;">
-                        <strong style="color: #c8f04d; font-size: 1.1rem;">41x faster groupby.</strong> <span style="color: #e0e0e0;">What took 12.4 seconds on CPU completes in 300ms with cuDF. For ETL pipelines running hourly, that compounds into hours saved per day — and the difference between real-time dashboards and stale data.</span>
+                        <strong style="color: #c8f04d; font-size: 1.1rem;">41x faster groupby.</strong> <span style="color: #e0e0e0;">What took 12.4 seconds on CPU completes in 300ms on GPU. For ETL pipelines running hourly, this compounds into hours saved per day. It is the difference between real-time dashboards and stale data.</span>
                     </div>
 
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">Drop Into Any Stack. Accelerate Immediately.</h2>
-                    <p style="margin-bottom: 16px;">RAPIDS cuDF isn't a new architecture — it's an upgrade to the one you already have. Your team queries a warehouse, transforms in Python, and feeds into ML pipelines or BI tools. cuDF accelerates that Python transformation layer on NVIDIA GPUs — turning minutes of processing into seconds, without rewriting a single pipeline.</p>
-                    <p style="margin-bottom: 16px;">And because it's built on the NVIDIA CUDA platform, cuDF takes full advantage of GPU parallelism across every operation — reads, joins, aggregations, filtering. The more data you throw at it, the wider the gap between CPU and GPU performance becomes. At 100M+ rows, there's no comparison.</p>
-                    <p style="margin-bottom: 16px;">cuDF also integrates with the broader NVIDIA RAPIDS ecosystem: <strong style="color: white;">cuML</strong> for GPU-accelerated machine learning, <strong style="color: white;">cuGraph</strong> for graph analytics, and <strong style="color: white;">Dask-cuDF</strong> for scaling across multi-GPU clusters. Every layer of your pipeline — from ETL to training — benefits from GPU acceleration.</p>
+                    <p style="margin-bottom: 16px;">cuDF is not a new architecture. It is a drop-in acceleration layer for the Python data stack your team already uses. A typical pipeline queries a data warehouse (BigQuery, Redshift, Snowflake), transforms in Python, then feeds results into ML models or BI dashboards. cuDF accelerates that Python transformation step on NVIDIA GPUs, turning minutes of processing into seconds without rewriting a single pipeline.</p>
+                    <p style="margin-bottom: 16px;">Because cuDF is built on NVIDIA CUDA, it leverages GPU parallelism across every operation: reads, joins, aggregations, sorts, and filters. The performance gap between CPU and GPU widens as data volume increases. At 100M+ rows, there is no comparison.</p>
+                    <p style="margin-bottom: 16px;">cuDF also integrates with the broader RAPIDS ecosystem. <strong style="color: white;">cuML</strong> provides GPU-accelerated machine learning (random forests, XGBoost, k-means). <strong style="color: white;">cuGraph</strong> handles graph analytics on GPU. <strong style="color: white;">Dask-cuDF</strong> scales DataFrames across multi-GPU clusters for terabyte-scale workloads. Every layer of the pipeline, from ETL to model training, benefits from GPU acceleration.</p>
 
                     <h2 style="font-size: 1.75rem; font-weight: 700; color: #76B900; margin-top: 48px; margin-bottom: 16px;">The GPU Advantage Compounds</h2>
-                    <p style="margin-bottom: 16px;">A single ETL job that runs 41x faster is impressive. But the real value shows up at scale: hourly pipelines that now run in real-time. Feature engineering that no longer bottlenecks model training. Dashboards that refresh in seconds instead of minutes. Every downstream process gets faster because the data layer got faster.</p>
-                    <p style="margin-bottom: 16px;">With NVIDIA GPUs already deployed across every major cloud — and available free on Google Colab — there's no hardware barrier. The only thing between your team and 10-50x faster data processing is <strong style="color: white;">one import change</strong>.</p>
+                    <p style="margin-bottom: 16px;">A single ETL job running 41x faster is notable on its own. But the real value compounds at scale. Hourly pipelines finish in real-time. Feature engineering no longer bottlenecks model training. Dashboards refresh in seconds instead of minutes. Every downstream process accelerates because the data layer got faster.</p>
+                    <p style="margin-bottom: 16px;">NVIDIA GPUs are already deployed across AWS, GCP, and Azure. They are available free on Google Colab. There is no hardware barrier. The only thing between your team and 10-50x faster data processing is <strong style="color: white;">one import change</strong>.</p>
                 </article>
                 </div>
             </div>
