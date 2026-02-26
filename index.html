@@ -382,19 +382,21 @@
         @media (max-width: 768px) {
             /* Hero Section */
             .hero { padding: 0 var(--space-3) 0; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
-            .hero-grid { grid-template-columns: 1fr !important; gap: 6px; text-align: center; }
+            .hero-grid { grid-template-columns: 1fr !important; gap: 2px; text-align: center; }
             .hero-left { display: flex; flex-direction: column; align-items: center; gap: 0; }
             .hero-right { padding: 0 !important; margin-top: 0 !important; }
-            .profile-photo { width: 80px; height: 80px; margin-bottom: 2px !important; }
-            .hero-name { font-size: 1.5rem; margin-bottom: 0; margin-top: 0; }
+            .profile-photo { width: 70px; height: 70px; margin-bottom: 2px !important; }
+            .hero-name { font-size: 1.4rem; margin-bottom: 0; margin-top: 0; }
             .hero-greeting { font-size: var(--text-sm); margin-bottom: 0; margin-top: 0; }
+            .tagline-bridge { margin: 4px auto 0 !important; }
+            .tagline-text { font-size: 1rem !important; margin-bottom: 4px !important; }
             .credential-bullet { display: none !important; }
             .credential-item { text-align: center; max-width: 100%; margin-bottom: 2px !important; padding: 4px 0 !important; }
             .credential-label { font-size: 0.6rem !important; margin-bottom: 0 !important; letter-spacing: 1px; }
             .credential-text { font-size: var(--text-sm); margin: 0 !important; }
 
             /* CTA Buttons - stacked, even 16px spacing */
-            .cta-container { flex-direction: column !important; align-items: center !important; gap: 10px !important; margin-top: 8px !important; }
+            .cta-container { flex-direction: column !important; align-items: center !important; gap: 6px !important; margin-top: 4px !important; }
             .cta-container > a.btn,
             .cta-container .arrow-wrapper .btn { width: 100% !important; max-width: 260px; padding: 10px 18px !important; font-size: 0.85rem !important; text-align: center !important; display: block !important; box-sizing: border-box !important; }
             .arrow-wrapper { width: 100%; max-width: 280px; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 0 !important; margin: 0 !important; padding: 0 !important; }
@@ -402,7 +404,7 @@
             .arrow-wrapper .btn { border: 2px solid #ff0000 !important; border-radius: 12px !important; animation: rainbow-flash 1.5s linear infinite, flicker 0.8s ease-in-out infinite !important; }
 
             /* Scroll indicator after CTA buttons */
-            .cta-container::after { content: 'Scroll down for more'; display: block; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-top: 8px; letter-spacing: 1px; }
+            .cta-container::after { content: 'Scroll down for more'; display: block; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.7rem; margin-top: 4px; letter-spacing: 1px; }
 
             /* Projects - single column */
             .works-section { padding: var(--space-6) var(--space-3); }
@@ -586,35 +588,27 @@
             #conversionsModal h1 { font-size: 1.25rem !important; }
             #conversionsModal p { font-size: 0.85rem !important; }
             #conversionsReadme {
-                grid-template-columns: 1fr !important;
-                gap: 16px !important;
+                grid-template-columns: 1fr 130px !important;
+                gap: 8px !important;
             }
             #conversionsReadme > div:last-child {
-                position: fixed !important;
-                bottom: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                top: auto !important;
+                position: sticky !important;
+                top: 60px !important;
                 transform: none !important;
-                z-index: 100 !important;
+                align-self: start !important;
             }
             #conversionsReadme > div:last-child > div {
-                padding: 14px 16px !important;
-                border-radius: 12px 12px 0 0 !important;
-                max-height: 35vh !important;
-                overflow-y: auto !important;
-            }
-            #readmeScroller {
-                margin-bottom: 35vh !important;
+                padding: 10px 8px !important;
             }
             #readmeScroller pre {
-                font-size: 0.65rem !important;
-                padding: 12px !important;
-                line-height: 1.5 !important;
+                font-size: 0.5rem !important;
+                padding: 8px !important;
+                line-height: 1.4 !important;
             }
-            #guideTitle { font-size: 1.15rem !important; }
-            #guideDesc { font-size: 0.95rem !important; }
-            #guideExampleText { font-size: 0.85rem !important; }
+            #guideTitle { font-size: 0.75rem !important; }
+            #guideDesc { font-size: 0.6rem !important; line-height: 1.3 !important; }
+            #guideExample { display: none !important; }
+            #guideSectionLabel { font-size: 0.7rem !important; }
 
             /* === SPOTIFY PIPELINE BOXES MOBILE === */
             .pipeline-flow {
@@ -671,8 +665,13 @@
             .pipeline-flow > div:nth-child(n+6) {
                 grid-column: auto;
             }
-            #readmeScroller pre { font-size: 0.58rem !important; }
+            #readmeScroller pre { font-size: 0.45rem !important; }
             #conversionsModal h1 { font-size: 1.1rem !important; }
+            #conversionsReadme {
+                grid-template-columns: 1fr 110px !important;
+            }
+            #guideTitle { font-size: 0.65rem !important; }
+            #guideDesc { display: none !important; }
         }
 
         @media (max-width: 1024px) {
