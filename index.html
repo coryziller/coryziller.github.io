@@ -2382,163 +2382,159 @@
             <!-- README: Side-by-side layout -->
             <div id="conversionsReadme" style="display: grid; grid-template-columns: 1fr 400px; gap: 32px; align-items: start;">
 
-                <!-- LEFT: The actual README -->
-                <div id="readmeScroller" style="background: #111; border: 1px solid #2a2a2a; border-radius: 12px; padding: 40px; font-size: 1rem; line-height: 1.8; color: #e0e0e0;">
+                <!-- LEFT: The actual README (verbatim, GitHub-style render) -->
+                <div id="readmeScroller" style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 40px 48px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #e6edf3;">
 
                     <div class="readme-section" data-annotation="overview">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 0; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Overview</h2>
-                        <p style="margin-bottom: 16px;">This workflow builds a touch-level "path to conversion" dataset by reconstructing all eligible impressions and clicks that occurred before a conversion within configurable lookback windows.</p>
-                        <p style="margin-bottom: 12px;">The output is designed for downstream attribution analysis and includes:</p>
-                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
-                            <li style="margin-bottom: 6px;">Path length (number of interactions in the lookback window)</li>
-                            <li style="margin-bottom: 6px;">Interaction rank (most recent back to oldest)</li>
-                            <li style="margin-bottom: 6px;">Touch position (First / Middle / Last)</li>
-                            <li style="margin-bottom: 6px;">Days since first interaction / last interaction</li>
-                            <li style="margin-bottom: 6px;">Metadata (campaign, site, placement, creative)</li>
+                        <h1 style="font-size: 2rem; font-weight: 600; color: #e6edf3; margin: 0 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Reconstructing Conversion Paths in SQL<br><span style="font-size: 1rem; font-weight: 400; color: #8b949e;">(Post-View + Post-Click Lookbacks)</span></h1>
+                    </div>
+
+                    <div class="readme-section" data-annotation="overview">
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Overview</h2>
+                        <p style="margin: 0 0 16px 0;">This workflow builds a touch-level &ldquo;path to conversion&rdquo; dataset by reconstructing all eligible impressions and clicks that occurred before a conversion within configurable lookback windows.</p>
+                        <p style="margin: 0 0 16px 0;">The output is designed for downstream attribution analysis and includes:</p>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li>Path length (# interactions in the lookback window)</li>
+                            <li>Interaction rank (most recent back to oldest)</li>
+                            <li>Touch position (First / Middle / Last)</li>
+                            <li>Days since first interaction / last interaction</li>
+                            <li>Metadata (campaign, site, placement, creative)</li>
                         </ul>
                     </div>
 
                     <div class="readme-section" data-annotation="problem">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Problem</h2>
-                        <p style="margin-bottom: 12px;">Given conversion events for a set of campaigns, we want to answer:</p>
-                        <ol style="margin: 0 0 16px 20px; padding: 0;">
-                            <li style="margin-bottom: 8px;">What interactions (impressions and clicks) preceded each conversion?</li>
-                            <li style="margin-bottom: 8px;">How long were the paths?</li>
-                            <li style="margin-bottom: 8px;">How recent were the interactions relative to conversion time?</li>
-                            <li style="margin-bottom: 8px;">What was the "position" of each interaction in the path?</li>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Problem</h2>
+                        <p style="margin: 0 0 16px 0;">Given conversion events for a set of campaigns, we want to answer:</p>
+                        <ol style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li>What interactions (impressions and clicks) preceded each conversion?</li>
+                            <li>How long were the paths?</li>
+                            <li>How recent were the interactions relative to conversion time?</li>
+                            <li>What was the &ldquo;position&rdquo; of each interaction in the path?</li>
                         </ol>
-                        <div style="background: rgba(37,99,235,0.08); border-left: 3px solid #60A5FA; padding: 16px 20px; margin: 20px 0; border-radius: 4px; font-size: 0.95rem;">
-                            This is useful when analyzing multi-touch behavior, channel sequencing, or creative/placement influence.
-                        </div>
+                        <p style="margin: 0 0 16px 0;">This is useful when analyzing multi-touch behavior, channel sequencing, or creative/placement influence.</p>
                     </div>
 
                     <div class="readme-section" data-annotation="inputs">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Inputs</h2>
-                        <p style="margin-bottom: 12px;">The query is parameterized by:</p>
-                        <div style="background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #ccc; margin: 20px 0; line-height: 2;">
-                            <div style="color: #666; font-size: 0.75rem; margin-bottom: 8px; font-family: Montserrat; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Parameters</div>
-                            <span style="color: #93C5FD;">start_date</span>, <span style="color: #93C5FD;">end_date</span><br>
-                            <span style="color: #93C5FD;">advertiser</span> filter<br>
-                            <span style="color: #93C5FD;">campaign</span> filter <span style="color: #666;">(regex)</span><br>
-                            <span style="color: #93C5FD;">conversion_activity_ids</span><br>
-                            <span style="color: #93C5FD;">click_look</span> <span style="color: #666;">(post-click lookback days)</span><br>
-                            <span style="color: #93C5FD;">imp_look</span> <span style="color: #666;">(post-view lookback days)</span>
-                        </div>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Inputs</h2>
+                        <p style="margin: 0 0 16px 0;">The query is parameterized by:</p>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">start_date</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">end_date</code></li>
+                            <li>advertiser filter</li>
+                            <li>campaign filter (regex)</li>
+                            <li>conversion activity IDs</li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">click_look</code> (post-click lookback days)</li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">imp_look</code> (post-view lookback days)</li>
+                        </ul>
 
-                        <h3 style="font-size: 1.2rem; font-weight: 700; color: #60A5FA; margin-top: 32px; margin-bottom: 12px;">Data Model (Conceptual)</h3>
-                        <table style="width: 100%; border-collapse: collapse; margin: 16px 0; background: #0a0a0a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; font-size: 0.9rem;">
-                            <thead><tr style="background: rgba(37,99,235,0.12);">
-                                <th style="padding: 12px 16px; text-align: left; color: #93C5FD; font-weight: 700;">Table</th>
-                                <th style="padding: 12px 16px; text-align: left; color: #999;">Description</th>
-                            </tr></thead>
-                            <tbody>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">conversions</td><td style="padding: 12px 16px; color: #ccc;">Conversion events (timestamped)</td></tr>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">impressions</td><td style="padding: 12px 16px; color: #ccc;">Impression logs with user_id + timestamp</td></tr>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">clicks</td><td style="padding: 12px 16px; color: #ccc;">Click logs with user_id + timestamp</td></tr>
-                                <tr><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">lookups</td><td style="padding: 12px 16px; color: #ccc;">Advertisers, campaigns, placements, creatives, sites</td></tr>
-                            </tbody>
-                        </table>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Data model (conceptual)</h2>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">conversions</code>: conversion events (timestamped)</li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">impressions</code>: impression logs with user_id + timestamp</li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">clicks</code>: click logs with user_id + timestamp</li>
+                            <li>lookups: advertisers, campaigns, placements, creatives, sites</li>
+                        </ul>
                     </div>
 
                     <div class="readme-section" data-annotation="approach">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Approach (High Level)</h2>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Approach (high level)</h2>
 
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 1 &mdash; Filter Conversions</h3>
-                        <p style="margin-bottom: 16px;">Select conversion rows for the reporting window and filters.</p>
+                        <h3 style="font-size: 1.25em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0;">Step 1 &mdash; Filter conversions</h3>
+                        <p style="margin: 0 0 16px 0;">Select conversion rows for the reporting window and filters.</p>
 
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 2 &mdash; Match Conversions to Interaction Anchors</h3>
-                        <p style="margin-bottom: 16px;">Create a conversion-level identifier (<code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #93C5FD; font-size: 0.9rem;">pseudo_id</code>) and attach a <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #93C5FD; font-size: 0.9rem;">user_id</code> to each conversion event via a join to either impressions or clicks (depending on conversion linkage).</p>
+                        <h3 style="font-size: 1.25em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0;">Step 2 &mdash; Match conversions to interaction anchors</h3>
+                        <p style="margin: 0 0 16px 0;">Create a conversion-level identifier (<code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">pseudo_id</code>) and attach a <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">user_id</code> to each conversion event via a join to either impressions or clicks (depending on conversion linkage).</p>
 
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 3 &mdash; Pull Prior Interactions Within Lookback Windows</h3>
-                        <p style="margin-bottom: 12px;">For each conversion <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #93C5FD; font-size: 0.9rem;">pseudo_id</code>, retrieve:</p>
-                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
-                            <li style="margin-bottom: 6px;">All impressions within <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #93C5FD; font-size: 0.9rem;">imp_look</code> days prior to conversion</li>
-                            <li style="margin-bottom: 6px;">All clicks within <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #93C5FD; font-size: 0.9rem;">click_look</code> days prior to conversion</li>
+                        <h3 style="font-size: 1.25em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0;">Step 3 &mdash; Pull prior interactions within lookback windows</h3>
+                        <p style="margin: 0 0 16px 0;">For each conversion <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">pseudo_id</code>, retrieve:</p>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li>all impressions within <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">imp_look</code> days prior to conversion</li>
+                            <li>all clicks within <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">click_look</code> days prior to conversion</li>
                         </ul>
 
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 4 &mdash; Deduplicate and Rank Interactions</h3>
-                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
-                            <li style="margin-bottom: 6px;">Remove exact duplicates</li>
-                            <li style="margin-bottom: 6px;">Rank interactions descending by timestamp (most recent first)</li>
+                        <h3 style="font-size: 1.25em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0;">Step 4 &mdash; Deduplicate and rank interactions</h3>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li>Remove exact duplicates</li>
+                            <li>Rank interactions descending by timestamp (most recent first)</li>
                         </ul>
 
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 5 &mdash; Compute Path Metrics</h3>
-                        <div style="background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #ccc; margin: 12px 0 16px; line-height: 2;">
-                            <span style="color: #93C5FD;">path_length</span><br>
-                            <span style="color: #93C5FD;">first_touch_date</span>, <span style="color: #93C5FD;">last_touch_date</span><br>
-                            <span style="color: #93C5FD;">touch_position</span> <span style="color: #666;">based on rank and path length</span>
-                        </div>
+                        <h3 style="font-size: 1.25em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0;">Step 5 &mdash; Compute path metrics</h3>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">path_length</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">first_touch_date</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">last_touch_date</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">touch_position</code> based on rank and path length</li>
+                        </ul>
 
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 6 &mdash; Produce Touch-Level Output</h3>
-                        <p style="margin-bottom: 16px;">Join interaction rows to lookup tables and output a flattened touch-level dataset.</p>
+                        <h3 style="font-size: 1.25em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0;">Step 6 &mdash; Produce touch-level output</h3>
+                        <p style="margin: 0 0 16px 0;">Join interaction rows to lookup tables and output a flattened touch-level dataset.</p>
                     </div>
 
                     <div class="readme-section" data-annotation="output">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Output Schema</h2>
-                        <div style="background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #ccc; margin: 16px 0; line-height: 2;">
-                            <div style="color: #666; font-size: 0.75rem; margin-bottom: 8px; font-family: Montserrat; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Output Fields</div>
-                            <span style="color: #93C5FD;">pseudo_id</span><br>
-                            <span style="color: #93C5FD;">activity</span>, <span style="color: #93C5FD;">activity_id</span>, <span style="color: #93C5FD;">activity_date</span><br>
-                            <span style="color: #93C5FD;">path_length</span><br>
-                            <span style="color: #93C5FD;">days_since_first_interaction</span>, <span style="color: #93C5FD;">days_since_last_interaction</span><br>
-                            <span style="color: #93C5FD;">interaction_date</span>, <span style="color: #93C5FD;">interaction_number</span><br>
-                            <span style="color: #93C5FD;">campaign</span>, <span style="color: #93C5FD;">site</span>, <span style="color: #93C5FD;">placement</span>, <span style="color: #93C5FD;">creative</span><br>
-                            <span style="color: #93C5FD;">touch_position</span>
-                        </div>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Output schema (example)</h2>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">pseudo_id</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">activity</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">activity_id</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">activity_date</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">path_length</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">days_since_first_interaction</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">days_since_last_interaction</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">interaction_date</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">interaction_number</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">campaign</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">site</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">placement</code>, <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">creative</code></li>
+                            <li><code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">touch_position</code></li>
+                        </ul>
                     </div>
 
                     <div class="readme-section" data-annotation="edges">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Edge Cases Handled</h2>
-                        <table style="width: 100%; border-collapse: collapse; margin: 16px 0; background: #0a0a0a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; font-size: 0.9rem;">
-                            <thead><tr style="background: rgba(37,99,235,0.12);">
-                                <th style="padding: 12px 16px; text-align: left; color: #93C5FD; font-weight: 700;">Edge Case</th>
-                                <th style="padding: 12px 16px; text-align: left; color: #999;">Handling</th>
-                            </tr></thead>
-                            <tbody>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Duplicate interaction records</td><td style="padding: 12px 16px; color: #ccc;">Deduped via GROUP BY</td></tr>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Very long paths</td><td style="padding: 12px 16px; color: #ccc;">Bucketed as 30+</td></tr>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Missing creative values</td><td style="padding: 12px 16px; color: #ccc;">Defaulted to N/A</td></tr>
-                                <tr><td style="padding: 12px 16px; color: white;">Interaction eligibility</td><td style="padding: 12px 16px; color: #ccc;">Enforced by event_date bounds, interaction-before-conversion check, and lookback window constraints</td></tr>
-                            </tbody>
-                        </table>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Edge cases handled</h2>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li>Duplicate interaction records (deduped via GROUP BY)</li>
+                            <li>Very long paths (bucketed as <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">30+</code>)</li>
+                            <li>Missing creative values (defaulted to <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">N/A</code>)</li>
+                            <li>Interaction eligibility enforced by:
+                                <ul style="margin: 8px 0 0 0; padding-left: 2em;">
+                                    <li>event_date bounds</li>
+                                    <li>&ldquo;interaction occurs before conversion time&rdquo;</li>
+                                    <li>lookback window constraints</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
 
                     <div class="readme-section" data-annotation="perf">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Performance Considerations</h2>
-                        <p style="margin-bottom: 12px;">This workflow can become expensive due to joining large interaction logs on <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #93C5FD; font-size: 0.9rem;">user_id</code>, wide date ranges, and high impression/click volumes.</p>
-                        <p style="margin-bottom: 8px; color: white; font-weight: 600;">Ways to scale:</p>
-                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
-                            <li style="margin-bottom: 6px;">Ensure interaction tables are partitioned by date and filters use partition keys</li>
-                            <li style="margin-bottom: 6px;">Narrow campaign filters early</li>
-                            <li style="margin-bottom: 6px;">Materialize intermediate tables for iterative development</li>
-                            <li style="margin-bottom: 6px;">Consider incremental runs (daily partitions) rather than reprocessing full quarters</li>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Performance considerations</h2>
+                        <p style="margin: 0 0 16px 0;">This workflow can become expensive due to:</p>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li>Joining large interaction logs on <code style="background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;">user_id</code></li>
+                            <li>Wide date ranges and high impression/click volumes</li>
+                        </ul>
+                        <p style="margin: 0 0 16px 0;">Ways to scale:</p>
+                        <ul style="margin: 0 0 16px 0; padding-left: 2em;">
+                            <li>Ensure interaction tables are partitioned by date and filters use partition keys</li>
+                            <li>Narrow campaign filters early</li>
+                            <li>Materialize intermediate tables for iterative development</li>
+                            <li>Consider incremental runs (daily partitions) rather than reprocessing full quarters</li>
                         </ul>
                     </div>
 
                     <div class="readme-section" data-annotation="relevance">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #60A5FA; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Why This Is Relevant to Accelerated Analytics</h2>
-                        <div style="background: rgba(37,99,235,0.08); border-left: 3px solid #60A5FA; padding: 16px 20px; margin: 20px 0; border-radius: 4px; font-size: 0.95rem;">
-                            Path reconstruction is typically dominated by large joins, filters, and high-cardinality group-by operations. This is exactly the workload profile where optimized execution engines and accelerated dataframe operations can significantly reduce runtime at scale.
-                        </div>
+                        <h2 style="font-size: 1.5em; font-weight: 600; color: #e6edf3; margin: 24px 0 16px 0; padding-bottom: 0.3em; border-bottom: 1px solid #30363d;">Why this is relevant to accelerated analytics</h2>
+                        <p style="margin: 0 0 16px 0;">Path reconstruction is typically dominated by large joins, filters, and high-cardinality group-by operations&mdash;exactly the workload profile where optimized execution engines and accelerated dataframe operations can significantly reduce runtime at scale.</p>
                     </div>
                 </div>
 
-                <!-- RIGHT: Scroll-linked single context box -->
-                <div style="position: sticky; top: 20px; align-self: start;">
-                    <div style="background: #1a1a1a; border: 1px solid rgba(37,99,235,0.2); border-radius: 16px; padding: 32px;">
-                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #60A5FA; margin-bottom: 20px;">Context</div>
-
-                        <div id="guideContent">
-                            <div id="guideTitle" style="font-size: 1.1rem; font-weight: 800; color: white; margin-bottom: 14px; line-height: 1.3;">What this document is</div>
-                            <div id="guideDesc" style="font-size: 0.95rem; color: #bbb; line-height: 1.65;">This README documents a SQL workflow I built to reconstruct full conversion paths from raw impression and click logs. It was written for analysts joining the team who needed to understand the pipeline from scratch.</div>
+                <!-- RIGHT: Scroll-linked context box, sticky mid-screen -->
+                <div style="position: sticky; top: 50%; transform: translateY(-50%); align-self: start;">
+                    <div style="background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                            <div style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #60A5FA;">Context</div>
+                            <div id="guideSectionLabel" style="font-size: 0.65rem; color: #484f58; font-weight: 600;">1 / 8</div>
                         </div>
 
-                        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #2a2a2a;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <div id="guideProgress" style="flex: 1; height: 3px; background: #2a2a2a; border-radius: 2px; overflow: hidden;">
-                                    <div id="guideProgressBar" style="width: 14%; height: 100%; background: #60A5FA; border-radius: 2px; transition: width 0.3s;"></div>
-                                </div>
-                                <div id="guideSectionLabel" style="font-size: 0.7rem; color: #666; font-weight: 600; white-space: nowrap;">1 / 7</div>
+                        <div id="guideContent">
+                            <div id="guideTitle" style="font-size: 1rem; font-weight: 700; color: #e6edf3; margin-bottom: 10px; line-height: 1.3;">What this document is</div>
+                            <div id="guideDesc" style="font-size: 0.875rem; color: #8b949e; line-height: 1.6;">A SQL workflow README I wrote to document how to reconstruct full conversion paths from raw ad server logs. Written for analysts joining the team.</div>
+                        </div>
+
+                        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #21262d;">
+                            <div id="guideProgress" style="height: 2px; background: #21262d; border-radius: 1px; overflow: hidden;">
+                                <div id="guideProgressBar" style="width: 12.5%; height: 100%; background: #60A5FA; border-radius: 1px; transition: width 0.3s;"></div>
                             </div>
                         </div>
                     </div>
@@ -2550,50 +2546,50 @@
     </div>
 
     <script>
-        // Context guide data - recruiter/hiring manager focused
+        // Context guide data
         var guideData = {
             overview: {
                 title: 'What this document is',
-                desc: 'This README documents a SQL workflow I built to reconstruct full conversion paths from raw impression and click logs. It was written for analysts joining the team who needed to understand the pipeline from scratch.',
+                desc: 'A SQL workflow README I wrote to document how to reconstruct full conversion paths from raw ad server logs. Written for analysts joining the team.',
                 index: 1
             },
             problem: {
                 title: 'The business question',
-                desc: 'Which ad touchpoints actually led to a conversion, and in what order? This is the core question behind multi-touch attribution and it requires reconstructing the full user journey from raw log data.',
+                desc: 'Which ad impressions and clicks actually preceded each conversion? How long were the paths, and what position did each touchpoint play? This is the foundation of multi-touch attribution.',
                 index: 2
             },
             inputs: {
-                title: 'How the query is configured',
-                desc: 'The workflow is fully parameterized so analysts can adjust date ranges, lookback windows, and campaign filters without modifying the SQL itself. The data model spans conversions, impressions, clicks, and dimension lookup tables.',
+                title: 'Query parameters + data model',
+                desc: 'Fully parameterized: date range, advertiser, campaign regex, lookback windows. Joins across four tables: conversions, impressions, clicks, and dimension lookups.',
                 index: 3
             },
             approach: {
-                title: 'The 6-step pipeline',
-                desc: 'Filter conversions, match to user IDs, pull all prior interactions within lookback windows, deduplicate, rank by recency, and compute path-level metrics like touch position and path length. Each step is a CTE in the final query.',
+                title: 'The 6-step SQL pipeline',
+                desc: 'Filter conversions \u2192 match to user IDs \u2192 pull all prior interactions within lookback windows \u2192 deduplicate \u2192 rank by recency \u2192 compute path metrics. Each step is a CTE.',
                 index: 4
             },
             output: {
-                title: 'What gets delivered',
-                desc: 'A flattened, touch-level dataset where every row is one interaction in a conversion path. This is the input for downstream attribution models, channel sequencing analysis, and creative performance reporting.',
+                title: 'What the query produces',
+                desc: 'A flattened touch-level dataset. Every row = one interaction in a conversion path, with path length, touch position, interaction rank, and full campaign/creative metadata.',
                 index: 5
             },
             edges: {
-                title: 'Production-ready details',
-                desc: 'Handles real-world data issues like duplicate log entries, extremely long paths (bucketed at 30+), missing creative metadata, and strict eligibility enforcement so only valid interactions within the lookback window are counted.',
+                title: 'Edge cases',
+                desc: 'Handles duplicates (GROUP BY), long paths (bucketed at 30+), missing creatives (default N/A), and strict eligibility: event_date bounds, interaction-before-conversion, lookback constraints.',
                 index: 6
             },
             perf: {
-                title: 'Scaling considerations',
-                desc: 'These joins on user_id across large impression and click tables can get expensive fast. The doc covers partition-aware filtering, materializing intermediates, and incremental daily runs to keep query costs under control.',
+                title: 'Scaling this in production',
+                desc: 'Large user_id joins on impression/click tables get expensive. Solutions: partition-aware filters, narrow campaigns early, materialize intermediates, run incremental daily partitions.',
                 index: 7
             },
             relevance: {
                 title: 'Why this matters for NVIDIA',
-                desc: 'Path reconstruction is dominated by large joins, filters, and high-cardinality GROUP BY operations. This is exactly the workload profile where GPU-accelerated dataframe engines like RAPIDS can deliver massive speedups.',
-                index: 7
+                desc: 'Path reconstruction = large joins + high-cardinality GROUP BY + heavy filtering. This is the exact workload profile where GPU-accelerated engines like RAPIDS deliver massive speedups.',
+                index: 8
             }
         };
-        var totalSections = 7;
+        var totalSections = 8;
 
         function updateGuideHighlight() {
             var sections = document.querySelectorAll('.readme-section');
