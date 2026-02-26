@@ -760,10 +760,10 @@
                             </svg>
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            PULLING ASSISTED CONVERSIONS FROM MEDIA DATA
+                            RECONSTRUCTING CONVERSION PATHS IN SQL
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            Assisted conversions reveal which campaigns influence outcomes without being the final touch. By reconstructing full interaction paths across channels, analysts can quantify how display, social, and search work together — not just who "gets credit" at the end. This shifts analysis from siloed channel performance to journey-level influence.
+                            A SQL pipeline that reconstructs full conversion paths by joining raw impression and click logs within configurable lookback windows. Computes touch position, path length, and interaction rank for downstream multi-touch attribution analysis.
                         </p>
                         <div style="margin-top: 16px; text-align: center;">
                             <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Technical Writing Example 2</span>
@@ -778,37 +778,34 @@
                                         <div style="margin-bottom: 24px;">
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                This is a real sample from a previous analytics role. All identifying data has been scrubbed. It documents the process of pulling assisted conversion reports from media platform data so new analysts can do it independently from day one.
+                                                Most attribution reporting stops at last-click. I built a SQL workflow that reconstructs the full path to conversion by pulling every impression and click that occurred within configurable lookback windows before a conversion event. The README documents the entire pipeline so any analyst can run it independently.
                                             </p>
                                         </div>
 
                                         <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">Why This Report Exists</h4>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the Pipeline Does</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7; margin-bottom: 16px;">
-                                                Imagine a user sees a <strong style="color: white;">Facebook ad</strong> on Monday, gets served a <strong style="color: white;">banner ad via DSP</strong> on Wednesday, then searches the brand on <strong style="color: white;">Google</strong> and converts on Friday.
-                                            </p>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7; margin-bottom: 16px;">
-                                                Without assisted conversions, only the Google brand search gets credit. Facebook and the DSP get zero. That makes upper-funnel spend look like waste, when in reality it started the entire journey.
+                                                Given a set of conversion events, the workflow joins against raw impression and click logs to find every touchpoint that preceded a conversion within the lookback window. It then deduplicates, ranks by recency, and computes path-level metrics like <strong style="color: white;">touch position</strong>, <strong style="color: white;">path length</strong>, and <strong style="color: white;">days since first/last interaction</strong>.
                                             </p>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                Assisted conversion data reconstructs the full path so analysts can see how channels work <strong style="color: white;">together</strong>, not just who closes. This shifts reporting from siloed channel metrics to journey-level influence.
+                                                The output is a flattened, touch-level dataset ready for multi-touch attribution models, channel sequencing analysis, and creative performance reporting.
                                             </p>
                                         </div>
 
                                         <div>
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What You Need to Know</h4>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the README Covers</h4>
                                             <div style="display: flex; flex-direction: column; gap: 12px;">
                                                 <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #D4B896;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Attribution Windows</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">How far back each platform looks to assign credit (Google, Meta, DV360, GA4)</div>
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">6-Step SQL Pipeline</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Filter, match, pull lookback interactions, deduplicate, rank, and output</div>
                                                 </div>
                                                 <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #D4B896;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">The Assist Ratio</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">The single metric that tells you if a channel is an opener or a closer</div>
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Edge Cases + Scaling</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Deduplication, long paths, missing metadata, partition-aware filtering</div>
                                                 </div>
                                                 <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #D4B896;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">GA4 Export + BigQuery</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Where to pull the data, which fields to export, and when to scale to BQ</div>
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">GPU Acceleration Relevance</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Large joins and GROUP BY operations that benefit from RAPIDS-style compute</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -818,9 +815,9 @@
                                         <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
                                             <div style="margin-bottom: 32px;">
                                                 <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">Read the Full Doc</span>
-                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Open the README & Onboarding Email</h3>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Open the README</h3>
                                                 <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
-                                                    The README walks through every step. The onboarding email is what I sent new analysts on their first day.
+                                                    The full SQL pipeline documentation. Walks through every step of reconstructing conversion paths from raw impression and click data.
                                                 </p>
                                             </div>
                                             <button onclick="document.getElementById('conversionsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #B89968; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
@@ -2378,144 +2375,170 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4B896" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                     <span style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: #D4B896;">README.md</span>
                 </div>
-                <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, #D4B896, #f0d9b5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Pulling Assisted Conversions from Media Data</h1>
-                <p style="font-size: 1rem; color: #888; max-width: 700px; margin: 0 auto;">Sanitized from documentation I wrote at a previous role. All company names, credentials, and proprietary details removed.</p>
+                <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, #D4B896, #f0d9b5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Reconstructing Conversion Paths in SQL</h1>
+                <p style="font-size: 1rem; color: #888; max-width: 700px; margin: 0 auto;">Post-View + Post-Click Lookbacks. Sanitized from documentation from my previous analytics role. All client names, credentials, and proprietary details removed.</p>
             </div>
 
             <!-- README: Side-by-side layout -->
-            <div id="conversionsReadme" style="display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start;">
+            <div id="conversionsReadme" style="display: grid; grid-template-columns: 1fr 400px; gap: 32px; align-items: start;">
 
                 <!-- LEFT: The actual README -->
                 <div id="readmeScroller" style="background: #111; border: 1px solid #2a2a2a; border-radius: 12px; padding: 40px; font-size: 1rem; line-height: 1.8; color: #e0e0e0;">
 
-                    <div class="readme-section" data-annotation="intro">
+                    <div class="readme-section" data-annotation="overview">
                         <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 0; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Overview</h2>
-                        <p style="margin-bottom: 16px;">This guide covers how to extract assisted conversion data from paid media platforms for multi-touch attribution reporting. If you are new to the team, start here.</p>
+                        <p style="margin-bottom: 16px;">This workflow builds a touch-level "path to conversion" dataset by reconstructing all eligible impressions and clicks that occurred before a conversion within configurable lookback windows.</p>
+                        <p style="margin-bottom: 12px;">The output is designed for downstream attribution analysis and includes:</p>
+                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
+                            <li style="margin-bottom: 6px;">Path length (number of interactions in the lookback window)</li>
+                            <li style="margin-bottom: 6px;">Interaction rank (most recent back to oldest)</li>
+                            <li style="margin-bottom: 6px;">Touch position (First / Middle / Last)</li>
+                            <li style="margin-bottom: 6px;">Days since first interaction / last interaction</li>
+                            <li style="margin-bottom: 6px;">Metadata (campaign, site, placement, creative)</li>
+                        </ul>
                     </div>
 
-                    <div class="readme-section" data-annotation="why">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Why Assisted Conversions Matter</h2>
-                        <p style="margin-bottom: 16px;">Most media platforms default to last-click attribution. This means they only credit the final touchpoint before a conversion. The problem: your paid social campaigns, display ads, and video views that introduced users to the product get zero credit, even though they started the journey.</p>
-                        <p style="margin-bottom: 16px;">Assisted conversions capture every touchpoint in the conversion path, not just the last one. This gives you an accurate picture of which channels are driving awareness and consideration, even if they are not closing the sale directly.</p>
+                    <div class="readme-section" data-annotation="problem">
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Problem</h2>
+                        <p style="margin-bottom: 12px;">Given conversion events for a set of campaigns, we want to answer:</p>
+                        <ol style="margin: 0 0 16px 20px; padding: 0;">
+                            <li style="margin-bottom: 8px;">What interactions (impressions and clicks) preceded each conversion?</li>
+                            <li style="margin-bottom: 8px;">How long were the paths?</li>
+                            <li style="margin-bottom: 8px;">How recent were the interactions relative to conversion time?</li>
+                            <li style="margin-bottom: 8px;">What was the "position" of each interaction in the path?</li>
+                        </ol>
                         <div style="background: rgba(212,184,150,0.08); border-left: 3px solid #D4B896; padding: 16px 20px; margin: 20px 0; border-radius: 4px; font-size: 0.95rem;">
-                            <strong style="color: #f0d9b5;">Example:</strong> A user sees a YouTube ad (Day 1), clicks a paid search ad (Day 5), then converts via an email link (Day 8). Last-click gives 100% credit to email. Assisted conversion data shows all three touchpoints, so you can properly value the YouTube and paid search spend that started the funnel.
+                            This is useful when analyzing multi-touch behavior, channel sequencing, or creative/placement influence.
                         </div>
                     </div>
 
-                    <div class="readme-section" data-annotation="step1">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Step 1: Set Your Attribution Window</h2>
-                        <p style="margin-bottom: 16px;">Before pulling any data, confirm the attribution window with your team lead. This is the lookback period that determines how far back a touchpoint can receive credit for a conversion.</p>
-                        <table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: #0a0a0a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; font-size: 0.9rem;">
-                            <thead><tr style="background: rgba(212,184,150,0.12);">
-                                <th style="padding: 12px 16px; text-align: left; color: #f0d9b5; font-weight: 700;">Platform</th>
-                                <th style="padding: 12px 16px; text-align: left; color: #999;">Default</th>
-                                <th style="padding: 12px 16px; text-align: left; color: #f0d9b5;">Recommended</th>
-                            </tr></thead>
-                            <tbody>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Google Ads</td><td style="padding: 12px 16px; color: #999;">30 days</td><td style="padding: 12px 16px; color: #ccc;">30d click / 1d view</td></tr>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Meta Ads</td><td style="padding: 12px 16px; color: #999;">7d click / 1d view</td><td style="padding: 12px 16px; color: #ccc;">7d click / 1d view</td></tr>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">DV360</td><td style="padding: 12px 16px; color: #999;">30 days</td><td style="padding: 12px 16px; color: #ccc;">Align with Google Ads</td></tr>
-                                <tr><td style="padding: 12px 16px; color: white;">GA4</td><td style="padding: 12px 16px; color: #999;">90 days</td><td style="padding: 12px 16px; color: #ccc;">30 days for consistency</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="readme-section" data-annotation="step2">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Step 2: Pull the Data from GA4</h2>
-                        <p style="margin-bottom: 16px;">Navigate to <strong style="color: white;">GA4 &gt; Advertising &gt; Conversion Paths</strong>. This report shows every channel that participated in a conversion, broken down by touchpoint position (first, middle, last).</p>
+                    <div class="readme-section" data-annotation="inputs">
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Inputs</h2>
+                        <p style="margin-bottom: 12px;">The query is parameterized by:</p>
                         <div style="background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #ccc; margin: 20px 0; line-height: 2;">
-                            <div style="color: #666; font-size: 0.75rem; margin-bottom: 8px; font-family: Montserrat; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Export Fields</div>
-                            source_medium<br>
-                            campaign_name<br>
-                            touchpoint_position <span style="color: #666;">(first | middle | last)</span><br>
-                            assisted_conversions<br>
-                            assisted_conversion_value<br>
-                            last_click_conversions<br>
-                            last_click_conversion_value
+                            <div style="color: #666; font-size: 0.75rem; margin-bottom: 8px; font-family: Montserrat; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Parameters</div>
+                            <span style="color: #f0d9b5;">start_date</span>, <span style="color: #f0d9b5;">end_date</span><br>
+                            <span style="color: #f0d9b5;">advertiser</span> filter<br>
+                            <span style="color: #f0d9b5;">campaign</span> filter <span style="color: #666;">(regex)</span><br>
+                            <span style="color: #f0d9b5;">conversion_activity_ids</span><br>
+                            <span style="color: #f0d9b5;">click_look</span> <span style="color: #666;">(post-click lookback days)</span><br>
+                            <span style="color: #f0d9b5;">imp_look</span> <span style="color: #666;">(post-view lookback days)</span>
                         </div>
-                        <p style="margin-bottom: 16px;">Export as CSV. If the dataset exceeds 500K rows, use BigQuery instead. The GA4 UI caps exports at 5,000 rows and will silently truncate your data.</p>
-                    </div>
 
-                    <div class="readme-section" data-annotation="step3">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Step 3: Calculate the Assist Ratio</h2>
-                        <p style="margin-bottom: 16px;">The assist ratio tells you whether a channel is primarily an initiator/assister or a closer. This is the single most useful metric for understanding where media spend is working upstream.</p>
-                        <div style="background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.95rem; color: #e0e0e0; margin: 20px 0;">
-                            <span style="color: #f0d9b5;">assist_ratio</span> = assisted_conversions / last_click_conversions
-                        </div>
-                        <table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: #0a0a0a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; font-size: 0.9rem;">
+                        <h3 style="font-size: 1.2rem; font-weight: 700; color: #D4B896; margin-top: 32px; margin-bottom: 12px;">Data Model (Conceptual)</h3>
+                        <table style="width: 100%; border-collapse: collapse; margin: 16px 0; background: #0a0a0a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; font-size: 0.9rem;">
                             <thead><tr style="background: rgba(212,184,150,0.12);">
-                                <th style="padding: 12px 16px; text-align: left; color: #f0d9b5; font-weight: 700;">Ratio</th>
-                                <th style="padding: 12px 16px; text-align: left; color: #999;">Meaning</th>
-                                <th style="padding: 12px 16px; text-align: left; color: #f0d9b5;">Example Channels</th>
+                                <th style="padding: 12px 16px; text-align: left; color: #f0d9b5; font-weight: 700;">Table</th>
+                                <th style="padding: 12px 16px; text-align: left; color: #999;">Description</th>
                             </tr></thead>
                             <tbody>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-weight: 700;">&gt; 1.0</td><td style="padding: 12px 16px; color: #999;">Primarily an assister</td><td style="padding: 12px 16px; color: #ccc;">Display, YouTube, Paid Social</td></tr>
-                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-weight: 700;">= 1.0</td><td style="padding: 12px 16px; color: #999;">Equal assist and close</td><td style="padding: 12px 16px; color: #ccc;">Organic Search</td></tr>
-                                <tr><td style="padding: 12px 16px; color: white; font-weight: 700;">&lt; 1.0</td><td style="padding: 12px 16px; color: #999;">Primarily a closer</td><td style="padding: 12px 16px; color: #ccc;">Brand Search, Email, Retargeting</td></tr>
+                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">conversions</td><td style="padding: 12px 16px; color: #ccc;">Conversion events (timestamped)</td></tr>
+                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">impressions</td><td style="padding: 12px 16px; color: #ccc;">Impression logs with user_id + timestamp</td></tr>
+                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">clicks</td><td style="padding: 12px 16px; color: #ccc;">Click logs with user_id + timestamp</td></tr>
+                                <tr><td style="padding: 12px 16px; color: white; font-family: 'Courier New', monospace; font-size: 0.85rem;">lookups</td><td style="padding: 12px 16px; color: #ccc;">Advertisers, campaigns, placements, creatives, sites</td></tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="readme-section" data-annotation="step4">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Step 4: Build the Report</h2>
-                        <p style="margin-bottom: 16px;">Combine the assist ratio with conversion value data to build a channel-level attribution view. The final deliverable should include: channel name, assisted conversions, last-click conversions, assist ratio, assisted revenue, and last-click revenue.</p>
-                        <p style="margin-bottom: 16px;">This goes into the weekly media performance deck and informs budget allocation conversations with the media director.</p>
+                    <div class="readme-section" data-annotation="approach">
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Approach (High Level)</h2>
+
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 1 &mdash; Filter Conversions</h3>
+                        <p style="margin-bottom: 16px;">Select conversion rows for the reporting window and filters.</p>
+
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 2 &mdash; Match Conversions to Interaction Anchors</h3>
+                        <p style="margin-bottom: 16px;">Create a conversion-level identifier (<code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #f0d9b5; font-size: 0.9rem;">pseudo_id</code>) and attach a <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #f0d9b5; font-size: 0.9rem;">user_id</code> to each conversion event via a join to either impressions or clicks (depending on conversion linkage).</p>
+
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 3 &mdash; Pull Prior Interactions Within Lookback Windows</h3>
+                        <p style="margin-bottom: 12px;">For each conversion <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #f0d9b5; font-size: 0.9rem;">pseudo_id</code>, retrieve:</p>
+                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
+                            <li style="margin-bottom: 6px;">All impressions within <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #f0d9b5; font-size: 0.9rem;">imp_look</code> days prior to conversion</li>
+                            <li style="margin-bottom: 6px;">All clicks within <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #f0d9b5; font-size: 0.9rem;">click_look</code> days prior to conversion</li>
+                        </ul>
+
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 4 &mdash; Deduplicate and Rank Interactions</h3>
+                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
+                            <li style="margin-bottom: 6px;">Remove exact duplicates</li>
+                            <li style="margin-bottom: 6px;">Rank interactions descending by timestamp (most recent first)</li>
+                        </ul>
+
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 5 &mdash; Compute Path Metrics</h3>
+                        <div style="background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #ccc; margin: 12px 0 16px; line-height: 2;">
+                            <span style="color: #f0d9b5;">path_length</span><br>
+                            <span style="color: #f0d9b5;">first_touch_date</span>, <span style="color: #f0d9b5;">last_touch_date</span><br>
+                            <span style="color: #f0d9b5;">touch_position</span> <span style="color: #666;">based on rank and path length</span>
+                        </div>
+
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-top: 28px; margin-bottom: 8px;">Step 6 &mdash; Produce Touch-Level Output</h3>
+                        <p style="margin-bottom: 16px;">Join interaction rows to lookup tables and output a flattened touch-level dataset.</p>
+                    </div>
+
+                    <div class="readme-section" data-annotation="output">
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Output Schema</h2>
+                        <div style="background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #ccc; margin: 16px 0; line-height: 2;">
+                            <div style="color: #666; font-size: 0.75rem; margin-bottom: 8px; font-family: Montserrat; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Output Fields</div>
+                            <span style="color: #f0d9b5;">pseudo_id</span><br>
+                            <span style="color: #f0d9b5;">activity</span>, <span style="color: #f0d9b5;">activity_id</span>, <span style="color: #f0d9b5;">activity_date</span><br>
+                            <span style="color: #f0d9b5;">path_length</span><br>
+                            <span style="color: #f0d9b5;">days_since_first_interaction</span>, <span style="color: #f0d9b5;">days_since_last_interaction</span><br>
+                            <span style="color: #f0d9b5;">interaction_date</span>, <span style="color: #f0d9b5;">interaction_number</span><br>
+                            <span style="color: #f0d9b5;">campaign</span>, <span style="color: #f0d9b5;">site</span>, <span style="color: #f0d9b5;">placement</span>, <span style="color: #f0d9b5;">creative</span><br>
+                            <span style="color: #f0d9b5;">touch_position</span>
+                        </div>
+                    </div>
+
+                    <div class="readme-section" data-annotation="edges">
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Edge Cases Handled</h2>
+                        <table style="width: 100%; border-collapse: collapse; margin: 16px 0; background: #0a0a0a; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; font-size: 0.9rem;">
+                            <thead><tr style="background: rgba(212,184,150,0.12);">
+                                <th style="padding: 12px 16px; text-align: left; color: #f0d9b5; font-weight: 700;">Edge Case</th>
+                                <th style="padding: 12px 16px; text-align: left; color: #999;">Handling</th>
+                            </tr></thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Duplicate interaction records</td><td style="padding: 12px 16px; color: #ccc;">Deduped via GROUP BY</td></tr>
+                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Very long paths</td><td style="padding: 12px 16px; color: #ccc;">Bucketed as 30+</td></tr>
+                                <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 12px 16px; color: white;">Missing creative values</td><td style="padding: 12px 16px; color: #ccc;">Defaulted to N/A</td></tr>
+                                <tr><td style="padding: 12px 16px; color: white;">Interaction eligibility</td><td style="padding: 12px 16px; color: #ccc;">Enforced by event_date bounds, interaction-before-conversion check, and lookback window constraints</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="readme-section" data-annotation="perf">
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Performance Considerations</h2>
+                        <p style="margin-bottom: 12px;">This workflow can become expensive due to joining large interaction logs on <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; color: #f0d9b5; font-size: 0.9rem;">user_id</code>, wide date ranges, and high impression/click volumes.</p>
+                        <p style="margin-bottom: 8px; color: white; font-weight: 600;">Ways to scale:</p>
+                        <ul style="margin: 0 0 16px 20px; padding: 0; list-style: disc;">
+                            <li style="margin-bottom: 6px;">Ensure interaction tables are partitioned by date and filters use partition keys</li>
+                            <li style="margin-bottom: 6px;">Narrow campaign filters early</li>
+                            <li style="margin-bottom: 6px;">Materialize intermediate tables for iterative development</li>
+                            <li style="margin-bottom: 6px;">Consider incremental runs (daily partitions) rather than reprocessing full quarters</li>
+                        </ul>
+                    </div>
+
+                    <div class="readme-section" data-annotation="relevance">
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #D4B896; margin-top: 40px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a;">Why This Is Relevant to Accelerated Analytics</h2>
                         <div style="background: rgba(212,184,150,0.08); border-left: 3px solid #D4B896; padding: 16px 20px; margin: 20px 0; border-radius: 4px; font-size: 0.95rem;">
-                            <strong style="color: #f0d9b5;">Pro tip:</strong> Always pull assisted and last-click data for the same date range and attribution window. Mismatched windows are the #1 source of reporting discrepancies.
+                            Path reconstruction is typically dominated by large joins, filters, and high-cardinality group-by operations. This is exactly the workload profile where optimized execution engines and accelerated dataframe operations can significantly reduce runtime at scale.
                         </div>
                     </div>
                 </div>
 
-                <!-- RIGHT: Scroll-linked context panel -->
+                <!-- RIGHT: Scroll-linked single context box -->
                 <div style="position: sticky; top: 20px; align-self: start;">
-                    <div style="background: #1a1a1a; border: 1px solid rgba(212,184,150,0.2); border-radius: 12px; padding: 24px;">
-                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #D4B896; margin-bottom: 16px;">Reading Guide</div>
+                    <div style="background: #1a1a1a; border: 1px solid rgba(212,184,150,0.2); border-radius: 16px; padding: 32px;">
+                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #D4B896; margin-bottom: 20px;">Context</div>
 
-                        <div class="guide-row" data-guide="intro" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(212,184,150,0.12); border-left: 3px solid #D4B896; transition: all 0.3s;">
-                            <div style="min-width: 18px; color: #D4B896; font-size: 0.85rem; font-weight: 700; margin-top: 1px;">&#9654;</div>
-                            <div>
-                                <div style="font-size: 0.82rem; font-weight: 700; color: white;">Overview</div>
-                                <div style="font-size: 0.78rem; color: #bbb; line-height: 1.45;">Context for new hires. Start here.</div>
-                            </div>
+                        <div id="guideContent">
+                            <div id="guideTitle" style="font-size: 1.1rem; font-weight: 800; color: white; margin-bottom: 14px; line-height: 1.3;">What this document is</div>
+                            <div id="guideDesc" style="font-size: 0.95rem; color: #bbb; line-height: 1.65;">This README documents a SQL workflow I built to reconstruct full conversion paths from raw impression and click logs. It was written for analysts joining the team who needed to understand the pipeline from scratch.</div>
                         </div>
 
-                        <div class="guide-row" data-guide="why" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: transparent; border-left: 3px solid transparent; transition: all 0.3s;">
-                            <div style="min-width: 18px; color: #555; font-size: 0.85rem; font-weight: 700; margin-top: 1px;">&#9654;</div>
-                            <div>
-                                <div style="font-size: 0.82rem; font-weight: 700; color: #888;">Why it matters</div>
-                                <div style="font-size: 0.78rem; color: #666; line-height: 1.45;">Last-click hides upper-funnel value. This report fixes that.</div>
-                            </div>
-                        </div>
-
-                        <div class="guide-row" data-guide="step1" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: transparent; border-left: 3px solid transparent; transition: all 0.3s;">
-                            <div style="min-width: 18px; color: #555; font-size: 0.85rem; font-weight: 700; margin-top: 1px;">&#9654;</div>
-                            <div>
-                                <div style="font-size: 0.82rem; font-weight: 700; color: #888;">Attribution windows</div>
-                                <div style="font-size: 0.78rem; color: #666; line-height: 1.45;">Platform lookback settings. #1 cause of data mismatches.</div>
-                            </div>
-                        </div>
-
-                        <div class="guide-row" data-guide="step2" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: transparent; border-left: 3px solid transparent; transition: all 0.3s;">
-                            <div style="min-width: 18px; color: #555; font-size: 0.85rem; font-weight: 700; margin-top: 1px;">&#9654;</div>
-                            <div>
-                                <div style="font-size: 0.82rem; font-weight: 700; color: #888;">GA4 data pull</div>
-                                <div style="font-size: 0.78rem; color: #666; line-height: 1.45;">Which fields to export, when to use BigQuery.</div>
-                            </div>
-                        </div>
-
-                        <div class="guide-row" data-guide="step3" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: transparent; border-left: 3px solid transparent; transition: all 0.3s;">
-                            <div style="min-width: 18px; color: #555; font-size: 0.85rem; font-weight: 700; margin-top: 1px;">&#9654;</div>
-                            <div>
-                                <div style="font-size: 0.82rem; font-weight: 700; color: #888;">Assist ratio</div>
-                                <div style="font-size: 0.78rem; color: #666; line-height: 1.45;">Does this channel open or close? Drives budget decisions.</div>
-                            </div>
-                        </div>
-
-                        <div class="guide-row" data-guide="step4" style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 8px; background: transparent; border-left: 3px solid transparent; transition: all 0.3s;">
-                            <div style="min-width: 18px; color: #555; font-size: 0.85rem; font-weight: 700; margin-top: 1px;">&#9654;</div>
-                            <div>
-                                <div style="font-size: 0.82rem; font-weight: 700; color: #888;">Final report</div>
-                                <div style="font-size: 0.78rem; color: #666; line-height: 1.45;">Weekly deliverable for the media deck. Budget allocation.</div>
+                        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #2a2a2a;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div id="guideProgress" style="flex: 1; height: 3px; background: #2a2a2a; border-radius: 2px; overflow: hidden;">
+                                    <div id="guideProgressBar" style="width: 14%; height: 100%; background: #D4B896; border-radius: 2px; transition: width 0.3s;"></div>
+                                </div>
+                                <div id="guideSectionLabel" style="font-size: 0.7rem; color: #666; font-weight: 600; white-space: nowrap;">1 / 7</div>
                             </div>
                         </div>
                     </div>
@@ -2527,27 +2550,70 @@
     </div>
 
     <script>
-        // Scroll-linked guide highlighting
+        // Context guide data - recruiter/hiring manager focused
+        var guideData = {
+            overview: {
+                title: 'What this document is',
+                desc: 'This README documents a SQL workflow I built to reconstruct full conversion paths from raw impression and click logs. It was written for analysts joining the team who needed to understand the pipeline from scratch.',
+                index: 1
+            },
+            problem: {
+                title: 'The business question',
+                desc: 'Which ad touchpoints actually led to a conversion, and in what order? This is the core question behind multi-touch attribution and it requires reconstructing the full user journey from raw log data.',
+                index: 2
+            },
+            inputs: {
+                title: 'How the query is configured',
+                desc: 'The workflow is fully parameterized so analysts can adjust date ranges, lookback windows, and campaign filters without modifying the SQL itself. The data model spans conversions, impressions, clicks, and dimension lookup tables.',
+                index: 3
+            },
+            approach: {
+                title: 'The 6-step pipeline',
+                desc: 'Filter conversions, match to user IDs, pull all prior interactions within lookback windows, deduplicate, rank by recency, and compute path-level metrics like touch position and path length. Each step is a CTE in the final query.',
+                index: 4
+            },
+            output: {
+                title: 'What gets delivered',
+                desc: 'A flattened, touch-level dataset where every row is one interaction in a conversion path. This is the input for downstream attribution models, channel sequencing analysis, and creative performance reporting.',
+                index: 5
+            },
+            edges: {
+                title: 'Production-ready details',
+                desc: 'Handles real-world data issues like duplicate log entries, extremely long paths (bucketed at 30+), missing creative metadata, and strict eligibility enforcement so only valid interactions within the lookback window are counted.',
+                index: 6
+            },
+            perf: {
+                title: 'Scaling considerations',
+                desc: 'These joins on user_id across large impression and click tables can get expensive fast. The doc covers partition-aware filtering, materializing intermediates, and incremental daily runs to keep query costs under control.',
+                index: 7
+            },
+            relevance: {
+                title: 'Why this matters for NVIDIA',
+                desc: 'Path reconstruction is dominated by large joins, filters, and high-cardinality GROUP BY operations. This is exactly the workload profile where GPU-accelerated dataframe engines like RAPIDS can deliver massive speedups.',
+                index: 7
+            }
+        };
+        var totalSections = 7;
+
         function updateGuideHighlight() {
             var sections = document.querySelectorAll('.readme-section');
-            var currentSection = 'intro';
+            var currentSection = 'overview';
             sections.forEach(function(sec) {
                 var rect = sec.getBoundingClientRect();
                 if (rect.top < window.innerHeight * 0.45) {
                     currentSection = sec.getAttribute('data-annotation');
                 }
             });
-            document.querySelectorAll('.guide-row').forEach(function(row) {
-                var isActive = row.getAttribute('data-guide') === currentSection;
-                row.style.background = isActive ? 'rgba(212,184,150,0.12)' : 'transparent';
-                row.style.borderLeftColor = isActive ? '#D4B896' : 'transparent';
-                var arrow = row.querySelector('div:first-child');
-                arrow.style.color = isActive ? '#D4B896' : '#555';
-                var title = row.querySelector('div:nth-child(2) div:first-child');
-                title.style.color = isActive ? 'white' : '#888';
-                var desc = row.querySelector('div:nth-child(2) div:last-child');
-                desc.style.color = isActive ? '#bbb' : '#666';
-            });
+            var data = guideData[currentSection];
+            if (!data) return;
+            var titleEl = document.getElementById('guideTitle');
+            var descEl = document.getElementById('guideDesc');
+            var barEl = document.getElementById('guideProgressBar');
+            var labelEl = document.getElementById('guideSectionLabel');
+            if (titleEl) titleEl.textContent = data.title;
+            if (descEl) descEl.textContent = data.desc;
+            if (barEl) barEl.style.width = ((data.index / totalSections) * 100) + '%';
+            if (labelEl) labelEl.textContent = data.index + ' / ' + totalSections;
         }
 
         // Initialize scroll listener when modal opens
