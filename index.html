@@ -590,12 +590,22 @@
                 gap: 16px !important;
             }
             #conversionsReadme > div:last-child {
-                position: relative !important;
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
                 top: auto !important;
                 transform: none !important;
+                z-index: 100 !important;
             }
             #conversionsReadme > div:last-child > div {
-                padding: 20px 20px !important;
+                padding: 14px 16px !important;
+                border-radius: 12px 12px 0 0 !important;
+                max-height: 35vh !important;
+                overflow-y: auto !important;
+            }
+            #readmeScroller {
+                margin-bottom: 35vh !important;
             }
             #readmeScroller pre {
                 font-size: 0.65rem !important;
