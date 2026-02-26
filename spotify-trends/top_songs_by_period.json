@@ -24974,67 +24974,67 @@
       "total_minutes": 81.181
     },
     {
-      "track": "Flowers",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
-      "play_count": 27,
-      "total_minutes": 107.151
-    },
-    {
       "track": "All for Love (I cry)",
       "artist": "Candee Sweet",
       "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
+      "play_count": 27,
+      "total_minutes": 75.482
+    },
+    {
+      "track": "Flowers",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
       "play_count": 24,
-      "total_minutes": 67.095
-    },
-    {
-      "track": "Homies",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:21KNT4TSX28H6DsyK9zh2x",
-      "play_count": 21,
-      "total_minutes": 70.755
-    },
-    {
-      "track": "Broke",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
-      "play_count": 18,
-      "total_minutes": 50.728
+      "total_minutes": 95.245
     },
     {
       "track": "everything will be okay",
       "artist": "REBBY",
       "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
-      "play_count": 15,
-      "total_minutes": 51.521
+      "play_count": 21,
+      "total_minutes": 72.13
     },
     {
       "track": "Keep Me Close",
       "artist": "Brasstracks",
       "spotify_uri": "spotify:track:7iKKeyYRRQVNVnkGqQPemI",
-      "play_count": 12,
-      "total_minutes": 31.717
+      "play_count": 18,
+      "total_minutes": 47.576
     },
     {
       "track": "More Wine",
       "artist": "Claire Ernst",
       "spotify_uri": "spotify:track:4Y9vMIsbHaDN2yjRAPMTTT",
-      "play_count": 9,
-      "total_minutes": 26.808
+      "play_count": 15,
+      "total_minutes": 44.68
     },
     {
-      "track": "Bad Bitch",
+      "track": "Broke",
       "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:6TSvgUTejhA1Ys4ZyryXKX",
-      "play_count": 6,
-      "total_minutes": 27.615
+      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
+      "play_count": 12,
+      "total_minutes": 33.819
     },
     {
       "track": "Sour Candy - Reimagined",
       "artist": "Melt",
       "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
+      "play_count": 9,
+      "total_minutes": 34.16
+    },
+    {
+      "track": "Sisters With Me",
+      "artist": "Tom Misch",
+      "spotify_uri": "spotify:track:2ewg31VuWBIamb8f8APqw7",
+      "play_count": 6,
+      "total_minutes": 24.459
+    },
+    {
+      "track": "Sway",
+      "artist": "Jesse Barrera",
+      "spotify_uri": "spotify:track:0URET1QRXICvNhwgNn5OWD",
       "play_count": 3,
-      "total_minutes": 11.387
+      "total_minutes": 8.006
     }
   ]
 }
