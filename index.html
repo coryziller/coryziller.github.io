@@ -957,7 +957,7 @@
                             RECONSTRUCTING CONVERSION PATHS IN SQL
                         </h3>
                         <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            A SQL pipeline that reconstructs full conversion paths by joining raw impression and click logs within configurable lookback windows. Computes touch position, path length, and interaction rank for downstream multi-touch attribution analysis.
+                            A parameterized SQL query that reconstructs full conversion paths by joining raw impression and click logs within configurable lookback windows. Outputs ranked touchpoints and path-level metrics for downstream multi-touch attribution analysis.
                         </p>
                         <div style="margin-top: 16px; text-align: center;">
                             <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Technical Writing Example 2</span>
@@ -972,14 +972,14 @@
                                         <div style="margin-bottom: 24px;">
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                Most attribution reporting stops at last-click. I built a SQL workflow that reconstructs the full path to conversion by pulling every impression and click that occurred within configurable lookback windows before a conversion event. The README documents the entire pipeline so any analyst can run it independently.
+                                                Most attribution reporting stops at last-click. I wrote a structured SQL query that reconstructs the full path to conversion by pulling every impression and click that occurred within configurable lookback windows before a conversion event. The README documents each transformation stage so any analyst can understand, adapt, and run the logic independently.
                                             </p>
                                         </div>
 
                                         <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the Pipeline Does</h4>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the Query Does</h4>
                                             <p style="font-size: 1.0625rem; line-height: 1.7; margin-bottom: 16px;">
-                                                Given a set of conversion events, the workflow joins against raw impression and click logs to find every touchpoint that preceded a conversion within the lookback window. It then deduplicates, ranks by recency, and computes path-level metrics like <strong style="color: white;">touch position</strong>, <strong style="color: white;">path length</strong>, and <strong style="color: white;">days since first/last interaction</strong>.
+                                                Given a set of conversion events, the SQL query joins against raw impression and click logs to find every touchpoint that preceded a conversion within the lookback window. It then deduplicates overlapping events, ranks touchpoints by recency, and computes path-level metrics like <strong style="color: white;">touch position</strong>, <strong style="color: white;">path length</strong>, and <strong style="color: white;">time since first/last interaction</strong>.
                                             </p>
                                             <p style="font-size: 1.0625rem; line-height: 1.7;">
                                                 The output is a flattened, touch-level dataset ready for multi-touch attribution models, channel sequencing analysis, and creative performance reporting.
@@ -990,16 +990,16 @@
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the README Covers</h4>
                                             <div style="display: flex; flex-direction: column; gap: 12px;">
                                                 <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">6-Step SQL Pipeline</div>
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">6-Step Query Structure</div>
                                                     <div style="font-size: 0.85rem; opacity: 0.75;">Filter, match, pull lookback interactions, deduplicate, rank, and output</div>
                                                 </div>
                                                 <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
                                                     <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Edge Cases + Scaling</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Deduplication, long paths, missing metadata, partition-aware filtering</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Deduplication logic, long paths, missing metadata, partition-aware filtering</div>
                                                 </div>
                                                 <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
                                                     <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">GPU Acceleration Relevance</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Allowing large joins and GROUP BY to process data at scale</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">How large joins and GROUP BY operations can scale with accelerated data processing frameworks</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1011,7 +1011,7 @@
                                                 <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">Read the Full Doc</span>
                                                 <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Open the README</h3>
                                                 <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
-                                                    The full SQL pipeline documentation. Walks through every step of reconstructing conversion paths from raw impression and click data.
+                                                    The full SQL query documentation. Walks through every step of reconstructing conversion paths from raw impression and click data.
                                                 </p>
                                             </div>
                                             <button onclick="document.getElementById('conversionsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #1E40AF; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
