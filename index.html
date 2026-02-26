@@ -726,6 +726,28 @@
                 font-size: 1rem !important;
             }
 
+            /* === RAPIDS MODAL MOBILE === */
+            #rapidsModal > div { padding: 20px 16px !important; max-width: 100% !important; }
+            #rapidsModal h1 { font-size: 1.5rem !important; margin-bottom: 12px !important; }
+            #rapidsModal > div > div:first-of-type { margin-bottom: 24px !important; }
+            #rapidsModal p { font-size: 0.9rem !important; }
+            #rapidsSimSection { padding: 16px !important; font-size: 0.8rem !important; line-height: 1.8 !important; margin: 16px 0 !important; max-height: none !important; overflow: visible !important; }
+            /* Writing sample box - fix overlap */
+            #rapidsWritingSample > div { padding: 20px 16px !important; margin-top: 24px !important; }
+            #rapidsWritingSample > div > div:first-child { position: relative !important; top: auto !important; left: auto !important; transform: none !important; text-align: center !important; margin-bottom: 12px !important; background: none !important; padding: 0 !important; }
+            #rapidsWritingSample > div > div:first-child span { font-size: 0.75rem !important; }
+            #rapidsWritingSample > div > div:nth-child(2) { margin-bottom: 16px !important; }
+            #rapidsWritingSample > div > div:nth-child(2) p { font-size: 0.8rem !important; }
+            #rapidsWritingSample article { font-size: 0.9rem !important; line-height: 1.7 !important; }
+            #rapidsWritingSample article h2 { font-size: 1.2rem !important; margin-top: 24px !important; margin-bottom: 10px !important; }
+            #rapidsWritingSample article p { font-size: 0.85rem !important; margin-bottom: 12px !important; }
+            /* Code blocks side by side -> stacked */
+            #rapidsWritingSample div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 10px !important; }
+            #rapidsWritingSample table { font-size: 0.75rem !important; }
+            #rapidsWritingSample table th, #rapidsWritingSample table td { padding: 8px !important; font-size: 0.7rem !important; }
+            /* Speed test results bars */
+            #rapidsModal .fullscreen-modal { overflow-y: auto !important; }
+
             /* === WORK HISTORY SUBTITLE MOBILE === */
             #history > p { font-size: 0.9rem !important; }
         }
