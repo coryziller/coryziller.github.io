@@ -24981,18 +24981,18 @@
       "total_minutes": 75.482
     },
     {
-      "track": "Flowers",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
-      "play_count": 24,
-      "total_minutes": 95.245
-    },
-    {
       "track": "everything will be okay",
       "artist": "REBBY",
       "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
+      "play_count": 24,
+      "total_minutes": 82.434
+    },
+    {
+      "track": "Flowers",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
       "play_count": 21,
-      "total_minutes": 72.13
+      "total_minutes": 83.34
     },
     {
       "track": "Keep Me Close",
@@ -25009,25 +25009,25 @@
       "total_minutes": 44.68
     },
     {
-      "track": "Broke",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
-      "play_count": 12,
-      "total_minutes": 33.819
-    },
-    {
       "track": "Sour Candy - Reimagined",
       "artist": "Melt",
       "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
-      "play_count": 9,
-      "total_minutes": 34.16
+      "play_count": 12,
+      "total_minutes": 45.547
     },
     {
       "track": "Sisters With Me",
       "artist": "Tom Misch",
       "spotify_uri": "spotify:track:2ewg31VuWBIamb8f8APqw7",
+      "play_count": 9,
+      "total_minutes": 36.689
+    },
+    {
+      "track": "Broke",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
       "play_count": 6,
-      "total_minutes": 24.459
+      "total_minutes": 16.91
     },
     {
       "track": "Homies",
