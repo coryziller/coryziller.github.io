@@ -25036,5 +25036,77 @@
       "play_count": 3,
       "total_minutes": 10.108
     }
+  ],
+  "2026-03": [
+    {
+      "track": "I Know It",
+      "artist": "Candee Sweet",
+      "spotify_uri": "spotify:track:48KuNRKRgw7XAoWw26tilG",
+      "play_count": 30,
+      "total_minutes": 81.181
+    },
+    {
+      "track": "All for Love (I cry)",
+      "artist": "Candee Sweet",
+      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
+      "play_count": 27,
+      "total_minutes": 75.482
+    },
+    {
+      "track": "everything will be okay",
+      "artist": "REBBY",
+      "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
+      "play_count": 24,
+      "total_minutes": 82.434
+    },
+    {
+      "track": "Flowers",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
+      "play_count": 21,
+      "total_minutes": 83.34
+    },
+    {
+      "track": "Keep Me Close",
+      "artist": "Brasstracks",
+      "spotify_uri": "spotify:track:7iKKeyYRRQVNVnkGqQPemI",
+      "play_count": 18,
+      "total_minutes": 47.576
+    },
+    {
+      "track": "Sour Candy - Reimagined",
+      "artist": "Melt",
+      "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
+      "play_count": 15,
+      "total_minutes": 56.934
+    },
+    {
+      "track": "Sisters With Me",
+      "artist": "Tom Misch",
+      "spotify_uri": "spotify:track:2ewg31VuWBIamb8f8APqw7",
+      "play_count": 12,
+      "total_minutes": 48.918
+    },
+    {
+      "track": "More Wine",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:4Y9vMIsbHaDN2yjRAPMTTT",
+      "play_count": 9,
+      "total_minutes": 26.808
+    },
+    {
+      "track": "Broke",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
+      "play_count": 6,
+      "total_minutes": 16.91
+    },
+    {
+      "track": "Homies",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:21KNT4TSX28H6DsyK9zh2x",
+      "play_count": 3,
+      "total_minutes": 10.108
+    }
   ]
 }
