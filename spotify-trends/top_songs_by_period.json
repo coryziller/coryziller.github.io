@@ -25053,32 +25053,32 @@
       "total_minutes": 75.482
     },
     {
-      "track": "everything will be okay",
-      "artist": "REBBY",
-      "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
-      "play_count": 24,
-      "total_minutes": 82.434
-    },
-    {
       "track": "Keep Me Close",
       "artist": "Brasstracks",
       "spotify_uri": "spotify:track:7iKKeyYRRQVNVnkGqQPemI",
-      "play_count": 21,
-      "total_minutes": 55.505
+      "play_count": 24,
+      "total_minutes": 63.434
     },
     {
-      "track": "Flowers",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
-      "play_count": 18,
-      "total_minutes": 71.434
+      "track": "everything will be okay",
+      "artist": "REBBY",
+      "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
+      "play_count": 21,
+      "total_minutes": 72.13
     },
     {
       "track": "Sour Candy - Reimagined",
       "artist": "Melt",
       "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
+      "play_count": 18,
+      "total_minutes": 68.321
+    },
+    {
+      "track": "Flowers",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
       "play_count": 15,
-      "total_minutes": 56.934
+      "total_minutes": 59.528
     },
     {
       "track": "Sisters With Me",
