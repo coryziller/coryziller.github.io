@@ -25067,18 +25067,18 @@
       "total_minutes": 79.708
     },
     {
-      "track": "everything will be okay",
-      "artist": "REBBY",
-      "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
-      "play_count": 18,
-      "total_minutes": 61.826
-    },
-    {
       "track": "Flowers",
       "artist": "Claire Ernst",
       "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
+      "play_count": 18,
+      "total_minutes": 71.434
+    },
+    {
+      "track": "everything will be okay",
+      "artist": "REBBY",
+      "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
       "play_count": 15,
-      "total_minutes": 59.528
+      "total_minutes": 51.521
     },
     {
       "track": "Sisters With Me",
@@ -25102,11 +25102,11 @@
       "total_minutes": 16.91
     },
     {
-      "track": "Sway",
-      "artist": "Jesse Barrera",
-      "spotify_uri": "spotify:track:0URET1QRXICvNhwgNn5OWD",
+      "track": "Maybe I",
+      "artist": "Claire Ernst",
+      "spotify_uri": "spotify:track:7uaizO1umK6Ozf4dRK4BDX",
       "play_count": 3,
-      "total_minutes": 8.006
+      "total_minutes": 10.936
     }
   ]
 }
