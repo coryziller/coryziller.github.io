@@ -25067,11 +25067,11 @@
       "total_minutes": 55.505
     },
     {
-      "track": "Sisters With Me",
-      "artist": "Tom Misch",
-      "spotify_uri": "spotify:track:2ewg31VuWBIamb8f8APqw7",
+      "track": "everything will be okay",
+      "artist": "REBBY",
+      "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
       "play_count": 18,
-      "total_minutes": 73.377
+      "total_minutes": 61.826
     },
     {
       "track": "Flowers",
@@ -25081,11 +25081,11 @@
       "total_minutes": 59.528
     },
     {
-      "track": "everything will be okay",
-      "artist": "REBBY",
-      "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
+      "track": "Sisters With Me",
+      "artist": "Tom Misch",
+      "spotify_uri": "spotify:track:2ewg31VuWBIamb8f8APqw7",
       "play_count": 12,
-      "total_minutes": 41.217
+      "total_minutes": 48.918
     },
     {
       "track": "Broke",
@@ -25095,18 +25095,18 @@
       "total_minutes": 25.364
     },
     {
-      "track": "More Wine",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:4Y9vMIsbHaDN2yjRAPMTTT",
+      "track": "inside",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
       "play_count": 6,
-      "total_minutes": 17.872
+      "total_minutes": 18.374
     },
     {
-      "track": "Homies",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:21KNT4TSX28H6DsyK9zh2x",
+      "track": "inside - Sped Up",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:3VRK2xzKsJLW0DxTA8ML83",
       "play_count": 3,
-      "total_minutes": 10.108
+      "total_minutes": 7.786
     }
   ]
 }
