@@ -25053,39 +25053,39 @@
       "total_minutes": 75.482
     },
     {
-      "track": "inside",
-      "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 24,
-      "total_minutes": 73.498
-    },
-    {
       "track": "Sour Candy - Reimagined",
       "artist": "Melt",
       "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
-      "play_count": 21,
-      "total_minutes": 79.708
+      "play_count": 24,
+      "total_minutes": 91.094
     },
     {
       "track": "I Think I Like You Better When You’re Gone",
       "artist": "Reneé Rapp",
       "spotify_uri": "spotify:track:3hBzKgqQKkChH9hyb3MhmT",
-      "play_count": 18,
-      "total_minutes": 42.989
+      "play_count": 21,
+      "total_minutes": 50.154
     },
     {
-      "track": "inside - Sped Up",
+      "track": "inside",
       "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:3VRK2xzKsJLW0DxTA8ML83",
-      "play_count": 15,
-      "total_minutes": 38.929
+      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
+      "play_count": 18,
+      "total_minutes": 55.123
     },
     {
       "track": "Keep Me Close",
       "artist": "Brasstracks",
       "spotify_uri": "spotify:track:7iKKeyYRRQVNVnkGqQPemI",
+      "play_count": 15,
+      "total_minutes": 39.647
+    },
+    {
+      "track": "inside - Sped Up",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:3VRK2xzKsJLW0DxTA8ML83",
       "play_count": 12,
-      "total_minutes": 31.717
+      "total_minutes": 31.143
     },
     {
       "track": "everything will be okay",
@@ -25095,18 +25095,18 @@
       "total_minutes": 30.913
     },
     {
-      "track": "Flowers",
+      "track": "Broke",
       "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:63oypqje8UNsr10hNDislA",
+      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
       "play_count": 6,
-      "total_minutes": 23.811
+      "total_minutes": 16.91
     },
     {
-      "track": "Homies",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:21KNT4TSX28H6DsyK9zh2x",
+      "track": "Sisters With Me",
+      "artist": "Tom Misch",
+      "spotify_uri": "spotify:track:2ewg31VuWBIamb8f8APqw7",
       "play_count": 3,
-      "total_minutes": 10.108
+      "total_minutes": 12.23
     }
   ]
 }
