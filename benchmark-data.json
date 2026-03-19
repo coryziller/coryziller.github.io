@@ -1,0 +1,26 @@
+{
+  "benchmark": {
+    "dataset": "100M row paid media dataset",
+    "operations": [
+      "groupby",
+      "merge",
+      "sort",
+      "filter",
+      "aggregation"
+    ],
+    "pandas": {
+      "time_seconds": 47.3,
+      "memory_gb": 8.2,
+      "label": "Pandas (CPU-based)"
+    },
+    "rapids_cudf": {
+      "time_seconds": 0.8,
+      "memory_gb": 1.4,
+      "label": "RAPIDS cuDF (GPU-accelerated)"
+    },
+    "gpu": "NVIDIA T4",
+    "speedup": 59.1,
+    "last_updated": "2026-03-19",
+    "note": "Sanitized results from production paid media pipeline benchmark"
+  }
+}
