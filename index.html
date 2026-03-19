@@ -3030,69 +3030,90 @@ function runRapidsSimulation() {
   var btn = document.querySelector('[onclick*="runRapidsSimulation"]');
   if (btn) btn.style.display = 'none';
   if (sec) sec.style.display = 'block';
-
-  // Real API call to log the speed test run
-  fetch('https://script.google.com/macros/s/AKfycbw-1Ug6SYktFirnQKSSkLr6pxTExJpTXdPfEnp6RWKmnIt56fkXk4siFgIp1KjBvBeY/exec', {
-    method: 'POST', mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'rapidsSpeedTest', timestamp: new Date().toISOString() })
-  }).catch(function(e) { console.log('notify:', e); });
-
   if (!sec) return;
   sec.innerHTML = '';
 
-  var rc = document.createElement('div');
-  rc.style.cssText = 'margin-top:20px;font-family:monospace;color:#fff;';
-
-  var labels = ['Pandas (CPU-based):', 'RAPIDS cuDF (GPU-accelerated):'];
-  var colors = ['#ff6b6b', '#51cf66'];
-  var fills = [];
-
-  labels.forEach(function(label, i) {
-    var lEl = document.createElement('div');
-    lEl.textContent = label;
-    lEl.style.marginBottom = '8px';
-    rc.appendChild(lEl);
-    var bar = document.createElement('div');
-    bar.style.cssText = 'width:100%;height:20px;background:#333;border-radius:4px;overflow:hidden;margin-bottom:16px;';
-    var fill = document.createElement('div');
-    fill.style.cssText = 'height:100%;width:0%;transition:width 0.3s;background:' + colors[i] + ';';
-    bar.appendChild(fill);
-    rc.appendChild(bar);
-    fills.push(fill);
-  });
-
   var rd = document.createElement('div');
-  rd.style.cssText = 'margin-top:16px;padding:15px;background:rgba(0,0,0,0.3);border-radius:4px;text-align:center;color:#fff;';
-  rd.textContent = 'Running simulation...';
-  rc.appendChild(rd);
-  sec.appendChild(rc);
+  rd.style.cssText = 'margin-top:16px;padding:15px;background:rgba(0,0,0,0.3);border-radius:4px;text-align:center;color:#fff;font-family:monospace;';
+  rd.textContent = 'Fetching benchmark data...';
+  sec.appendChild(rd);
 
-  var p = 0;
-  var pi = setInterval(function() {
-    p = Math.min(p + Math.random() * 15, 100);
-    fills[0].style.width = p + '%';
-    if (p >= 100) clearInterval(pi);
-  }, 80);
+  // Real API pull from benchmark-data.json
+  fetch('/benchmark-data.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var bench = d.benchmark;
+      var pandasTime = bench.pandas.time_seconds;
+      var rapidsTime = bench.rapids_cudf.time_seconds;
+      var speedup = bench.speedup;
+      var gpu = bench.gpu;
 
-  setTimeout(function() { fills[1].style.width = '100%'; }, 5500);
+      // Log the speed test run via GAS
+      fetch('https://script.google.com/macros/s/AKfycbw-1Ug6SYktFirnQKSSkLr6pxTExJpTXdPfEnp6RWKmnIt56fkXk4siFgIp1KjBvBeY/exec', {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'rapidsSpeedTest', dataset: bench.dataset, speedup: speedup })
+      }).catch(function(e) {});
 
-  setTimeout(function() {
-    rd.textContent = '';
-    var t = document.createElement('div');
-    t.style.cssText = 'font-size:18px;font-weight:bold;margin-bottom:8px;';
-    t.textContent = 'Benchmark Results (100M Rows)';
-    rd.appendChild(t);
-    var s = document.createElement('div');
-    s.style.cssText = 'font-size:16px;line-height:1.8;color:#51cf66;';
-    s.textContent = 'Pandas: 47.3s   |   RAPIDS cuDF: 0.8s   |   Speedup: 59.1x faster';
-    rd.appendChild(s);
-    var again = document.createElement('button');
-    again.textContent = 'Run Again';
-    again.onclick = function() { sec.innerHTML = ''; runRapidsSimulation(); };
-    again.style.cssText = 'margin-top:16px;padding:10px 20px;background:#51cf66;color:#000;border:none;border-radius:4px;cursor:pointer;font-weight:bold;';
-    rd.appendChild(again);
-  }, 9000);
+      // Build UI
+      sec.innerHTML = '';
+      var rc = document.createElement('div');
+      rc.style.cssText = 'font-family:monospace;color:#fff;';
+
+      var labels = [bench.pandas.label, bench.rapids_cudf.label];
+      var colors = ['#ff6b6b', '#51cf66'];
+      var fills = [];
+
+      labels.forEach(function(label, i) {
+        var lEl = document.createElement('div');
+        lEl.textContent = label;
+        lEl.style.marginBottom = '8px';
+        rc.appendChild(lEl);
+        var bar = document.createElement('div');
+        bar.style.cssText = 'width:100%;height:20px;background:#333;border-radius:4px;overflow:hidden;margin-bottom:16px;';
+        var fill = document.createElement('div');
+        fill.style.cssText = 'height:100%;width:0%;transition:width 0.3s;background:' + colors[i] + ';';
+        bar.appendChild(fill);
+        rc.appendChild(bar);
+        fills.push(fill);
+      });
+
+      var rdd = document.createElement('div');
+      rdd.style.cssText = 'margin-top:16px;padding:15px;background:rgba(0,0,0,0.3);border-radius:4px;text-align:center;color:#fff;';
+      rdd.textContent = 'Running simulation...';
+      rc.appendChild(rdd);
+      sec.appendChild(rc);
+
+      var p = 0;
+      var pi = setInterval(function() {
+        p = Math.min(p + Math.random() * 15, 100);
+        fills[0].style.width = p + '%';
+        if (p >= 100) clearInterval(pi);
+      }, 80);
+      setTimeout(function() { fills[1].style.width = '100%'; }, 5500);
+
+      setTimeout(function() {
+        rdd.textContent = '';
+        var t = document.createElement('div');
+        t.style.cssText = 'font-size:18px;font-weight:bold;margin-bottom:8px;';
+        t.textContent = 'Benchmark Results (' + bench.dataset + ')';
+        rdd.appendChild(t);
+        var s = document.createElement('div');
+        s.style.cssText = 'font-size:15px;line-height:2;';
+        s.innerHTML = 'Pandas: ' + pandasTime + 's' +
+          '<br>RAPIDS cuDF (' + gpu + '): ' + rapidsTime + 's' +
+          '<br><span style="color:#51cf66;font-weight:bold;">' + speedup + 'x faster</span>';
+        rdd.appendChild(s);
+        var again = document.createElement('button');
+        again.textContent = 'Run Again';
+        again.onclick = function() { runRapidsSimulation(); };
+        again.style.cssText = 'margin-top:14px;padding:10px 20px;background:#51cf66;color:#000;border:none;border-radius:4px;cursor:pointer;font-weight:bold;';
+        rdd.appendChild(again);
+      }, 9000);
+    })
+    .catch(function(e) {
+      rd.textContent = 'Error loading benchmark data: ' + e.message;
+    });
 }
 </script>
 
