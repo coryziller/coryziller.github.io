@@ -3023,5 +3023,107 @@
         });
         observer.observe(conversionsModalEl, { attributes: true, attributeFilter: ['class'] });
     </script>
+
+function runRapidsSimulation() {
+  const rapidsSimSection = document.getElementById('rapidsSimSection');
+  const demoResult = document.getElementById('demoResult');
+  
+  if (!rapidsSimSection && !demoResult) {
+    console.error('Could not find result elements');
+    return;
+  }
+  
+  // Hide any existing button
+  const runButton = event.target;
+  if (runButton) {
+    runButton.style.display = 'none';
+  }
+  
+  // Create result container
+  const resultContainer = document.createElement('div');
+  resultContainer.style.cssText = 'margin-top: 20px; font-family: monospace; color: #fff;';
+  
+  // Pandas progress
+  const pandasLabel = document.createElement('div');
+  pandasLabel.textContent = 'Pandas (CPU-based):';
+  pandasLabel.style.marginBottom = '10px';
+  resultContainer.appendChild(pandasLabel);
+  
+  const pandasBar = document.createElement('div');
+  pandasBar.style.cssText = 'width: 100%; height: 20px; background: #333; border-radius: 4px; overflow: hidden; margin-bottom: 20px;';
+  const pandasFill = document.createElement('div');
+  pandasFill.style.cssText = 'height: 100%; background: #ff6b6b; width: 0%; transition: width 0.05s linear;';
+  pandasBar.appendChild(pandasFill);
+  resultContainer.appendChild(pandasBar);
+  
+  // RAPIDS progress
+  const rapidsLabel = document.createElement('div');
+  rapidsLabel.textContent = 'RAPIDS cuDF (GPU-accelerated):';
+  rapidsLabel.style.marginBottom = '10px';
+  resultContainer.appendChild(rapidsLabel);
+  
+  const rapidsBar = document.createElement('div');
+  rapidsBar.style.cssText = 'width: 100%; height: 20px; background: #333; border-radius: 4px; overflow: hidden; margin-bottom: 20px;';
+  const rapidsFill = document.createElement('div');
+  rapidsFill.style.cssText = 'height: 100%; background: #51cf66; width: 0%; transition: width 0.05s linear;';
+  rapidsBar.appendChild(rapidsFill);
+  resultContainer.appendChild(rapidsBar);
+  
+  // Results display
+  const resultsDisplay = document.createElement('div');
+  resultsDisplay.style.cssText = 'margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 4px; text-align: center;';
+  resultsDisplay.textContent = 'Running simulation...';
+  resultContainer.appendChild(resultsDisplay);
+  
+  if (rapidsSimSection) {
+    rapidsSimSection.appendChild(resultContainer);
+  }
+  if (demoResult) {
+    demoResult.appendChild(resultContainer.cloneNode(true));
+  }
+  
+  let pandasProgress = 0;
+  const pandasInterval = setInterval(() => {
+    pandasProgress += Math.random() * 15;
+    if (pandasProgress > 100) pandasProgress = 100;
+    const fill = resultContainer.querySelector('div > div:nth-child(2) > div');
+    if (fill) fill.style.width = pandasProgress + '%';
+    
+    if (pandasProgress >= 100) {
+      clearInterval(pandasInterval);
+    }
+  }, 80);
+  
+  let rapidsProgress = 0;
+  const rapidsStartTime = Date.now() + 5000;
+  const rapidsInterval = setInterval(() => {
+    const elapsed = Date.now() - rapidsStartTime;
+    if (elapsed > 0) {
+      rapidsProgress += Math.random() * 150;
+      if (rapidsProgress > 100) rapidsProgress = 100;
+      const fill = resultContainer.querySelector('div > div:nth-child(4) > div');
+      if (fill) fill.style.width = rapidsProgress + '%';
+    }
+    
+    if (rapidsProgress >= 100) {
+      clearInterval(rapidsInterval);
+    }
+  }, 80);
+  
+  setTimeout(() => {
+    const pandasTime = 47.3;
+    const rapidsTime = 0.8;
+    const speedup = (pandasTime / rapidsTime).toFixed(1);
+    
+    resultsDisplay.innerHTML = '<div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Benchmark Results (100M Rows)</div><div style="font-size: 16px; line-height: 1.8;"><strong>Pandas:</strong> ' + pandasTime + 's<br><strong>RAPIDS cuDF:</strong> ' + rapidsTime + 's<br><strong>Speedup:</strong> <span style="color: #51cf66;">' + speedup + 'x faster</span></div>';
+    
+    const runAgainBtn = document.createElement('button');
+    runAgainBtn.textContent = 'Run Again';
+    runAgainBtn.onclick = runRapidsSimulation;
+    runAgainBtn.style.cssText = 'margin-top: 20px; padding: 10px 20px; background: #51cf66; color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;';
+    resultsDisplay.appendChild(runAgainBtn);
+  }, 9000);
+}
+
 </body>
 </html>
