@@ -25067,18 +25067,18 @@
       "total_minutes": 79.708
     },
     {
-      "track": "Keep Me Close",
-      "artist": "Brasstracks",
-      "spotify_uri": "spotify:track:7iKKeyYRRQVNVnkGqQPemI",
-      "play_count": 18,
-      "total_minutes": 47.576
-    },
-    {
       "track": "inside",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
+      "play_count": 18,
+      "total_minutes": 55.123
+    },
+    {
+      "track": "Keep Me Close",
+      "artist": "Brasstracks",
+      "spotify_uri": "spotify:track:7iKKeyYRRQVNVnkGqQPemI",
       "play_count": 15,
-      "total_minutes": 45.936
+      "total_minutes": 39.647
     },
     {
       "track": "everything will be okay",
