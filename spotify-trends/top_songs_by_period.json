@@ -25074,39 +25074,39 @@
       "total_minutes": 68.321
     },
     {
+      "track": "Midnight Sun (Live) - Spotify Live Room",
+      "artist": "Zara Larsson",
+      "spotify_uri": "spotify:track:6ZN4ZI5f7ZIXO0lMe5fcyQ",
+      "play_count": 15,
+      "total_minutes": 49.135
+    },
+    {
       "track": "Nightingale Lane.",
       "artist": "RAYE",
       "spotify_uri": "spotify:track:7j7J2M3ZsKOsrhBueDjhqF",
-      "play_count": 15,
-      "total_minutes": 75.656
+      "play_count": 12,
+      "total_minutes": 60.525
     },
     {
       "track": "everything will be okay",
       "artist": "REBBY",
       "spotify_uri": "spotify:track:0InDD7XH5D3WzxLzzaHwZd",
-      "play_count": 12,
-      "total_minutes": 41.217
+      "play_count": 9,
+      "total_minutes": 30.913
     },
     {
       "track": "Keep Me Close",
       "artist": "Brasstracks",
       "spotify_uri": "spotify:track:7iKKeyYRRQVNVnkGqQPemI",
-      "play_count": 9,
-      "total_minutes": 23.788
-    },
-    {
-      "track": "Midnight Sun (Live) - Spotify Live Room",
-      "artist": "Zara Larsson",
-      "spotify_uri": "spotify:track:6ZN4ZI5f7ZIXO0lMe5fcyQ",
       "play_count": 6,
-      "total_minutes": 19.654
+      "total_minutes": 15.859
     },
     {
-      "track": "Homies",
+      "track": "Broke",
       "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:21KNT4TSX28H6DsyK9zh2x",
+      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
       "play_count": 3,
-      "total_minutes": 10.108
+      "total_minutes": 8.455
     }
   ]
 }
