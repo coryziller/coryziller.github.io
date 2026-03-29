@@ -25053,37 +25053,37 @@
       "total_minutes": 73.063
     },
     {
-      "track": "All for Love (I cry)",
-      "artist": "Candee Sweet",
-      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
-      "play_count": 24,
-      "total_minutes": 67.095
-    },
-    {
       "track": "inside",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 21,
-      "total_minutes": 64.31
+      "play_count": 24,
+      "total_minutes": 73.498
     },
     {
-      "track": "Sour Candy - Reimagined",
-      "artist": "Melt",
-      "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
-      "play_count": 18,
-      "total_minutes": 68.321
+      "track": "All for Love (I cry)",
+      "artist": "Candee Sweet",
+      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
+      "play_count": 21,
+      "total_minutes": 58.708
     },
     {
       "track": "Midnight Sun (Live) - Spotify Live Room",
       "artist": "Zara Larsson",
       "spotify_uri": "spotify:track:6ZN4ZI5f7ZIXO0lMe5fcyQ",
+      "play_count": 18,
+      "total_minutes": 58.962
+    },
+    {
+      "track": "Sour Candy - Reimagined",
+      "artist": "Melt",
+      "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
       "play_count": 15,
-      "total_minutes": 49.135
+      "total_minutes": 56.934
     },
     {
       "track": "Nightingale Lane.",
       "artist": "RAYE",
-      "spotify_uri": "spotify:track:7j7J2M3ZsKOsrhBueDjhqF",
+      "spotify_uri": "spotify:track:5TCpeSXHkTEUJmCXlxhESv",
       "play_count": 12,
       "total_minutes": 60.525
     },
@@ -25102,11 +25102,11 @@
       "total_minutes": 15.859
     },
     {
-      "track": "Broke",
-      "artist": "Claire Ernst",
-      "spotify_uri": "spotify:track:7MB08zDBPgfVJfhoO117mP",
+      "track": "Goodbye Henry. (feat. Al Green)",
+      "artist": "RAYE",
+      "spotify_uri": "spotify:track:5lBL8xRTXIDpPDJcuPL9UH",
       "play_count": 3,
-      "total_minutes": 8.455
+      "total_minutes": 16.022
     }
   ]
 }
