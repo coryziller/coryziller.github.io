@@ -25153,32 +25153,32 @@
       "total_minutes": 41.934
     },
     {
-      "track": "Sour Candy - Reimagined",
-      "artist": "Melt",
-      "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
-      "play_count": 12,
-      "total_minutes": 45.547
-    },
-    {
       "track": "after you don't love me anymore",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
-      "play_count": 9,
-      "total_minutes": 32.135
+      "play_count": 12,
+      "total_minutes": 42.846
     },
     {
-      "track": "Pressure",
-      "artist": "Ari Lennox",
-      "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
-      "play_count": 6,
-      "total_minutes": 19.233
+      "track": "Sour Candy - Reimagined",
+      "artist": "Melt",
+      "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
+      "play_count": 9,
+      "total_minutes": 34.16
     },
     {
       "track": "Kitty Kat",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:28GCTzKIpLkhEktYvIgiYE",
+      "play_count": 6,
+      "total_minutes": 23.539
+    },
+    {
+      "track": "Pressure",
+      "artist": "Ari Lennox",
+      "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
       "play_count": 3,
-      "total_minutes": 11.769
+      "total_minutes": 9.616
     }
   ]
 }
