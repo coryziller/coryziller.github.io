@@ -25160,25 +25160,25 @@
       "total_minutes": 42.846
     },
     {
-      "track": "Sour Candy - Reimagined",
-      "artist": "Melt",
-      "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
-      "play_count": 9,
-      "total_minutes": 34.16
-    },
-    {
       "track": "Kitty Kat",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:28GCTzKIpLkhEktYvIgiYE",
-      "play_count": 6,
-      "total_minutes": 23.539
+      "play_count": 9,
+      "total_minutes": 35.308
     },
     {
       "track": "Pressure",
       "artist": "Ari Lennox",
       "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
+      "play_count": 6,
+      "total_minutes": 19.233
+    },
+    {
+      "track": "Sour Candy - Reimagined",
+      "artist": "Melt",
+      "spotify_uri": "spotify:track:6Jb7JJTuFZTwTgYqjmAshp",
       "play_count": 3,
-      "total_minutes": 9.616
+      "total_minutes": 11.387
     }
   ]
 }
