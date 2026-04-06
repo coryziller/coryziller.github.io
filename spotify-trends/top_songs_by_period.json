@@ -25125,46 +25125,46 @@
       "total_minutes": 88.443
     },
     {
-      "track": "I Know It",
-      "artist": "Candee Sweet",
-      "spotify_uri": "spotify:track:48KuNRKRgw7XAoWw26tilG",
-      "play_count": 24,
-      "total_minutes": 64.945
-    },
-    {
       "track": "inside",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 21,
-      "total_minutes": 64.31
+      "play_count": 24,
+      "total_minutes": 73.498
     },
     {
       "track": "Goodbye Henry. (feat. Al Green)",
       "artist": "RAYE",
       "spotify_uri": "spotify:track:5lBL8xRTXIDpPDJcuPL9UH",
-      "play_count": 18,
-      "total_minutes": 96.13
-    },
-    {
-      "track": "All for Love (I cry)",
-      "artist": "Candee Sweet",
-      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
-      "play_count": 15,
-      "total_minutes": 41.934
+      "play_count": 21,
+      "total_minutes": 112.152
     },
     {
       "track": "after you don't love me anymore",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
-      "play_count": 12,
-      "total_minutes": 42.846
+      "play_count": 18,
+      "total_minutes": 64.269
+    },
+    {
+      "track": "I Know It",
+      "artist": "Candee Sweet",
+      "spotify_uri": "spotify:track:48KuNRKRgw7XAoWw26tilG",
+      "play_count": 15,
+      "total_minutes": 40.591
     },
     {
       "track": "Kitty Kat",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:28GCTzKIpLkhEktYvIgiYE",
+      "play_count": 12,
+      "total_minutes": 47.077
+    },
+    {
+      "track": "All for Love (I cry)",
+      "artist": "Candee Sweet",
+      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
       "play_count": 9,
-      "total_minutes": 35.308
+      "total_minutes": 25.161
     },
     {
       "track": "Pressure",
