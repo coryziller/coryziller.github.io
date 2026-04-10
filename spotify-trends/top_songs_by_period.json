@@ -25125,18 +25125,18 @@
       "total_minutes": 88.443
     },
     {
-      "track": "inside",
-      "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 24,
-      "total_minutes": 73.498
-    },
-    {
       "track": "Goodbye Henry. (feat. Al Green)",
       "artist": "RAYE",
       "spotify_uri": "spotify:track:5lBL8xRTXIDpPDJcuPL9UH",
+      "play_count": 24,
+      "total_minutes": 128.174
+    },
+    {
+      "track": "inside",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
       "play_count": 21,
-      "total_minutes": 112.152
+      "total_minutes": 64.31
     },
     {
       "track": "after you don't love me anymore",
@@ -25146,39 +25146,39 @@
       "total_minutes": 64.269
     },
     {
-      "track": "I Know It",
-      "artist": "Candee Sweet",
-      "spotify_uri": "spotify:track:48KuNRKRgw7XAoWw26tilG",
-      "play_count": 15,
-      "total_minutes": 40.591
-    },
-    {
       "track": "Kitty Kat",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:28GCTzKIpLkhEktYvIgiYE",
-      "play_count": 12,
-      "total_minutes": 47.077
+      "play_count": 15,
+      "total_minutes": 58.846
     },
     {
       "track": "Pressure",
       "artist": "Ari Lennox",
       "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
-      "play_count": 9,
-      "total_minutes": 28.849
+      "play_count": 12,
+      "total_minutes": 38.465
     },
     {
-      "track": "All for Love (I cry)",
+      "track": "I Know It",
       "artist": "Candee Sweet",
-      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
-      "play_count": 6,
-      "total_minutes": 16.774
+      "spotify_uri": "spotify:track:48KuNRKRgw7XAoWw26tilG",
+      "play_count": 9,
+      "total_minutes": 24.354
     },
     {
       "track": "Crazy",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
+      "play_count": 6,
+      "total_minutes": 18.519
+    },
+    {
+      "track": "All for Love (I cry)",
+      "artist": "Candee Sweet",
+      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
       "play_count": 3,
-      "total_minutes": 9.26
+      "total_minutes": 8.387
     }
   ]
 }
