@@ -25132,32 +25132,32 @@
       "total_minutes": 128.174
     },
     {
-      "track": "inside",
-      "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 21,
-      "total_minutes": 64.31
-    },
-    {
       "track": "after you don't love me anymore",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
-      "play_count": 18,
-      "total_minutes": 64.269
+      "play_count": 21,
+      "total_minutes": 74.981
     },
     {
       "track": "Kitty Kat",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:28GCTzKIpLkhEktYvIgiYE",
-      "play_count": 15,
-      "total_minutes": 58.846
+      "play_count": 18,
+      "total_minutes": 70.616
     },
     {
       "track": "Pressure",
       "artist": "Ari Lennox",
       "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
+      "play_count": 15,
+      "total_minutes": 48.081
+    },
+    {
+      "track": "inside",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
       "play_count": 12,
-      "total_minutes": 38.465
+      "total_minutes": 36.749
     },
     {
       "track": "I Know It",
@@ -25174,11 +25174,11 @@
       "total_minutes": 18.519
     },
     {
-      "track": "All for Love (I cry)",
-      "artist": "Candee Sweet",
-      "spotify_uri": "spotify:track:4q1YRvVa6WFVGpVeiyXwUh",
+      "track": "Stayin' Alive",
+      "artist": "The Harvard Opportunes",
+      "spotify_uri": "spotify:track:47THedjnWM5ft8r2qI3vSe",
       "play_count": 3,
-      "total_minutes": 8.387
+      "total_minutes": 10.683
     }
   ]
 }
