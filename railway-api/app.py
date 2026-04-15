@@ -398,6 +398,192 @@ def send_demo():
         return jsonify({'ok': False, 'error': str(e)}), 500
 
 
+# ---------------------------------------------------------------------------
+# Lyrics word-cloud endpoint (for the Spotify dashboard)
+#
+# The frontend sends the list of top-played (artist, track, play_count) tuples
+# for a given year. This endpoint fetches lyrics for each from LyricsOVH (free,
+# public, no API key), tokenizes them into words, and returns an aggregated
+# word-frequency table weighted by play count.
+#
+# COPYRIGHT: we never return the raw lyrics text — only aggregated word counts
+# and song-level match metadata. Raw lyrics stay on LyricsOVH.
+# ---------------------------------------------------------------------------
+
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from threading import Lock
+
+_LYRICS_CACHE: dict[str, list[str] | None] = {}
+_LYRICS_LOCK = Lock()
+
+# Stopwords: English common + song-filler words
+_LYRIC_STOPWORDS = set("""
+a about after ah all also am an and any are aren at be because been before
+being below both but by can could cause cuz did didn do does don down during
+each else even ever every for from get got gonna gotta had has have having he
+her here hers him his how i if in into is isn it its just know let like ll
+look ma made make makes making many may me might more most must my na nah no
+not now o of off oh on once only or other our ours ourselves out over own re
+said say says see should shouldn so some such than that the their theirs them
+then there these they they'd they'll this those though through thus to too
+uh uhh um up upon us use used very wanna was way we well were what whatever
+when where which while who why will with would wow yeah yep yes yet you your
+yours yourself yourselves ya ll ve re
+""".split())
+
+# Extra-aggressive song-filler removal (these dominate otherwise)
+_LYRIC_STOPWORDS.update({
+    'll', 've', 're', 'em', 'ol', 'mm', 'hmm', 'huh', 'ooh', 'ohh',
+    'oo', 'ay', 'ayy', 'yah', 'yo', 'im', 'ima', 'aint', 'ya', 'y',
+    'bout', 'cause', 'got', 'gonna', 'gotta', 'wanna', 'tryna',
+    'lil', 'bro', 'one', 'two', 'three', 'baby',
+})
+
+_WORD_RE = re.compile(r"[a-z']+")
+
+
+def fetch_lyrics_ovh(artist: str, title: str, timeout: int = 12) -> str | None:
+    """Return plain text lyrics from LyricsOVH, or None if not found."""
+    key = f'{artist.lower().strip()}||{title.lower().strip()}'
+    with _LYRICS_LOCK:
+        if key in _LYRICS_CACHE:
+            return _LYRICS_CACHE[key] or None
+
+    try:
+        url = (
+            'https://api.lyrics.ovh/v1/'
+            + urllib.parse.quote(artist, safe='')
+            + '/'
+            + urllib.parse.quote(title, safe='')
+        )
+        req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            body = json.loads(r.read().decode('utf-8', errors='replace'))
+        text = (body.get('lyrics') or '').strip() or None
+    except Exception as e:
+        log.info('lyrics miss %r / %r: %s', artist, title, e)
+        text = None
+
+    with _LYRICS_LOCK:
+        _LYRICS_CACHE[key] = text
+    return text
+
+
+def _clean_lyrics_words(text: str) -> list[str]:
+    """Tokenize lyrics into real content words, stripping section markers etc."""
+    # Strip [Verse], [Chorus], etc.
+    text = re.sub(r'\[[^\]]{0,40}\]', ' ', text)
+    # Lowercase + split on non-letters
+    words = _WORD_RE.findall(text.lower())
+    return [
+        w.strip("'") for w in words
+        if len(w) >= 3 and w not in _LYRIC_STOPWORDS and not w.isdigit()
+    ]
+
+
+# Per-year word-cloud cache (keyed by year + top-N fingerprint)
+_WORDCLOUD_CACHE: dict[str, dict] = {}
+_WORDCLOUD_CACHE_LOCK = Lock()
+
+
+@app.route('/lyrics-wordcloud', methods=['POST', 'OPTIONS'])
+def lyrics_wordcloud():
+    if request.method == 'OPTIONS':
+        return '', 200
+
+    data: dict[str, Any] = request.get_json(silent=True) or {}
+    year = str(data.get('year', '')).strip() or 'all'
+    songs_in = data.get('songs') or []
+    if not isinstance(songs_in, list) or not songs_in:
+        return jsonify({'ok': False, 'error': 'songs[] required'}), 400
+
+    # Normalize, dedupe, cap at 30 most-played
+    normalized: list[dict] = []
+    seen = set()
+    for s in songs_in:
+        artist = str(s.get('artist', '')).strip()
+        track = str(s.get('track', '') or s.get('title', '')).strip()
+        plays = int(s.get('play_count') or s.get('plays') or 1)
+        if not artist or not track:
+            continue
+        key = (artist.lower(), track.lower())
+        if key in seen:
+            continue
+        seen.add(key)
+        normalized.append({'artist': artist, 'track': track, 'plays': plays})
+    normalized.sort(key=lambda x: x['plays'], reverse=True)
+    normalized = normalized[:30]
+
+    if not normalized:
+        return jsonify({'ok': False, 'error': 'no valid songs provided'}), 400
+
+    # Cache key: year + fingerprint of the song list + today's UTC date,
+    # so the cache auto-invalidates each day and picks up fresh Spotify data.
+    fp = '|'.join(f"{s['artist'].lower()}::{s['track'].lower()}" for s in normalized)
+    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    cache_key = f'{year}:{today}:{hash(fp)}'
+    with _WORDCLOUD_CACHE_LOCK:
+        hit = _WORDCLOUD_CACHE.get(cache_key)
+        if hit:
+            return jsonify(hit)
+
+    from collections import Counter
+    counts: Counter = Counter()
+    per_song: list[dict] = []
+
+    def do_one(s: dict) -> tuple[dict, list[str]]:
+        text = fetch_lyrics_ovh(s['artist'], s['track'])
+        if not text:
+            return {
+                'artist': s['artist'], 'track': s['track'],
+                'plays': s['plays'], 'found': False,
+            }, []
+        words = _clean_lyrics_words(text)
+        return {
+            'artist': s['artist'], 'track': s['track'],
+            'plays': s['plays'], 'found': True,
+            'word_count': len(words),
+        }, words
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        futures = [pool.submit(do_one, s) for s in normalized]
+        for fut in as_completed(futures):
+            info, words = fut.result()
+            per_song.append(info)
+            if words:
+                # Weight each unique-word-per-song by that song's play count
+                plays = info.get('plays', 1)
+                bag = Counter(words)
+                for w, c in bag.items():
+                    counts[w] += c * plays
+
+    # Limit output size (top 80 is plenty for a word cloud)
+    top_words = counts.most_common(80)
+    found = [p for p in per_song if p.get('found')]
+    total_plays = sum(p['plays'] for p in per_song)
+    found_plays = sum(p['plays'] for p in found)
+
+    result = {
+        'ok': True,
+        'year': year,
+        'words': top_words,
+        'stats': {
+            'songs_considered': len(per_song),
+            'lyrics_found': len(found),
+            'coverage_by_plays': round(100 * found_plays / total_plays, 1) if total_plays else 0.0,
+            'total_words_counted': sum(counts.values()),
+            'unique_words': len(counts),
+        },
+        # Keep the per-song list so the UI can show coverage details
+        # (no raw lyrics included — only artist/track/plays/found/word_count).
+        'songs': sorted(per_song, key=lambda p: p['plays'], reverse=True),
+    }
+
+    with _WORDCLOUD_CACHE_LOCK:
+        _WORDCLOUD_CACHE[cache_key] = result
+    return jsonify(result)
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
     app.run(host='0.0.0.0', port=port, debug=False)
