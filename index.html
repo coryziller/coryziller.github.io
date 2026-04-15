@@ -861,170 +861,6 @@
 
             <div style="margin-top: 16px;">
                 <div class="tiles-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; box-sizing: border-box;">
-<!-- Card 1: RAPIDS vs Pandas -->
-                    <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; cursor: pointer;">
-                        <button onclick="toggleCard('rapids-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
-                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="1.5">
-                                <rect x="6" y="6" width="12" height="12" rx="2"/>
-                                <rect x="9" y="9" width="6" height="6" rx="1" fill="#76B900" stroke="none"/>
-                                <line x1="8" y1="6" x2="8" y2="3"/><line x1="12" y1="6" x2="12" y2="3"/><line x1="16" y1="6" x2="16" y2="3"/>
-                                <line x1="8" y1="18" x2="8" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="16" y1="18" x2="16" y2="21"/>
-                                <line x1="6" y1="8" x2="3" y2="8"/><line x1="6" y1="12" x2="3" y2="12"/><line x1="6" y1="16" x2="3" y2="16"/>
-                                <line x1="18" y1="8" x2="21" y2="8"/><line x1="18" y1="12" x2="21" y2="12"/><line x1="18" y1="16" x2="21" y2="16"/>
-                            </svg>
-                        </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">PANDAS VS RAPIDS cuDF: GPU SPEED TEST</h3>
-                        <p style="font-size: 1rem; line-height: 1.6;">Run a live simulation comparing CPU-based Pandas with NVIDIA's GPU-accelerated RAPIDS cuDF on 100M rows of paid media data.</p>
-                        <div style="margin-top: 16px; text-align: center;">
-                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Technical Writing Example 1</span>
-                        </div>
-
-                        <div class="work-details" style="position: relative;">
-                            <button onclick="toggleCard('rapids-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
-                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-2); padding-top: var(--space-3);">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: var(--space-4);">
-
-                                    <div>
-                                        <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                Most data teams don't realize how much performance they leave on the table with CPU-based Pandas. I wanted to make that gap impossible to ignore. So I built an interactive speed test that visualizes CPU vs GPU performance in real time, then wrote a technical blog post breaking down RAPIDS cuDF for data engineering audiences.
-                                            </p>
-                                        </div>
-
-                                        <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What's Inside</h4>
-                                            <div style="display: flex; align-items: stretch; gap: 12px;">
-                                                <div style="flex: 1; text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
-                                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">&#9654;</div>
-                                                    <div style="font-weight: 700; font-size: 1rem; margin-bottom: 6px;">Interactive Speed Test</div>
-                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Racing bar simulation comparing Pandas vs cuDF on 5 operations across 100M rows</div>
-                                                </div>
-                                                <div style="flex: 1; text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
-                                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">&#9998;</div>
-                                                    <div style="font-weight: 700; font-size: 1rem; margin-bottom: 6px;">Product Blog Post</div>
-                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Hypothetical NVIDIA developer blog â code samples, benchmarks, and RAPIDS ecosystem positioning</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">Key Result</h4>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                <strong style="color: white;">41x faster groupby on 100M rows.</strong> What takes Pandas 12.4 seconds completes in 0.3 seconds on a single NVIDIA T4 GPU â with one import change. The article walks data teams through exactly why and how to switch.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
-                                            <div style="margin-bottom: 32px;">
-                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">Try It Yourself</span>
-                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Run the Speed Test & Read the Article</h3>
-                                                <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
-                                                    Click to launch the interactive Pandas vs cuDF benchmark, then read the full product blog post I wrote in NVIDIA's voice.
-                                                </p>
-                                            </div>
-                                            <button onclick="document.getElementById('rapidsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #4A7A00; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
-                                                Launch Speed Test
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <button class="close-btn" onclick="toggleCard('rapids-card'); event.stopPropagation();">Close</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-<!-- Card 4: Assisted Conversions -->
-                    <div class="work-card quad-card" id="conversions-card" onclick="toggleCard('conversions-card')" style="background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; cursor: pointer;">
-                        <button onclick="toggleCard('conversions-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
-                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
-                        </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
-                            RECONSTRUCTING CONVERSION PATHS IN SQL
-                        </h3>
-                        <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
-                            A parameterized SQL query that reconstructs full conversion paths by joining raw impression and click logs within configurable lookback windows. Outputs ranked touchpoints and path-level metrics for downstream multi-touch attribution analysis.
-                        </p>
-                        <div style="margin-top: 16px; text-align: center;">
-                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Technical Writing Example 2</span>
-                        </div>
-
-                        <div class="work-details" style="position: relative;">
-                            <button onclick="toggleCard('conversions-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
-                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-2); padding-top: var(--space-3);">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: var(--space-4);">
-
-                                    <div>
-                                        <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                Most attribution reporting stops at last-click. I wrote a structured SQL query that reconstructs the full path to conversion by pulling every impression and click that occurred within configurable lookback windows before a conversion event. The README documents each transformation stage so any analyst can understand, adapt, and run the logic independently.
-                                            </p>
-                                        </div>
-
-                                        <div style="margin-bottom: 24px;">
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the Query Does</h4>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7; margin-bottom: 16px;">
-                                                Given a set of conversion events, the SQL query joins against raw impression and click logs to find every touchpoint that preceded a conversion within the lookback window. It then deduplicates overlapping events, ranks touchpoints by recency, and computes path-level metrics like <strong style="color: white;">touch position</strong>, <strong style="color: white;">path length</strong>, and <strong style="color: white;">time since first/last interaction</strong>.
-                                            </p>
-                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
-                                                The output is a flattened, touch-level dataset ready for multi-touch attribution models, channel sequencing analysis, and creative performance reporting.
-                                            </p>
-                                        </div>
-
-                                        <div>
-                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the README Covers</h4>
-                                            <div style="display: flex; flex-direction: column; gap: 12px;">
-                                                <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">6-Step Query Structure</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Filter, match, pull lookback interactions, deduplicate, rank, and output</div>
-                                                </div>
-                                                <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Edge Cases + Scaling</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Deduplication logic, long paths, missing metadata, partition-aware filtering</div>
-                                                </div>
-                                                <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">GPU Acceleration Relevance</div>
-                                                    <div style="font-size: 0.85rem; opacity: 0.75;">How large joins and GROUP BY operations can scale with accelerated data processing frameworks</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
-                                            <div style="margin-bottom: 32px;">
-                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">Read the Full Doc</span>
-                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Open the README</h3>
-                                                <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
-                                                    The full SQL query documentation. Walks through every step of reconstructing conversion paths from raw impression and click data.
-                                                </p>
-                                            </div>
-                                            <button onclick="document.getElementById('conversionsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #1E40AF; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
-                                                Open Documentation
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <button class="close-btn" onclick="toggleCard('conversions-card'); event.stopPropagation();">Close</button>
-                            </div>
-                        </div>
-                    </div>
 <!-- Card 2: Social Listening -->
                     <div class="work-card quad-card" id="social-card" onclick="toggleCard('social-card')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; cursor: pointer;">
                         <button onclick="toggleCard('social-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
@@ -1125,6 +961,170 @@
                                 </div>
 
                                 <button class="close-btn" onclick="toggleCard('social-card'); event.stopPropagation();">Close</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+<!-- Card 4: Assisted Conversions -->
+                    <div class="work-card quad-card" id="conversions-card" onclick="toggleCard('conversions-card')" style="background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; cursor: pointer;">
+                        <button onclick="toggleCard('conversions-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
+                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3;">
+                            RECONSTRUCTING CONVERSION PATHS IN SQL
+                        </h3>
+                        <p style="font-size: 1rem; line-height: 1.6; opacity: 0.95;">
+                            A parameterized SQL query that reconstructs full conversion paths by joining raw impression and click logs within configurable lookback windows. Outputs ranked touchpoints and path-level metrics for downstream multi-touch attribution analysis.
+                        </p>
+                        <div style="margin-top: 16px; text-align: center;">
+                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Technical Writing Example 2</span>
+                        </div>
+
+                        <div class="work-details" style="position: relative;">
+                            <button onclick="toggleCard('conversions-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-2); padding-top: var(--space-3);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: var(--space-4);">
+
+                                    <div>
+                                        <div style="margin-bottom: 24px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
+                                                Most attribution reporting stops at last-click. I wrote a structured SQL query that reconstructs the full path to conversion by pulling every impression and click that occurred within configurable lookback windows before a conversion event. The README documents each transformation stage so any analyst can understand, adapt, and run the logic independently.
+                                            </p>
+                                        </div>
+
+                                        <div style="margin-bottom: 24px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the Query Does</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7; margin-bottom: 16px;">
+                                                Given a set of conversion events, the SQL query joins against raw impression and click logs to find every touchpoint that preceded a conversion within the lookback window. It then deduplicates overlapping events, ranks touchpoints by recency, and computes path-level metrics like <strong style="color: white;">touch position</strong>, <strong style="color: white;">path length</strong>, and <strong style="color: white;">time since first/last interaction</strong>.
+                                            </p>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
+                                                The output is a flattened, touch-level dataset ready for multi-touch attribution models, channel sequencing analysis, and creative performance reporting.
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What the README Covers</h4>
+                                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                                <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">6-Step Query Structure</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Filter, match, pull lookback interactions, deduplicate, rank, and output</div>
+                                                </div>
+                                                <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Edge Cases + Scaling</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">Deduplication logic, long paths, missing metadata, partition-aware filtering</div>
+                                                </div>
+                                                <div style="padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 10px; border-left: 3px solid #60A5FA;">
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">GPU Acceleration Relevance</div>
+                                                    <div style="font-size: 0.85rem; opacity: 0.75;">How large joins and GROUP BY operations can scale with accelerated data processing frameworks</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                                            <div style="margin-bottom: 32px;">
+                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">Read the Full Doc</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Open the README</h3>
+                                                <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
+                                                    The full SQL query documentation. Walks through every step of reconstructing conversion paths from raw impression and click data.
+                                                </p>
+                                            </div>
+                                            <button onclick="document.getElementById('conversionsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #1E40AF; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
+                                                Open Documentation
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button class="close-btn" onclick="toggleCard('conversions-card'); event.stopPropagation();">Close</button>
+                            </div>
+                        </div>
+                    </div>
+<!-- Card 1: RAPIDS vs Pandas -->
+                    <div class="work-card quad-card" id="rapids-card" onclick="toggleCard('rapids-card')" style="background: linear-gradient(135deg, #76B900 0%, #4A7A00 100%); border-radius: 16px; padding: 24px; color: white; position: relative; min-height: 0; cursor: pointer;">
+                        <button onclick="toggleCard('rapids-card'); event.stopPropagation();" class="card-close-x" style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; background: rgba(0,0,0,0.35); border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: none; align-items: center; justify-content: center; z-index: 100; line-height: 1;">&times;</button>
+                        <div style="background: white; width: 48px; height: 48px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="1.5">
+                                <rect x="6" y="6" width="12" height="12" rx="2"/>
+                                <rect x="9" y="9" width="6" height="6" rx="1" fill="#76B900" stroke="none"/>
+                                <line x1="8" y1="6" x2="8" y2="3"/><line x1="12" y1="6" x2="12" y2="3"/><line x1="16" y1="6" x2="16" y2="3"/>
+                                <line x1="8" y1="18" x2="8" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="16" y1="18" x2="16" y2="21"/>
+                                <line x1="6" y1="8" x2="3" y2="8"/><line x1="6" y1="12" x2="3" y2="12"/><line x1="6" y1="16" x2="3" y2="16"/>
+                                <line x1="18" y1="8" x2="21" y2="8"/><line x1="18" y1="12" x2="21" y2="12"/><line x1="18" y1="16" x2="21" y2="16"/>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">PANDAS VS RAPIDS cuDF: GPU SPEED TEST</h3>
+                        <p style="font-size: 1rem; line-height: 1.6;">Run a live simulation comparing CPU-based Pandas with NVIDIA's GPU-accelerated RAPIDS cuDF on 100M rows of paid media data.</p>
+                        <div style="margin-top: 16px; text-align: center;">
+                            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; white-space: nowrap; backdrop-filter: blur(4px);">Technical Writing Example 1</span>
+                        </div>
+
+                        <div class="work-details" style="position: relative;">
+                            <button onclick="toggleCard('rapids-card'); event.stopPropagation();" style="position: absolute; top: -180px; right: 20px; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; color: #FFFFFF; font-size: 28px; font-weight: 300; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 100;" onmouseover="this.style.background='rgba(255,0,0,0.2)'; this.style.borderColor='rgba(255,0,0,0.4)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">&times;</button>
+                            <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: var(--space-2); padding-top: var(--space-3);">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: var(--space-4);">
+
+                                    <div>
+                                        <div style="margin-bottom: 24px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">The Idea</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
+                                                Most data teams don't realize how much performance they leave on the table with CPU-based Pandas. I wanted to make that gap impossible to ignore. So I built an interactive speed test that visualizes CPU vs GPU performance in real time, then wrote a technical blog post breaking down RAPIDS cuDF for data engineering audiences.
+                                            </p>
+                                        </div>
+
+                                        <div style="margin-bottom: 24px;">
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">What's Inside</h4>
+                                            <div style="display: flex; align-items: stretch; gap: 12px;">
+                                                <div style="flex: 1; text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
+                                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">&#9654;</div>
+                                                    <div style="font-weight: 700; font-size: 1rem; margin-bottom: 6px;">Interactive Speed Test</div>
+                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Racing bar simulation comparing Pandas vs cuDF on 5 operations across 100M rows</div>
+                                                </div>
+                                                <div style="flex: 1; text-align: center; padding: 16px 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
+                                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">&#9998;</div>
+                                                    <div style="font-weight: 700; font-size: 1rem; margin-bottom: 6px;">Product Blog Post</div>
+                                                    <div style="font-size: 0.8rem; opacity: 0.75; line-height: 1.4;">Hypothetical NVIDIA developer blog â code samples, benchmarks, and RAPIDS ecosystem positioning</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">Key Result</h4>
+                                            <p style="font-size: 1.0625rem; line-height: 1.7;">
+                                                <strong style="color: white;">41x faster groupby on 100M rows.</strong> What takes Pandas 12.4 seconds completes in 0.3 seconds on a single NVIDIA T4 GPU â with one import change. The article walks data teams through exactly why and how to switch.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="scroll-section" style="text-align: center; background: rgba(255,255,255,0.1); padding: 40px 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                                            <div style="margin-bottom: 32px;">
+                                                <span style="font-size: 0.8125rem; font-weight: 600; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em;">Try It Yourself</span>
+                                                <h3 style="font-size: 2rem; font-weight: 800; margin-top: 12px; margin-bottom: 16px;">Run the Speed Test & Read the Article</h3>
+                                                <p style="font-size: 1rem; opacity: 0.85; line-height: 1.6;">
+                                                    Click to launch the interactive Pandas vs cuDF benchmark, then read the full product blog post I wrote in NVIDIA's voice.
+                                                </p>
+                                            </div>
+                                            <button onclick="document.getElementById('rapidsModal').classList.add('active'); document.body.style.overflow='hidden'; event.stopPropagation();" style="width: 100%; padding: 16px 32px; background: white; color: #4A7A00; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer;">
+                                                Launch Speed Test
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button class="close-btn" onclick="toggleCard('rapids-card'); event.stopPropagation();">Close</button>
                             </div>
                         </div>
                     </div>
@@ -2179,7 +2179,11 @@
             scrollContainer.dispatchEvent(new Event('scroll'));
         }
 
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-1Ug6SYktFirnQKSSkLr6pxTExJpTXdPfEnp6RWKmnIt56fkXk4siFgIp1KjBvBeY/exec';
+        // Backend for the real Reddit + HN sentiment workflow.
+        // Deploy railway-api/ to Render (or any Python host) and paste the URL here.
+        // The backend: live-scrapes Reddit+HN → scores sentiment → generates a ~30s
+        // audio briefing → emails it via Brevo with the MP3 attached.
+        const SENTIMENT_API_URL = 'https://coryziller-sentiment-api.onrender.com/send-demo';
 
         document.getElementById('socialListeningForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -2189,25 +2193,37 @@
 
             if (!name || !email) return;
 
-            resultDiv.innerHTML = '&#9203; Sending...';
+            resultDiv.innerHTML = '&#9203; Scraping Reddit &amp; HN, scoring sentiment, generating audio, and sending email. This usually takes 15&ndash;30 seconds&hellip;';
             resultDiv.style.display = 'block';
 
             try {
-                fetch(GOOGLE_SCRIPT_URL, {
+                const resp = await fetch(SENTIMENT_API_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email })
-                }).catch(err => console.log('Google Sheets:', err));
+                });
 
-                resultDiv.innerHTML = `<strong>&#9989; Success!</strong><br><br>Check ${email} for the report!`;
-                fetch('https://script.google.com/macros/s/AKfycbw-1Ug6SYktFirnQKSSkLr6pxTExJpTXdPfEnp6RWKmnIt56fkXk4siFgIp1KjBvBeY/exec', {
-                    method: 'POST', mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'sendDemo', name, email })
-                }).catch(e => console.log('notify:', e));
+                let payload = {};
+                try { payload = await resp.json(); } catch (_) { /* non-JSON error */ }
+
+                if (resp.ok && payload.ok) {
+                    const total = payload.posts_analyzed ?? 0;
+                    const label = payload.overall_label ?? 'Mixed';
+                    resultDiv.innerHTML =
+                        `<strong>&#9989; Sent!</strong><br><br>` +
+                        `Analyzed <strong>${total}</strong> posts from the last 24h. ` +
+                        `Overall sentiment: <strong>${label}</strong>.<br>` +
+                        `Check <strong>${email}</strong> for the report and 30-second audio briefing.`;
+                } else {
+                    const msg = (payload && (payload.error || payload.details)) || `HTTP ${resp.status}`;
+                    resultDiv.innerHTML =
+                        `<strong>&#10060; Couldn&rsquo;t send</strong><br><br>${msg}<br><br>` +
+                        `If the backend is cold-starting on the free tier, give it 30 seconds and try again.`;
+                }
             } catch (error) {
-                resultDiv.innerHTML = `<strong>&#10060; Error</strong><br><br>${error.message}`;
+                resultDiv.innerHTML =
+                    `<strong>&#10060; Network error</strong><br><br>${error.message}<br><br>` +
+                    `The API may be waking up &mdash; please retry in a moment.`;
             }
         });
     </script>
@@ -2297,6 +2313,20 @@
                 </div>
                 <div class="tl-dot" style="left: calc(50% - 7px); background: #BB0000;"></div>
                 <div style="width: 50%;"></div>
+            </div>
+
+            <!-- Bank of America - RIGHT -->
+            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 24px;">
+                <div style="width: 50%;"></div>
+                <div class="tl-dot" style="left: calc(50% - 7px); background: #E31837;"></div>
+                <div style="width: 50%; padding-left: 40px;">
+                    <div class="tl-card">
+                        <div class="tl-date">June &ndash; August 2027 &bull; NYC, NY</div>
+                        <div class="tl-title">Bank of America</div>
+                        <div class="tl-desc">Summer Internship</div>
+                        <div class="tl-role">Strategy and Management</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Basis - RIGHT -->
