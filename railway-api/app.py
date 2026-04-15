@@ -266,39 +266,28 @@ def synth_audio(script: str) -> bytes:
 # ---------------------------------------------------------------------------
 
 def format_email_body(name: str, report: dict) -> str:
-    now = datetime.now().strftime('%B %d, %Y')
+    """Concise plain-text email body. Headline stats, one top+/top-, 30s audio."""
+    now = datetime.now().strftime('%b %d')
+
     lines = [
         f"Hi {name},",
         '',
-        "Thanks for trying the Reddit & Hacker News sentiment workflow demo.",
-        '',
-        f"NVIDIA GPU sentiment report — {now}",
-        f"  Posts analyzed: {report['total_posts']}",
-        f"  Overall sentiment: {report['overall_label']} ({report['avg_sentiment']}/100)",
+        f"NVIDIA GPU sentiment, last 24h ({now}):",
+        f"  {report['overall_label']} — {report['avg_sentiment']}/100 across {report['total_posts']} posts",
     ]
-    for src, stats in report.get('by_source', {}).items():
-        src_name = 'Reddit' if src == 'reddit' else 'Hacker News'
-        lines.append(f"    {src_name}: {stats['count']} posts, avg {stats['avg_sentiment']}/100")
 
-    if report['top_positive']:
-        lines += ['', 'Top positive chatter:']
-        for p in report['top_positive']:
-            lines.append(f"  • [{p['sentiment']}/100] {p['title'][:140]}")
-            lines.append(f"    {p['url']}")
-
-    if report['top_negative']:
-        lines += ['', 'Top negative chatter:']
-        for p in report['top_negative']:
-            lines.append(f"  • [{p['sentiment']}/100] {p['title'][:140]}")
-            lines.append(f"    {p['url']}")
+    top = (report.get('top_positive') or [None])[0]
+    bot = (report.get('top_negative') or [None])[0]
+    if top:
+        lines.append(f"  + {top['title'][:110]}")
+    if bot:
+        lines.append(f"  – {bot['title'][:110]}")
 
     lines += [
         '',
-        'Attached is a ~30-second audio briefing generated just for you.',
+        '30-second audio briefing attached.',
         '',
-        'Best,',
-        'Cory Ziller',
-        'https://coryziller.github.io',
+        '— Cory',
     ]
     return '\n'.join(lines)
 
