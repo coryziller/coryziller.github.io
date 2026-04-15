@@ -265,31 +265,20 @@ def synth_audio(script: str) -> bytes:
 # 4. Email
 # ---------------------------------------------------------------------------
 
-def format_email_body(name: str, report: dict) -> str:
-    """Concise plain-text email body. Headline stats, one top+/top-, 30s audio."""
+def format_email_body(name: str, report: dict, audio_filename: str) -> str:
+    """Minimal email body with a prominent pointer to the audio attachment."""
     now = datetime.now().strftime('%b %d')
-
-    lines = [
-        f"Hi {name},",
-        '',
-        f"NVIDIA GPU sentiment, last 24h ({now}):",
-        f"  {report['overall_label']} — {report['avg_sentiment']}/100 across {report['total_posts']} posts",
-    ]
-
-    top = (report.get('top_positive') or [None])[0]
-    bot = (report.get('top_negative') or [None])[0]
-    if top:
-        lines.append(f"  + {top['title'][:110]}")
-    if bot:
-        lines.append(f"  – {bot['title'][:110]}")
-
-    lines += [
-        '',
-        '30-second audio briefing attached.',
-        '',
-        '— Cory',
-    ]
-    return '\n'.join(lines)
+    return (
+        f"Hi {name},\n"
+        f"\n"
+        f"NVIDIA GPU sentiment, last 24h ({now}):\n"
+        f"  {report['overall_label']} — {report['avg_sentiment']}/100 across {report['total_posts']} posts\n"
+        f"\n"
+        f"▶ LISTEN: a personalized 30-second audio briefing is attached to this email\n"
+        f"  as {audio_filename}. Open the attachment to play it.\n"
+        f"\n"
+        f"— Cory\n"
+    )
 
 
 def send_email(name: str, email: str, report: dict, audio: bytes) -> str:
@@ -302,17 +291,18 @@ def send_email(name: str, email: str, report: dict, audio: bytes) -> str:
     cfg.api_key['api-key'] = api_key
     client = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(cfg))
 
+    audio_filename = 'nvidia-gpu-audio-briefing.mp3'
     attachment = [{
         'content': base64.b64encode(audio).decode('utf-8'),
-        'name': f"nvidia_sentiment_{name.replace(' ', '_') or 'report'}.mp3",
+        'name': audio_filename,
     }]
 
     msg = sib_api_v3_sdk.SendSmtpEmail(
         to=[{'email': email, 'name': name or email}],
         sender={'email': sender, 'name': 'Cory Ziller'},
         reply_to={'email': 'coryziller@gmail.com', 'name': 'Cory Ziller'},
-        subject=f"Your NVIDIA GPU sentiment report — {datetime.now().strftime('%b %d, %Y')}",
-        text_content=format_email_body(name, report),
+        subject=f"Your NVIDIA GPU sentiment report + audio briefing — {datetime.now().strftime('%b %d, %Y')}",
+        text_content=format_email_body(name, report, audio_filename),
         attachment=attachment,
     )
     resp = client.send_transac_email(msg)
