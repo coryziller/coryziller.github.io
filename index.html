@@ -1775,7 +1775,7 @@
                 const cacheKey = `${y}::${todayKey}`;
                 if (LYRICS_WORDCLOUD_CACHE[cacheKey]) return;
                 const url = `${LYRICS_STATIC_BASE}/${encodeURIComponent(y)}.json?v=${todayKey}`;
-                fetch(url, { cache: 'force-cache', priority: 'low' })
+                fetch(url, { priority: 'low' })
                     .then(r => r.ok ? r.json() : null)
                     .then(data => {
                         if (data && data.ok && Array.isArray(data.words)) {
@@ -1997,7 +1997,7 @@
             // Try precomputed static JSON first -- instant, no backend.
             try {
                 const staticUrl = `${LYRICS_STATIC_BASE}/${encodeURIComponent(year)}.json?v=${todayKey}`;
-                const sResp = await fetch(staticUrl, { cache: 'force-cache' });
+                const sResp = await fetch(staticUrl);
                 if (sResp.ok) {
                     const sData = await sResp.json();
                     if (sData && sData.ok && Array.isArray(sData.words)) {
