@@ -3047,10 +3047,19 @@
 
       function getCurrentSection() {
         var scrollY = window.scrollY + window.innerHeight / 2;
-        var sections = document.querySelectorAll('section, [id]');
-        var current = 'hero';
-        sections.forEach(function(s) {
-          if (s.id && s.offsetTop <= scrollY) current = s.id;
+        var defined = ['works', 'history', 'rapids-card', 'conversions-card', 'social-card', 'spotify-card'];
+        var labels  = {
+          'works': 'Writing Samples & Side Projects',
+          'history': 'Work History & Education',
+          'rapids-card': 'RAPIDS cuDF Project Card',
+          'conversions-card': 'SQL Conversions Project Card',
+          'social-card': 'Reddit & HN Sentiment Project Card',
+          'spotify-card': 'Spotify Trends Project Card'
+        };
+        var current = 'Hero';
+        defined.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollY) current = labels[id] || id;
         });
         return current;
       }
@@ -3133,12 +3142,20 @@
         });
       }
 
+      var cardNames = {
+        'rapids-card': 'RAPIDS cuDF Project Card',
+        'conversions-card': 'SQL Conversions Project Card',
+        'social-card': 'Reddit & HN Sentiment Project Card',
+        'spotify-card': 'Spotify Trends Project Card'
+      };
+
       document.querySelectorAll('.card-close-x').forEach(function(btn) {
         btn.addEventListener('click', function() {
           var card = btn.closest('.work-card');
           var cardId = card ? card.id : 'unknown';
-          trackEvent('project_card_close_click', 'Project_Card_Interaction',
-            'Closed expanded project card: ' + cardId, { 'card_id': cardId });
+          trackEvent('project_card_close_x_click', 'Project_Card_Interaction',
+            'Clicked X to collapse ' + (cardNames[cardId] || cardId),
+            { 'card_id': cardId, 'card_name': cardNames[cardId] || cardId });
         });
       });
 
@@ -3185,10 +3202,32 @@
 
       document.querySelectorAll('.close-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
+          var card = btn.closest('.work-card');
+          var cardId = card ? card.id : 'unknown';
+          var cardLabels = {
+            'rapids-card': 'RAPIDS cuDF Project Card',
+            'conversions-card': 'SQL Conversions Project Card',
+            'social-card': 'Reddit & HN Sentiment Project Card',
+            'spotify-card': 'Spotify Trends Project Card'
+          };
+          trackEvent('project_card_close_text_btn_click', 'Project_Card_Interaction',
+            'Clicked Close button on ' + (cardLabels[cardId] || cardId),
+            { 'card_id': cardId, 'card_name': cardLabels[cardId] || cardId });
+        });
+      });
+
+      document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
           var modal = btn.closest('.fullscreen-modal');
           var modalId = modal ? modal.id : 'unknown';
-          trackEvent('modal_close_button_click', 'Modal_Interaction',
-            'Closed fullscreen modal: ' + modalId, { 'modal_name': modalId });
+          var modalLabels = {
+            'rapidsModal': 'RAPIDS cuDF Speed Test Modal',
+            'conversionsModal': 'SQL Conversion Paths README Modal',
+            'spotifyModal': 'Spotify Trends Dashboard Modal'
+          };
+          trackEvent('modal_x_close_button_click', 'Modal_Interaction',
+            'Clicked X to close ' + (modalLabels[modalId] || modalId),
+            { 'modal_name': modalId, 'modal_label': modalLabels[modalId] || modalId });
         });
       });
 
