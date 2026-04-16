@@ -42,7 +42,7 @@ USER_AGENT = (
     '(KHTML, like Gecko) Version/17.0 Safari/605.1.15 coryziller-portfolio/2.0'
 )
 
-TOP_N_PER_YEAR = 30
+TOP_N_PER_YEAR = 500  # effectively "all" songs per year
 MAX_WORKERS = 6
 REQUEST_TIMEOUT = 12
 TOP_WORDS_OUT = 80
