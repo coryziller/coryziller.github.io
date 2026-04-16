@@ -1971,6 +1971,8 @@
         async function generateWordCloud(year) {
             const cloudDiv = document.getElementById('wordCloud');
             if (!cloudDiv) return;
+            // Clear stale sidebar immediately so year switches dont show last years songs
+            try { renderSongsSidebar([]); } catch (_) {}
 
             const todayKey = new Date().toISOString().slice(0, 10);
             const cacheKey = `${year}::${todayKey}`;
