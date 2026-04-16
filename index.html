@@ -1827,67 +1827,48 @@
             const MIN_PX = 16;
             const MAX_PX = 128;
 
-            // --- Funky one-liner: "what the year said" ---------------
-            const VIBE_BLOCKS = {
-                upbeat:  ['{YEAR} was a love-letter to', '{YEAR} danced its heart out on', '{YEAR} felt like sunlight on'],
-                positive:['{YEAR} kept circling back to', '{YEAR} wore', 'The shape of {YEAR}: '],
-                mixed:   ['{YEAR} was a mood swing between', '{YEAR} toggled between', '{YEAR} talked in'],
-                moody:   ['{YEAR} sat with', '{YEAR} stewed on', '{YEAR} replayed'],
-                heavy:   ['{YEAR} ached over', '{YEAR} wrestled with', '{YEAR} bled about']
+            // --- Funky year-as-sentence, grounded in this year's top artists ---
+            const artistPlays = {};
+            (songs || []).forEach(s => {
+                const a = (s.artist || '').trim();
+                if (!a) return;
+                artistPlays[a] = (artistPlays[a] || 0) + (s.plays || 0);
+            });
+            const topArtists = Object.entries(artistPlays).sort((a,b) => b[1]-a[1]).slice(0, 3).map(x => x[0]);
+            const topTrack = (songs && songs[0]) ? (songs[0].track || '') : '';
+
+            const YEAR_TEMPLATES = {
+                upbeat:  ['{YEAR} sounded like {ARTISTS} on repeat.',
+                          '{YEAR} was {TRACK} energy, stitched together by {ARTISTS}.',
+                          '{YEAR} felt like a sunny drive with {ARTISTS} on the aux.'],
+                positive:['{YEAR} leaned into {ARTISTS}, with "{TRACK}" setting the mood.',
+                          '{YEAR} kept circling back to {ARTISTS}.',
+                          'The shape of {YEAR}: {ARTISTS}, looping through better days.'],
+                mixed:   ['{YEAR} was a mood swing between {ARTISTS}.',
+                          '{YEAR} toggled between {ARTISTS}.',
+                          '{YEAR} kept it complicated — {ARTISTS} narrated the highs and lows.'],
+                moody:   ['{YEAR} sat with {ARTISTS} on low, nursing "{TRACK}".',
+                          '{YEAR} lived inside {ARTISTS}.',
+                          '{YEAR} replayed {ARTISTS} when nothing else fit.'],
+                heavy:   ['{YEAR} ached through {ARTISTS}.',
+                          '{YEAR} wrestled with {ARTISTS} and stayed in the feeling.',
+                          '{YEAR} leaned into {ARTISTS} for the heavy days.']
             };
-            const FILLER = new Set(["i'm","don't","it's","ain't","you're","can't","we're","i'll","i've","they're","he's","she's","that's","there's","who's","whose","oh","uh","yeah","la","na","ooh","like","know","think","try","want","get","go","come","way","one","two","baby","lil","bro"]);
-            const vibeWords = [];
-            for (const [w, f] of words) {
-                if (vibeWords.length >= 3) break;
-                if (FILLER.has(w)) continue;
-                if (w.length < 3) continue;
-                vibeWords.push(w);
-            }
-            while (vibeWords.length < 3 && words[vibeWords.length]) vibeWords.push(words[vibeWords.length][0]);
-
-            // --- Sentiment (client-side lexicon over the top words) ----
-            const POS = new Set(['love','happy','smile','dance','good','better','best','fun','light','sweet','heart','free','hope','bright','alright','peace','dream','shine','high','alive','win','rise','fly','sing']);
-            const NEG = new Set(['hate','sad','cry','pain','hurt','lost','lose','broken','dark','bad','alone','die','dead','fall','fear','wrong','blood','tears','sorry','cold','gone','miss','empty','scared','hell']);
-            let posScore = 0, negScore = 0;
-            top.forEach(([w, f]) => { if (POS.has(w)) posScore += f; else if (NEG.has(w)) negScore += f; });
-            const tot = posScore + negScore;
-            const sentPct = tot > 0 ? Math.round(100 * posScore / tot) : 50;
-            let mood, moodColor, moodEmoji;
-            if (sentPct >= 70)       { mood = 'Upbeat';   moodColor = '#1DB954'; moodEmoji = '☀️';  }
-            else if (sentPct >= 55)  { mood = 'Positive'; moodColor = '#22d3ee'; moodEmoji = '🙂'; }
-            else if (sentPct >= 45)  { mood = 'Mixed';    moodColor = '#f59e0b'; moodEmoji = '🌀'; }
-            else if (sentPct >= 30)  { mood = 'Moody';    moodColor = '#a855f7'; moodEmoji = '🌧️'; }
-            else                     { mood = 'Heavy';    moodColor = '#ec4899'; moodEmoji = '😔'; }
-            const sentHeader = `
-                <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin:0 0 18px; padding:10px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:999px; max-width:420px; margin-left:auto; margin-right:auto;">
-                    <div style="font-size:1.4rem;">${moodEmoji}</div>
-                    <div style="display:flex; flex-direction:column;">
-                        <div style="color: rgba(255,255,255,0.5); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Sentiment</div>
-                        <div style="color:${moodColor}; font-weight:800; font-size:1rem; letter-spacing:0.02em;">${mood} &middot; ${sentPct}/100</div>
-                    </div>
-                    <div style="flex:1; min-width:90px; height:6px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden;">
-                        <div style="width:${sentPct}%; height:100%; background:${moodColor}; transition:width 0.4s ease;"></div>
-                    </div>
-                </div>`;
-
-            const statsLine = stats
-                ? `<div style="text-align:center; color:rgba(255,255,255,0.55); font-size:0.8rem; margin:20px 0 0;">Analyzed lyrics for <strong>${stats.lyrics_found}</strong> of <strong>${stats.songs_considered}</strong> top songs &bull; ${stats.coverage_by_plays}% by play count &bull; ${stats.total_words_counted.toLocaleString()} words counted</div>`
-                : '';
-
-            const cloudHtml = top.map(([word, freq], i) => {
-                const norm = (freq - minFreq) / range;
-                const size = Math.round(MIN_PX + Math.pow(norm, 0.65) * (MAX_PX - MIN_PX));
-                const opacity = 0.55 + norm * 0.45;
-                const color = colors[i % colors.length];
-                return `<span style="font-size:${size}px; color:${color}; opacity:${opacity}; font-weight:800; padding:4px 12px; line-height:1.05; transition:all 0.25s ease; cursor:default; display:inline-block;" title="appeared ${freq.toLocaleString()} times (weighted by plays)" onmouseover="this.style.transform='scale(1.12)'; this.style.opacity='1';" onmouseout="this.style.transform='scale(1)'; this.style.opacity='${opacity}';">${word}</span>`;
-            }).join(' ');
-
             const vibeKey = sentPct >= 70 ? 'upbeat' : sentPct >= 55 ? 'positive' : sentPct >= 45 ? 'mixed' : sentPct >= 30 ? 'moody' : 'heavy';
-            const vibeOpener = VIBE_BLOCKS[vibeKey][Math.floor(Math.random() * VIBE_BLOCKS[vibeKey].length)].replace('{YEAR}', year || 'This year');
-            const yearVibe = vibeWords.length === 3
-                ? `${vibeOpener} <strong style="color:${moodColor};">${vibeWords[0]}</strong>, <strong style="color:${moodColor};">${vibeWords[1]}</strong>, and <strong style="color:${moodColor};">${vibeWords[2]}</strong>.`
-                : `${vibeOpener} <strong style="color:${moodColor};">${(vibeWords[0]||'the vibes')}</strong>.`;
-            const vibeBar = `<div style="text-align:center; color: rgba(255,255,255,0.85); font-size:1.05rem; font-weight:500; font-style:italic; letter-spacing:0.01em; margin:0 auto 14px; max-width:640px; line-height:1.4;">&ldquo;${yearVibe}&rdquo;</div>`;
+            const pool = YEAR_TEMPLATES[vibeKey];
+            const tmpl = pool[Math.floor(Math.random() * pool.length)];
+            const artistsHtml = topArtists.length
+                ? topArtists.map((a, i) => {
+                    const sep = i < topArtists.length - 2 ? ', ' : (i === topArtists.length - 2 ? ' and ' : '');
+                    return `<strong style="color:${moodColor};">${a.replace(/</g,'&lt;')}</strong>${sep}`;
+                  }).join('')
+                : `<strong style="color:${moodColor};">your playlist</strong>`;
+            const trackHtml = topTrack ? topTrack.replace(/</g,'&lt;') : 'this';
+            const yearVibe = tmpl
+                .replace('{YEAR}', `<strong>${year || 'This year'}</strong>`)
+                .replace('{ARTISTS}', artistsHtml)
+                .replace('{TRACK}', trackHtml);
+            const vibeBar = `<div style="text-align:center; color: rgba(255,255,255,0.9); font-size:1.1rem; font-weight:500; font-style:italic; letter-spacing:0.01em; margin:0 auto 14px; max-width:720px; line-height:1.45;">&ldquo;${yearVibe}&rdquo;</div>`;
 
             cloudDiv.innerHTML = vibeBar + sentHeader + cloudHtml + statsLine;
         }
