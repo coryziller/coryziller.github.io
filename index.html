@@ -1762,7 +1762,7 @@
                 const cacheKey = `${y}::${todayKey}`;
                 if (LYRICS_WORDCLOUD_CACHE[cacheKey]) return;
                 const url = `${LYRICS_STATIC_BASE}/${encodeURIComponent(y)}.json?v=${todayKey}`;
-                fetch(url, { cache: 'force-cache' })
+                fetch(url, { cache: 'force-cache', priority: 'low' })
                     .then(r => r.ok ? r.json() : null)
                     .then(data => {
                         if (data && data.ok && Array.isArray(data.words)) {
@@ -1773,6 +1773,17 @@
                     })
                     .catch(() => {});
             });
+        }
+
+
+        // Start the parallel prefetch as soon as the page loads so the Word
+        // Cloud tab has data in memory the moment it's ever opened.
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () {
+                try { prefetchAllYearClouds(); } catch (_) {}
+            });
+        } else {
+            setTimeout(function () { try { prefetchAllYearClouds(); } catch (_) {} }, 50);
         }
 
         // Collect the most-played songs for a given year, merged across all months.
