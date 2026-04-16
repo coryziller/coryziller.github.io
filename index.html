@@ -1880,6 +1880,19 @@
                           '{YEAR} wrestled with {ARTISTS} and stayed in the feeling.',
                           '{YEAR} leaned into {ARTISTS} for the heavy days.']
             };
+            const POS_WORDS = new Set(["love","happy","smile","dance","good","better","best","fun","light","sweet","heart","free","hope","bright","alright","peace","dream","shine","high","alive","win","rise","fly","sing","joy","warm","sun","beautiful","glow","magic","kiss","smile","laugh"]);
+            const NEG_WORDS = new Set(["hate","sad","cry","pain","hurt","lost","lose","broken","dark","bad","alone","die","dead","fall","fear","wrong","blood","tears","sorry","cold","gone","miss","empty","scared","hell","ache","cruel","bleed","drown","break","leave","regret","sorrow","silent"]);
+            let posScore = 0, negScore = 0;
+            (words || []).forEach(function (p) { const w = p[0], f = p[1]; if (POS_WORDS.has(w)) posScore += f; else if (NEG_WORDS.has(w)) negScore += f; });
+            const totalSentWords = posScore + negScore;
+            const sentPct = totalSentWords > 0 ? Math.round(100 * posScore / totalSentWords) : 50;
+            let mood, moodColor, moodEmoji;
+            if (sentPct >= 70) { mood = "Upbeat"; moodColor = "#1DB954"; moodEmoji = "\u2600\ufe0f"; }
+            else if (sentPct >= 55) { mood = "Positive"; moodColor = "#22d3ee"; moodEmoji = "\ud83d\ude42"; }
+            else if (sentPct >= 45) { mood = "Mixed"; moodColor = "#f59e0b"; moodEmoji = "\ud83c\udf00"; }
+            else if (sentPct >= 30) { mood = "Moody"; moodColor = "#a855f7"; moodEmoji = "\ud83c\udf27\ufe0f"; }
+            else { mood = "Heavy"; moodColor = "#ec4899"; moodEmoji = "\ud83d\ude14"; }
+            const sentHeader = `<div style="display:flex; align-items:center; justify-content:center; gap:14px; margin:0 auto 18px; padding:10px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:999px; max-width:420px;"><div style="font-size:1.4rem;">${moodEmoji}</div><div style="display:flex; flex-direction:column;"><div style="color: rgba(255,255,255,0.5); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Sentiment</div><div style="color:${moodColor}; font-weight:800; font-size:1rem;">${mood} &middot; ${sentPct}/100</div></div><div style="flex:1; min-width:90px; height:6px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden;"><div style="width:${sentPct}%; height:100%; background:${moodColor};"></div></div></div>`;
             const vibeKey = sentPct >= 70 ? 'upbeat' : sentPct >= 55 ? 'positive' : sentPct >= 45 ? 'mixed' : sentPct >= 30 ? 'moody' : 'heavy';
             const pool = YEAR_TEMPLATES[vibeKey];
             const tmpl = pool[Math.floor(Math.random() * pool.length)];
