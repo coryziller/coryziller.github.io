@@ -1811,7 +1811,7 @@
                 ${rows}`;
         }
 
-        function renderWordCloudFromData(words /* [[word, count], ...] */, stats, songs) {
+        function renderWordCloudFromData(words /* [[word, count], ...] */, stats, songs, year) {
             const cloudDiv = document.getElementById('wordCloud');
             if (!cloudDiv) return;
 
@@ -1892,7 +1892,7 @@
             }).join(' ');
 
             const vibeKey = sentPct >= 70 ? 'upbeat' : sentPct >= 55 ? 'positive' : sentPct >= 45 ? 'mixed' : sentPct >= 30 ? 'moody' : 'heavy';
-            const vibeOpener = VIBE_BLOCKS[vibeKey][Math.floor(Math.random() * VIBE_BLOCKS[vibeKey].length)].replace('{YEAR}', year);
+            const vibeOpener = VIBE_BLOCKS[vibeKey][Math.floor(Math.random() * VIBE_BLOCKS[vibeKey].length)].replace('{YEAR}', year || 'This year');
             const yearVibe = vibeWords.length === 3
                 ? `${vibeOpener} <strong style="color:${moodColor};">${vibeWords[0]}</strong>, <strong style="color:${moodColor};">${vibeWords[1]}</strong>, and <strong style="color:${moodColor};">${vibeWords[2]}</strong>.`
                 : `${vibeOpener} <strong style="color:${moodColor};">${(vibeWords[0]||'the vibes')}</strong>.`;
@@ -1909,7 +1909,7 @@
             const cacheKey = `${year}::${todayKey}`;
             if (LYRICS_WORDCLOUD_CACHE[cacheKey]) {
                 const cached = LYRICS_WORDCLOUD_CACHE[cacheKey];
-                renderWordCloudFromData(cached.words, cached.stats, cached.songs);
+                renderWordCloudFromData(cached.words, cached.stats, cached.songs, year);
                 return;
             }
 
@@ -1921,7 +1921,7 @@
                     const sData = await sResp.json();
                     if (sData && sData.ok && Array.isArray(sData.words)) {
                         LYRICS_WORDCLOUD_CACHE[cacheKey] = { words: sData.words, stats: sData.stats, songs: sData.songs };
-                        renderWordCloudFromData(sData.words, sData.stats, sData.songs);
+                        renderWordCloudFromData(sData.words, sData.stats, sData.songs, year);
                         return;
                     }
                 }
@@ -1950,7 +1950,7 @@
                     throw new Error(data.error || `HTTP ${resp.status}`);
                 }
                 LYRICS_WORDCLOUD_CACHE[cacheKey] = { words: data.words, stats: data.stats, songs: data.songs };
-                renderWordCloudFromData(data.words, data.stats, data.songs);
+                renderWordCloudFromData(data.words, data.stats, data.songs, year);
             } catch (err) {
                 cloudDiv.innerHTML = `
                     <div style="text-align:center; color:rgba(255,255,255,0.7); padding:40px 20px;">
