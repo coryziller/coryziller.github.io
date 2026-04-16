@@ -445,24 +445,29 @@
             .tab-btn { padding: 6px 10px; font-size: 0.6rem; white-space: nowrap; flex-shrink: 0; }
 
             /* Evolution panels - single column so artist names show fully */
-            .evolution-panels { grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; margin-bottom: var(--space-2) !important; overflow-x: auto !important; max-width: 100% !important; }
-            .evolution-panel { padding: 6px !important; min-width: 0 !important; overflow: hidden; }
-            .evolution-panel-title { font-size: 0.7rem !important; margin-bottom: 4px !important; }
-            .evolution-rank { font-size: 0.55rem !important; white-space: normal !important; overflow: visible !important; line-height: 1.3; padding: 1px 0 !important; word-break: break-word; }
-            .evolution-artist-row { gap: 2px !important; padding: 2px 4px !important; }
-            .evolution-controls { flex-wrap: wrap; gap: 6px !important; }
+            .evolution-panels { grid-template-columns: 1fr !important; gap: 10px !important; margin-bottom: var(--space-3) !important; max-width: 100% !important; }
+            .evolution-panels.two-panels { grid-template-columns: 1fr !important; }
+            .evolution-panel { padding: 12px !important; min-width: 0 !important; overflow: hidden; }
+            .evolution-panel-title { font-size: 0.95rem !important; margin-bottom: 8px !important; }
+            .evolution-artist-row { grid-template-columns: 28px 1fr auto !important; gap: 8px !important; padding: 6px 0 !important; }
+            .evolution-rank { font-size: 0.7rem !important; white-space: nowrap !important; overflow: visible !important; line-height: 1.3; padding: 0 !important; }
+            .evolution-controls { flex-wrap: wrap; gap: 6px !important; padding: 12px !important; }
             .evolution-btn { min-height: 36px !important; min-width: 70px !important; font-size: 0.75rem !important; padding: 8px 12px !important; }
-            .evolution-artist-name { font-size: 0.85rem !important; white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
+            .evolution-artist-name { font-size: 0.9rem !important; white-space: normal !important; overflow: visible !important; text-overflow: unset !important; word-break: break-word; line-height: 1.25 !important; }
             .evolution-change { font-size: 0.75rem !important; white-space: nowrap; }
 
-            /* Word cloud - scale to fit mobile */
+            /* Word cloud - no transform; cap per-word size so words wrap into multiple columns */
             .word-cloud-container {
-                transform: scale(0.38) !important;
-                transform-origin: top center !important;
+                transform: none !important;
                 width: 100% !important;
-                margin-bottom: -250px !important;
-                overflow: visible !important;
+                max-width: 100% !important;
+                padding: 14px 10px !important;
+                min-height: 260px !important;
+                gap: 8px 10px !important;
+                overflow: hidden !important;
+                margin-bottom: 0 !important;
             }
+            .word-cloud-container > * { font-size: clamp(11px, 5.5vw, 44px) !important; max-width: 100% !important; line-height: 1.1 !important; }
 
             .chart-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
             .chart-container canvas { min-width: 280px; }
@@ -763,6 +768,118 @@
 
             /* === WORK HISTORY SUBTITLE MOBILE === */
             #history > p { font-size: 0.9rem !important; }
+
+            /* === WEEKLY TRENDS TAB MOBILE === */
+            #weeklyMoodContent { padding: 0 !important; max-width: 100% !important; }
+            /* Outer content padding around the madlib card */
+            #weeklyMoodContent > div { padding: 0 !important; max-width: 100% !important; }
+            /* Vibe card: roomier padding, smaller text that still reads large enough */
+            #weeklyMoodContent > div > div:first-child {
+                padding: 20px 16px !important;
+                border-radius: 16px !important;
+                margin: 0 !important;
+            }
+            #weeklyMoodContent > div > div:first-child > div:nth-child(1) {
+                font-size: 0.62rem !important;
+                margin-bottom: 10px !important;
+                letter-spacing: 0.14em !important;
+            }
+            /* The madlib sentence — force readable line height, no overflow */
+            #weeklyMoodContent > div > div:first-child > div:nth-child(2) {
+                font-size: 1.05rem !important;
+                line-height: 1.55 !important;
+                margin-bottom: 14px !important;
+                word-break: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+            /* Vibe line */
+            #weeklyMoodContent > div > div:first-child > div:nth-child(3) {
+                font-size: 0.85rem !important;
+                line-height: 1.5 !important;
+                word-break: break-word !important;
+            }
+            #weeklyMoodContent > div > div:first-child > div:nth-child(4) {
+                font-size: 0.65rem !important;
+                margin-top: 12px !important;
+            }
+            /* Track list: single column with tighter padding */
+            #weeklyMoodContent > div > div:nth-child(2) {
+                margin-top: 18px !important;
+            }
+            #weeklyMoodContent > div > div:nth-child(2) > div:first-child {
+                font-size: 0.6rem !important;
+                letter-spacing: 0.14em !important;
+                margin-bottom: 10px !important;
+            }
+            #weeklyMoodContent > div > div:nth-child(2) > div:last-child {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+            #weeklyMoodContent > div > div:nth-child(2) > div:last-child > div {
+                padding: 10px 12px !important;
+            }
+            /* Madlib underlined spans should wrap cleanly */
+            #weeklyMoodContent span {
+                white-space: normal !important;
+            }
+
+            /* === OVERVIEW DATA TABLES MOBILE ===
+               The row grid is 50px/1fr/120px and 97px tall on desktop —
+               wasteful and cramped on a 375-wide phone. */
+            .data-table { min-height: 0 !important; margin-bottom: var(--space-3) !important; }
+            .table-header { padding: 12px 14px !important; }
+            .table-title { font-size: 0.95rem !important; }
+            .table-row {
+                grid-template-columns: 30px 1fr auto !important;
+                min-height: 0 !important;
+                padding: 12px 14px !important;
+                gap: 10px !important;
+            }
+            .rank { font-size: 0.9rem !important; }
+            .item-name { font-size: 0.88rem !important; line-height: 1.25 !important; word-break: break-word; }
+            .item-detail { font-size: 0.72rem !important; line-height: 1.2 !important; margin-top: 2px !important; }
+            .item-count { font-size: 0.78rem !important; white-space: nowrap; }
+
+            /* === CHART CONTAINERS MOBILE === */
+            .chart-container { height: 320px !important; padding: 14px !important; margin-bottom: 12px !important; }
+            .chart-title { font-size: 0.95rem !important; margin-bottom: 10px !important; }
+
+            /* === YEAR FILTER / SLIDER MOBILE === */
+            .year-filter-container { padding: 14px !important; margin-bottom: 16px !important; }
+            .year-filter-header { gap: 10px !important; }
+            .year-filter-label { font-size: 0.7rem !important; }
+            .year-display { font-size: 1.15rem !important; }
+            .year-mark { font-size: 0.65rem !important; }
+
+            /* === STATS GRID (Overview) — tighter cards === */
+            .stats-grid { gap: 10px !important; margin-bottom: 16px !important; grid-template-columns: repeat(2, 1fr) !important; }
+            .stat-card { padding: 12px 14px !important; }
+            .stat-value { font-size: 1.6rem !important; }
+            .stat-label { font-size: 0.62rem !important; letter-spacing: 0.08em !important; }
+
+            /* === TAB NAVIGATION — make sure all 6 tabs fit, wrap cleanly === */
+            .tab-navigation {
+                gap: 4px !important;
+                padding-bottom: 6px !important;
+                margin-bottom: 16px !important;
+            }
+            .tab-btn {
+                padding: 6px 8px !important;
+                font-size: 0.62rem !important;
+                border-bottom-width: 2px !important;
+            }
+
+            /* === MODAL CLOSE BUTTON — keep out of the way of content === */
+            .modal-close-btn {
+                top: 12px !important; right: 12px !important;
+                width: 38px !important; height: 38px !important;
+                font-size: 22px !important;
+            }
+
+            /* === EVOLUTION YEAR CONTROLS — stack nicely === */
+            .evolution-controls { padding: 10px !important; margin-bottom: 14px !important; }
+            .evolution-year-display { font-size: 1.25rem !important; min-width: 70px !important; }
         }
         @media (max-width: 480px) {
             .hero-name { font-size: 1.5rem; }
@@ -776,7 +893,8 @@
             h2, .section-title { font-size: 1.25rem !important; }
             .quad-card { padding: var(--space-2); }
             .quad-title { font-size: 1rem !important; }
-            .word-cloud-container { transform: scale(0.55) !important; margin-bottom: -80px !important; }
+            .word-cloud-container { transform: none !important; margin-bottom: 0 !important; padding: 12px 8px !important; min-height: 220px !important; }
+            .word-cloud-container > * { font-size: clamp(10px, 5vw, 38px) !important; }
             /* Pipeline: stack to 2 rows on very small screens */
             .pipeline-flow {
                 grid-template-columns: 1fr auto 1fr !important;
@@ -787,6 +905,34 @@
             }
             #readmeScroller pre { font-size: 0.58rem !important; }
             #conversionsModal h1 { font-size: 1.1rem !important; }
+
+            /* === SUPER-NARROW (iPhone SE / mini) REFINEMENTS === */
+            /* Weekly Trends: drop madlib a bit so long artist names wrap ok */
+            #weeklyMoodContent > div > div:first-child > div:nth-child(2) {
+                font-size: 0.98rem !important;
+            }
+            #weeklyMoodContent > div > div:first-child > div:nth-child(3) {
+                font-size: 0.8rem !important;
+            }
+            #weeklyMoodContent > div > div:first-child { padding: 18px 14px !important; }
+
+            /* Overview stats: 2 columns still, but punchier */
+            .stat-value { font-size: 1.35rem !important; }
+            .stat-label { font-size: 0.58rem !important; }
+
+            /* Dashboard title line — keep on one row if we can */
+            .dashboard-title { font-size: 1.05rem !important; }
+            .dashboard-subtitle { font-size: 0.68rem !important; }
+
+            /* Tables a bit tighter */
+            .table-title { font-size: 0.9rem !important; }
+            .table-row { padding: 10px 12px !important; gap: 8px !important; grid-template-columns: 26px 1fr auto !important; }
+            .item-name { font-size: 0.82rem !important; }
+            .item-count { font-size: 0.72rem !important; }
+
+            /* Chart heights a bit shorter so all charts are scannable */
+            .chart-container { height: 280px !important; padding: 12px !important; }
+            .chart-title { font-size: 0.85rem !important; }
         }
 
         @media (max-width: 1024px) {
@@ -1268,6 +1414,7 @@
                 <button class="tab-btn" onclick="switchTab('genres', event)">Genre Evolution</button>
                 <button class="tab-btn" onclick="switchTab('charts', event)">Charts & Trends</button>
                 <button class="tab-btn" onclick="switchTab('insights', event)">Word Cloud</button>
+                <button class="tab-btn" onclick="switchTab('weekly', event)">Weekly Trends</button>
             </div>
 
             <div id="dashboardContent">
@@ -1335,6 +1482,19 @@
             }
         }
 
+        // Cached weekly mood JSON so the Weekly Trends tab renders instantly
+        // from memory on first click (no network hit at tab-switch time).
+        let WEEKLY_MOOD_CACHE = null;
+        let WEEKLY_MOOD_PROMISE = null;
+        function prefetchWeeklyMood() {
+            if (WEEKLY_MOOD_CACHE || WEEKLY_MOOD_PROMISE) return WEEKLY_MOOD_PROMISE;
+            WEEKLY_MOOD_PROMISE = fetch('spotify-trends/weekly_mood.json?t=' + new Date().toISOString().slice(0, 10))
+                .then(r => r.ok ? r.json() : null)
+                .then(data => { WEEKLY_MOOD_CACHE = data; return data; })
+                .catch(() => null);
+            return WEEKLY_MOOD_PROMISE;
+        }
+
         async function openSpotifyDashboard() {
             const modal = document.getElementById('spotifyModal');
             modal.classList.add('active');
@@ -1343,6 +1503,12 @@
             if (!SPOTIFY_DATA.stats) {
                 await loadSpotifyData();
             }
+            // Kick off every tab's data fetch in parallel the moment the modal
+            // opens, so switching tabs is instant (data is already in memory).
+            // These are all idempotent and cheap to call multiple times.
+            try { prefetchAllYearClouds(); } catch (_) {}
+            try { prefetchWeeklyMood(); } catch (_) {}
+
             switchTab('overview');
         }
 
@@ -1405,6 +1571,10 @@
                         prefetchAllYearClouds();
                         generateWordCloud(latestYear);
                     }, 100);
+                    break;
+                case 'weekly':
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:620px;line-height:1.5;">What I\'m preferring this week &mdash; and the vibe the lyrics are giving off.</div>' + renderWeeklyTab();
+                    setTimeout(() => { renderWeeklyTrends(); }, 100);
                     break;
             }
         }
@@ -1715,6 +1885,202 @@
                     <canvas id="activityTimelineChart"></canvas>
                 </div>
             `;
+        }
+
+        // ============================================================
+        // WEEKLY TRENDS TAB
+        // Shows this week's mood (from lyric sentiment of actually-played
+        // songs) vs. last week's mood, plus a week-specific essence quip.
+        // Data source: spotify-trends/weekly_mood.json (precomputed daily).
+        // ============================================================
+        function renderWeeklyTab() {
+            return `
+                <div id="weeklyMoodContent" style="max-width: 980px; margin: 0 auto; padding: 0 var(--space-4);">
+                    <div style="text-align:center; padding: 48px 16px; color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                        Pulling your last 14 days of lyrics&hellip;
+                    </div>
+                </div>
+            `;
+        }
+
+        function _moodFromPct(pct) {
+            if (pct >= 70) return { label: 'Upbeat', color: '#1DB954', emoji: '\u2600\ufe0f' };
+            if (pct >= 55) return { label: 'Positive', color: '#22d3ee', emoji: '\ud83d\ude42' };
+            if (pct >= 45) return { label: 'Mixed', color: '#f59e0b', emoji: '\ud83c\udf00' };
+            if (pct >= 30) return { label: 'Moody', color: '#a855f7', emoji: '\ud83c\udf27\ufe0f' };
+            return { label: 'Heavy', color: '#ec4899', emoji: '\ud83d\ude14' };
+        }
+
+        function _weekCard(title, week, isThis) {
+            if (!week) {
+                return `<div style="flex:1; min-width:260px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:20px; text-align:center; color:rgba(255,255,255,0.4);">
+                    <div style="font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:8px;">${title}</div>
+                    <div style="font-size:0.85rem;">No data yet</div>
+                </div>`;
+            }
+            const m = _moodFromPct(week.sentiment_pct);
+            const range = (week.week_start || '').slice(5) + ' \u2192 ' + (week.week_end || '').slice(5);
+            const plays = week.total_plays || 0;
+            const tracks = week.unique_tracks || 0;
+            const coverage = week.lyrics_coverage != null ? Math.round(week.lyrics_coverage * 100) : null;
+            return `<div style="flex:1; min-width:260px; background:${isThis ? 'rgba(29,185,84,0.08)' : 'rgba(255,255,255,0.03)'}; border:1px solid ${isThis ? 'rgba(29,185,84,0.25)' : 'rgba(255,255,255,0.08)'}; border-radius:16px; padding:20px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
+                    <div style="font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; color:rgba(255,255,255,0.55);">${title}</div>
+                    <div style="font-size:0.7rem; color:rgba(255,255,255,0.4);">${range}</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="font-size:2rem;">${m.emoji}</div>
+                    <div style="flex:1; min-width:0;">
+                        <div style="color:${m.color}; font-weight:800; font-size:1.25rem; line-height:1;">${m.label}</div>
+                        <div style="color:rgba(255,255,255,0.5); font-size:0.72rem; margin-top:4px;">${week.sentiment_pct}/100 \u00b7 ${plays} plays \u00b7 ${tracks} tracks${coverage != null ? ' \u00b7 ' + coverage + '% with lyrics' : ''}</div>
+                    </div>
+                </div>
+                <div style="margin-top:12px; height:6px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden;">
+                    <div style="width:${week.sentiment_pct}%; height:100%; background:${m.color}; transition:width 0.4s ease;"></div>
+                </div>
+            </div>`;
+        }
+
+        function _deltaPill(delta) {
+            if (delta == null) return '';
+            const rounded = Math.round(delta);
+            const up = rounded >= 0;
+            const color = rounded === 0 ? '#9ca3af' : (up ? '#1DB954' : '#ec4899');
+            const arrow = rounded === 0 ? '\u2192' : (up ? '\u2197' : '\u2198');
+            const sign = rounded > 0 ? '+' : (rounded < 0 ? '' : '\u00b1');
+            return `<div style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:${color}1a; border:1px solid ${color}55; color:${color}; border-radius:999px; font-weight:800; font-size:0.95rem;">
+                <span style="font-size:1.1rem; line-height:1;">${arrow}</span>
+                <span>${sign}${rounded} pts WoW</span>
+            </div>`;
+        }
+
+        function _trackList(tracks) {
+            if (!tracks || !tracks.length) return '';
+            const rows = tracks.slice(0, 8).map((t, i) => {
+                const name = (t.track || '').replace(/</g, '&lt;');
+                const artist = (t.artist || '').replace(/</g, '&lt;');
+                const plays = t.play_count || 0;
+                const hasLyrics = t.lyrics_found === true;
+                return `<div style="display:flex; align-items:center; gap:12px; padding:10px 14px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.06); border-radius:10px;">
+                    <div style="width:24px; color:rgba(255,255,255,0.35); font-weight:700; font-size:0.85rem;">${i + 1}</div>
+                    <div style="flex:1; min-width:0;">
+                        <div style="color:#fff; font-weight:600; font-size:0.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${name}</div>
+                        <div style="color:rgba(255,255,255,0.5); font-size:0.75rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${artist}</div>
+                    </div>
+                    <div style="color:rgba(255,255,255,0.65); font-size:0.8rem; font-weight:600; text-align:right;">${plays}\u00d7</div>
+                    <div title="${hasLyrics ? 'Lyrics analyzed' : 'No lyrics available'}" style="width:8px; height:8px; border-radius:999px; background:${hasLyrics ? '#1DB954' : 'rgba(255,255,255,0.2)'};"></div>
+                </div>`;
+            }).join('');
+            return `<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px; margin-top:12px;">${rows}</div>`;
+        }
+
+        // --- Madlib helpers ---
+        function _vibeWord(pct) {
+            // Adjective that fits the mood bucket — kept punchy and non-cringe.
+            if (pct >= 80) return 'glowing';
+            if (pct >= 70) return 'upbeat';
+            if (pct >= 60) return 'optimistic';
+            if (pct >= 50) return 'steady';
+            if (pct >= 40) return 'mixed';
+            if (pct >= 30) return 'moody';
+            if (pct >= 20) return 'aching';
+            return 'raw';
+        }
+
+        function _deltaPhrase(delta) {
+            if (delta == null) return { word: 'hanging out', color: '#9ca3af', arrow: '\u2192' };
+            const d = Math.round(delta);
+            if (d >= 15) return { word: 'way brighter', color: '#1DB954', arrow: '\u2197' };
+            if (d >= 6)  return { word: 'lifting',     color: '#1DB954', arrow: '\u2197' };
+            if (d >= 2)  return { word: 'a touch up',  color: '#1DB954', arrow: '\u2197' };
+            if (d <= -15) return { word: 'way heavier',  color: '#ec4899', arrow: '\u2198' };
+            if (d <= -6)  return { word: 'sinking',      color: '#ec4899', arrow: '\u2198' };
+            if (d <= -2)  return { word: 'a touch down', color: '#ec4899', arrow: '\u2198' };
+            return { word: 'holding steady', color: '#9ca3af', arrow: '\u2192' };
+        }
+
+        function _madlibSpan(text, color) {
+            return '<span style="color:' + (color || '#1DB954') + '; font-weight:800; border-bottom:2px dashed ' + (color || '#1DB954') + '77; padding-bottom:1px;">' + text + '</span>';
+        }
+
+        function _topArtistThisWeek(week) {
+            if (!week || !week.top_tracks) return null;
+            const counts = {};
+            for (const t of week.top_tracks) {
+                const a = (t.artist || '').trim();
+                if (!a) continue;
+                counts[a] = (counts[a] || 0) + (t.play_count || 0);
+            }
+            const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+            return sorted.length ? sorted[0][0] : null;
+        }
+
+        function _topWordThisWeek(week) {
+            if (!week || !week.top_words || !week.top_words.length) return null;
+            const [w] = week.top_words[0];
+            return w || null;
+        }
+
+        async function renderWeeklyTrends() {
+            const host = document.getElementById('weeklyMoodContent');
+            if (!host) return;
+            try {
+                // Use the preload cache if available; otherwise fire a fresh fetch.
+                const data = WEEKLY_MOOD_CACHE
+                    ? WEEKLY_MOOD_CACHE
+                    : (await prefetchWeeklyMood());
+                if (!data) throw new Error('no-data');
+                const thisWeek = data.this_week || null;
+                const lastWeek = data.last_week || null;
+                if (!thisWeek) throw new Error('no-this-week');
+
+                const vibe = _vibeWord(thisWeek.sentiment_pct);
+                const delta = (lastWeek && lastWeek.sentiment_pct != null)
+                    ? thisWeek.sentiment_pct - lastWeek.sentiment_pct : null;
+                const deltaPhrase = _deltaPhrase(delta);
+                const topArtist = _topArtistThisWeek(thisWeek) || 'a mystery act';
+                const topWord = _topWordThisWeek(thisWeek) || 'something';
+                const topTrack = (thisWeek.top_tracks && thisWeek.top_tracks[0]) ? thisWeek.top_tracks[0] : null;
+                const topTrackName = topTrack ? (topTrack.track || '') : null;
+
+                // Stats for subhead
+                const plays = thisWeek.total_plays || 0;
+                const tracks = thisWeek.unique_tracks || 0;
+
+                // --- Madlib sentence, filled from data, with "fill-in-the-blank" underline treatment ---
+                const madlib = `This week you're preferring ${_madlibSpan(topArtist)}` +
+                    (topTrackName ? ` &mdash; especially ${_madlibSpan('&ldquo;' + topTrackName.replace(/</g,'&lt;') + '&rdquo;')}` : '') +
+                    `, and the lyrics keep circling ${_madlibSpan(topWord)}.`;
+
+                const vibeLine = `Overall vibe: ${_madlibSpan(vibe, '#1DB954')} &middot; ${_madlibSpan(deltaPhrase.arrow + ' ' + deltaPhrase.word, deltaPhrase.color)} from last week.`;
+
+                host.innerHTML = `
+                    <div style="max-width:720px; margin:0 auto; padding:0 16px;">
+                        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px 26px; text-align:center;">
+                            <div style="color:rgba(255,255,255,0.45); font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:700; margin-bottom:14px;">This Week's Vibe</div>
+                            <div style="font-size:1.35rem; line-height:1.55; color:#fff; font-weight:500; margin-bottom:18px;">${madlib}</div>
+                            <div style="font-size:1rem; line-height:1.5; color:rgba(255,255,255,0.8);">${vibeLine}</div>
+                            <div style="color:rgba(255,255,255,0.35); font-size:0.72rem; margin-top:18px;">${plays} plays \u00b7 ${tracks} different songs this week</div>
+                        </div>
+
+                        ${thisWeek.top_tracks && thisWeek.top_tracks.length ? `
+                            <div style="margin-top:24px;">
+                                <div style="color:rgba(255,255,255,0.5); font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:700; text-align:center; margin-bottom:12px;">on repeat</div>
+                                ${_trackList(thisWeek.top_tracks)}
+                            </div>` : ''}
+                    </div>
+                `;
+            } catch (err) {
+                host.innerHTML = `
+                    <div style="max-width:560px; margin:48px auto; padding:32px 28px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:20px; text-align:center;">
+                        <div style="font-size:2rem; margin-bottom:12px;">\ud83c\udfb5</div>
+                        <div style="color:#fff; font-weight:700; font-size:1.1rem; margin-bottom:8px;">This week's vibe lands tomorrow</div>
+                        <div style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.55;">
+                            I'm still pulling the lyrics for this week's songs. Check back after the next daily refresh.
+                        </div>
+                    </div>
+                `;
+            }
         }
 
         function renderInsightsTab() {
