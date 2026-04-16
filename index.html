@@ -1785,28 +1785,19 @@
                 return;
             }
             const rows = list.map((s, i) => {
-                const found = s.found;
-                const badge = found
-                    ? '<span style="background: rgba(29,185,84,0.18); color:#1DB954; font-size:0.65rem; font-weight:700; padding:2px 6px; border-radius:999px; letter-spacing:0.04em;">LYRICS</span>'
-                    : '<span style="background: rgba(255,255,255,0.07); color:rgba(255,255,255,0.5); font-size:0.65rem; font-weight:700; padding:2px 6px; border-radius:999px; letter-spacing:0.04em;">MISSING</span>';
                 return `
                     <div style="display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
                         <div style="flex-shrink:0; color:rgba(255,255,255,0.35); font-size:0.7rem; font-weight:700; width:18px; text-align:right; padding-top:2px;">${i + 1}</div>
                         <div style="flex:1; min-width:0;">
                             <div style="color: #fff; font-size: 0.85rem; font-weight:600; line-height:1.25; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escapeHtml(s.track)}">${escapeHtml(s.track)}</div>
                             <div style="color: rgba(255,255,255,0.6); font-size: 0.72rem; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escapeHtml(s.artist)}">${escapeHtml(s.artist)}</div>
-                            <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
-                                <span style="color: rgba(255,255,255,0.4); font-size:0.7rem;">${(s.plays || 0).toLocaleString()} play${s.plays === 1 ? '' : 's'}</span>
-                                ${badge}
-                            </div>
+                            <div style="color: rgba(255,255,255,0.4); font-size:0.7rem; margin-top:4px;">${(s.plays || 0).toLocaleString()} play${s.plays === 1 ? '' : 's'}</div>
                         </div>
                     </div>`;
             }).join('');
-            const found = list.filter(s => s.found).length;
             box.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 6px;">
+                <div style="margin-bottom: 6px;">
                     <div style="color: rgba(255,255,255,0.5); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">Songs in this cloud</div>
-                    <div style="color: rgba(255,255,255,0.4); font-size: 0.7rem;">${found}/${list.length} w/ lyrics</div>
                 </div>
                 ${rows}`;
         }
