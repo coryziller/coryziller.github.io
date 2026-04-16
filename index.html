@@ -1977,7 +1977,7 @@
             }
             const vibeBar = `<div style="text-align:center; color: rgba(255,255,255,0.9); font-size:1.1rem; font-weight:500; font-style:italic; letter-spacing:0.01em; margin:0 auto 14px; max-width:720px; line-height:1.45;">&ldquo;${yearVibe}&rdquo;</div>`;
 
-            cloudDiv.innerHTML = vibeBar + sentHeader + cloudHtml + statsLine;
+            const cloudHtml = top.map(function(p, i){ var word=p[0], freq=p[1]; var norm=(freq-minFreq)/range; var size=Math.round(MIN_PX+Math.pow(norm,0.65)*(MAX_PX-MIN_PX)); var opacity=0.55+norm*0.45; var color=colors[i%colors.length]; return '<span style="font-size:'+size+'px;color:'+color+';opacity:'+opacity+';font-weight:800;padding:4px 12px;line-height:1.05;display:inline-block;" title="'+freq.toLocaleString()+' plays">'+word+'</span>'; }).join(' '); const statsLine = stats ? '<div style="text-align:center;color:rgba(255,255,255,0.55);font-size:0.8rem;margin:20px 0 0;">Analyzed lyrics for <strong>'+stats.lyrics_found+'</strong> of <strong>'+stats.songs_considered+'</strong> top songs</div>' : ''; cloudDiv.innerHTML = vibeBar + sentHeader + cloudHtml + statsLine;
         }
 
         async function generateWordCloud(year) {
