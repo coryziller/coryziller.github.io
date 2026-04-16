@@ -1864,21 +1864,41 @@
             const topTrack = (songs && songs[0]) ? (songs[0].track || '') : '';
 
             const YEAR_TEMPLATES = {
-                upbeat:  ['{YEAR} sounded like {ARTISTS} on repeat.',
-                          '{YEAR} was {TRACK} energy, stitched together by {ARTISTS}.',
-                          '{YEAR} felt like a sunny drive with {ARTISTS} on the aux.'],
-                positive:['{YEAR} leaned into {ARTISTS}, with "{TRACK}" setting the mood.',
-                          '{YEAR} kept circling back to {ARTISTS}.',
-                          'The shape of {YEAR}: {ARTISTS}, looping through better days.'],
-                mixed:   ['{YEAR} was a mood swing between {ARTISTS}.',
-                          '{YEAR} toggled between {ARTISTS}.',
-                          '{YEAR} kept it complicated — {ARTISTS} narrated the highs and lows.'],
-                moody:   ['{YEAR} sat with {ARTISTS} on low, nursing "{TRACK}".',
-                          '{YEAR} lived inside {ARTISTS}.',
-                          '{YEAR} replayed {ARTISTS} when nothing else fit.'],
-                heavy:   ['{YEAR} ached through {ARTISTS}.',
-                          '{YEAR} wrestled with {ARTISTS} and stayed in the feeling.',
-                          '{YEAR} leaned into {ARTISTS} for the heavy days.']
+                upbeat:  [
+                    '{YEAR}: you had {ARTISTS} on a leash and the sidewalks knew it.',
+                    '{YEAR} was mostly {ARTISTS} and main-character lighting.',
+                    'Somewhere in {YEAR}, {ARTISTS} replaced your personality for six months. No notes.',
+                    '{YEAR}: the year you probably skipped to {ARTISTS} in a Trader Joe\'s.',
+                    'If {YEAR} were a playlist it would just be {ARTISTS} and the word "yes".'
+                ],
+                positive:[
+                    '{YEAR}: {ARTISTS} did the emotional heavy lifting and you took the credit.',
+                    '{YEAR} was {ARTISTS} at 70% volume, and honestly that was enough.',
+                    'You spent {YEAR} quietly convinced {ARTISTS} wrote "{TRACK}" about you.',
+                    '{YEAR}: {ARTISTS} on the aux, no one complained, that is a win.',
+                    'Big {ARTISTS} energy in {YEAR}. Quieter than it looked.'
+                ],
+                mixed:   [
+                    '{YEAR}: {ARTISTS} one day, questionable choices the next. A real patchwork quilt.',
+                    '{YEAR} oscillated between {ARTISTS} and whatever your friend texted you at 1am.',
+                    'You went through {ARTISTS}, a phase, and back to {ARTISTS} — all in {YEAR}.',
+                    '{YEAR} was {ARTISTS} and also several things that did not make the final cut.',
+                    'The plot of {YEAR}, in three names: {ARTISTS}. Draw your own conclusions.'
+                ],
+                moody:   [
+                    '{YEAR}: {ARTISTS}, shower lights off, staring at the ceiling. Classic.',
+                    'You and {ARTISTS} spent {YEAR} doing parallel play in your feelings.',
+                    '{YEAR}: {ARTISTS} on a loop until the neighbors filed a gentle complaint.',
+                    '"{TRACK}" from {ARTISTS} did not write {YEAR} for you, but it did file the paperwork.',
+                    '{YEAR}, narrated by {ARTISTS}, produced by the ceiling fan.'
+                ],
+                heavy:   [
+                    '{YEAR}: {ARTISTS} absolutely folded you like laundry and you pressed repeat.',
+                    '{YEAR} was {ARTISTS} doing crimes to your tear ducts. On purpose.',
+                    'You let {ARTISTS} bully you all year in {YEAR}. Some call it healing.',
+                    '{YEAR}: {ARTISTS}, one million plays of "{TRACK}", zero regrets (legally).',
+                    'If {YEAR} had a receipt it would just say {ARTISTS} × 12 and "don\'t ask".'
+                ]
             };
             const POS_WORDS = new Set(["love","happy","smile","dance","good","better","best","fun","light","sweet","heart","free","hope","bright","alright","peace","dream","shine","high","alive","win","rise","fly","sing","joy","warm","sun","beautiful","glow","magic","kiss","smile","laugh"]);
             const NEG_WORDS = new Set(["hate","sad","cry","pain","hurt","lost","lose","broken","dark","bad","alone","die","dead","fall","fear","wrong","blood","tears","sorry","cold","gone","miss","empty","scared","hell","ache","cruel","bleed","drown","break","leave","regret","sorrow","silent"]);
