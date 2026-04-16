@@ -1162,15 +1162,15 @@
                                             <h4 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 20px; color: #fff;">What I Built</h4>
                                             <div class="pipeline-flow" style="display: flex; align-items: flex-start; gap: 0; flex-wrap: wrap;">
                                                 <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: #fff;">Export</div>
-                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">Spotify Privacy</div>
-                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-top: 2px;">Raw History</div>
+                                                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: #fff;">Collect</div>
+                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">Spotify Web API</div>
+                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-top: 2px;">OAuth + History</div>
                                                 </div>
                                                 <div style="display: flex; align-items: center; padding: 0 4px; color: rgba(255,255,255,0.7); font-size: 1.2rem;">&rarr;</div>
                                                 <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
                                                     <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: #fff;">Analyze</div>
-                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">Python + Pandas</div>
-                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-top: 2px;">Clean & Pattern</div>
+                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">Python</div>
+                                                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-top: 2px;">Trends & Patterns</div>
                                                 </div>
                                                 <div style="display: flex; align-items: center; padding: 0 4px; color: rgba(255,255,255,0.7); font-size: 1.2rem;">&rarr;</div>
                                                 <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
@@ -1414,7 +1414,7 @@
                 <button class="tab-btn" onclick="switchTab('genres', event)">Genre Evolution</button>
                 <button class="tab-btn" onclick="switchTab('charts', event)">Charts & Trends</button>
                 <button class="tab-btn" onclick="switchTab('insights', event)">Word Cloud</button>
-                <button class="tab-btn" onclick="switchTab('weekly', event)">Weekly Trends</button>
+                <button class="tab-btn" onclick="switchTab('weekly', event)">This Month</button>
             </div>
 
             <div id="dashboardContent">
@@ -1573,8 +1573,7 @@
                     }, 100);
                     break;
                 case 'weekly':
-                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:620px;line-height:1.5;">What I\'m preferring this week &mdash; and the vibe the lyrics are giving off.</div>' + renderWeeklyTab();
-                    setTimeout(() => { renderWeeklyTrends(); }, 100);
+                    content.innerHTML = renderThisMonthTab();
                     break;
             }
         }
@@ -1888,19 +1887,104 @@
         }
 
         // ============================================================
-        // WEEKLY TRENDS TAB
-        // Shows this week's mood (from lyric sentiment of actually-played
-        // songs) vs. last week's mood, plus a week-specific essence quip.
-        // Data source: spotify-trends/weekly_mood.json (precomputed daily).
+        // THIS MONTH TAB
+        // Shows the current month's top tracks from SPOTIFY_DATA
+        // (already loaded — no fetch required, renders instantly).
+        // Falls back to weekly_mood.json if it ever exists.
         // ============================================================
-        function renderWeeklyTab() {
-            return `
-                <div id="weeklyMoodContent" style="max-width: 980px; margin: 0 auto; padding: 0 var(--space-4);">
-                    <div style="text-align:center; padding: 48px 16px; color: rgba(255,255,255,0.5); font-size: 0.9rem;">
-                        Pulling your last 14 days of lyrics&hellip;
-                    </div>
-                </div>
-            `;
+        function renderThisMonthTab() {
+            const songs = SPOTIFY_DATA.topSongsByPeriod || {};
+            const periods = Object.keys(songs).sort();
+            const currentKey = periods[periods.length - 1];
+            const prevKey = periods.length > 1 ? periods[periods.length - 2] : null;
+            const current = songs[currentKey] || [];
+            const prev = prevKey ? (songs[prevKey] || []) : [];
+
+            if (!current.length) {
+                return '<div style="text-align:center; padding:48px; color:rgba(255,255,255,0.5);">No data for this month yet.</div>';
+            }
+
+            const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const [yr, mo] = currentKey.split('-');
+            const monthLabel = monthNames[parseInt(mo, 10) - 1] + ' ' + yr;
+            const prevLabel = prevKey ? monthNames[parseInt(prevKey.split('-')[1], 10) - 1] : '';
+
+            const totalPlays = current.reduce((s, t) => s + (t.play_count || 0), 0);
+            const totalMin = current.reduce((s, t) => s + (t.total_minutes || 0), 0);
+            const uniqueTracks = current.length;
+            const topArtist = current[0] ? current[0].artist : '';
+            const topTrack = current[0] ? current[0].track : '';
+
+            // Compare vs previous month
+            const prevPlays = prev.reduce((s, t) => s + (t.play_count || 0), 0);
+            const delta = prevPlays ? Math.round(((totalPlays - prevPlays) / prevPlays) * 100) : null;
+            const deltaStr = delta != null ? (delta >= 0 ? '+' + delta + '%' : delta + '%') : '';
+            const deltaColor = delta != null ? (delta >= 0 ? '#1DB954' : '#ec4899') : '#9ca3af';
+            const deltaArrow = delta != null ? (delta >= 0 ? '\u2197' : '\u2198') : '';
+
+            // Build track rows
+            const trackRows = current.slice(0, 10).map((t, i) => {
+                const name = (t.track || '').replace(/</g, '&lt;');
+                const artist = (t.artist || '').replace(/</g, '&lt;');
+                const mins = Math.round(t.total_minutes || 0);
+                return '<div style="display:flex; align-items:center; gap:12px; padding:12px 14px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.06); border-radius:12px;">' +
+                    '<div style="flex-shrink:0; color:rgba(255,255,255,0.35); font-size:0.85rem; font-weight:700; width:22px; text-align:right;">' + (i + 1) + '</div>' +
+                    '<div style="flex:1; min-width:0;">' +
+                        '<div style="color:#fff; font-weight:600; font-size:0.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + name + '</div>' +
+                        '<div style="color:rgba(255,255,255,0.5); font-size:0.75rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + artist + '</div>' +
+                    '</div>' +
+                    '<div style="text-align:right; flex-shrink:0;">' +
+                        '<div style="color:#1DB954; font-weight:700; font-size:0.85rem;">' + (t.play_count || 0) + '\u00d7</div>' +
+                        '<div style="color:rgba(255,255,255,0.4); font-size:0.68rem;">' + mins + ' min</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            // Artist frequency from this month
+            const artistCounts = {};
+            current.forEach(t => { artistCounts[t.artist] = (artistCounts[t.artist] || 0) + (t.play_count || 0); });
+            const topArtists = Object.entries(artistCounts).sort((a,b) => b[1] - a[1]).slice(0, 5);
+            const artistBubbles = topArtists.map(([name, plays]) =>
+                '<span style="display:inline-block; padding:6px 14px; background:rgba(29,185,84,0.12); border:1px solid rgba(29,185,84,0.25); border-radius:999px; font-size:0.8rem; font-weight:600; color:#1DB954;">' +
+                    name.replace(/</g,'&lt;') + ' <span style="opacity:0.6;">' + plays + '\u00d7</span>' +
+                '</span>'
+            ).join(' ');
+
+            return '<div style="max-width:720px; margin:0 auto; padding:0 16px;">' +
+                '<div style="text-align:center; color:rgba(255,255,255,0.7); font-size:0.95rem; margin-bottom:24px; line-height:1.5;">What I\u2019m listening to in ' + monthLabel + '.</div>' +
+
+                // Stats header
+                '<div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:24px;">' +
+                    '<div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px 20px; text-align:center; min-width:100px;">' +
+                        '<div style="color:#1DB954; font-weight:800; font-size:1.4rem;">' + totalPlays + '</div>' +
+                        '<div style="color:rgba(255,255,255,0.5); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600;">plays</div>' +
+                    '</div>' +
+                    '<div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px 20px; text-align:center; min-width:100px;">' +
+                        '<div style="color:#fff; font-weight:800; font-size:1.4rem;">' + Math.round(totalMin / 60) + 'h</div>' +
+                        '<div style="color:rgba(255,255,255,0.5); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600;">listened</div>' +
+                    '</div>' +
+                    '<div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px 20px; text-align:center; min-width:100px;">' +
+                        '<div style="color:#fff; font-weight:800; font-size:1.4rem;">' + uniqueTracks + '</div>' +
+                        '<div style="color:rgba(255,255,255,0.5); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600;">tracks</div>' +
+                    '</div>' +
+                    (delta != null ? '<div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px 20px; text-align:center; min-width:100px;">' +
+                        '<div style="color:' + deltaColor + '; font-weight:800; font-size:1.4rem;">' + deltaArrow + ' ' + deltaStr + '</div>' +
+                        '<div style="color:rgba(255,255,255,0.5); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600;">vs ' + prevLabel + '</div>' +
+                    '</div>' : '') +
+                '</div>' +
+
+                // Top artists bubbles
+                '<div style="text-align:center; margin-bottom:24px;">' +
+                    '<div style="color:rgba(255,255,255,0.5); font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Top Artists</div>' +
+                    '<div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">' + artistBubbles + '</div>' +
+                '</div>' +
+
+                // Track list
+                '<div>' +
+                    '<div style="color:rgba(255,255,255,0.5); font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:700; text-align:center; margin-bottom:12px;">On Repeat</div>' +
+                    '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px;">' + trackRows + '</div>' +
+                '</div>' +
+            '</div>';
         }
 
         function _moodFromPct(pct) {
