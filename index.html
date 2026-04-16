@@ -1292,17 +1292,15 @@
 
         async function loadSpotifyData() {
             try {
-                const [stats, artistEvolution, monthlyTrends, topSongs] = await Promise.all([
+                const [stats, artistEvolution, monthlyTrends] = await Promise.all([
                     fetch('spotify-trends/basic_stats.json').then(r => r.json()),
                     fetch('spotify-trends/artist_evolution.json').then(r => r.json()),
-                    fetch('spotify-trends/monthly_trends.json').then(r => r.json()),
-                    fetch('spotify-trends/top_songs_by_period.json').then(r => r.json())
+                    fetch('spotify-trends/monthly_trends.json').then(r => r.json())
                 ]);
 
                 SPOTIFY_DATA.stats = stats;
                 SPOTIFY_DATA.artistEvolution = artistEvolution;
                 SPOTIFY_DATA.monthlyTrends = monthlyTrends;
-                SPOTIFY_DATA.topSongs = topSongs;
 
                 // Filter out unwanted artists
                 filterOutArtist('Meghan Trainor');
@@ -1801,9 +1799,23 @@
             setTimeout(function () { try { prefetchAllYearClouds(); } catch (_) {} }, 50);
         }
 
+        // Lazy-load top_songs_by_period.json only when actually needed (731KB).
+        // This keeps the initial dashboard open fast; it's only used as a
+        // fallback when precomputed word-cloud JSONs are missing.
+        async function ensureTopSongsLoaded() {
+            if (SPOTIFY_DATA.topSongs) return;
+            try {
+                SPOTIFY_DATA.topSongs = await fetch('spotify-trends/top_songs_by_period.json').then(r => r.json());
+            } catch (e) {
+                console.warn('Could not load top_songs_by_period.json:', e);
+                SPOTIFY_DATA.topSongs = {};
+            }
+        }
+
         // Collect the most-played songs for a given year, merged across all months.
         // Returns up to `limit` {artist, track, play_count} entries.
-        function collectTopSongsForYear(year, limit = 30) {
+        async function collectTopSongsForYear(year, limit = 30) {
+            await ensureTopSongsLoaded();
             const yr = String(year);
             const bag = new Map(); // key: "artist||track", val: {artist, track, play_count}
             const ts = SPOTIFY_DATA.topSongs || {};
@@ -1996,7 +2008,7 @@
                 }
             } catch (_) { /* fall through to live fallback */ }
 
-            const songs = collectTopSongsForYear(year, 30);
+            const songs = await collectTopSongsForYear(year, 30);
             if (songs.length === 0) {
                 cloudDiv.innerHTML = `<div style="text-align:center; color:rgba(255,255,255,0.6); padding:40px 20px;">No top songs recorded for ${year}.</div>`;
                 return;
