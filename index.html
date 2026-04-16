@@ -1389,6 +1389,7 @@
                     setTimeout(() => {
                         const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
                         const latestYear = years[years.length - 1];
+                        prefetchAllYearClouds();
                         generateWordCloud(latestYear);
                     }, 100);
                     break;
@@ -1748,6 +1749,31 @@
         // to the repo, so the Word Cloud tab is instant with no backend round-trip.
         const LYRICS_STATIC_BASE = 'spotify-trends/wordclouds';
         const LYRICS_API_FALLBACK = 'https://coryziller-sentiment-api.onrender.com/lyrics-wordcloud';
+
+        // Parallel-prefetch every year's precomputed word cloud JSON once on
+        // first tab-open so slider moves are instant from in-memory cache.
+        let LYRICS_PREFETCH_DONE = false;
+        function prefetchAllYearClouds() {
+            if (LYRICS_PREFETCH_DONE) return;
+            LYRICS_PREFETCH_DONE = true;
+            const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
+            const todayKey = new Date().toISOString().slice(0, 10);
+            years.forEach(y => {
+                const cacheKey = `${y}::${todayKey}`;
+                if (LYRICS_WORDCLOUD_CACHE[cacheKey]) return;
+                const url = `${LYRICS_STATIC_BASE}/${encodeURIComponent(y)}.json?v=${todayKey}`;
+                fetch(url, { cache: 'force-cache' })
+                    .then(r => r.ok ? r.json() : null)
+                    .then(data => {
+                        if (data && data.ok && Array.isArray(data.words)) {
+                            LYRICS_WORDCLOUD_CACHE[cacheKey] = {
+                                words: data.words, stats: data.stats, songs: data.songs
+                            };
+                        }
+                    })
+                    .catch(() => {});
+            });
+        }
 
         // Collect the most-played songs for a given year, merged across all months.
         // Returns up to `limit` {artist, track, play_count} entries.
