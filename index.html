@@ -1385,7 +1385,7 @@
                     setTimeout(() => renderCharts(), 100);
                     break;
                 case 'insights':
-                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:720px;line-height:1.5;">The most frequent words in the <strong>actual lyrics</strong> of the songs I played most that year. Fetched live from LyricsOVH, aggregated server-side, weighted by play count. Refreshes daily as new listening data flows in.</div>' + renderInsightsTab();
+                    content.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7);font-size:15px;margin:0 auto 24px;max-width:720px;line-height:1.5;">The most frequent words in the <strong>actual lyrics</strong> of the songs I played most that year. Precomputed daily from LyricsOVH, LyricFind, Genius and AZLyrics, aggregated server-side, weighted by play count.</div>' + renderInsightsTab();
                     setTimeout(() => {
                         const years = Object.keys(SPOTIFY_DATA.artistEvolution || {}).sort();
                         const latestYear = years[years.length - 1];
@@ -1744,7 +1744,10 @@
         // Cache of lyric word-clouds per year so switching years feels instant
         // after the first fetch. Reset on page load only.
         const LYRICS_WORDCLOUD_CACHE = {};
-        const LYRICS_API = 'https://coryziller-sentiment-api.onrender.com/lyrics-wordcloud';
+        // Word clouds are precomputed daily by update_wordcloud.py and committed
+        // to the repo, so the Word Cloud tab is instant with no backend round-trip.
+        const LYRICS_STATIC_BASE = 'spotify-trends/wordclouds';
+        const LYRICS_API_FALLBACK = 'https://coryziller-sentiment-api.onrender.com/lyrics-wordcloud';
 
         // Collect the most-played songs for a given year, merged across all months.
         // Returns up to `limit` {artist, track, play_count} entries.
@@ -1818,7 +1821,7 @@
                 cloudDiv.innerHTML = `
                     <div style="text-align:center; color:rgba(255,255,255,0.6); padding:40px 20px;">
                         <p style="font-size:1rem; margin-bottom:8px;">No lyrics found for this year's top songs.</p>
-                        <p style="font-size:0.85rem; opacity:0.7;">The lyrics source (LyricsOVH) didn't recognize these tracks. Try a different year.</p>
+                        <p style="font-size:0.85rem; opacity:0.7;">None of our lyrics sources (LyricsOVH / LyricFind / Genius / AZLyrics) recognized these tracks. Try a different year.</p>
                     </div>`;
                 return;
             }
@@ -1851,7 +1854,6 @@
             const cloudDiv = document.getElementById('wordCloud');
             if (!cloudDiv) return;
 
-            // 1. Cache hit — render instantly (cache is also keyed by day for daily freshness)
             const todayKey = new Date().toISOString().slice(0, 10);
             const cacheKey = `${year}::${todayKey}`;
             if (LYRICS_WORDCLOUD_CACHE[cacheKey]) {
@@ -1860,23 +1862,34 @@
                 return;
             }
 
-            // 2. Collect this year's top songs from the Spotify data
+            // Try precomputed static JSON first -- instant, no backend.
+            try {
+                const staticUrl = `${LYRICS_STATIC_BASE}/${encodeURIComponent(year)}.json?v=${todayKey}`;
+                const sResp = await fetch(staticUrl, { cache: 'force-cache' });
+                if (sResp.ok) {
+                    const sData = await sResp.json();
+                    if (sData && sData.ok && Array.isArray(sData.words)) {
+                        LYRICS_WORDCLOUD_CACHE[cacheKey] = { words: sData.words, stats: sData.stats, songs: sData.songs };
+                        renderWordCloudFromData(sData.words, sData.stats, sData.songs);
+                        return;
+                    }
+                }
+            } catch (_) { /* fall through to live fallback */ }
+
             const songs = collectTopSongsForYear(year, 30);
             if (songs.length === 0) {
                 cloudDiv.innerHTML = `<div style="text-align:center; color:rgba(255,255,255,0.6); padding:40px 20px;">No top songs recorded for ${year}.</div>`;
                 return;
             }
 
-            // 3. Loading state
             cloudDiv.innerHTML = `
                 <div style="text-align:center; color:rgba(255,255,255,0.75); padding:50px 20px;">
                     <div style="font-size:1rem; font-weight:600; margin-bottom:8px;">Pulling lyrics for ${songs.length} top-played songs from ${year}&hellip;</div>
-                    <div style="font-size:0.85rem; opacity:0.65;">First load can take 20&ndash;40 seconds while the server wakes and fetches lyrics.</div>
+                    <div style="font-size:0.85rem; opacity:0.65;">Precomputed data missing for this year &mdash; falling back to live fetch (may take 20&ndash;40s).</div>
                 </div>`;
 
-            // 4. Call backend
             try {
-                const resp = await fetch(LYRICS_API, {
+                const resp = await fetch(LYRICS_API_FALLBACK, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ year, songs })
@@ -1890,8 +1903,8 @@
             } catch (err) {
                 cloudDiv.innerHTML = `
                     <div style="text-align:center; color:rgba(255,255,255,0.7); padding:40px 20px;">
-                        <p style="margin-bottom:8px;">Couldn&rsquo;t reach the lyrics service: ${err.message}</p>
-                        <p style="font-size:0.85rem; opacity:0.65;">The backend may be cold-starting &mdash; try this year again in ~30 seconds.</p>
+                        <p style="margin-bottom:8px;">Couldn&rsquo;t load word cloud: ${err.message}</p>
+                        <p style="font-size:0.85rem; opacity:0.65;">The daily job may not have run yet for this year.</p>
                     </div>`;
             }
         }
@@ -3258,4 +3271,4 @@ function runRapidsSimulation() {
 </script>
 
 </body>
-</html>
+                        </html>
