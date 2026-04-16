@@ -465,6 +465,79 @@ def collect_top_songs(top_songs_by_period, year, limit=TOP_N_PER_YEAR):
     return sorted(bag.values(), key=lambda x: x['play_count'], reverse=True)[:limit]
 
 
+EMOTION_LEXICON = {
+    'joy': {'happy','smile','smiling','laugh','laughing','fun','bright','shine','shining','alive','celebrate','light','sunny','glow','magic','good','better','best','loud','lit','happiness'},
+    'love': {'love','loving','lover','kiss','kisses','hold','held','heart','together','touch','arms','close','sweet','tender','darling','dear','yours','ours','us','romance'},
+    'melancholy': {'sad','tears','cry','crying','cried','blue','slow','quiet','quietly','grey','gray','empty','hurt','ache','aching','sore','sigh','low','tired','sleep','fade','faded'},
+    'longing': {'miss','missed','missing','wait','waiting','want','wanted','wanting','need','needed','gone','without','again','still','someday','maybe','hope','wish','wishing','somewhere'},
+    'anger': {'hate','hated','burn','burning','break','broken','scream','screaming','fight','fighting','rage','blood','cruel','mad','angry','wrong','punch','shout'},
+    'hope': {'rise','new','morning','believe','future','begin','beginning','start','starts','open','soon','tomorrow','gonna','someday','forward','light','sun','wake'},
+    'nostalgia': {'remember','remembering','used','back','home','young','old','always','forever','first','childhood','years','memory','memories','past','kid','teenage'},
+    'escape': {'run','running','leave','leaving','away','high','free','drive','driving','wild','road','gone','fly','flying','out','beyond'},
+    'loneliness': {'alone','lonely','without','empty','cold','silent','solo','myself','nobody','noone','solitary','abandoned'},
+}
+
+DIM_PRIMARY = {
+    'joy': ['loud and mostly smiling', 'a pretty good time', 'lighter than expected', 'unbothered, mostly'],
+    'love': ['mostly love', 'stuck on someone', 'tender in the way that leaves marks', 'soft around the edges'],
+    'melancholy': ['a little heavy', 'quiet on purpose', 'slower-paced', 'a blue streak'],
+    'longing': ['reaching for something just out of reach', 'wanting', 'missing things', 'waiting on a return'],
+    'anger': ['sharper than usual', 'pushing back', 'some real edges'],
+    'hope': ['looking forward', 'quietly rebuilding', 'open-handed', 'trying'],
+    'nostalgia': ['looking backward', 'circling old ground', 'living in memory', 'mostly in the rearview'],
+    'escape': ['restless', 'ready to bolt', 'foot on the gas', 'halfway out the door'],
+    'loneliness': ['a lot of alone time', 'quieter than it looked', 'emptier rooms than usual'],
+}
+
+DIM_SECONDARY = {
+    'joy': 'with laughter in the mix',
+    'love': 'with someone on your mind',
+    'melancholy': 'with a little ache underneath',
+    'longing': 'and a pull toward what was missing',
+    'anger': 'with some bite in the mix',
+    'hope': 'and the idea of better underneath',
+    'nostalgia': 'with one eye on the rearview',
+    'escape': 'and a restless streak',
+    'loneliness': 'and a few emptier rooms',
+}
+
+
+def _compute_emotion_dimensions(word_freq_list):
+    dims = {k: 0 for k in EMOTION_LEXICON}
+    for w, f in word_freq_list:
+        for dim, vocab in EMOTION_LEXICON.items():
+            if w in vocab:
+                dims[dim] += f
+    return dims
+
+
+def _format_artists(artists):
+    artists = [a for a in artists if a][:3]
+    if not artists:
+        return 'your playlist'
+    if len(artists) == 1:
+        return artists[0]
+    if len(artists) == 2:
+        return f'{artists[0]} and {artists[1]}'
+    return f'{artists[0]}, {artists[1]}, and {artists[2]}'
+
+
+def _build_year_phrase(year, top_artists, dims):
+    import random
+    ranked = sorted(dims.items(), key=lambda x: -x[1])
+    ranked = [(k, v) for k, v in ranked if v > 0]
+    artist_str = _format_artists(top_artists)
+    if not ranked:
+        return f'{year} was {artist_str} — hard to pin down in words.'
+    primary = ranked[0][0]
+    secondary = ranked[1][0] if len(ranked) > 1 and ranked[1][0] != primary else None
+    p = random.choice(DIM_PRIMARY[primary])
+    if secondary:
+        s = DIM_SECONDARY[secondary]
+        return f'{year} was {artist_str} — {p}, {s}.'
+    return f'{year} was {artist_str} — {p}.'
+
+
 def build_year_cloud(year, songs):
     counts = Counter()
     per_song = []
@@ -514,6 +587,28 @@ def build_year_cloud(year, songs):
             'source_hits': dict(source_hits),
         },
         'songs': per_song,
+        'sentiment': _build_year_sentiment(year, per_song, counts),
+    }
+
+
+def _build_year_sentiment(year, per_song, counts):
+    top_artists_by_plays = {}
+    for s in per_song:
+        if not s.get('found'):
+            continue
+        a = (s.get('artist') or '').strip()
+        if not a:
+            continue
+        top_artists_by_plays[a] = top_artists_by_plays.get(a, 0) + s.get('plays', 0)
+    top_artists = [a for a, _ in sorted(top_artists_by_plays.items(), key=lambda x: -x[1])[:3]]
+    dims = _compute_emotion_dimensions(counts.most_common(200))
+    phrase = _build_year_phrase(year, top_artists, dims)
+    ranked = sorted(dims.items(), key=lambda x: -x[1])
+    return {
+        'dimensions': dims,
+        'top_dimensions': [d[0] for d in ranked if d[1] > 0][:3],
+        'top_artists': top_artists,
+        'phrase': phrase,
     }
 
 
