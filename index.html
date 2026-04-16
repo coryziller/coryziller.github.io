@@ -1951,20 +1951,15 @@
             const trackHtml = topTrack ? topTrack.replace(/</g,'&lt;') : 'this';
             let yearVibe;
             if (phrase) {
-                // Precomputed server-side from the actual lyrics sentiment.
-                // Lightly format: bold the year token (e.g. "2019 was ...") and colorize artist names that appear.
                 yearVibe = phrase.replace(/^(\d{4})/, '<strong>$1</strong>');
-                topArtists.forEach(a => {
+                topArtists.forEach(function (a) {
                     if (!a) return;
-                    const safe = a.replace(/[.*+?^${}()|[\]\\]/g, '\\const yearVibe = phrase ? phrase : tmpl
-                .replace('{YEAR}', `<strong>${year || 'This year'}</strong>`)
-                .replace('{ARTISTS}', artistsHtml)
-                .replace('{TRACK}', trackHtml);');
-                    yearVibe = yearVibe.replace(new RegExp(safe, 'g'), `<strong style="color:${moodColor};">${a.replace(/</g,'&lt;')}</strong>`);
+                    const escaped = a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    yearVibe = yearVibe.replace(new RegExp(escaped, 'g'), '<strong style="color:' + moodColor + ';">' + a.replace(/</g,'&lt;') + '</strong>');
                 });
             } else {
                 yearVibe = tmpl
-                    .replace('{YEAR}', `<strong>${year || 'This year'}</strong>`)
+                    .replace('{YEAR}', '<strong>' + (year || 'This year') + '</strong>')
                     .replace('{ARTISTS}', artistsHtml)
                     .replace('{TRACK}', trackHtml);
             }
