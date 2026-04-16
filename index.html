@@ -1839,7 +1839,7 @@
                 ${rows}`;
         }
 
-        function renderWordCloudFromData(words /* [[word, count], ...] */, stats, songs, year) {
+        function renderWordCloudFromData(words /* [[word, count], ...] */, stats, songs, year, phrase) {
             const cloudDiv = document.getElementById('wordCloud');
             if (!cloudDiv) return;
 
@@ -1934,10 +1934,25 @@
                   }).join('')
                 : `<strong style="color:${moodColor};">your playlist</strong>`;
             const trackHtml = topTrack ? topTrack.replace(/</g,'&lt;') : 'this';
-            const yearVibe = tmpl
+            let yearVibe;
+            if (phrase) {
+                // Precomputed server-side from the actual lyrics sentiment.
+                // Lightly format: bold the year token (e.g. "2019 was ...") and colorize artist names that appear.
+                yearVibe = phrase.replace(/^(\d{4})/, '<strong>$1</strong>');
+                topArtists.forEach(a => {
+                    if (!a) return;
+                    const safe = a.replace(/[.*+?^${}()|[\]\\]/g, '\\const yearVibe = phrase ? phrase : tmpl
                 .replace('{YEAR}', `<strong>${year || 'This year'}</strong>`)
                 .replace('{ARTISTS}', artistsHtml)
-                .replace('{TRACK}', trackHtml);
+                .replace('{TRACK}', trackHtml);');
+                    yearVibe = yearVibe.replace(new RegExp(safe, 'g'), `<strong style="color:${moodColor};">${a.replace(/</g,'&lt;')}</strong>`);
+                });
+            } else {
+                yearVibe = tmpl
+                    .replace('{YEAR}', `<strong>${year || 'This year'}</strong>`)
+                    .replace('{ARTISTS}', artistsHtml)
+                    .replace('{TRACK}', trackHtml);
+            }
             const vibeBar = `<div style="text-align:center; color: rgba(255,255,255,0.9); font-size:1.1rem; font-weight:500; font-style:italic; letter-spacing:0.01em; margin:0 auto 14px; max-width:720px; line-height:1.45;">&ldquo;${yearVibe}&rdquo;</div>`;
 
             cloudDiv.innerHTML = vibeBar + sentHeader + cloudHtml + statsLine;
@@ -1951,7 +1966,7 @@
             const cacheKey = `${year}::${todayKey}`;
             if (LYRICS_WORDCLOUD_CACHE[cacheKey]) {
                 const cached = LYRICS_WORDCLOUD_CACHE[cacheKey];
-                renderWordCloudFromData(cached.words, cached.stats, cached.songs, year);
+                renderWordCloudFromData(cached.words, cached.stats, cached.songs, year, cached.phrase);
                 return;
             }
 
@@ -1991,8 +2006,8 @@
                 if (!resp.ok || !data.ok) {
                     throw new Error(data.error || `HTTP ${resp.status}`);
                 }
-                LYRICS_WORDCLOUD_CACHE[cacheKey] = { words: data.words, stats: data.stats, songs: data.songs };
-                renderWordCloudFromData(data.words, data.stats, data.songs, year);
+                LYRICS_WORDCLOUD_CACHE[cacheKey] = { words: data.words, stats: data.stats, songs: data.songs, phrase: data.sentiment && data.sentiment.phrase };
+                renderWordCloudFromData(data.words, data.stats, data.songs, year, data.sentiment && data.sentiment.phrase);
             } catch (err) {
                 cloudDiv.innerHTML = `
                     <div style="text-align:center; color:rgba(255,255,255,0.7); padding:40px 20px;">
