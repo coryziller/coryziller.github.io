@@ -1836,18 +1836,44 @@
             const MIN_PX = 16;
             const MAX_PX = 128;
 
+            // --- Sentiment (client-side lexicon over the top words) ----
+            const POS = new Set(['love','happy','smile','dance','good','better','best','fun','light','sweet','heart','free','hope','bright','alright','peace','dream','shine','high','alive','win','rise','fly','sing']);
+            const NEG = new Set(['hate','sad','cry','pain','hurt','lost','lose','broken','dark','bad','alone','die','dead','fall','fear','wrong','blood','tears','sorry','cold','gone','miss','empty','scared','hell']);
+            let posScore = 0, negScore = 0;
+            top.forEach(([w, f]) => { if (POS.has(w)) posScore += f; else if (NEG.has(w)) negScore += f; });
+            const tot = posScore + negScore;
+            const sentPct = tot > 0 ? Math.round(100 * posScore / tot) : 50;
+            let mood, moodColor, moodEmoji;
+            if (sentPct >= 70)       { mood = 'Upbeat';   moodColor = '#1DB954'; moodEmoji = '☀️';  }
+            else if (sentPct >= 55)  { mood = 'Positive'; moodColor = '#22d3ee'; moodEmoji = '🙂'; }
+            else if (sentPct >= 45)  { mood = 'Mixed';    moodColor = '#f59e0b'; moodEmoji = '🌀'; }
+            else if (sentPct >= 30)  { mood = 'Moody';    moodColor = '#a855f7'; moodEmoji = '🌧️'; }
+            else                     { mood = 'Heavy';    moodColor = '#ec4899'; moodEmoji = '😔'; }
+            const sentHeader = `
+                <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin:0 0 18px; padding:10px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:999px; max-width:420px; margin-left:auto; margin-right:auto;">
+                    <div style="font-size:1.4rem;">${moodEmoji}</div>
+                    <div style="display:flex; flex-direction:column;">
+                        <div style="color: rgba(255,255,255,0.5); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Sentiment</div>
+                        <div style="color:${moodColor}; font-weight:800; font-size:1rem; letter-spacing:0.02em;">${mood} &middot; ${sentPct}/100</div>
+                    </div>
+                    <div style="flex:1; min-width:90px; height:6px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden;">
+                        <div style="width:${sentPct}%; height:100%; background:${moodColor}; transition:width 0.4s ease;"></div>
+                    </div>
+                </div>`;
+
             const statsLine = stats
-                ? `<div style="text-align:center; color:rgba(255,255,255,0.55); font-size:0.8rem; margin:0 0 20px;">Analyzed lyrics for <strong>${stats.lyrics_found}</strong> of <strong>${stats.songs_considered}</strong> top songs &bull; ${stats.coverage_by_plays}% by play count &bull; ${stats.total_words_counted.toLocaleString()} words counted</div>`
+                ? `<div style="text-align:center; color:rgba(255,255,255,0.55); font-size:0.8rem; margin:20px 0 0;">Analyzed lyrics for <strong>${stats.lyrics_found}</strong> of <strong>${stats.songs_considered}</strong> top songs &bull; ${stats.coverage_by_plays}% by play count &bull; ${stats.total_words_counted.toLocaleString()} words counted</div>`
                 : '';
 
-            cloudDiv.innerHTML = statsLine + top.map(([word, freq], i) => {
-                // Non-linear scale so the tail stays readable but the head really pops
+            const cloudHtml = top.map(([word, freq], i) => {
                 const norm = (freq - minFreq) / range;
                 const size = Math.round(MIN_PX + Math.pow(norm, 0.65) * (MAX_PX - MIN_PX));
                 const opacity = 0.55 + norm * 0.45;
                 const color = colors[i % colors.length];
                 return `<span style="font-size:${size}px; color:${color}; opacity:${opacity}; font-weight:800; padding:4px 12px; line-height:1.05; transition:all 0.25s ease; cursor:default; display:inline-block;" title="appeared ${freq.toLocaleString()} times (weighted by plays)" onmouseover="this.style.transform='scale(1.12)'; this.style.opacity='1';" onmouseout="this.style.transform='scale(1)'; this.style.opacity='${opacity}';">${word}</span>`;
             }).join(' ');
+
+            cloudDiv.innerHTML = sentHeader + cloudHtml + statsLine;
         }
 
         async function generateWordCloud(year) {
