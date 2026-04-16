@@ -2403,84 +2403,89 @@
             }
         </style>
 
-        <div style="position: relative;">
-            <!-- Center line -->
-            <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.1); transform: translateX(-1px);"></div>
+        <style>
+            .wh-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+                align-items: start;
+            }
+            .wh-col-header {
+                font-size: 0.75rem;
+                font-weight: 800;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.55);
+                margin: 0 0 16px 4px;
+            }
+            .wh-stack { display: flex; flex-direction: column; gap: 16px; }
+            .wh-card {
+                position: relative;
+                background: rgba(255,255,255,0.06);
+                border: 1px solid rgba(255,255,255,0.12);
+                border-radius: 14px;
+                padding: 20px 22px;
+                transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            }
+            .wh-card::before {
+                content: "";
+                position: absolute;
+                left: 0; top: 20px; bottom: 20px;
+                width: 4px;
+                border-radius: 0 4px 4px 0;
+                background: var(--wh-accent, rgba(255,255,255,0.2));
+            }
+            .wh-card:hover {
+                background: rgba(255,255,255,0.10);
+                border-color: rgba(255,255,255,0.22);
+                transform: translateY(-1px);
+            }
+            @media (max-width: 720px) {
+                .wh-grid { grid-template-columns: 1fr; gap: 40px; }
+            }
+        </style>
 
-            <!-- OSU - RIGHT (education) -->
-            <div class="tl-item tl-right" style="position: relative; display: flex; margin-bottom: 24px;">
-                <div style="width: 50%;"></div>
-                <div class="tl-dot" style="left: calc(50% - 7px); background: #BB0000;"></div>
-                <div style="width: 50%; padding-left: 40px;">
-                    <div class="tl-card">
-                        <div class="tl-date">Expected May 2027</div>
-                        <div class="tl-title">The Ohio State University</div>
-                        <div class="tl-role">STEM MBA &mdash; Fisher College of Business</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bank of America - LEFT (work) -->
-            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 24px;">
-                <div style="width: 50%; padding-right: 40px; text-align: right;">
-                    <div class="tl-card">
+        <div class="wh-grid">
+            <!-- Left column: WORK -->
+            <div>
+                <div class="wh-col-header">Work</div>
+                <div class="wh-stack">
+                    <div class="wh-card" style="--wh-accent: #E31837;">
                         <div class="tl-date">June &ndash; August 2027 &bull; NYC, NY</div>
                         <div class="tl-title">Bank of America</div>
                         <div class="tl-desc">Summer Internship</div>
                         <div class="tl-role">Strategy and Management</div>
                     </div>
-                </div>
-                <div class="tl-dot" style="left: calc(50% - 7px); background: #E31837;"></div>
-                <div style="width: 50%;"></div>
-            </div>
-
-            <!-- Basis - LEFT (work) -->
-            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 24px;">
-                <div style="width: 50%; padding-right: 40px; text-align: right;">
-                    <div class="tl-card">
+                    <div class="wh-card" style="--wh-accent: #4A90D9;">
                         <div class="tl-date">2021 &ndash; 2025 &bull; Chicago, IL</div>
                         <div class="tl-title">Basis Technologies</div>
                         <div class="tl-desc">Chicago-based advertising technology company</div>
                         <div class="tl-role">Data Analyst &rarr; Senior Data Analyst</div>
                     </div>
-                </div>
-                <div class="tl-dot" style="left: calc(50% - 7px); background: #4A90D9;"></div>
-                <div style="width: 50%;"></div>
-            </div>
-
-            <!-- Yelp - LEFT (work) -->
-            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 24px;">
-                <div style="width: 50%; padding-right: 40px; text-align: right;">
-                    <div class="tl-card">
+                    <div class="wh-card" style="--wh-accent: #D32323;">
                         <div class="tl-date">2019 &ndash; 2020 &bull; Washington D.C.</div>
                         <div class="tl-title">Yelp</div>
                         <div class="tl-role">Account Executive</div>
                     </div>
-                </div>
-                <div class="tl-dot" style="left: calc(50% - 7px); background: #D32323;"></div>
-                <div style="width: 50%;"></div>
-            </div>
-
-            <!-- Marinus - LEFT (work) -->
-            <div class="tl-item tl-left" style="position: relative; display: flex; margin-bottom: 24px;">
-                <div style="width: 50%; padding-right: 40px; text-align: right;">
-                    <div class="tl-card">
+                    <div class="wh-card" style="--wh-accent: #7B68EE;">
                         <div class="tl-date">2017 &ndash; 2019 &bull; Pittsburgh, PA</div>
                         <div class="tl-title">Marinus Analytics</div>
                         <div class="tl-desc">AI startup combating human trafficking with technology</div>
                         <div class="tl-role">Impact &amp; Business Development Intern</div>
                     </div>
                 </div>
-                <div class="tl-dot" style="left: calc(50% - 7px); background: #7B68EE;"></div>
-                <div style="width: 50%;"></div>
             </div>
 
-            <!-- Penn State - RIGHT (education) -->
-            <div class="tl-item tl-right" style="position: relative; display: flex;">
-                <div style="width: 50%;"></div>
-                <div class="tl-dot" style="left: calc(50% - 7px); background: #003893;"></div>
-                <div style="width: 50%; padding-left: 40px;">
-                    <div class="tl-card">
+            <!-- Right column: EDUCATION -->
+            <div>
+                <div class="wh-col-header">Education</div>
+                <div class="wh-stack">
+                    <div class="wh-card" style="--wh-accent: #BB0000;">
+                        <div class="tl-date">Expected May 2027 &bull; Columbus, OH</div>
+                        <div class="tl-title">The Ohio State University</div>
+                        <div class="tl-role">STEM MBA &mdash; Fisher College of Business</div>
+                    </div>
+                    <div class="wh-card" style="--wh-accent: #003893;">
                         <div class="tl-date">2015 &ndash; 2019 &bull; State College, PA</div>
                         <div class="tl-title">Penn State University</div>
                         <div class="tl-role">BS Information Science &amp; Technology (App Design and Development) &bull; BS Applied Spanish</div>
