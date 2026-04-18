@@ -25125,53 +25125,53 @@
       "total_minutes": 88.443
     },
     {
-      "track": "I Think I Like You Better When You’re Gone",
-      "artist": "Reneé Rapp",
-      "spotify_uri": "spotify:track:3hBzKgqQKkChH9hyb3MhmT",
-      "play_count": 24,
-      "total_minutes": 57.319
-    },
-    {
       "track": "Goodbye Henry. (feat. Al Green)",
       "artist": "RAYE",
       "spotify_uri": "spotify:track:5lBL8xRTXIDpPDJcuPL9UH",
-      "play_count": 21,
-      "total_minutes": 112.152
+      "play_count": 24,
+      "total_minutes": 128.174
     },
     {
       "track": "inside",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 18,
-      "total_minutes": 55.123
+      "play_count": 21,
+      "total_minutes": 64.31
     },
     {
       "track": "after you don't love me anymore",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
-      "play_count": 15,
-      "total_minutes": 53.558
+      "play_count": 18,
+      "total_minutes": 64.269
     },
     {
       "track": "Crazy In Love - Live",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:1DJfcWfj5dSIzksFpnRr3S",
-      "play_count": 12,
-      "total_minutes": 64.747
+      "play_count": 15,
+      "total_minutes": 80.933
     },
     {
       "track": "Pressure",
       "artist": "Ari Lennox",
       "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
-      "play_count": 9,
-      "total_minutes": 28.849
+      "play_count": 12,
+      "total_minutes": 38.465
     },
     {
       "track": "Kitty Kat",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:28GCTzKIpLkhEktYvIgiYE",
+      "play_count": 9,
+      "total_minutes": 35.308
+    },
+    {
+      "track": "I Think I Like You Better When You’re Gone",
+      "artist": "Reneé Rapp",
+      "spotify_uri": "spotify:track:3hBzKgqQKkChH9hyb3MhmT",
       "play_count": 6,
-      "total_minutes": 23.539
+      "total_minutes": 14.33
     },
     {
       "track": "Jason's Song (Gave It Away) - Live",
