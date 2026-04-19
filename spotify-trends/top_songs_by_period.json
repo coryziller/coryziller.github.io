@@ -25132,18 +25132,18 @@
       "total_minutes": 128.174
     },
     {
-      "track": "inside",
-      "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 21,
-      "total_minutes": 64.31
-    },
-    {
       "track": "after you don't love me anymore",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
+      "play_count": 21,
+      "total_minutes": 74.981
+    },
+    {
+      "track": "inside",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
       "play_count": 18,
-      "total_minutes": 64.269
+      "total_minutes": 55.123
     },
     {
       "track": "Crazy In Love - Live",
@@ -25167,18 +25167,18 @@
       "total_minutes": 35.308
     },
     {
-      "track": "I Think I Like You Better When You’re Gone",
-      "artist": "Reneé Rapp",
-      "spotify_uri": "spotify:track:3hBzKgqQKkChH9hyb3MhmT",
+      "track": "Crazier Than You - from \"Love Somebody Now\"",
+      "artist": "Andrew Lippa",
+      "spotify_uri": "spotify:track:30jd8R5TdN2nBy6OaeqV2L",
       "play_count": 6,
-      "total_minutes": 14.33
+      "total_minutes": 17.48
     },
     {
-      "track": "Jason's Song (Gave It Away) - Live",
+      "track": "Erase Me - Live",
       "artist": "The Harvard Opportunes",
-      "spotify_uri": "spotify:track:1vgE8GbejIV2JZW0xRuWNk",
+      "spotify_uri": "spotify:track:6LLM5hxdSXzK9UJHrEyh2i",
       "play_count": 3,
-      "total_minutes": 11.467
+      "total_minutes": 12.497
     }
   ]
 }
