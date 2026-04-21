@@ -25132,46 +25132,46 @@
       "total_minutes": 128.174
     },
     {
-      "track": "Crazy In Love - Live",
-      "artist": "Beyoncé",
-      "spotify_uri": "spotify:track:1DJfcWfj5dSIzksFpnRr3S",
-      "play_count": 21,
-      "total_minutes": 113.307
-    },
-    {
-      "track": "inside",
-      "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 18,
-      "total_minutes": 55.123
-    },
-    {
-      "track": "after you don't love me anymore",
-      "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
-      "play_count": 15,
-      "total_minutes": 53.558
-    },
-    {
-      "track": "Pressure",
-      "artist": "Ari Lennox",
-      "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
-      "play_count": 12,
-      "total_minutes": 38.465
-    },
-    {
       "track": "When You're an Addams",
       "artist": "Moonlight Heroes",
       "spotify_uri": "spotify:track:2HEubCJ688jtYIsbHEJLBV",
-      "play_count": 9,
-      "total_minutes": 37.83
+      "play_count": 21,
+      "total_minutes": 88.27
+    },
+    {
+      "track": "Crazy In Love - Live",
+      "artist": "Beyoncé",
+      "spotify_uri": "spotify:track:1DJfcWfj5dSIzksFpnRr3S",
+      "play_count": 18,
+      "total_minutes": 97.12
     },
     {
       "track": "Crazier Than You - from \"Love Somebody Now\"",
       "artist": "Andrew Lippa",
       "spotify_uri": "spotify:track:30jd8R5TdN2nBy6OaeqV2L",
+      "play_count": 15,
+      "total_minutes": 43.699
+    },
+    {
+      "track": "inside",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
+      "play_count": 12,
+      "total_minutes": 36.749
+    },
+    {
+      "track": "after you don't love me anymore",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
+      "play_count": 9,
+      "total_minutes": 32.135
+    },
+    {
+      "track": "Pressure",
+      "artist": "Ari Lennox",
+      "spotify_uri": "spotify:track:3JfhLEO8qB9qZr9xIefh5m",
       "play_count": 6,
-      "total_minutes": 17.48
+      "total_minutes": 19.233
     },
     {
       "track": "Erase Me - Live",
