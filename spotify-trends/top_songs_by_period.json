@@ -25111,39 +25111,39 @@
   ],
   "2026-04": [
     {
-      "track": "Issues/Hold On",
-      "artist": "Teyana Taylor",
-      "spotify_uri": "spotify:track:0bxmVPKnEopTyuMMkaTvUb",
-      "play_count": 30,
-      "total_minutes": 92.99
-    },
-    {
       "track": "Miss You",
       "artist": "Young Franco",
       "spotify_uri": "spotify:track:3MRuglRyXY8EbGzUj7FAUx",
-      "play_count": 27,
-      "total_minutes": 83.891
+      "play_count": 30,
+      "total_minutes": 93.212
     },
     {
-      "track": "Midnight Sun (Live) - Spotify Live Room",
-      "artist": "Zara Larsson",
-      "spotify_uri": "spotify:track:6ZN4ZI5f7ZIXO0lMe5fcyQ",
-      "play_count": 24,
-      "total_minutes": 78.616
+      "track": "Issues/Hold On",
+      "artist": "Teyana Taylor",
+      "spotify_uri": "spotify:track:0bxmVPKnEopTyuMMkaTvUb",
+      "play_count": 27,
+      "total_minutes": 83.691
     },
     {
       "track": "When You're an Addams",
       "artist": "Moonlight Heroes",
       "spotify_uri": "spotify:track:2HEubCJ688jtYIsbHEJLBV",
-      "play_count": 21,
-      "total_minutes": 88.27
+      "play_count": 24,
+      "total_minutes": 100.88
     },
     {
       "track": "Crazy In Love - Live",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:1DJfcWfj5dSIzksFpnRr3S",
+      "play_count": 21,
+      "total_minutes": 113.307
+    },
+    {
+      "track": "Midnight Sun (Live) - Spotify Live Room",
+      "artist": "Zara Larsson",
+      "spotify_uri": "spotify:track:6ZN4ZI5f7ZIXO0lMe5fcyQ",
       "play_count": 18,
-      "total_minutes": 97.12
+      "total_minutes": 58.962
     },
     {
       "track": "Crazier Than You - from \"Love Somebody Now\"",
@@ -25160,18 +25160,18 @@
       "total_minutes": 42.846
     },
     {
-      "track": "Goodbye Henry. (feat. Al Green)",
-      "artist": "RAYE",
-      "spotify_uri": "spotify:track:5lBL8xRTXIDpPDJcuPL9UH",
-      "play_count": 9,
-      "total_minutes": 48.065
-    },
-    {
       "track": "inside",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
+      "play_count": 9,
+      "total_minutes": 27.562
+    },
+    {
+      "track": "Goodbye Henry. (feat. Al Green)",
+      "artist": "RAYE",
+      "spotify_uri": "spotify:track:5lBL8xRTXIDpPDJcuPL9UH",
       "play_count": 6,
-      "total_minutes": 18.374
+      "total_minutes": 32.043
     },
     {
       "track": "Erase Me - Live",
