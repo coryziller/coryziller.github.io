@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-27T09:16:01.415837+00:00",
+  "generated_at": "2026-04-28T09:05:37.217417+00:00",
   "years": [
     {
       "year": "2012",
@@ -21,109 +21,110 @@
       "year": "2014",
       "file": "wordclouds/2014.json",
       "songs_considered": 109,
-      "lyrics_found": 76,
-      "coverage_by_plays": 51.9,
-      "unique_words": 2247
+      "lyrics_found": 58,
+      "coverage_by_plays": 39.2,
+      "unique_words": 1803
     },
     {
       "year": "2015",
       "file": "wordclouds/2015.json",
       "songs_considered": 206,
-      "lyrics_found": 163,
-      "coverage_by_plays": 78.6,
-      "unique_words": 3761
+      "lyrics_found": 125,
+      "coverage_by_plays": 53.6,
+      "unique_words": 3182
     },
     {
       "year": "2016",
       "file": "wordclouds/2016.json",
       "songs_considered": 189,
-      "lyrics_found": 122,
-      "coverage_by_plays": 74.9,
-      "unique_words": 3432
+      "lyrics_found": 85,
+      "coverage_by_plays": 36.4,
+      "unique_words": 2620
     },
     {
       "year": "2017",
       "file": "wordclouds/2017.json",
       "songs_considered": 185,
-      "lyrics_found": 126,
-      "coverage_by_plays": 70.4,
-      "unique_words": 3013
+      "lyrics_found": 87,
+      "coverage_by_plays": 47.2,
+      "unique_words": 2422
     },
     {
       "year": "2018",
       "file": "wordclouds/2018.json",
       "songs_considered": 179,
-      "lyrics_found": 122,
-      "coverage_by_plays": 67.8,
-      "unique_words": 2767
+      "lyrics_found": 94,
+      "coverage_by_plays": 53.3,
+      "unique_words": 2353
     },
     {
       "year": "2019",
       "file": "wordclouds/2019.json",
       "songs_considered": 180,
-      "lyrics_found": 139,
-      "coverage_by_plays": 80.6,
-      "unique_words": 3054
+      "lyrics_found": 119,
+      "coverage_by_plays": 66.4,
+      "unique_words": 2794
     },
     {
       "year": "2020",
       "file": "wordclouds/2020.json",
       "songs_considered": 174,
-      "lyrics_found": 137,
-      "coverage_by_plays": 80.3,
-      "unique_words": 3017
+      "lyrics_found": 114,
+      "coverage_by_plays": 68.6,
+      "unique_words": 2739
     },
     {
       "year": "2021",
       "file": "wordclouds/2021.json",
       "songs_considered": 141,
-      "lyrics_found": 115,
-      "coverage_by_plays": 85.7,
-      "unique_words": 2889
+      "lyrics_found": 107,
+      "coverage_by_plays": 69.3,
+      "unique_words": 2736
     },
     {
       "year": "2022",
       "file": "wordclouds/2022.json",
       "songs_considered": 188,
-      "lyrics_found": 142,
-      "coverage_by_plays": 83.2,
-      "unique_words": 3337
+      "lyrics_found": 131,
+      "coverage_by_plays": 65.2,
+      "unique_words": 3232
     },
     {
       "year": "2023",
       "file": "wordclouds/2023.json",
       "songs_considered": 155,
-      "lyrics_found": 118,
-      "coverage_by_plays": 73.5,
-      "unique_words": 2701
+      "lyrics_found": 110,
+      "coverage_by_plays": 70.8,
+      "unique_words": 2587
     },
     {
       "year": "2024",
       "file": "wordclouds/2024.json",
       "songs_considered": 178,
-      "lyrics_found": 128,
-      "coverage_by_plays": 75.3,
-      "unique_words": 2819
+      "lyrics_found": 115,
+      "coverage_by_plays": 71.9,
+      "unique_words": 2629
     },
     {
       "year": "2025",
       "file": "wordclouds/2025.json",
       "songs_considered": 174,
-      "lyrics_found": 94,
-      "coverage_by_plays": 57.1,
-      "unique_words": 2401
+      "lyrics_found": 84,
+      "coverage_by_plays": 53.9,
+      "unique_words": 2212
     },
     {
       "year": "2026",
       "file": "wordclouds/2026.json",
-      "songs_considered": 43,
-      "lyrics_found": 21,
-      "coverage_by_plays": 34.5,
-      "unique_words": 824
+      "songs_considered": 44,
+      "lyrics_found": 17,
+      "coverage_by_plays": 28.6,
+      "unique_words": 736
     }
   ],
   "source_hits_total": {
-    "lyricsovh": 1042,
-    "songlyrics": 483
+    "lyricsovh": 1047,
+    "songlyrics": 204,
+    "ddg": 17
   }
 }

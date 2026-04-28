@@ -25139,46 +25139,46 @@
       "total_minutes": 113.307
     },
     {
+      "track": "Crazier Than You",
+      "artist": "Andrew Lippa",
+      "spotify_uri": "spotify:track:0ObzgH8OjQIIcPEPfZlZLa",
+      "play_count": 18,
+      "total_minutes": 52.439
+    },
+    {
       "track": "Midnight Sun (Live) - Spotify Live Room",
       "artist": "Zara Larsson",
       "spotify_uri": "spotify:track:6ZN4ZI5f7ZIXO0lMe5fcyQ",
-      "play_count": 18,
-      "total_minutes": 58.962
-    },
-    {
-      "track": "Crazier Than You - from \"Love Somebody Now\"",
-      "artist": "Andrew Lippa",
-      "spotify_uri": "spotify:track:30jd8R5TdN2nBy6OaeqV2L",
       "play_count": 15,
-      "total_minutes": 43.699
-    },
-    {
-      "track": "after you don't love me anymore",
-      "artist": "Patrick Hizon",
-      "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
-      "play_count": 12,
-      "total_minutes": 42.846
+      "total_minutes": 49.135
     },
     {
       "track": "inside",
       "artist": "Patrick Hizon",
       "spotify_uri": "spotify:track:1XBeBGPbTxCkNARTMGAD4M",
-      "play_count": 9,
-      "total_minutes": 27.562
+      "play_count": 12,
+      "total_minutes": 36.749
     },
     {
-      "track": "Goodbye Henry. (feat. Al Green)",
-      "artist": "RAYE",
-      "spotify_uri": "spotify:track:5lBL8xRTXIDpPDJcuPL9UH",
-      "play_count": 6,
-      "total_minutes": 32.043
+      "track": "after you don't love me anymore",
+      "artist": "Patrick Hizon",
+      "spotify_uri": "spotify:track:4UoZ5j7DzQPaqU5HFt6Az8",
+      "play_count": 9,
+      "total_minutes": 32.135
     },
     {
       "track": "Erase Me - Live",
       "artist": "The Harvard Opportunes",
       "spotify_uri": "spotify:track:6LLM5hxdSXzK9UJHrEyh2i",
+      "play_count": 6,
+      "total_minutes": 24.993
+    },
+    {
+      "track": "Jason's Song (Gave It Away) - Live",
+      "artist": "The Harvard Opportunes",
+      "spotify_uri": "spotify:track:1vgE8GbejIV2JZW0xRuWNk",
       "play_count": 3,
-      "total_minutes": 12.497
+      "total_minutes": 11.467
     }
   ]
 }
