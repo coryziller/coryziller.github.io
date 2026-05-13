@@ -25197,18 +25197,18 @@
       "total_minutes": 72.08
     },
     {
-      "track": "Miss You",
-      "artist": "Young Franco",
-      "spotify_uri": "spotify:track:3MRuglRyXY8EbGzUj7FAUx",
-      "play_count": 24,
-      "total_minutes": 74.57
-    },
-    {
       "track": "When You're an Addams",
       "artist": "Moonlight Heroes",
       "spotify_uri": "spotify:track:2HEubCJ688jtYIsbHEJLBV",
+      "play_count": 24,
+      "total_minutes": 100.88
+    },
+    {
+      "track": "Miss You",
+      "artist": "Young Franco",
+      "spotify_uri": "spotify:track:3MRuglRyXY8EbGzUj7FAUx",
       "play_count": 21,
-      "total_minutes": 88.27
+      "total_minutes": 65.248
     },
     {
       "track": "Crazier Than You",
@@ -25239,18 +25239,18 @@
       "total_minutes": 39.696
     },
     {
-      "track": "Crazy In Love - Live",
-      "artist": "Beyoncé",
-      "spotify_uri": "spotify:track:1DJfcWfj5dSIzksFpnRr3S",
-      "play_count": 6,
-      "total_minutes": 32.373
-    },
-    {
       "track": "Doo Wop (That Thing) - Edit",
       "artist": "Ms. Lauryn Hill",
       "spotify_uri": "spotify:track:6otqZiIqqzzzggZdd1rKgO",
+      "play_count": 6,
+      "total_minutes": 24.067
+    },
+    {
+      "track": "Crazy",
+      "artist": "Kelly Rowland",
+      "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
       "play_count": 3,
-      "total_minutes": 12.033
+      "total_minutes": 9.26
     }
   ]
 }
