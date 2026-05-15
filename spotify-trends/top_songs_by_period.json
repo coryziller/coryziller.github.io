@@ -25183,18 +25183,18 @@
   ],
   "2026-05": [
     {
-      "track": "Issues/Hold On",
-      "artist": "Teyana Taylor",
-      "spotify_uri": "spotify:track:0bxmVPKnEopTyuMMkaTvUb",
-      "play_count": 30,
-      "total_minutes": 92.99
-    },
-    {
       "track": "One Normal Night",
       "artist": "Andrew Lippa",
       "spotify_uri": "spotify:track:0O77dKVRjzNMQtlwMgg62e",
+      "play_count": 30,
+      "total_minutes": 80.089
+    },
+    {
+      "track": "Issues/Hold On",
+      "artist": "Teyana Taylor",
+      "spotify_uri": "spotify:track:0bxmVPKnEopTyuMMkaTvUb",
       "play_count": 27,
-      "total_minutes": 72.08
+      "total_minutes": 83.691
     },
     {
       "track": "When You're an Addams",
