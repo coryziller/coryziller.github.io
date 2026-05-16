@@ -25204,18 +25204,18 @@
       "total_minutes": 100.88
     },
     {
-      "track": "Crazier Than You",
-      "artist": "Andrew Lippa",
-      "spotify_uri": "spotify:track:0ObzgH8OjQIIcPEPfZlZLa",
-      "play_count": 21,
-      "total_minutes": 61.179
-    },
-    {
       "track": "Therapy at the Club",
       "artist": "FLO",
       "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
+      "play_count": 21,
+      "total_minutes": 58.45
+    },
+    {
+      "track": "Crazier Than You",
+      "artist": "Andrew Lippa",
+      "spotify_uri": "spotify:track:0ObzgH8OjQIIcPEPfZlZLa",
       "play_count": 18,
-      "total_minutes": 50.1
+      "total_minutes": 52.439
     },
     {
       "track": "Miss You",
