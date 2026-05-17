@@ -25218,18 +25218,18 @@
       "total_minutes": 52.439
     },
     {
-      "track": "Miss You",
-      "artist": "Young Franco",
-      "spotify_uri": "spotify:track:3MRuglRyXY8EbGzUj7FAUx",
-      "play_count": 15,
-      "total_minutes": 46.606
-    },
-    {
       "track": "Pulled",
       "artist": "Andrew Lippa",
       "spotify_uri": "spotify:track:2ZK7pIAsfd90FcaDjsrJJO",
+      "play_count": 15,
+      "total_minutes": 45.953
+    },
+    {
+      "track": "Miss You",
+      "artist": "Young Franco",
+      "spotify_uri": "spotify:track:3MRuglRyXY8EbGzUj7FAUx",
       "play_count": 12,
-      "total_minutes": 36.763
+      "total_minutes": 37.285
     },
     {
       "track": "Jason's Song (Gave It Away)",
