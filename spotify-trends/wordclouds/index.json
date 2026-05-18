@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T08:46:33.511015+00:00",
+  "generated_at": "2026-05-18T10:24:37.469396+00:00",
   "years": [
     {
       "year": "2012",
@@ -21,109 +21,109 @@
       "year": "2014",
       "file": "wordclouds/2014.json",
       "songs_considered": 109,
-      "lyrics_found": 46,
-      "coverage_by_plays": 25.0,
-      "unique_words": 1374
+      "lyrics_found": 41,
+      "coverage_by_plays": 23.9,
+      "unique_words": 1223
     },
     {
       "year": "2015",
       "file": "wordclouds/2015.json",
       "songs_considered": 206,
-      "lyrics_found": 129,
-      "coverage_by_plays": 67.3,
-      "unique_words": 3190
+      "lyrics_found": 121,
+      "coverage_by_plays": 54.4,
+      "unique_words": 2712
     },
     {
       "year": "2016",
       "file": "wordclouds/2016.json",
       "songs_considered": 189,
-      "lyrics_found": 89,
-      "coverage_by_plays": 65.4,
-      "unique_words": 2419
+      "lyrics_found": 96,
+      "coverage_by_plays": 40.8,
+      "unique_words": 2758
     },
     {
       "year": "2017",
       "file": "wordclouds/2017.json",
       "songs_considered": 185,
-      "lyrics_found": 86,
-      "coverage_by_plays": 42.9,
-      "unique_words": 2164
+      "lyrics_found": 83,
+      "coverage_by_plays": 40.6,
+      "unique_words": 2140
     },
     {
       "year": "2018",
       "file": "wordclouds/2018.json",
       "songs_considered": 179,
       "lyrics_found": 93,
-      "coverage_by_plays": 53.1,
-      "unique_words": 2260
+      "coverage_by_plays": 51.6,
+      "unique_words": 2262
     },
     {
       "year": "2019",
       "file": "wordclouds/2019.json",
       "songs_considered": 180,
-      "lyrics_found": 112,
-      "coverage_by_plays": 74.8,
-      "unique_words": 2633
+      "lyrics_found": 110,
+      "coverage_by_plays": 60.6,
+      "unique_words": 2601
     },
     {
       "year": "2020",
       "file": "wordclouds/2020.json",
       "songs_considered": 174,
-      "lyrics_found": 105,
-      "coverage_by_plays": 67.0,
-      "unique_words": 2665
+      "lyrics_found": 101,
+      "coverage_by_plays": 64.6,
+      "unique_words": 2527
     },
     {
       "year": "2021",
       "file": "wordclouds/2021.json",
       "songs_considered": 141,
-      "lyrics_found": 82,
-      "coverage_by_plays": 74.3,
-      "unique_words": 2290
+      "lyrics_found": 95,
+      "coverage_by_plays": 80.6,
+      "unique_words": 2647
     },
     {
       "year": "2022",
       "file": "wordclouds/2022.json",
       "songs_considered": 188,
-      "lyrics_found": 103,
-      "coverage_by_plays": 68.3,
-      "unique_words": 3011
+      "lyrics_found": 94,
+      "coverage_by_plays": 51.8,
+      "unique_words": 2689
     },
     {
       "year": "2023",
       "file": "wordclouds/2023.json",
       "songs_considered": 155,
-      "lyrics_found": 86,
-      "coverage_by_plays": 44.6,
-      "unique_words": 2267
+      "lyrics_found": 84,
+      "coverage_by_plays": 56.5,
+      "unique_words": 2277
     },
     {
       "year": "2024",
       "file": "wordclouds/2024.json",
       "songs_considered": 178,
-      "lyrics_found": 83,
-      "coverage_by_plays": 50.0,
-      "unique_words": 2135
+      "lyrics_found": 97,
+      "coverage_by_plays": 62.1,
+      "unique_words": 2256
     },
     {
       "year": "2025",
       "file": "wordclouds/2025.json",
       "songs_considered": 174,
-      "lyrics_found": 61,
-      "coverage_by_plays": 37.5,
-      "unique_words": 1769
+      "lyrics_found": 59,
+      "coverage_by_plays": 37.2,
+      "unique_words": 1796
     },
     {
       "year": "2026",
       "file": "wordclouds/2026.json",
       "songs_considered": 50,
-      "lyrics_found": 23,
-      "coverage_by_plays": 31.7,
-      "unique_words": 904
+      "lyrics_found": 21,
+      "coverage_by_plays": 27.6,
+      "unique_words": 858
     }
   ],
   "source_hits_total": {
-    "songlyrics": 291,
-    "lyricsovh": 827
+    "songlyrics": 290,
+    "lyricsovh": 825
   }
 }

@@ -25197,25 +25197,25 @@
       "total_minutes": 83.691
     },
     {
-      "track": "When You're an Addams",
-      "artist": "Moonlight Heroes",
-      "spotify_uri": "spotify:track:2HEubCJ688jtYIsbHEJLBV",
-      "play_count": 24,
-      "total_minutes": 100.88
-    },
-    {
       "track": "Therapy at the Club",
       "artist": "FLO",
       "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
-      "play_count": 21,
-      "total_minutes": 58.45
+      "play_count": 24,
+      "total_minutes": 66.8
     },
     {
-      "track": "Crazier Than You",
-      "artist": "Andrew Lippa",
-      "spotify_uri": "spotify:track:0ObzgH8OjQIIcPEPfZlZLa",
+      "track": "A Summer in Ohio - Live at the London Palladium",
+      "artist": "Rachel Zegler",
+      "spotify_uri": "spotify:track:6BJ915Y8xarJ74zZi6xmIi",
+      "play_count": 21,
+      "total_minutes": 86.083
+    },
+    {
+      "track": "When You're an Addams",
+      "artist": "Moonlight Heroes",
+      "spotify_uri": "spotify:track:2HEubCJ688jtYIsbHEJLBV",
       "play_count": 18,
-      "total_minutes": 52.439
+      "total_minutes": 75.66
     },
     {
       "track": "Pulled",
@@ -25239,18 +25239,18 @@
       "total_minutes": 39.696
     },
     {
+      "track": "Crazier Than You",
+      "artist": "Andrew Lippa",
+      "spotify_uri": "spotify:track:0ObzgH8OjQIIcPEPfZlZLa",
+      "play_count": 6,
+      "total_minutes": 17.48
+    },
+    {
       "track": "Doo Wop (That Thing) - Edit",
       "artist": "Ms. Lauryn Hill",
       "spotify_uri": "spotify:track:6otqZiIqqzzzggZdd1rKgO",
-      "play_count": 6,
-      "total_minutes": 24.067
-    },
-    {
-      "track": "Crazy",
-      "artist": "Kelly Rowland",
-      "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
       "play_count": 3,
-      "total_minutes": 9.26
+      "total_minutes": 12.033
     }
   ]
 }
