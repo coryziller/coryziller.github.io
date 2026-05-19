@@ -9,9 +9,6 @@ workflow on demand when the form on coryziller.github.io is submitted:
     3. Generate a ~30-second audio briefing with gTTS
     4. Email the report + MP3 attachment via Brevo
 
-Designed to deploy to Render.com (or Fly.io) with no code changes. See
-render.yaml and DEPLOY.md in this folder for the 5-minute deploy steps.
-
 Required environment variables:
     BREVO_API_KEY      — Brevo transactional API key
     SENDER_EMAIL       — verified sender in Brevo (e.g. demo@coryziller.com)
@@ -30,9 +27,11 @@ import logging
 import os
 import re
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
+from threading import Lock
 from typing import Any
 
 from flask import Flask, jsonify, request
@@ -51,6 +50,36 @@ CORS(app, resources={r'/*': {'origins': [ALLOWED_ORIGIN, 'http://localhost:*']}}
 QUERY = 'nvidia gpu'
 USER_AGENT = 'coryziller-portfolio/2.0 (contact: coryziller@gmail.com)'
 
+# ---------------------------------------------------------------------------
+# Scrape cache — avoids hammering Reddit/HN on every form submission.
+# Results are reused for SCRAPE_CACHE_TTL seconds. On a 429 we fall back
+# to cached data rather than surfacing a raw HTTP error.
+# ---------------------------------------------------------------------------
+SCRAPE_CACHE_TTL = 300  # 5 minutes
+
+_scrape_cache: dict[str, Any] = {'reddit': [], 'hn': [], 'ts': 0.0}
+_scrape_lock = Lock()
+
+# ---------------------------------------------------------------------------
+# Per-IP rate limiter for /send-demo (max 1 request per 60s per IP)
+# ---------------------------------------------------------------------------
+RATE_LIMIT_WINDOW = 60
+_rate_limit: dict[str, float] = {}
+_rate_lock = Lock()
+
+
+def _check_rate_limit(ip: str) -> bool:
+    now = time.time()
+    with _rate_lock:
+        last = _rate_limit.get(ip, 0.0)
+        if now - last < RATE_LIMIT_WINDOW:
+            return False
+        _rate_limit[ip] = now
+        cutoff = now - RATE_LIMIT_WINDOW * 10
+        for k in [k for k, v in _rate_limit.items() if v < cutoff]:
+            del _rate_limit[k]
+    return True
+
 
 # ---------------------------------------------------------------------------
 # 1. Scraping
@@ -63,14 +92,32 @@ def _http_get_json(url: str, timeout: int = 15) -> dict:
 
 
 def fetch_reddit(limit: int = 25) -> list[dict]:
-    """Last 24h of Reddit results for the query, sorted by recency."""
+    now = time.time()
+    with _scrape_lock:
+        cache_age = now - _scrape_cache['ts']
+        if _scrape_cache['ts'] and cache_age < SCRAPE_CACHE_TTL:
+            log.info('Reddit: cache hit (age %.0fs)', cache_age)
+            return list(_scrape_cache['reddit'])
+
     url = (
         'https://www.reddit.com/search.json'
-        f'?q={urllib.parse.quote_plus(QUERY)}'
-        '&sort=new&t=day'
-        f'&limit={limit}'
+        f'?q={urllib.parse.quote_plus(QUERY)}&sort=new&t=day&limit={limit}'
     )
-    data = _http_get_json(url)
+    try:
+        data = _http_get_json(url)
+    except urllib.error.HTTPError as e:
+        if e.code == 429:
+            with _scrape_lock:
+                cached = list(_scrape_cache['reddit'])
+            if cached:
+                log.warning('Reddit 429 — using cached data (%d posts)', len(cached))
+                return cached
+            raise RuntimeError(
+                'Reddit is temporarily rate-limiting requests. '
+                'Please wait 60 seconds and try again.'
+            ) from e
+        raise
+
     out = []
     for c in data.get('data', {}).get('children', []):
         p = c.get('data', {})
@@ -83,48 +130,59 @@ def fetch_reddit(limit: int = 25) -> list[dict]:
             'subreddit': p.get('subreddit'),
             'url': f"https://www.reddit.com{p.get('permalink', '')}",
         })
+    with _scrape_lock:
+        _scrape_cache['reddit'] = out
+        _scrape_cache['ts'] = time.time()
     return out
 
 
 def fetch_hackernews(limit: int = 25) -> list[dict]:
-    """Last 24h of Hacker News stories/comments matching the query."""
     since = int(time.time()) - 86_400
     url = (
         'https://hn.algolia.com/api/v1/search_by_date'
         f'?query={urllib.parse.quote_plus(QUERY)}'
-        f'&numericFilters=created_at_i>{since}'
-        f'&hitsPerPage={limit}'
+        f'&numericFilters=created_at_i>{since}&hitsPerPage={limit}'
     )
-    data = _http_get_json(url)
-    out = []
-    for h in data.get('hits', []):
-        title = h.get('title') or h.get('story_title') or ''
-        out.append({
+    try:
+        data = _http_get_json(url)
+    except urllib.error.HTTPError as e:
+        if e.code == 429:
+            with _scrape_lock:
+                cached = list(_scrape_cache['hn'])
+            if cached:
+                log.warning('HN 429 — using cached data (%d posts)', len(cached))
+                return cached
+            raise RuntimeError(
+                'Hacker News is temporarily rate-limiting. Please wait 60 seconds and try again.'
+            ) from e
+        raise
+
+    out = [
+        {
             'source': 'hn',
-            'title': title.strip(),
+            'title': (h.get('title') or h.get('story_title') or '').strip(),
             'text': (h.get('comment_text') or h.get('story_text') or '')[:400],
             'score': h.get('points') or 0,
             'num_comments': h.get('num_comments') or 0,
             'url': f"https://news.ycombinator.com/item?id={h.get('objectID')}",
-        })
-    return [p for p in out if p['title']]
+        }
+        for h in data.get('hits', [])
+    ]
+    hn_results = [p for p in out if p['title']]
+    with _scrape_lock:
+        _scrape_cache['hn'] = hn_results
+    return hn_results
 
 
 # ---------------------------------------------------------------------------
 # 2. Sentiment
 # ---------------------------------------------------------------------------
 
-_POS = {
-    'love', 'great', 'amazing', 'awesome', 'fantastic', 'incredible', 'best',
-    'excellent', 'fast', 'smooth', 'impressive', 'solid', 'reliable', 'worth',
-    'happy', 'recommend', 'beats', 'wins', 'upgrade',
-}
-_NEG = {
-    'bad', 'terrible', 'awful', 'worst', 'broken', 'crash', 'crashes', 'fails',
-    'disappointed', 'slow', 'overpriced', 'scam', 'hate', 'issue', 'issues',
-    'problem', 'problems', 'bug', 'bugs', 'driver', 'overheat', 'overheats',
-    'expensive',
-}
+_POS = {'love','great','amazing','awesome','fantastic','incredible','best','excellent',
+        'fast','smooth','impressive','solid','reliable','worth','happy','recommend','beats','wins','upgrade'}
+_NEG = {'bad','terrible','awful','worst','broken','crash','crashes','fails','disappointed',
+        'slow','overpriced','scam','hate','issue','issues','problem','problems','bug','bugs',
+        'driver','overheat','overheats','expensive'}
 
 
 def score_one_lexicon(text: str) -> float:
@@ -137,51 +195,35 @@ def score_one_lexicon(text: str) -> float:
 
 
 def score_posts(posts: list[dict]) -> list[dict]:
-    """Attach a 0–100 sentiment score to each post."""
     api_key = os.environ.get('OPENAI_API_KEY')
     if api_key and posts:
         try:
             return _score_with_openai(posts, api_key)
-        except Exception as e:  # pragma: no cover
+        except Exception as e:
             log.warning('OpenAI scoring failed, using lexicon fallback: %s', e)
-
     for p in posts:
         p['sentiment'] = score_one_lexicon(f"{p['title']} {p['text']}")
     return posts
 
 
 def _score_with_openai(posts: list[dict], api_key: str) -> list[dict]:
-    """Batch-score sentiment with gpt-4o-mini. One call, strict JSON."""
-    snippets = [
-        {'i': i, 'text': f"{p['title']}. {p['text']}"[:500]}
-        for i, p in enumerate(posts)
-    ]
+    snippets = [{'i': i, 'text': f"{p['title']}. {p['text']}"[:500]} for i, p in enumerate(posts)]
     body = {
         'model': 'gpt-4o-mini',
-        'messages': [{
-            'role': 'user',
-            'content': (
-                'Score each snippet below for sentiment about NVIDIA/GPUs on a '
-                '0 (very negative) to 100 (very positive) scale. Return ONLY '
-                'JSON: {"scores":[{"i":0,"s":72}, ...]}\n\n'
-                + json.dumps(snippets)
-            ),
-        }],
+        'messages': [{'role': 'user', 'content': (
+            'Score each snippet for NVIDIA/GPU sentiment 0-100. '
+            'Return ONLY JSON: {"scores":[{"i":0,"s":72},...]}\n\n' + json.dumps(snippets)
+        )}],
         'response_format': {'type': 'json_object'},
         'temperature': 0.0,
     }
     req = urllib.request.Request(
         'https://api.openai.com/v1/chat/completions',
         data=json.dumps(body).encode('utf-8'),
-        headers={
-            'Authorization': f'Bearer {api_key}',
-            'Content-Type': 'application/json',
-        },
+        headers={'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/json'},
     )
     with urllib.request.urlopen(req, timeout=30) as r:
-        resp = json.loads(r.read().decode('utf-8'))
-    content = resp['choices'][0]['message']['content']
-    data = json.loads(content)
+        data = json.loads(json.loads(r.read().decode('utf-8'))['choices'][0]['message']['content'])
     by_i = {row['i']: row['s'] for row in data.get('scores', [])}
     for i, p in enumerate(posts):
         p['sentiment'] = float(by_i.get(i, score_one_lexicon(p['title'])))
@@ -194,70 +236,43 @@ def _score_with_openai(posts: list[dict], api_key: str) -> list[dict]:
 
 def build_report(posts: list[dict]) -> dict:
     if not posts:
-        return {
-            'generated_at': datetime.now(timezone.utc).isoformat(),
-            'total_posts': 0,
-            'avg_sentiment': 50.0,
-            'overall_label': 'No chatter',
-            'by_source': {},
-            'top_positive': [],
-            'top_negative': [],
-        }
-
+        return {'generated_at': datetime.now(timezone.utc).isoformat(), 'total_posts': 0,
+                'avg_sentiment': 50.0, 'overall_label': 'No chatter', 'by_source': {},
+                'top_positive': [], 'top_negative': []}
     avg = round(sum(p['sentiment'] for p in posts) / len(posts), 1)
-    if avg >= 65: label = 'Positive'
-    elif avg >= 55: label = 'Mildly positive'
-    elif avg >= 45: label = 'Mixed'
-    elif avg >= 35: label = 'Mildly negative'
-    else: label = 'Negative'
-
-    by_source: dict[str, dict] = {}
+    label = ('Positive' if avg >= 65 else 'Mildly positive' if avg >= 55 else
+             'Mixed' if avg >= 45 else 'Mildly negative' if avg >= 35 else 'Negative')
+    by_source = {}
     for src in ('reddit', 'hn'):
         sp = [p for p in posts if p['source'] == src]
         if sp:
-            by_source[src] = {
-                'count': len(sp),
-                'avg_sentiment': round(sum(p['sentiment'] for p in sp) / len(sp), 1),
-            }
-
+            by_source[src] = {'count': len(sp),
+                              'avg_sentiment': round(sum(p['sentiment'] for p in sp) / len(sp), 1)}
     ranked = sorted(posts, key=lambda p: p['sentiment'], reverse=True)
-    return {
-        'generated_at': datetime.now(timezone.utc).isoformat(),
-        'total_posts': len(posts),
-        'avg_sentiment': avg,
-        'overall_label': label,
-        'by_source': by_source,
-        'top_positive': ranked[:3],
-        'top_negative': ranked[-3:][::-1],
-    }
+    return {'generated_at': datetime.now(timezone.utc).isoformat(), 'total_posts': len(posts),
+            'avg_sentiment': avg, 'overall_label': label, 'by_source': by_source,
+            'top_positive': ranked[:3], 'top_negative': ranked[-3:][::-1]}
 
 
 def audio_script(name: str, report: dict) -> str:
-    total = report['total_posts']
-    label = report['overall_label']
-    avg = report['avg_sentiment']
-
+    total, label, avg = report['total_posts'], report['overall_label'], report['avg_sentiment']
     if total == 0:
-        return (f"Hi {name}, this is Cory with your NVIDIA GPU sentiment briefing. "
-                "No fresh posts in the last 24 hours. Check the attached report for context.")
-
+        return f"Hi {name}, this is Cory with your NVIDIA GPU sentiment briefing. No fresh posts in the last 24 hours."
     top = (report['top_positive'] or [None])[0]
     bot = (report['top_negative'] or [None])[0]
-    top_line = f" Most positive chatter: {top['title'][:120]}." if top else ''
-    bot_line = f" Most negative chatter: {bot['title'][:120]}." if bot else ''
-
     return (
         f"Hi {name}, this is Cory Ziller with your NVIDIA GPU sentiment briefing. "
         f"In the last 24 hours I analyzed {total} posts across Reddit and Hacker News. "
-        f"Overall sentiment is {label}, averaging {avg} out of 100.{top_line}{bot_line} "
-        "The full report is attached. Thanks for checking out my work!"
+        f"Overall sentiment is {label}, averaging {avg} out of 100."
+        + (f" Most positive: {top['title'][:120]}." if top else '')
+        + (f" Most negative: {bot['title'][:120]}." if bot else '')
+        + " The full report is attached. Thanks for checking out my work!"
     )
 
 
 def synth_audio(script: str) -> bytes:
-    tts = gTTS(text=script, lang='en', slow=False)
     buf = io.BytesIO()
-    tts.write_to_fp(buf)
+    gTTS(text=script, lang='en', slow=False).write_to_fp(buf)
     return buf.getvalue()
 
 
@@ -266,47 +281,33 @@ def synth_audio(script: str) -> bytes:
 # ---------------------------------------------------------------------------
 
 def format_email_body(name: str, report: dict, audio_filename: str) -> str:
-    """Minimal email body with a prominent pointer to the audio attachment."""
     now = datetime.now().strftime('%b %d')
     return (
-        f"Hi {name},\n"
-        f"\n"
+        f"Hi {name},\n\n"
         f"NVIDIA GPU sentiment, last 24h ({now}):\n"
-        f"  {report['overall_label']} — {report['avg_sentiment']}/100 across {report['total_posts']} posts\n"
-        f"\n"
-        f"▶ LISTEN: a personalized 30-second audio briefing is attached to this email\n"
-        f"  as {audio_filename}. Open the attachment to play it.\n"
-        f"\n"
+        f"  {report['overall_label']} — {report['avg_sentiment']}/100 across {report['total_posts']} posts\n\n"
+        f"LISTEN: a 30-second audio briefing is attached as {audio_filename}.\n\n"
         f"— Cory\n"
     )
 
 
 def send_email(name: str, email: str, report: dict, audio: bytes) -> str:
     api_key = os.environ.get('BREVO_API_KEY')
-    sender = os.environ.get('SENDER_EMAIL', 'demo@coryziller.com')
     if not api_key:
         raise RuntimeError('BREVO_API_KEY not set')
-
     cfg = sib_api_v3_sdk.Configuration()
     cfg.api_key['api-key'] = api_key
     client = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(cfg))
-
     audio_filename = 'nvidia-gpu-audio-briefing.mp3'
-    attachment = [{
-        'content': base64.b64encode(audio).decode('utf-8'),
-        'name': audio_filename,
-    }]
-
     msg = sib_api_v3_sdk.SendSmtpEmail(
         to=[{'email': email, 'name': name or email}],
-        sender={'email': sender, 'name': 'Cory Ziller'},
+        sender={'email': os.environ.get('SENDER_EMAIL', 'demo@coryziller.com'), 'name': 'Cory Ziller'},
         reply_to={'email': 'coryziller@gmail.com', 'name': 'Cory Ziller'},
         subject=f"Your NVIDIA GPU sentiment report + audio briefing — {datetime.now().strftime('%b %d, %Y')}",
         text_content=format_email_body(name, report, audio_filename),
-        attachment=attachment,
+        attachment=[{'content': base64.b64encode(audio).decode('utf-8'), 'name': audio_filename}],
     )
-    resp = client.send_transac_email(msg)
-    return getattr(resp, 'message_id', '') or ''
+    return getattr(client.send_transac_email(msg), 'message_id', '') or ''
 
 
 # ---------------------------------------------------------------------------
@@ -315,20 +316,22 @@ def send_email(name: str, email: str, report: dict, audio: bytes) -> str:
 
 @app.route('/health', methods=['GET'])
 def health():
+    with _scrape_lock:
+        cache_age = time.time() - _scrape_cache['ts'] if _scrape_cache['ts'] else None
     return jsonify({
         'status': 'healthy',
         'timestamp': datetime.now(timezone.utc).isoformat(),
         'has_brevo_key': bool(os.environ.get('BREVO_API_KEY')),
         'has_openai_key': bool(os.environ.get('OPENAI_API_KEY')),
+        'scrape_cache_age_seconds': round(cache_age, 1) if cache_age is not None else None,
+        'scrape_cache_reddit_count': len(_scrape_cache['reddit']),
+        'scrape_cache_hn_count': len(_scrape_cache['hn']),
     })
 
 
 @app.route('/preview', methods=['GET'])
 def preview():
-    """Run the full pipeline end-to-end WITHOUT sending email — for smoke testing."""
-    reddit_posts = fetch_reddit()
-    hn_posts = fetch_hackernews()
-    posts = score_posts(reddit_posts + hn_posts)
+    posts = score_posts(fetch_reddit() + fetch_hackernews())
     return jsonify(build_report(posts))
 
 
@@ -336,6 +339,10 @@ def preview():
 def send_demo():
     if request.method == 'OPTIONS':
         return '', 200
+
+    client_ip = request.headers.get('X-Forwarded-For', request.remote_addr or 'unknown').split(',')[0].strip()
+    if not _check_rate_limit(client_ip):
+        return jsonify({'ok': False, 'error': 'You already submitted recently. Please wait 60 seconds and try again.'}), 429
 
     data: dict[str, Any] = request.get_json(silent=True) or {}
     name = (data.get('name') or '').strip()[:120]
@@ -351,90 +358,63 @@ def send_demo():
         reddit_posts = fetch_reddit()
         hn_posts = fetch_hackernews()
         log.info('scraped: reddit=%d hn=%d', len(reddit_posts), len(hn_posts))
-
         posts = score_posts(reddit_posts + hn_posts)
         report = build_report(posts)
-        log.info('report: total=%d label=%s avg=%.1f',
-                 report['total_posts'], report['overall_label'], report['avg_sentiment'])
-
+        log.info('report: total=%d label=%s avg=%.1f', report['total_posts'], report['overall_label'], report['avg_sentiment'])
         audio = synth_audio(audio_script(name, report))
         log.info('audio: %d bytes', len(audio))
-
         message_id = send_email(name, email, report, audio)
         log.info('email sent: %s message_id=%s', email, message_id)
-
-        return jsonify({
-            'ok': True,
-            'posts_analyzed': report['total_posts'],
-            'overall_label': report['overall_label'],
-            'message_id': message_id,
-        })
+        return jsonify({'ok': True, 'posts_analyzed': report['total_posts'],
+                       'overall_label': report['overall_label'], 'message_id': message_id})
     except ApiException as e:
         log.exception('brevo api error')
         return jsonify({'ok': False, 'error': 'Email provider error', 'details': str(e)}), 502
+    except RuntimeError as e:
+        log.warning('send-demo runtime error: %s', e)
+        return jsonify({'ok': False, 'error': str(e)}), 503
     except Exception as e:
         log.exception('send-demo failed')
         return jsonify({'ok': False, 'error': str(e)}), 500
 
 
 # ---------------------------------------------------------------------------
-# Lyrics word-cloud endpoint (for the Spotify dashboard)
-#
-# The frontend sends the list of top-played (artist, track, play_count) tuples
-# for a given year. This endpoint fetches lyrics for each from LyricsOVH (free,
-# public, no API key), tokenizes them into words, and returns an aggregated
-# word-frequency table weighted by play count.
-#
-# COPYRIGHT: we never return the raw lyrics text — only aggregated word counts
-# and song-level match metadata. Raw lyrics stay on LyricsOVH.
+# Lyrics word-cloud endpoint
 # ---------------------------------------------------------------------------
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from threading import Lock
 
 _LYRICS_CACHE: dict[str, list[str] | None] = {}
 _LYRICS_LOCK = Lock()
 
-# Stopwords: English common + song-filler words
 _LYRIC_STOPWORDS = set("""
 a about after ah all also am an and any are aren at be because been before
 being below both but by can could cause cuz did didn do does don down during
 each else even ever every for from get got gonna gotta had has have having he
 her here hers him his how i if in into is isn it its just know let like ll
 look ma made make makes making many may me might more most must my na nah no
-not now o of off oh on once only or other our ours ourselves out over own re
-said say says see should shouldn so some such than that the their theirs them
-then there these they they'd they'll this those though through thus to too
-uh uhh um up upon us use used very wanna was way we well were what whatever
-when where which while who why will with would wow yeah yep yes yet you your
-yours yourself yourselves ya ll ve re
+not now o of off oh on once only or other our ours out over own re said say
+says see should shouldn so some such than that the their them then there these
+they this those though through to too uh um up upon us use used very wanna was
+way we well were what when where which while who why will with would yeah yes
+yet you your yours ya ll ve re
 """.split())
-
-# Extra-aggressive song-filler removal (these dominate otherwise)
-_LYRIC_STOPWORDS.update({
-    'll', 've', 're', 'em', 'ol', 'mm', 'hmm', 'huh', 'ooh', 'ohh',
-    'oo', 'ay', 'ayy', 'yah', 'yo', 'im', 'ima', 'aint', 'ya', 'y',
-    'bout', 'cause', 'got', 'gonna', 'gotta', 'wanna', 'tryna',
-    'lil', 'bro', 'one', 'two', 'three', 'baby',
-})
+_LYRIC_STOPWORDS.update({'ll','ve','re','em','ol','mm','hmm','huh','ooh','ohh','oo','ay','ayy',
+    'yah','yo','im','ima','aint','ya','y','bout','cause','got','gonna','gotta','wanna','tryna',
+    'lil','bro','one','two','three','baby'})
 
 _WORD_RE = re.compile(r"[a-z']+")
+_WORDCLOUD_CACHE: dict[str, dict] = {}
+_WORDCLOUD_CACHE_LOCK = Lock()
 
 
 def fetch_lyrics_ovh(artist: str, title: str, timeout: int = 12) -> str | None:
-    """Return plain text lyrics from LyricsOVH, or None if not found."""
     key = f'{artist.lower().strip()}||{title.lower().strip()}'
     with _LYRICS_LOCK:
         if key in _LYRICS_CACHE:
             return _LYRICS_CACHE[key] or None
-
     try:
-        url = (
-            'https://api.lyrics.ovh/v1/'
-            + urllib.parse.quote(artist, safe='')
-            + '/'
-            + urllib.parse.quote(title, safe='')
-        )
+        url = f"https://api.lyrics.ovh/v1/{urllib.parse.quote(artist, safe='')}/{urllib.parse.quote(title, safe='')}"
         req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
         with urllib.request.urlopen(req, timeout=timeout) as r:
             body = json.loads(r.read().decode('utf-8', errors='replace'))
@@ -442,65 +422,45 @@ def fetch_lyrics_ovh(artist: str, title: str, timeout: int = 12) -> str | None:
     except Exception as e:
         log.info('lyrics miss %r / %r: %s', artist, title, e)
         text = None
-
     with _LYRICS_LOCK:
         _LYRICS_CACHE[key] = text
     return text
 
 
 def _clean_lyrics_words(text: str) -> list[str]:
-    """Tokenize lyrics into real content words, stripping section markers etc."""
-    # Strip [Verse], [Chorus], etc.
     text = re.sub(r'\[[^\]]{0,40}\]', ' ', text)
-    # Lowercase + split on non-letters
     words = _WORD_RE.findall(text.lower())
-    return [
-        w.strip("'") for w in words
-        if len(w) >= 3 and w not in _LYRIC_STOPWORDS and not w.isdigit()
-    ]
-
-
-# Per-year word-cloud cache (keyed by year + top-N fingerprint)
-_WORDCLOUD_CACHE: dict[str, dict] = {}
-_WORDCLOUD_CACHE_LOCK = Lock()
+    return [w.strip("'") for w in words if len(w) >= 3 and w not in _LYRIC_STOPWORDS and not w.isdigit()]
 
 
 @app.route('/lyrics-wordcloud', methods=['POST', 'OPTIONS'])
 def lyrics_wordcloud():
     if request.method == 'OPTIONS':
         return '', 200
-
     data: dict[str, Any] = request.get_json(silent=True) or {}
     year = str(data.get('year', '')).strip() or 'all'
     songs_in = data.get('songs') or []
     if not isinstance(songs_in, list) or not songs_in:
         return jsonify({'ok': False, 'error': 'songs[] required'}), 400
 
-    # Normalize, dedupe, cap at 30 most-played
     normalized: list[dict] = []
-    seen = set()
+    seen: set = set()
     for s in songs_in:
         artist = str(s.get('artist', '')).strip()
         track = str(s.get('track', '') or s.get('title', '')).strip()
         plays = int(s.get('play_count') or s.get('plays') or 1)
-        if not artist or not track:
-            continue
         key = (artist.lower(), track.lower())
-        if key in seen:
+        if not artist or not track or key in seen:
             continue
         seen.add(key)
         normalized.append({'artist': artist, 'track': track, 'plays': plays})
     normalized.sort(key=lambda x: x['plays'], reverse=True)
     normalized = normalized[:30]
-
     if not normalized:
         return jsonify({'ok': False, 'error': 'no valid songs provided'}), 400
 
-    # Cache key: year + fingerprint of the song list + today's UTC date,
-    # so the cache auto-invalidates each day and picks up fresh Spotify data.
     fp = '|'.join(f"{s['artist'].lower()}::{s['track'].lower()}" for s in normalized)
-    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
-    cache_key = f'{year}:{today}:{hash(fp)}'
+    cache_key = f"{year}:{datetime.now(timezone.utc).strftime('%Y-%m-%d')}:{hash(fp)}"
     with _WORDCLOUD_CACHE_LOCK:
         hit = _WORDCLOUD_CACHE.get(cache_key)
         if hit:
@@ -513,56 +473,34 @@ def lyrics_wordcloud():
     def do_one(s: dict) -> tuple[dict, list[str]]:
         text = fetch_lyrics_ovh(s['artist'], s['track'])
         if not text:
-            return {
-                'artist': s['artist'], 'track': s['track'],
-                'plays': s['plays'], 'found': False,
-            }, []
+            return {'artist': s['artist'], 'track': s['track'], 'plays': s['plays'], 'found': False}, []
         words = _clean_lyrics_words(text)
-        return {
-            'artist': s['artist'], 'track': s['track'],
-            'plays': s['plays'], 'found': True,
-            'word_count': len(words),
-        }, words
+        return {'artist': s['artist'], 'track': s['track'], 'plays': s['plays'], 'found': True, 'word_count': len(words)}, words
 
     with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = [pool.submit(do_one, s) for s in normalized]
-        for fut in as_completed(futures):
-            info, words = fut.result()
+        for info, words in [f.result() for f in as_completed([pool.submit(do_one, s) for s in normalized])]:
             per_song.append(info)
             if words:
-                # Weight each unique-word-per-song by that song's play count
-                plays = info.get('plays', 1)
                 bag = Counter(words)
                 for w, c in bag.items():
-                    counts[w] += c * plays
+                    counts[w] += c * info.get('plays', 1)
 
-    # Limit output size (top 80 is plenty for a word cloud)
-    top_words = counts.most_common(80)
     found = [p for p in per_song if p.get('found')]
     total_plays = sum(p['plays'] for p in per_song)
     found_plays = sum(p['plays'] for p in found)
-
     result = {
-        'ok': True,
-        'year': year,
-        'words': top_words,
+        'ok': True, 'year': year, 'words': counts.most_common(80),
         'stats': {
-            'songs_considered': len(per_song),
-            'lyrics_found': len(found),
+            'songs_considered': len(per_song), 'lyrics_found': len(found),
             'coverage_by_plays': round(100 * found_plays / total_plays, 1) if total_plays else 0.0,
-            'total_words_counted': sum(counts.values()),
-            'unique_words': len(counts),
+            'total_words_counted': sum(counts.values()), 'unique_words': len(counts),
         },
-        # Keep the per-song list so the UI can show coverage details
-        # (no raw lyrics included — only artist/track/plays/found/word_count).
         'songs': sorted(per_song, key=lambda p: p['plays'], reverse=True),
     }
-
     with _WORDCLOUD_CACHE_LOCK:
         _WORDCLOUD_CACHE[cache_key] = result
     return jsonify(result)
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8000)), debug=False)
