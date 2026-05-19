@@ -25197,60 +25197,60 @@
       "total_minutes": 83.691
     },
     {
-      "track": "Therapy at the Club",
-      "artist": "FLO",
-      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
-      "play_count": 24,
-      "total_minutes": 66.8
-    },
-    {
       "track": "A Summer in Ohio - Live at the London Palladium",
       "artist": "Rachel Zegler",
       "spotify_uri": "spotify:track:6BJ915Y8xarJ74zZi6xmIi",
+      "play_count": 24,
+      "total_minutes": 98.381
+    },
+    {
+      "track": "Therapy at the Club",
+      "artist": "FLO",
+      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
       "play_count": 21,
-      "total_minutes": 86.083
+      "total_minutes": 58.45
     },
     {
-      "track": "When You're an Addams",
-      "artist": "Moonlight Heroes",
-      "spotify_uri": "spotify:track:2HEubCJ688jtYIsbHEJLBV",
+      "track": "Midnight Sun",
+      "artist": "Zara Larsson",
+      "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
       "play_count": 18,
-      "total_minutes": 75.66
+      "total_minutes": 56.969
     },
     {
-      "track": "Pulled",
-      "artist": "Andrew Lippa",
-      "spotify_uri": "spotify:track:2ZK7pIAsfd90FcaDjsrJJO",
+      "track": "Workin' on Lovin'",
+      "artist": "Juice",
+      "spotify_uri": "spotify:track:6bPF8VDAb12I4TG7IZjVeX",
       "play_count": 15,
-      "total_minutes": 45.953
-    },
-    {
-      "track": "Miss You",
-      "artist": "Young Franco",
-      "spotify_uri": "spotify:track:3MRuglRyXY8EbGzUj7FAUx",
-      "play_count": 12,
-      "total_minutes": 37.285
+      "total_minutes": 58.507
     },
     {
       "track": "Jason's Song (Gave It Away)",
       "artist": "Ariana Grande",
       "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
+      "play_count": 12,
+      "total_minutes": 52.928
+    },
+    {
+      "track": "September Told Me",
+      "artist": "Juice",
+      "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
       "play_count": 9,
-      "total_minutes": 39.696
+      "total_minutes": 38.382
     },
     {
-      "track": "Crazier Than You",
+      "track": "Pulled",
       "artist": "Andrew Lippa",
-      "spotify_uri": "spotify:track:0ObzgH8OjQIIcPEPfZlZLa",
+      "spotify_uri": "spotify:track:2ZK7pIAsfd90FcaDjsrJJO",
       "play_count": 6,
-      "total_minutes": 17.48
+      "total_minutes": 18.381
     },
     {
-      "track": "Doo Wop (That Thing) - Edit",
-      "artist": "Ms. Lauryn Hill",
-      "spotify_uri": "spotify:track:6otqZiIqqzzzggZdd1rKgO",
+      "track": "Miss You",
+      "artist": "Young Franco",
+      "spotify_uri": "spotify:track:3MRuglRyXY8EbGzUj7FAUx",
       "play_count": 3,
-      "total_minutes": 12.033
+      "total_minutes": 9.321
     }
   ]
 }
