@@ -25211,25 +25211,25 @@
       "total_minutes": 66.464
     },
     {
-      "track": "Jason's Song (Gave It Away)",
-      "artist": "Ariana Grande",
-      "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
-      "play_count": 18,
-      "total_minutes": 79.392
-    },
-    {
       "track": "September Told Me",
       "artist": "Juice",
       "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
-      "play_count": 15,
-      "total_minutes": 63.97
+      "play_count": 18,
+      "total_minutes": 76.764
     },
     {
       "track": "Workin' on Lovin'",
       "artist": "Juice",
       "spotify_uri": "spotify:track:6bPF8VDAb12I4TG7IZjVeX",
+      "play_count": 15,
+      "total_minutes": 58.507
+    },
+    {
+      "track": "Jason's Song (Gave It Away)",
+      "artist": "Ariana Grande",
+      "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
       "play_count": 12,
-      "total_minutes": 46.805
+      "total_minutes": 52.928
     },
     {
       "track": "Pulled",
