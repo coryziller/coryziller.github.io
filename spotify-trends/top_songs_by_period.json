@@ -25211,18 +25211,18 @@
       "total_minutes": 66.464
     },
     {
+      "track": "PARTY b4 the PARTY",
+      "artist": "World Scout: The Final Piece",
+      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
+      "play_count": 18,
+      "total_minutes": 43.284
+    },
+    {
       "track": "September Told Me",
       "artist": "Juice",
       "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
-      "play_count": 18,
-      "total_minutes": 76.764
-    },
-    {
-      "track": "Workin' on Lovin'",
-      "artist": "Juice",
-      "spotify_uri": "spotify:track:6bPF8VDAb12I4TG7IZjVeX",
       "play_count": 15,
-      "total_minutes": 58.507
+      "total_minutes": 63.97
     },
     {
       "track": "Jason's Song (Gave It Away)",
@@ -25232,25 +25232,25 @@
       "total_minutes": 52.928
     },
     {
+      "track": "Workin' on Lovin'",
+      "artist": "Juice",
+      "spotify_uri": "spotify:track:6bPF8VDAb12I4TG7IZjVeX",
+      "play_count": 9,
+      "total_minutes": 35.104
+    },
+    {
       "track": "Rock Bottom Baby",
       "artist": "Stephen Day",
       "spotify_uri": "spotify:track:0ZOiEgVYyFKh5wzFzooSOH",
-      "play_count": 9,
-      "total_minutes": 29.943
+      "play_count": 6,
+      "total_minutes": 19.962
     },
     {
       "track": "supposed to",
       "artist": "Joy Rhodes",
       "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
-      "play_count": 6,
-      "total_minutes": 26.727
-    },
-    {
-      "track": "Dance With a Stranger",
-      "artist": "Lake Street Dive",
-      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
       "play_count": 3,
-      "total_minutes": 10.752
+      "total_minutes": 13.364
     }
   ]
 }
