@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-31T09:09:43.810679+00:00",
+  "generated_at": "2026-06-01T12:04:23.760072+00:00",
   "years": [
     {
       "year": "2012",
@@ -39,7 +39,7 @@
       "songs_considered": 189,
       "lyrics_found": 59,
       "coverage_by_plays": 28.1,
-      "unique_words": 1828
+      "unique_words": 1827
     },
     {
       "year": "2017",
@@ -118,7 +118,7 @@
       "file": "wordclouds/2026.json",
       "songs_considered": 54,
       "lyrics_found": 13,
-      "coverage_by_plays": 18.9,
+      "coverage_by_plays": 18.3,
       "unique_words": 652
     }
   ],
