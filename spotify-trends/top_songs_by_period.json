@@ -25262,18 +25262,18 @@
       "total_minutes": 122.976
     },
     {
-      "track": "Therapy at the Club",
-      "artist": "FLO",
-      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
-      "play_count": 27,
-      "total_minutes": 75.15
-    },
-    {
       "track": "Midnight Sun",
       "artist": "Zara Larsson",
       "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
+      "play_count": 27,
+      "total_minutes": 85.454
+    },
+    {
+      "track": "Therapy at the Club",
+      "artist": "FLO",
+      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
       "play_count": 24,
-      "total_minutes": 75.959
+      "total_minutes": 66.8
     },
     {
       "track": "One Normal Night",
@@ -25283,39 +25283,39 @@
       "total_minutes": 56.062
     },
     {
-      "track": "PARTY b4 the PARTY",
-      "artist": "World Scout: The Final Piece",
-      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
+      "track": "Dance With a Stranger",
+      "artist": "Lake Street Dive",
+      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
       "play_count": 18,
-      "total_minutes": 43.284
-    },
-    {
-      "track": "September Told Me",
-      "artist": "Juice",
-      "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
-      "play_count": 15,
-      "total_minutes": 63.97
+      "total_minutes": 64.509
     },
     {
       "track": "Jason's Song (Gave It Away)",
       "artist": "Ariana Grande",
       "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
-      "play_count": 12,
-      "total_minutes": 52.928
-    },
-    {
-      "track": "Workin' on Lovin'",
-      "artist": "Juice",
-      "spotify_uri": "spotify:track:6bPF8VDAb12I4TG7IZjVeX",
-      "play_count": 9,
-      "total_minutes": 35.104
+      "play_count": 15,
+      "total_minutes": 66.16
     },
     {
       "track": "supposed to",
       "artist": "Joy Rhodes",
       "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
+      "play_count": 12,
+      "total_minutes": 53.454
+    },
+    {
+      "track": "PARTY b4 the PARTY",
+      "artist": "World Scout: The Final Piece",
+      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
+      "play_count": 9,
+      "total_minutes": 21.642
+    },
+    {
+      "track": "September Told Me",
+      "artist": "Juice",
+      "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
       "play_count": 6,
-      "total_minutes": 26.727
+      "total_minutes": 25.588
     },
     {
       "track": "Rock Bottom Baby",
