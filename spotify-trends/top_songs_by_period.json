@@ -25269,18 +25269,18 @@
       "total_minutes": 85.454
     },
     {
-      "track": "supposed to",
-      "artist": "Joy Rhodes",
-      "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
-      "play_count": 24,
-      "total_minutes": 106.909
-    },
-    {
       "track": "Therapy at the Club",
       "artist": "FLO",
       "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
+      "play_count": 24,
+      "total_minutes": 66.8
+    },
+    {
+      "track": "supposed to",
+      "artist": "Joy Rhodes",
+      "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
       "play_count": 21,
-      "total_minutes": 58.45
+      "total_minutes": 93.545
     },
     {
       "track": "Dance With a Stranger",
@@ -25290,11 +25290,11 @@
       "total_minutes": 64.509
     },
     {
-      "track": "One Normal Night",
-      "artist": "Andrew Lippa",
-      "spotify_uri": "spotify:track:0O77dKVRjzNMQtlwMgg62e",
+      "track": "PARTY b4 the PARTY",
+      "artist": "World Scout: The Final Piece",
+      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
       "play_count": 15,
-      "total_minutes": 40.044
+      "total_minutes": 36.07
     },
     {
       "track": "Jason's Song (Gave It Away)",
@@ -25304,25 +25304,25 @@
       "total_minutes": 52.928
     },
     {
-      "track": "PARTY b4 the PARTY",
-      "artist": "World Scout: The Final Piece",
-      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
-      "play_count": 9,
-      "total_minutes": 21.642
-    },
-    {
       "track": "September Told Me",
       "artist": "Juice",
       "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
-      "play_count": 6,
-      "total_minutes": 25.588
+      "play_count": 9,
+      "total_minutes": 38.382
     },
     {
       "track": "Rock Bottom Baby",
       "artist": "Stephen Day",
       "spotify_uri": "spotify:track:0ZOiEgVYyFKh5wzFzooSOH",
+      "play_count": 6,
+      "total_minutes": 19.962
+    },
+    {
+      "track": "One Normal Night",
+      "artist": "Andrew Lippa",
+      "spotify_uri": "spotify:track:0O77dKVRjzNMQtlwMgg62e",
       "play_count": 3,
-      "total_minutes": 9.981
+      "total_minutes": 8.009
     }
   ]
 }
