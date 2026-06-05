@@ -25269,18 +25269,18 @@
       "total_minutes": 85.454
     },
     {
-      "track": "Therapy at the Club",
-      "artist": "FLO",
-      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
-      "play_count": 24,
-      "total_minutes": 66.8
-    },
-    {
       "track": "supposed to",
       "artist": "Joy Rhodes",
       "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
+      "play_count": 24,
+      "total_minutes": 106.909
+    },
+    {
+      "track": "Therapy at the Club",
+      "artist": "FLO",
+      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
       "play_count": 21,
-      "total_minutes": 93.545
+      "total_minutes": 58.45
     },
     {
       "track": "Dance With a Stranger",
@@ -25318,11 +25318,11 @@
       "total_minutes": 19.962
     },
     {
-      "track": "One Normal Night",
-      "artist": "Andrew Lippa",
-      "spotify_uri": "spotify:track:0O77dKVRjzNMQtlwMgg62e",
+      "track": "Workin' on Lovin'",
+      "artist": "Juice",
+      "spotify_uri": "spotify:track:6bPF8VDAb12I4TG7IZjVeX",
       "play_count": 3,
-      "total_minutes": 8.009
+      "total_minutes": 11.701
     }
   ]
 }
