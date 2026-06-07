@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T09:14:59.021905+00:00",
+  "generated_at": "2026-06-07T09:59:10.816445+00:00",
   "years": [
     {
       "year": "2012",
@@ -94,8 +94,8 @@
       "file": "wordclouds/2023.json",
       "songs_considered": 155,
       "lyrics_found": 54,
-      "coverage_by_plays": 31.4,
-      "unique_words": 1768
+      "coverage_by_plays": 30.8,
+      "unique_words": 1764
     },
     {
       "year": "2024",
@@ -117,12 +117,12 @@
       "year": "2026",
       "file": "wordclouds/2026.json",
       "songs_considered": 56,
-      "lyrics_found": 14,
-      "coverage_by_plays": 20.0,
-      "unique_words": 668
+      "lyrics_found": 15,
+      "coverage_by_plays": 20.5,
+      "unique_words": 671
     }
   ],
   "source_hits_total": {
-    "lyricsovh": 833
+    "lyricsovh": 834
   }
 }

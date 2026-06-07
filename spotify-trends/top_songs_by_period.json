@@ -25304,25 +25304,25 @@
       "total_minutes": 52.928
     },
     {
-      "track": "September Told Me",
-      "artist": "Juice",
-      "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
-      "play_count": 9,
-      "total_minutes": 38.382
-    },
-    {
       "track": "Rock Bottom Baby",
       "artist": "Stephen Day",
       "spotify_uri": "spotify:track:0ZOiEgVYyFKh5wzFzooSOH",
-      "play_count": 6,
-      "total_minutes": 19.962
+      "play_count": 9,
+      "total_minutes": 29.943
     },
     {
-      "track": "Little Less Over You (The Sweater Sessions II)",
-      "artist": "Couch",
-      "spotify_uri": "spotify:track:6jaBhIApn2TRe908QONviE",
+      "track": "One in a Million",
+      "artist": "LEISURE",
+      "spotify_uri": "spotify:track:3KduRAJlBZlOU8tsc9JdNC",
+      "play_count": 6,
+      "total_minutes": 25.74
+    },
+    {
+      "track": "September Told Me",
+      "artist": "Juice",
+      "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
       "play_count": 3,
-      "total_minutes": 10.487
+      "total_minutes": 12.794
     }
   ]
 }
