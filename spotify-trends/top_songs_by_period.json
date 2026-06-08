@@ -25262,67 +25262,67 @@
       "total_minutes": 122.976
     },
     {
-      "track": "Midnight Sun",
-      "artist": "Zara Larsson",
-      "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
-      "play_count": 27,
-      "total_minutes": 85.454
-    },
-    {
       "track": "supposed to",
       "artist": "Joy Rhodes",
       "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
-      "play_count": 24,
-      "total_minutes": 106.909
+      "play_count": 27,
+      "total_minutes": 120.272
     },
     {
-      "track": "Therapy at the Club",
-      "artist": "FLO",
-      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
-      "play_count": 21,
-      "total_minutes": 58.45
+      "track": "Midnight Sun",
+      "artist": "Zara Larsson",
+      "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
+      "play_count": 24,
+      "total_minutes": 75.959
     },
     {
       "track": "Dance With a Stranger",
       "artist": "Lake Street Dive",
       "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
-      "play_count": 18,
-      "total_minutes": 64.509
+      "play_count": 21,
+      "total_minutes": 75.261
     },
     {
       "track": "PARTY b4 the PARTY",
       "artist": "World Scout: The Final Piece",
       "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
-      "play_count": 15,
-      "total_minutes": 36.07
+      "play_count": 18,
+      "total_minutes": 43.284
     },
     {
-      "track": "Jason's Song (Gave It Away)",
-      "artist": "Ariana Grande",
-      "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
-      "play_count": 12,
-      "total_minutes": 52.928
+      "track": "Therapy at the Club",
+      "artist": "FLO",
+      "spotify_uri": "spotify:track:0mAlyy4pl3pO9ht9qU1PBn",
+      "play_count": 15,
+      "total_minutes": 41.75
     },
     {
       "track": "Rock Bottom Baby",
       "artist": "Stephen Day",
       "spotify_uri": "spotify:track:0ZOiEgVYyFKh5wzFzooSOH",
+      "play_count": 12,
+      "total_minutes": 39.924
+    },
+    {
+      "track": "Jason's Song (Gave It Away)",
+      "artist": "Ariana Grande",
+      "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
       "play_count": 9,
-      "total_minutes": 29.943
+      "total_minutes": 39.696
+    },
+    {
+      "track": "Little Less Over You (The Sweater Sessions II)",
+      "artist": "Couch",
+      "spotify_uri": "spotify:track:6jaBhIApn2TRe908QONviE",
+      "play_count": 6,
+      "total_minutes": 20.973
     },
     {
       "track": "One in a Million",
       "artist": "LEISURE",
       "spotify_uri": "spotify:track:3KduRAJlBZlOU8tsc9JdNC",
-      "play_count": 6,
-      "total_minutes": 25.74
-    },
-    {
-      "track": "September Told Me",
-      "artist": "Juice",
-      "spotify_uri": "spotify:track:6pYStr5mExsrLBeQqc4Lbl",
       "play_count": 3,
-      "total_minutes": 12.794
+      "total_minutes": 12.87
     }
   ]
 }
