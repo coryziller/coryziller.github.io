@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11T10:59:41.768400+00:00",
+  "generated_at": "2026-06-12T11:39:14.740180+00:00",
   "years": [
     {
       "year": "2012",
@@ -31,7 +31,7 @@
       "songs_considered": 206,
       "lyrics_found": 100,
       "coverage_by_plays": 44.8,
-      "unique_words": 2300
+      "unique_words": 2295
     },
     {
       "year": "2016",
@@ -53,9 +53,9 @@
       "year": "2018",
       "file": "wordclouds/2018.json",
       "songs_considered": 179,
-      "lyrics_found": 76,
-      "coverage_by_plays": 46.7,
-      "unique_words": 1943
+      "lyrics_found": 77,
+      "coverage_by_plays": 46.9,
+      "unique_words": 1949
     },
     {
       "year": "2019",
@@ -85,9 +85,9 @@
       "year": "2022",
       "file": "wordclouds/2022.json",
       "songs_considered": 188,
-      "lyrics_found": 64,
-      "coverage_by_plays": 41.6,
-      "unique_words": 2291
+      "lyrics_found": 63,
+      "coverage_by_plays": 41.1,
+      "unique_words": 2216
     },
     {
       "year": "2023",
@@ -118,7 +118,7 @@
       "file": "wordclouds/2026.json",
       "songs_considered": 58,
       "lyrics_found": 15,
-      "coverage_by_plays": 20.2,
+      "coverage_by_plays": 19.7,
       "unique_words": 671
     }
   ],
