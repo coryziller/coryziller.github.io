@@ -25276,53 +25276,53 @@
       "total_minutes": 86.012
     },
     {
-      "track": "Midnight Sun",
-      "artist": "Zara Larsson",
-      "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
-      "play_count": 21,
-      "total_minutes": 66.464
-    },
-    {
       "track": "PARTY b4 the PARTY",
       "artist": "World Scout: The Final Piece",
       "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
+      "play_count": 21,
+      "total_minutes": 50.498
+    },
+    {
+      "track": "Midnight Sun",
+      "artist": "Zara Larsson",
+      "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
       "play_count": 18,
-      "total_minutes": 43.284
-    },
-    {
-      "track": "A Summer in Ohio - Live at the London Palladium",
-      "artist": "Rachel Zegler",
-      "spotify_uri": "spotify:track:6BJ915Y8xarJ74zZi6xmIi",
-      "play_count": 15,
-      "total_minutes": 61.488
-    },
-    {
-      "track": "Jason's Song (Gave It Away)",
-      "artist": "Ariana Grande",
-      "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
-      "play_count": 12,
-      "total_minutes": 52.928
+      "total_minutes": 56.969
     },
     {
       "track": "God Must Really Love Me (Intro)",
       "artist": "Tori Kelly",
       "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
-      "play_count": 9,
-      "total_minutes": 9.855
-    },
-    {
-      "track": "Little Less Over You (The Sweater Sessions II)",
-      "artist": "Couch",
-      "spotify_uri": "spotify:track:6jaBhIApn2TRe908QONviE",
-      "play_count": 6,
-      "total_minutes": 20.973
+      "play_count": 15,
+      "total_minutes": 16.425
     },
     {
       "track": "One in a Million",
       "artist": "LEISURE",
       "spotify_uri": "spotify:track:3KduRAJlBZlOU8tsc9JdNC",
+      "play_count": 12,
+      "total_minutes": 51.48
+    },
+    {
+      "track": "Little Less Over You (The Sweater Sessions II)",
+      "artist": "Couch",
+      "spotify_uri": "spotify:track:6jaBhIApn2TRe908QONviE",
+      "play_count": 9,
+      "total_minutes": 31.46
+    },
+    {
+      "track": "A Summer in Ohio - Live at the London Palladium",
+      "artist": "Rachel Zegler",
+      "spotify_uri": "spotify:track:6BJ915Y8xarJ74zZi6xmIi",
+      "play_count": 6,
+      "total_minutes": 24.595
+    },
+    {
+      "track": "Jason's Song (Gave It Away)",
+      "artist": "Ariana Grande",
+      "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
       "play_count": 3,
-      "total_minutes": 12.87
+      "total_minutes": 13.232
     }
   ]
 }
