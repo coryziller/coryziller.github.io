@@ -25283,18 +25283,18 @@
       "total_minutes": 50.498
     },
     {
-      "track": "Midnight Sun",
-      "artist": "Zara Larsson",
-      "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
-      "play_count": 18,
-      "total_minutes": 56.969
-    },
-    {
       "track": "God Must Really Love Me (Intro)",
       "artist": "Tori Kelly",
       "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
+      "play_count": 18,
+      "total_minutes": 19.71
+    },
+    {
+      "track": "Midnight Sun",
+      "artist": "Zara Larsson",
+      "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
       "play_count": 15,
-      "total_minutes": 16.425
+      "total_minutes": 47.474
     },
     {
       "track": "One in a Million",
@@ -25304,25 +25304,25 @@
       "total_minutes": 51.48
     },
     {
-      "track": "Little Less Over You (The Sweater Sessions II)",
-      "artist": "Couch",
-      "spotify_uri": "spotify:track:6jaBhIApn2TRe908QONviE",
-      "play_count": 9,
-      "total_minutes": 31.46
-    },
-    {
       "track": "A Summer in Ohio - Live at the London Palladium",
       "artist": "Rachel Zegler",
       "spotify_uri": "spotify:track:6BJ915Y8xarJ74zZi6xmIi",
-      "play_count": 6,
-      "total_minutes": 24.595
+      "play_count": 9,
+      "total_minutes": 36.893
     },
     {
       "track": "Jason's Song (Gave It Away)",
       "artist": "Ariana Grande",
       "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
+      "play_count": 6,
+      "total_minutes": 26.464
+    },
+    {
+      "track": "One Normal Night",
+      "artist": "Andrew Lippa",
+      "spotify_uri": "spotify:track:0O77dKVRjzNMQtlwMgg62e",
       "play_count": 3,
-      "total_minutes": 13.232
+      "total_minutes": 8.009
     }
   ]
 }
