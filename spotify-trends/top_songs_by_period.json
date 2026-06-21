@@ -25262,18 +25262,18 @@
       "total_minutes": 111.029
     },
     {
-      "track": "supposed to",
-      "artist": "Joy Rhodes",
-      "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
-      "play_count": 27,
-      "total_minutes": 120.272
-    },
-    {
       "track": "Dance With a Stranger",
       "artist": "Lake Street Dive",
       "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
+      "play_count": 27,
+      "total_minutes": 96.764
+    },
+    {
+      "track": "supposed to",
+      "artist": "Joy Rhodes",
+      "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
       "play_count": 24,
-      "total_minutes": 86.012
+      "total_minutes": 106.909
     },
     {
       "track": "PARTY b4 the PARTY",
