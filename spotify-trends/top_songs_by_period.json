@@ -25276,18 +25276,18 @@
       "total_minutes": 106.909
     },
     {
-      "track": "PARTY b4 the PARTY",
-      "artist": "World Scout: The Final Piece",
-      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
-      "play_count": 21,
-      "total_minutes": 50.498
-    },
-    {
       "track": "God Must Really Love Me (Intro)",
       "artist": "Tori Kelly",
       "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
+      "play_count": 21,
+      "total_minutes": 22.995
+    },
+    {
+      "track": "PARTY b4 the PARTY",
+      "artist": "World Scout: The Final Piece",
+      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
       "play_count": 18,
-      "total_minutes": 19.71
+      "total_minutes": 43.284
     },
     {
       "track": "Problem / Can’t Feel My Face",
@@ -25318,11 +25318,11 @@
       "total_minutes": 24.595
     },
     {
-      "track": "All This Space",
-      "artist": "Stephen Day",
-      "spotify_uri": "spotify:track:0Y36El0k8fS2myogTVGXKP",
+      "track": "yes, and?",
+      "artist": "Ariana Grande",
+      "spotify_uri": "spotify:track:5D34wRmbFS29AjtTOP2QJe",
       "play_count": 3,
-      "total_minutes": 7.345
+      "total_minutes": 10.75
     }
   ]
 }
