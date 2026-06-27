@@ -25269,18 +25269,18 @@
       "total_minutes": 96.764
     },
     {
-      "track": "supposed to",
-      "artist": "Joy Rhodes",
-      "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
-      "play_count": 24,
-      "total_minutes": 106.909
-    },
-    {
       "track": "God Must Really Love Me (Intro)",
       "artist": "Tori Kelly",
       "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
+      "play_count": 24,
+      "total_minutes": 26.28
+    },
+    {
+      "track": "supposed to",
+      "artist": "Joy Rhodes",
+      "spotify_uri": "spotify:track:3BB0Cj3SpGy95goCClABCb",
       "play_count": 21,
-      "total_minutes": 22.995
+      "total_minutes": 93.545
     },
     {
       "track": "PARTY b4 the PARTY",
@@ -25311,18 +25311,18 @@
       "total_minutes": 38.61
     },
     {
-      "track": "A Summer in Ohio - Live at the London Palladium",
-      "artist": "Rachel Zegler",
-      "spotify_uri": "spotify:track:6BJ915Y8xarJ74zZi6xmIi",
-      "play_count": 6,
-      "total_minutes": 24.595
-    },
-    {
       "track": "yes, and?",
       "artist": "Ariana Grande",
       "spotify_uri": "spotify:track:5D34wRmbFS29AjtTOP2QJe",
+      "play_count": 6,
+      "total_minutes": 21.499
+    },
+    {
+      "track": "A Summer in Ohio - Live at the London Palladium",
+      "artist": "Rachel Zegler",
+      "spotify_uri": "spotify:track:6BJ915Y8xarJ74zZi6xmIi",
       "play_count": 3,
-      "total_minutes": 10.75
+      "total_minutes": 12.298
     }
   ]
 }
