@@ -25283,25 +25283,25 @@
       "total_minutes": 93.545
     },
     {
-      "track": "PARTY b4 the PARTY",
-      "artist": "World Scout: The Final Piece",
-      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
-      "play_count": 18,
-      "total_minutes": 43.284
-    },
-    {
       "track": "Problem / Can’t Feel My Face",
       "artist": "Lorna Courtney",
       "spotify_uri": "spotify:track:15vkRjpiNKYte59cFfAzng",
-      "play_count": 15,
-      "total_minutes": 48.886
+      "play_count": 18,
+      "total_minutes": 58.663
     },
     {
       "track": "Midnight Sun",
       "artist": "Zara Larsson",
       "spotify_uri": "spotify:track:1qRV1dKLOfH1s00b9J2LUQ",
+      "play_count": 15,
+      "total_minutes": 47.474
+    },
+    {
+      "track": "yes, and?",
+      "artist": "Ariana Grande",
+      "spotify_uri": "spotify:track:5D34wRmbFS29AjtTOP2QJe",
       "play_count": 12,
-      "total_minutes": 37.98
+      "total_minutes": 42.999
     },
     {
       "track": "One in a Million",
@@ -25311,11 +25311,11 @@
       "total_minutes": 38.61
     },
     {
-      "track": "yes, and?",
-      "artist": "Ariana Grande",
-      "spotify_uri": "spotify:track:5D34wRmbFS29AjtTOP2QJe",
+      "track": "PARTY b4 the PARTY",
+      "artist": "World Scout: The Final Piece",
+      "spotify_uri": "spotify:track:78jrpGKYNsfqjEtuVUFifU",
       "play_count": 6,
-      "total_minutes": 21.499
+      "total_minutes": 14.428
     },
     {
       "track": "A Summer in Ohio - Live at the London Palladium",
