@@ -25355,46 +25355,46 @@
       "total_minutes": 68.44
     },
     {
-      "track": "You Just Wanna Get With My Friend",
-      "artist": "Sammy Rae & The Friends",
-      "spotify_uri": "spotify:track:0e5I84r00PdAba0AP4kztX",
-      "play_count": 18,
-      "total_minutes": 61.018
-    },
-    {
       "track": "yes, and?",
       "artist": "Ariana Grande",
       "spotify_uri": "spotify:track:5D34wRmbFS29AjtTOP2QJe",
+      "play_count": 18,
+      "total_minutes": 64.498
+    },
+    {
+      "track": "You Just Wanna Get With My Friend",
+      "artist": "Sammy Rae & The Friends",
+      "spotify_uri": "spotify:track:0e5I84r00PdAba0AP4kztX",
       "play_count": 15,
-      "total_minutes": 53.748
+      "total_minutes": 50.848
+    },
+    {
+      "track": "Crazy",
+      "artist": "Kelly Rowland",
+      "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
+      "play_count": 12,
+      "total_minutes": 37.039
     },
     {
       "track": "All This Space",
       "artist": "Stephen Day",
       "spotify_uri": "spotify:track:0Y36El0k8fS2myogTVGXKP",
-      "play_count": 12,
-      "total_minutes": 29.379
+      "play_count": 9,
+      "total_minutes": 22.035
     },
     {
       "track": "Concentrative 528 Hz",
       "artist": "Matheo Lyon",
       "spotify_uri": "spotify:track:2KHUEHbWk23yMrj3IDb0dY",
-      "play_count": 9,
-      "total_minutes": 24.489
-    },
-    {
-      "track": "I Kissed A Girl",
-      "artist": "Justin David Sullivan",
-      "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
       "play_count": 6,
-      "total_minutes": 17.136
+      "total_minutes": 16.326
     },
     {
-      "track": "Without You",
-      "artist": "Tori Kelly",
-      "spotify_uri": "spotify:track:1FDktoTB3hWB69a66Bp9uf",
+      "track": "Like This (feat. Eve)",
+      "artist": "Kelly Rowland",
+      "spotify_uri": "spotify:track:7ju8Fz9Z6rTNAzDMSoOCh2",
       "play_count": 3,
-      "total_minutes": 10.104
+      "total_minutes": 10.793
     }
   ]
 }
