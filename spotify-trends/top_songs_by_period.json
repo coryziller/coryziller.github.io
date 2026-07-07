@@ -25341,18 +25341,18 @@
       "total_minutes": 29.565
     },
     {
-      "track": "Dance With a Stranger",
-      "artist": "Lake Street Dive",
-      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
-      "play_count": 24,
-      "total_minutes": 86.012
-    },
-    {
       "track": "Problem / Can’t Feel My Face",
       "artist": "Lorna Courtney",
       "spotify_uri": "spotify:track:15vkRjpiNKYte59cFfAzng",
+      "play_count": 24,
+      "total_minutes": 78.218
+    },
+    {
+      "track": "Dance With a Stranger",
+      "artist": "Lake Street Dive",
+      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
       "play_count": 21,
-      "total_minutes": 68.44
+      "total_minutes": 75.261
     },
     {
       "track": "yes, and?",
@@ -25369,32 +25369,32 @@
       "total_minutes": 50.848
     },
     {
+      "track": "I Kissed A Girl",
+      "artist": "Justin David Sullivan",
+      "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
+      "play_count": 12,
+      "total_minutes": 34.271
+    },
+    {
       "track": "Crazy",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
-      "play_count": 12,
-      "total_minutes": 37.039
+      "play_count": 9,
+      "total_minutes": 27.779
     },
     {
       "track": "All This Space",
       "artist": "Stephen Day",
       "spotify_uri": "spotify:track:0Y36El0k8fS2myogTVGXKP",
-      "play_count": 9,
-      "total_minutes": 22.035
+      "play_count": 6,
+      "total_minutes": 14.69
     },
     {
       "track": "Concentrative 528 Hz",
       "artist": "Matheo Lyon",
       "spotify_uri": "spotify:track:2KHUEHbWk23yMrj3IDb0dY",
-      "play_count": 6,
-      "total_minutes": 16.326
-    },
-    {
-      "track": "Like This (feat. Eve)",
-      "artist": "Kelly Rowland",
-      "spotify_uri": "spotify:track:7ju8Fz9Z6rTNAzDMSoOCh2",
       "play_count": 3,
-      "total_minutes": 10.793
+      "total_minutes": 8.163
     }
   ]
 }
