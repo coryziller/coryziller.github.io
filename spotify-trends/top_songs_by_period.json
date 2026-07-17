@@ -25369,32 +25369,32 @@
       "total_minutes": 42.839
     },
     {
-      "track": "Dance With a Stranger",
-      "artist": "Lake Street Dive",
-      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
-      "play_count": 12,
-      "total_minutes": 43.006
-    },
-    {
       "track": "God Must Really Love Me (Intro)",
       "artist": "Tori Kelly",
       "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
-      "play_count": 9,
-      "total_minutes": 9.855
+      "play_count": 12,
+      "total_minutes": 13.14
     },
     {
       "track": "Crazy",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
-      "play_count": 6,
-      "total_minutes": 18.519
+      "play_count": 9,
+      "total_minutes": 27.779
     },
     {
-      "track": "The I Love You Song",
-      "artist": "25th Annual Putnam County Spelling Bee Original Cast",
-      "spotify_uri": "spotify:track:6dqEr0TRaRjRZrDYkf3Kle",
+      "track": "Dance With a Stranger",
+      "artist": "Lake Street Dive",
+      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
+      "play_count": 6,
+      "total_minutes": 21.503
+    },
+    {
+      "track": "Out Of Control",
+      "artist": "Gloria Tells",
+      "spotify_uri": "spotify:track:5wLGfiunY1hPV6acUzJVYk",
       "play_count": 3,
-      "total_minutes": 17.849
+      "total_minutes": 9.223
     }
   ]
 }
