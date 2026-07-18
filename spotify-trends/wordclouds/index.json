@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T08:34:06.830452+00:00",
+  "generated_at": "2026-07-18T08:06:27.491797+00:00",
   "years": [
     {
       "year": "2012",
@@ -23,7 +23,7 @@
       "songs_considered": 109,
       "lyrics_found": 43,
       "coverage_by_plays": 30.7,
-      "unique_words": 1261
+      "unique_words": 1260
     },
     {
       "year": "2015",
@@ -31,7 +31,7 @@
       "songs_considered": 206,
       "lyrics_found": 106,
       "coverage_by_plays": 47.6,
-      "unique_words": 2599
+      "unique_words": 2607
     },
     {
       "year": "2016",
@@ -39,7 +39,7 @@
       "songs_considered": 189,
       "lyrics_found": 71,
       "coverage_by_plays": 31.9,
-      "unique_words": 2344
+      "unique_words": 2343
     },
     {
       "year": "2017",
@@ -47,7 +47,7 @@
       "songs_considered": 185,
       "lyrics_found": 79,
       "coverage_by_plays": 40.9,
-      "unique_words": 2274
+      "unique_words": 2279
     },
     {
       "year": "2018",
@@ -63,7 +63,7 @@
       "songs_considered": 180,
       "lyrics_found": 103,
       "coverage_by_plays": 57.5,
-      "unique_words": 2464
+      "unique_words": 2484
     },
     {
       "year": "2020",
@@ -71,7 +71,7 @@
       "songs_considered": 174,
       "lyrics_found": 104,
       "coverage_by_plays": 62.9,
-      "unique_words": 2547
+      "unique_words": 2540
     },
     {
       "year": "2021",
@@ -79,7 +79,7 @@
       "songs_considered": 141,
       "lyrics_found": 84,
       "coverage_by_plays": 60.3,
-      "unique_words": 2279
+      "unique_words": 2273
     },
     {
       "year": "2022",
@@ -87,7 +87,7 @@
       "songs_considered": 188,
       "lyrics_found": 103,
       "coverage_by_plays": 58.6,
-      "unique_words": 2850
+      "unique_words": 2803
     },
     {
       "year": "2023",
@@ -95,7 +95,7 @@
       "songs_considered": 155,
       "lyrics_found": 82,
       "coverage_by_plays": 57.1,
-      "unique_words": 2165
+      "unique_words": 2170
     },
     {
       "year": "2024",
@@ -103,7 +103,7 @@
       "songs_considered": 178,
       "lyrics_found": 97,
       "coverage_by_plays": 61.1,
-      "unique_words": 2285
+      "unique_words": 2278
     },
     {
       "year": "2025",
@@ -111,7 +111,7 @@
       "songs_considered": 174,
       "lyrics_found": 65,
       "coverage_by_plays": 43.6,
-      "unique_words": 1844
+      "unique_words": 1845
     },
     {
       "year": "2026",
@@ -119,7 +119,7 @@
       "songs_considered": 63,
       "lyrics_found": 28,
       "coverage_by_plays": 34.3,
-      "unique_words": 991
+      "unique_words": 994
     }
   ],
   "source_hits_total": {
