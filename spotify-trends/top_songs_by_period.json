@@ -25348,53 +25348,53 @@
       "total_minutes": 81.357
     },
     {
-      "track": "Problem / Can’t Feel My Face",
-      "artist": "Lorna Courtney",
-      "spotify_uri": "spotify:track:15vkRjpiNKYte59cFfAzng",
-      "play_count": 21,
-      "total_minutes": 68.44
-    },
-    {
       "track": "yes, and?",
       "artist": "Ariana Grande",
       "spotify_uri": "spotify:track:5D34wRmbFS29AjtTOP2QJe",
+      "play_count": 21,
+      "total_minutes": 75.248
+    },
+    {
+      "track": "Problem / Can’t Feel My Face",
+      "artist": "Lorna Courtney",
+      "spotify_uri": "spotify:track:15vkRjpiNKYte59cFfAzng",
       "play_count": 18,
-      "total_minutes": 64.498
+      "total_minutes": 58.663
+    },
+    {
+      "track": "Grow Up",
+      "artist": "Gloria Tells",
+      "spotify_uri": "spotify:track:1713usrmCZ9pOoPCFNw5Bi",
+      "play_count": 15,
+      "total_minutes": 49.055
     },
     {
       "track": "I Kissed A Girl",
       "artist": "Justin David Sullivan",
       "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
-      "play_count": 15,
-      "total_minutes": 42.839
-    },
-    {
-      "track": "God Must Really Love Me (Intro)",
-      "artist": "Tori Kelly",
-      "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
       "play_count": 12,
-      "total_minutes": 13.14
-    },
-    {
-      "track": "Crazy",
-      "artist": "Kelly Rowland",
-      "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
-      "play_count": 9,
-      "total_minutes": 27.779
-    },
-    {
-      "track": "Dance With a Stranger",
-      "artist": "Lake Street Dive",
-      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
-      "play_count": 6,
-      "total_minutes": 21.503
+      "total_minutes": 34.271
     },
     {
       "track": "Out Of Control",
       "artist": "Gloria Tells",
       "spotify_uri": "spotify:track:5wLGfiunY1hPV6acUzJVYk",
+      "play_count": 9,
+      "total_minutes": 27.669
+    },
+    {
+      "track": "God Must Really Love Me (Intro)",
+      "artist": "Tori Kelly",
+      "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
+      "play_count": 6,
+      "total_minutes": 6.57
+    },
+    {
+      "track": "Crazy",
+      "artist": "Kelly Rowland",
+      "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
       "play_count": 3,
-      "total_minutes": 9.223
+      "total_minutes": 9.26
     }
   ]
 }
