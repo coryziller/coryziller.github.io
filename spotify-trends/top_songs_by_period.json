@@ -25355,11 +25355,11 @@
       "total_minutes": 75.248
     },
     {
-      "track": "Problem / Can’t Feel My Face",
-      "artist": "Lorna Courtney",
-      "spotify_uri": "spotify:track:15vkRjpiNKYte59cFfAzng",
+      "track": "Put You On",
+      "artist": "Amber Mark",
+      "spotify_uri": "spotify:track:59nJ265OcQ7Rrms09xk8LO",
       "play_count": 18,
-      "total_minutes": 58.663
+      "total_minutes": 67.366
     },
     {
       "track": "Grow Up",
@@ -25369,32 +25369,32 @@
       "total_minutes": 49.055
     },
     {
-      "track": "I Kissed A Girl",
-      "artist": "Justin David Sullivan",
-      "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
-      "play_count": 12,
-      "total_minutes": 34.271
-    },
-    {
       "track": "Out Of Control",
       "artist": "Gloria Tells",
       "spotify_uri": "spotify:track:5wLGfiunY1hPV6acUzJVYk",
-      "play_count": 9,
-      "total_minutes": 27.669
+      "play_count": 12,
+      "total_minutes": 36.893
     },
     {
-      "track": "God Must Really Love Me (Intro)",
-      "artist": "Tori Kelly",
-      "spotify_uri": "spotify:track:3US0d1cLUTvL2XMXX57XWJ",
-      "play_count": 6,
-      "total_minutes": 6.57
+      "track": "I Kissed A Girl",
+      "artist": "Justin David Sullivan",
+      "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
+      "play_count": 9,
+      "total_minutes": 25.704
     },
     {
       "track": "Crazy",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
+      "play_count": 6,
+      "total_minutes": 18.519
+    },
+    {
+      "track": "Problem / Can’t Feel My Face",
+      "artist": "Lorna Courtney",
+      "spotify_uri": "spotify:track:15vkRjpiNKYte59cFfAzng",
       "play_count": 3,
-      "total_minutes": 9.26
+      "total_minutes": 9.777
     }
   ]
 }
