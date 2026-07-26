@@ -25341,32 +25341,32 @@
       "total_minutes": 97.134
     },
     {
-      "track": "You Just Wanna Get With My Friend",
-      "artist": "Sammy Rae & The Friends",
-      "spotify_uri": "spotify:track:0e5I84r00PdAba0AP4kztX",
-      "play_count": 24,
-      "total_minutes": 81.357
-    },
-    {
       "track": "Put You On",
       "artist": "Amber Mark",
       "spotify_uri": "spotify:track:59nJ265OcQ7Rrms09xk8LO",
-      "play_count": 21,
-      "total_minutes": 78.594
+      "play_count": 24,
+      "total_minutes": 89.821
     },
     {
       "track": "Just Friends",
       "artist": "Audrey Mika",
       "spotify_uri": "spotify:track:1NzRZ7AosK7ZDumMsZYofo",
-      "play_count": 18,
-      "total_minutes": 50.695
+      "play_count": 21,
+      "total_minutes": 59.144
     },
     {
       "track": "Grow Up",
       "artist": "Gloria Tells",
       "spotify_uri": "spotify:track:1713usrmCZ9pOoPCFNw5Bi",
+      "play_count": 18,
+      "total_minutes": 58.866
+    },
+    {
+      "track": "You Just Wanna Get With My Friend",
+      "artist": "Sammy Rae & The Friends",
+      "spotify_uri": "spotify:track:0e5I84r00PdAba0AP4kztX",
       "play_count": 15,
-      "total_minutes": 49.055
+      "total_minutes": 50.848
     },
     {
       "track": "Out Of Control",
@@ -25376,25 +25376,25 @@
       "total_minutes": 36.893
     },
     {
-      "track": "Dance With a Stranger",
-      "artist": "Lake Street Dive",
-      "spotify_uri": "spotify:track:43thKZxOf40xZaJlzaZX9T",
-      "play_count": 9,
-      "total_minutes": 32.255
-    },
-    {
       "track": "I Kissed A Girl",
       "artist": "Justin David Sullivan",
       "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
-      "play_count": 6,
-      "total_minutes": 17.136
+      "play_count": 9,
+      "total_minutes": 25.704
     },
     {
       "track": "Crazy",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
+      "play_count": 6,
+      "total_minutes": 18.519
+    },
+    {
+      "track": "Put You On - MJ Cole Remix",
+      "artist": "Amber Mark",
+      "spotify_uri": "spotify:track:7GuOq2XU2lvTmzG7zptNpg",
       "play_count": 3,
-      "total_minutes": 9.26
+      "total_minutes": 9.644
     }
   ]
 }
