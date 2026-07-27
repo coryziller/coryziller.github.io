@@ -25362,39 +25362,39 @@
       "total_minutes": 58.866
     },
     {
-      "track": "You Just Wanna Get With My Friend",
-      "artist": "Sammy Rae & The Friends",
-      "spotify_uri": "spotify:track:0e5I84r00PdAba0AP4kztX",
-      "play_count": 15,
-      "total_minutes": 50.848
-    },
-    {
       "track": "Out Of Control",
       "artist": "Gloria Tells",
       "spotify_uri": "spotify:track:5wLGfiunY1hPV6acUzJVYk",
-      "play_count": 12,
-      "total_minutes": 36.893
+      "play_count": 15,
+      "total_minutes": 46.116
     },
     {
       "track": "I Kissed A Girl",
       "artist": "Justin David Sullivan",
       "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
-      "play_count": 9,
-      "total_minutes": 25.704
+      "play_count": 12,
+      "total_minutes": 34.271
     },
     {
       "track": "Crazy",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
-      "play_count": 6,
-      "total_minutes": 18.519
+      "play_count": 9,
+      "total_minutes": 27.779
     },
     {
       "track": "Put You On - MJ Cole Remix",
       "artist": "Amber Mark",
       "spotify_uri": "spotify:track:7GuOq2XU2lvTmzG7zptNpg",
+      "play_count": 6,
+      "total_minutes": 19.287
+    },
+    {
+      "track": "MORNING DEW (DONK)",
+      "artist": "Beyoncé",
+      "spotify_uri": "spotify:track:4ZYlzwjjAJrflwWg4DJTlT",
       "play_count": 3,
-      "total_minutes": 9.644
+      "total_minutes": 12.195
     }
   ]
 }
