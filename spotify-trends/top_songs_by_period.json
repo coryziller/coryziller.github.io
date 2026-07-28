@@ -25348,18 +25348,18 @@
       "total_minutes": 89.821
     },
     {
-      "track": "Just Friends",
-      "artist": "Audrey Mika",
-      "spotify_uri": "spotify:track:1NzRZ7AosK7ZDumMsZYofo",
-      "play_count": 21,
-      "total_minutes": 59.144
-    },
-    {
       "track": "Grow Up",
       "artist": "Gloria Tells",
       "spotify_uri": "spotify:track:1713usrmCZ9pOoPCFNw5Bi",
+      "play_count": 21,
+      "total_minutes": 68.677
+    },
+    {
+      "track": "Just Friends",
+      "artist": "Audrey Mika",
+      "spotify_uri": "spotify:track:1NzRZ7AosK7ZDumMsZYofo",
       "play_count": 18,
-      "total_minutes": 58.866
+      "total_minutes": 50.695
     },
     {
       "track": "Out Of Control",
