@@ -25369,25 +25369,25 @@
       "total_minutes": 46.116
     },
     {
-      "track": "I Kissed A Girl",
-      "artist": "Justin David Sullivan",
-      "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
-      "play_count": 12,
-      "total_minutes": 34.271
-    },
-    {
       "track": "Crazy",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
-      "play_count": 9,
-      "total_minutes": 27.779
+      "play_count": 12,
+      "total_minutes": 37.039
     },
     {
       "track": "Put You On - MJ Cole Remix",
       "artist": "Amber Mark",
       "spotify_uri": "spotify:track:7GuOq2XU2lvTmzG7zptNpg",
+      "play_count": 9,
+      "total_minutes": 28.931
+    },
+    {
+      "track": "I Kissed A Girl",
+      "artist": "Justin David Sullivan",
+      "spotify_uri": "spotify:track:7aU2Kh53aHUW0zIkI72NmE",
       "play_count": 6,
-      "total_minutes": 19.287
+      "total_minutes": 17.136
     },
     {
       "track": "MORNING DEW (DONK)",
