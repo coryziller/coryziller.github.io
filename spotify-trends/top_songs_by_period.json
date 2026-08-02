@@ -25441,11 +25441,11 @@
       "total_minutes": 46.116
     },
     {
-      "track": "Crazy",
-      "artist": "Kelly Rowland",
-      "spotify_uri": "spotify:track:1nmypDEMIhxlgvZViMUmoZ",
+      "track": "One Normal Night",
+      "artist": "Andrew Lippa",
+      "spotify_uri": "spotify:track:0O77dKVRjzNMQtlwMgg62e",
       "play_count": 12,
-      "total_minutes": 37.039
+      "total_minutes": 32.036
     },
     {
       "track": "Put You On - MJ Cole Remix",
@@ -25455,18 +25455,18 @@
       "total_minutes": 28.931
     },
     {
+      "track": "How Deep Is Your Love (feat. Yebba) - Live",
+      "artist": "PJ Morton",
+      "spotify_uri": "spotify:track:3SjAiqAQ6sMmsJBeVw0nMf",
+      "play_count": 6,
+      "total_minutes": 21.013
+    },
+    {
       "track": "MORNING DEW (DONK)",
       "artist": "Beyoncé",
       "spotify_uri": "spotify:track:4ZYlzwjjAJrflwWg4DJTlT",
-      "play_count": 6,
-      "total_minutes": 24.39
-    },
-    {
-      "track": "Put Your Records On",
-      "artist": "Ritt Momney",
-      "spotify_uri": "spotify:track:6AGOKlMZWLCaEJGnaROtF9",
       "play_count": 3,
-      "total_minutes": 10.523
+      "total_minutes": 12.195
     }
   ]
 }
