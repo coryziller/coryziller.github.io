@@ -25413,39 +25413,39 @@
       "total_minutes": 72.08
     },
     {
-      "track": "Grow Up",
-      "artist": "Gloria Tells",
-      "spotify_uri": "spotify:track:1713usrmCZ9pOoPCFNw5Bi",
-      "play_count": 24,
-      "total_minutes": 78.488
-    },
-    {
       "track": "Put You On",
       "artist": "Amber Mark",
       "spotify_uri": "spotify:track:59nJ265OcQ7Rrms09xk8LO",
-      "play_count": 21,
-      "total_minutes": 78.594
+      "play_count": 24,
+      "total_minutes": 89.821
     },
     {
       "track": "Just Friends",
       "artist": "Audrey Mika",
       "spotify_uri": "spotify:track:1NzRZ7AosK7ZDumMsZYofo",
-      "play_count": 18,
-      "total_minutes": 50.695
+      "play_count": 21,
+      "total_minutes": 59.144
     },
     {
-      "track": "Out Of Control",
+      "track": "Grow Up",
       "artist": "Gloria Tells",
-      "spotify_uri": "spotify:track:5wLGfiunY1hPV6acUzJVYk",
-      "play_count": 15,
-      "total_minutes": 46.116
+      "spotify_uri": "spotify:track:1713usrmCZ9pOoPCFNw5Bi",
+      "play_count": 18,
+      "total_minutes": 58.866
     },
     {
       "track": "Like This (feat. Eve)",
       "artist": "Kelly Rowland",
       "spotify_uri": "spotify:track:7ju8Fz9Z6rTNAzDMSoOCh2",
+      "play_count": 15,
+      "total_minutes": 53.963
+    },
+    {
+      "track": "Folded X Miss Independent",
+      "artist": "Razeonx",
+      "spotify_uri": "spotify:track:13B6PIIMJTZNcpc8yB1HCw",
       "play_count": 12,
-      "total_minutes": 43.171
+      "total_minutes": 29.692
     },
     {
       "track": "Put You On - MJ Cole Remix",
@@ -25455,18 +25455,18 @@
       "total_minutes": 28.931
     },
     {
+      "track": "American Express",
+      "artist": "Two Strangers (Carry A Cake Across New York)",
+      "spotify_uri": "spotify:track:60GmNHl5av6TXEYasjqoPZ",
+      "play_count": 6,
+      "total_minutes": 18.097
+    },
+    {
       "track": "Bloom [From \"In Pieces: A New Musical (Highlights) (Deluxe Edition)\"]",
       "artist": "Antonio Cipriano",
       "spotify_uri": "spotify:track:3JAdariZi9PHkeBpw9cq5y",
-      "play_count": 6,
-      "total_minutes": 26.1
-    },
-    {
-      "track": "How Deep Is Your Love (feat. Yebba) - Live",
-      "artist": "PJ Morton",
-      "spotify_uri": "spotify:track:3SjAiqAQ6sMmsJBeVw0nMf",
       "play_count": 3,
-      "total_minutes": 10.507
+      "total_minutes": 13.05
     }
   ]
 }
