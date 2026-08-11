@@ -25413,60 +25413,60 @@
       "total_minutes": 72.08
     },
     {
+      "track": "Folded X Miss Independent",
+      "artist": "Razeonx",
+      "spotify_uri": "spotify:track:13B6PIIMJTZNcpc8yB1HCw",
+      "play_count": 24,
+      "total_minutes": 59.384
+    },
+    {
+      "track": "Animal",
+      "artist": "KATSEYE",
+      "spotify_uri": "spotify:track:3ouNEk0tv5TTi8VWMe1xbX",
+      "play_count": 21,
+      "total_minutes": 55.473
+    },
+    {
       "track": "Put You On",
       "artist": "Amber Mark",
       "spotify_uri": "spotify:track:59nJ265OcQ7Rrms09xk8LO",
-      "play_count": 24,
-      "total_minutes": 89.821
+      "play_count": 18,
+      "total_minutes": 67.366
     },
     {
       "track": "Just Friends",
       "artist": "Audrey Mika",
       "spotify_uri": "spotify:track:1NzRZ7AosK7ZDumMsZYofo",
-      "play_count": 21,
-      "total_minutes": 59.144
-    },
-    {
-      "track": "Folded X Miss Independent",
-      "artist": "Razeonx",
-      "spotify_uri": "spotify:track:13B6PIIMJTZNcpc8yB1HCw",
-      "play_count": 18,
-      "total_minutes": 44.538
+      "play_count": 15,
+      "total_minutes": 42.245
     },
     {
       "track": "Grow Up",
       "artist": "Gloria Tells",
       "spotify_uri": "spotify:track:1713usrmCZ9pOoPCFNw5Bi",
-      "play_count": 15,
-      "total_minutes": 49.055
+      "play_count": 12,
+      "total_minutes": 39.244
+    },
+    {
+      "track": "Shoulda Never (feat. USHER)",
+      "artist": "Kehlani",
+      "spotify_uri": "spotify:track:3NBBUedTNWVACWLVR5HCwf",
+      "play_count": 9,
+      "total_minutes": 27.917
     },
     {
       "track": "Put You On - MJ Cole Remix",
       "artist": "Amber Mark",
       "spotify_uri": "spotify:track:7GuOq2XU2lvTmzG7zptNpg",
-      "play_count": 12,
-      "total_minutes": 38.575
+      "play_count": 6,
+      "total_minutes": 19.287
     },
     {
       "track": "How Deep Is Your Love (feat. Yebba) - Live",
       "artist": "PJ Morton",
       "spotify_uri": "spotify:track:3SjAiqAQ6sMmsJBeVw0nMf",
-      "play_count": 9,
-      "total_minutes": 31.52
-    },
-    {
-      "track": "Jason's Song (Gave It Away)",
-      "artist": "Ariana Grande",
-      "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
-      "play_count": 6,
-      "total_minutes": 26.464
-    },
-    {
-      "track": "American Express",
-      "artist": "Two Strangers (Carry A Cake Across New York)",
-      "spotify_uri": "spotify:track:60GmNHl5av6TXEYasjqoPZ",
       "play_count": 3,
-      "total_minutes": 9.049
+      "total_minutes": 10.507
     }
   ]
 }
