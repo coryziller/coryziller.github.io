@@ -25406,67 +25406,67 @@
       "total_minutes": 79.247
     },
     {
+      "track": "Shoulda Never (feat. USHER)",
+      "artist": "Kehlani",
+      "spotify_uri": "spotify:track:3NBBUedTNWVACWLVR5HCwf",
+      "play_count": 27,
+      "total_minutes": 83.75
+    },
+    {
       "track": "Folded X Miss Independent",
       "artist": "Razeonx",
       "spotify_uri": "spotify:track:13B6PIIMJTZNcpc8yB1HCw",
-      "play_count": 27,
-      "total_minutes": 66.807
+      "play_count": 24,
+      "total_minutes": 59.384
     },
     {
       "track": "One Normal Night",
       "artist": "Andrew Lippa",
       "spotify_uri": "spotify:track:0O77dKVRjzNMQtlwMgg62e",
-      "play_count": 24,
-      "total_minutes": 64.071
+      "play_count": 21,
+      "total_minutes": 56.062
     },
     {
       "track": "Just Friends",
       "artist": "Audrey Mika",
       "spotify_uri": "spotify:track:1NzRZ7AosK7ZDumMsZYofo",
-      "play_count": 21,
-      "total_minutes": 59.144
-    },
-    {
-      "track": "Grow Up",
-      "artist": "Gloria Tells",
-      "spotify_uri": "spotify:track:1713usrmCZ9pOoPCFNw5Bi",
       "play_count": 18,
-      "total_minutes": 58.866
+      "total_minutes": 50.695
     },
     {
-      "track": "Put You On",
-      "artist": "Amber Mark",
-      "spotify_uri": "spotify:track:59nJ265OcQ7Rrms09xk8LO",
+      "track": "MORNING DEW (DONK)",
+      "artist": "Beyoncé",
+      "spotify_uri": "spotify:track:4ZYlzwjjAJrflwWg4DJTlT",
       "play_count": 15,
-      "total_minutes": 56.138
-    },
-    {
-      "track": "Shoulda Never (feat. USHER)",
-      "artist": "Kehlani",
-      "spotify_uri": "spotify:track:3NBBUedTNWVACWLVR5HCwf",
-      "play_count": 12,
-      "total_minutes": 37.222
+      "total_minutes": 60.974
     },
     {
       "track": "Jason's Song (Gave It Away)",
       "artist": "Ariana Grande",
       "spotify_uri": "spotify:track:0kngSEayfCOjR8w83R7vAT",
-      "play_count": 9,
-      "total_minutes": 39.696
+      "play_count": 12,
+      "total_minutes": 52.928
     },
     {
       "track": "American Express",
       "artist": "Two Strangers (Carry A Cake Across New York)",
       "spotify_uri": "spotify:track:60GmNHl5av6TXEYasjqoPZ",
-      "play_count": 6,
-      "total_minutes": 18.097
+      "play_count": 9,
+      "total_minutes": 27.146
     },
     {
       "track": "Plant the Garden",
       "artist": "Melt",
       "spotify_uri": "spotify:track:2fHu8iey2gdc3nzMhSfOSy",
+      "play_count": 6,
+      "total_minutes": 22.206
+    },
+    {
+      "track": "Put You On",
+      "artist": "Amber Mark",
+      "spotify_uri": "spotify:track:59nJ265OcQ7Rrms09xk8LO",
       "play_count": 3,
-      "total_minutes": 11.103
+      "total_minutes": 11.228
     }
   ]
 }
